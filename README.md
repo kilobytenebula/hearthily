@@ -1,12 +1,16 @@
-# Hearthily
-Hearthily is innovative cloud kitchen solution tailored to the needs of individuals looking for low-risk business ventures. The name Hearthily blends the concepts of “hearth,” “hearty,” and “healthily.” The hearth evokes the traditional center of the home and its focus on food preparation; “hearty” symbolizes generous portions and satisfaction; and “healthily” represents our commitment to using wholesome ingredients, implying that the meals prepared using our web app not only convenient but also nourishing. This name embodies our goal—to deliver delicious, nourishing meals prepared with heart and optimized for the fast-paced, delivery-driven world.	
-
-Hearthily introduces a groundbreaking web app designed to take the cloud kitchen concept to the next level. Cloud kitchens, also known as ghost kitchens, have already disrupted the food service industry by eliminating dine-in spaces and focusing solely on delivery. This model reduces overhead costs and increases efficiency. However, even traditional cloud kitchens may encounter bottlenecks due to ingredient management and the sequential nature of meal preparation.
-
-Hearthily solves these challenges through an innovative order-splitting approach. Imagine ordering a chicken burrito; instead of one kitchen handling the entire process, our system intelligently divides the task. One kitchen might focus on preparing the rice and beans, another on grilling the chicken, and a third on assembling the final burrito. This specialization streamlines ingredient storage; a kitchen specializing in rice dishes needs only to stock rice, while a meat-focused kitchen maintains its meat inventory. Additionally, multiple kitchens working in tandem dramatically accelerates order fulfilment.
-
-In effect, we're reimagining the cloud kitchen as a decentralized network of micro-kitchens, each a master of its domain. This model empowers entrepreneurs with limited resources to enter the food service sector, reduces food waste, and delivers meals to customers with unprecedented speed. Our platform ushers in a new era of hyper-optimized cloud kitchens, making this already attractive business model even more compelling.
-
-From the customer's perspective, the process remains utterly seamless. They interact with a single, intuitive interface on our web app. Their order appears as if prepared by one kitchen, belying the reality that it may have been assembled across multiple micro-kitchens within a single facility. In this way, our app encapsulates the complexity of the cloud kitchen process while maintaining the illusion of a traditional online food ordering experience for the customer.
-In short, our platform transforms the cloud kitchen concept to further increase efficiency, making it an even more attractive and low-risk startup venture.
-
+# Hearthily — An innovative cloud kitchen solution
+## Branch Structure
+Main Branch: This branch is the primary branch and is protected from direct pushes.
+Feature Branches: There are eight feature branches, each dedicated to a specific feature or task.
+## Contribution Process
+### Pushing Commits:
+- Directly pushing commits to the *main* branch is restricted.
+- You must push your commits to your respective *feature* branch.
+### Creating Pull Requests (PRs):
+- Push your commits to a temporary branch (e.g., *kilobytenebula-patch*).
+- Create a PR from your temporary branch to merge into the feature branch.
+- Request review and **approval** from another team member.
+### Merging Feature Branches:
+- Once your feature is developed and ready for integration:
+  - Create a new PR from your feature branch to merge into the main branch.
+  - Obtain at least **2 approvals** from team members before merging.
