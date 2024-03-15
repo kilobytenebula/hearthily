@@ -1,9 +1,9 @@
 # Hearthily — An innovative cloud kitchen solution
 ## Branch Structure
-- Main Branch: This branch is the primary branch and is protected from direct pushes.
-- Feature Branches:
-  - Team members need to create a feature branch for their function following the naming convention ***feat-function-name*** first.
-  - Feature branches are where individual features or tasks are developed and tested.
+1. Main Branch: This branch is the primary branch and is protected from direct pushes.
+2. Feature Branches:
+    - Team members need to create a feature branch for their function following the naming convention ***feat-function-name*** first.
+    - Feature branches are where individual features or tasks are developed and tested.
 ## Contribution Process
 ### Pushing Commits:
 - Directly pushing commits to the *main* branch is restricted.
