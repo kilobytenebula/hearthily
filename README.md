@@ -2,7 +2,7 @@
 ## Branch Structure
 1. Main Branch: This branch is the primary branch and is protected from direct pushes.
 2. Feature Branches:
-    - Team members need to create a feature branch for their function following the naming convention ***feat-function-name*** first.
+    - Team members need to create a feature branch for their function following the naming convention ***feat-<function-name>-management*** first.
     - Feature branches are where individual features or tasks are developed and tested.
 ## Contribution Process
 ### Pushing Commits:
