@@ -1,0 +1,17 @@
+
+:root {
+
+    /*Color palette*/       
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-primary-bg: #1F1D2B;
+    --color-secondary-bg: #252836;
+    --color-text-field: #2d303e;
+    --color-button: #fa8517;
+    --color-button-hover: #dd7617;
+    --color-selected-text: #fa8517;
+    --color-AAA-text: #FFFFFF;
+    --color-AA-text: #F5F5F5;
+    --color-A-text: #CCCCCC;
+
+}
