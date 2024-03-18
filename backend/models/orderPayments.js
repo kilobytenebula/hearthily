@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
-
-
 const paymentSchema = new Schema({
 
     orderId:{
@@ -31,17 +28,13 @@ const paymentSchema = new Schema({
         required: true
     },
     // paymentSlip:{
-        // type: Image,
-        
-
+    //     data: Buffer,
+    //     contentType: String
     // },
     isSuccess:{
         type: Boolean,
         required: true
     }
-
-
-
 })
 const payment = mongoose.model("orderPayments",paymentSchema);
 
