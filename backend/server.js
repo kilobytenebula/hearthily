@@ -30,6 +30,9 @@ connection.once("open", () => {
 const driverRouter = require('./routes/drivers.js');
 app.use('/driver', driverRouter);
 
+const feedbackRouter = require('./routes/feedbacks.js');
+app.use('/feedback', feedbackRouter);
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
