@@ -8,15 +8,15 @@ const Schema = mongoose.Schema;
 const feedbackSchema = new Schema({
     customerId: {
         type: String,
-        required: true
+        required: false
     },
     deliveryId: {
         type: String,
-        required: true
+        required: false
     },
     driverId: {
         type: String,
-        required: true
+        required: false
     },
     rating: {
         type: Number,
