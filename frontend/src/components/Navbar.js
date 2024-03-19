@@ -11,10 +11,10 @@ const logo = require('../icons/logo.png')
 
 const Navbar = () => {
   return (
-    <div class="navBar fixed-top">
-        <div className='logoContainer'><img src={logo} alt="Logo" class="logo"></img></div>
+    <div className="navBar fixed-top">
+        <div className='logoContainer'><img src={logo} alt="Logo" className="logo"></img></div>
         
-        <div class="navBarItems">
+        <div className="navBarItems">
             <ul>
                 <li><div className='navItem '><img src={home} alt="Home"  /></div></li>
                 <li><div className='navItem active'><img src={orderHistory} alt="Order History" title='Order History' /></div></li>

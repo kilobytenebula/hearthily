@@ -8,8 +8,10 @@ import GetFeedback from './components/GetFeedback';
 function App() {
   return (
     <Router>
-      <div>
+      <div className='navbar'>
         <Navbar />
+      </div>
+      <div className='page-content'>
         <Routes>
           <Route path="/" element={<GetFeedback />} />
           <Route path="/add" element={<AddFeedback />} />
