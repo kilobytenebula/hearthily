@@ -94,7 +94,6 @@ export default function AllPortions(){
     };
 
     function addOrder(){
-        console.log("button clicked");
         const portionNames = selectedPortion.map(portion => portion.name);
         
         const newOrder = {
@@ -159,7 +158,7 @@ export default function AllPortions(){
                 <div className="side-heading">Choice of size</div>
                 <div className="side-container">
                     <div className="side-item">
-                        <input type="radio" name="portion-size" id="regular" onChange={()=>handleSizeChange(null,'R')} ></input>
+                        <input type="radio" name="portion-size" id="regular" onChange={()=>handleSizeChange(baseDetails.reg_price,'R')} ></input>
                         <label name="portion-size">Regular</label>
                     </div>
                 </div>
@@ -193,7 +192,8 @@ export default function AllPortions(){
                     </div>
                     <div className="button-container">
                         <div className="">
-                           <Link to={"/checkout"}> 
+                           <Link 
+                            to={`/checkout/${baseDetails.base_name}/${selectedSizePrice}/${JSON.stringify(selectedPortion)}/${total}`}> 
                              <button type="button" onClick={addOrder}>Checkout</button>
                            </Link>
                             
