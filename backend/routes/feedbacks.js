@@ -8,17 +8,13 @@ let Feedback = require('../models/Feedback');
 //1. Create Route
 router.route('/add').post((req, res) => {
     //get data from the request body
-    const customerId = req.body.customerId;
-    const deliveryId = req.body.deliveryId;
-    const driverId = req.body.driverId;
+    const orderId = req.body.orderId;
     const rating = req.body.rating;
     const comment = req.body.comment;
 
     //create a new feedback object
     const newFeedback = new Feedback({
-        customerId,
-        deliveryId,
-        driverId,
+        orderId,
         rating,
         comment
     });
@@ -37,9 +33,9 @@ router.route('/').get((req, res) => Feedback.find()
 
 //2b. Read Specific Route
 router.route('/:id').get(async (req, res) => {
-    let feedbackId = req.params.id;
+    let orderId = req.params.id;
 
-    const feedback = await Feedback.findById(feedbackId)
+    const feedback = await Feedback.findOne({ orderId: orderId })
         .then(feedback => res.status(200).send({ status: "Feedback fetched", feedback: feedback }))
         .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -47,12 +43,10 @@ router.route('/:id').get(async (req, res) => {
 //3. Update Route
 router.route('/:id').put(async (req, res) => {
     let feedbackId = req.params.id;
-    const { customerId, deliveryId, driverId, rating, comment } = req.body;
+    const { orderId, rating, comment } = req.body;
 
     const updateFeedback = {
-        customerId,
-        deliveryId,
-        driverId,
+        orderId,
         rating,
         comment
     }

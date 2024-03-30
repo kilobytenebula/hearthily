@@ -6,15 +6,7 @@ const Schema = mongoose.Schema;
 
 //create a feedback schema
 const feedbackSchema = new Schema({
-    customerId: {
-        type: String,
-        required: false
-    },
-    deliveryId: {
-        type: String,
-        required: false
-    },
-    driverId: {
+    orderId: {
         type: String,
         required: false
     },

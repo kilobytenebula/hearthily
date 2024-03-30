@@ -33,6 +33,9 @@ app.use('/driver', driverRouter);
 const feedbackRouter = require('./routes/feedbacks.js');
 app.use('/feedback', feedbackRouter);
 
+const orderRouter = require('./routes/orders.js');
+app.use('/order', orderRouter);
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
