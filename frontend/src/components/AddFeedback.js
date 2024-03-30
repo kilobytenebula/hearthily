@@ -1,70 +1,40 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom'; 
 
-function AddFeedback() {
+export default function GetFeedbackForm() {
+    const [rating, setRating] = useState('');
+    const [comment, setComment] = useState('');
+    const { id: orderId } = useParams(); 
+    const navigate = useNavigate();
 
-  const [rating, setRating] = useState("");
-  const [comment, setComment] = useState("");
+    const handleSubmit = async e => {
+        e.preventDefault();
 
-  const handleRatingChange = e => setRating(e.target.value);
-  const handleCommentChange = e => setComment(e.target.value);
+        try {
+            const response = await axios.post(`http://localhost:8070/feedback/add`, {
+                orderId,
+                rating,
+                comment
+            });
 
-  function sendData(e) {
-    e.preventDefault();
-    
-    const feedback = {
-      rating: rating,
-      comment: comment,
+            console.log(response.data); 
+            navigate(`/order/${orderId}`); 
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    axios.post("http://localhost:8070/feedback/add", feedback)
-      .then(res => {
-      console.log(res.data);
-      alert("Feedback added successfully");
-    }).catch(err => alert(err));
-  }
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="rating">Rating:</label>
+            <input type="number" id="rating" value={rating} onChange={e => setRating(e.target.value)} />
 
-  return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-      <h1>Add Feedback</h1>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <form onSubmit={sendData}>
-                <div className="form-group">
-                  <label htmlFor="ratingSelect">Rating</label>
-                  <select className="form-control" id="ratingSelect" onChange={handleRatingChange}>
-                    <option value="">Select Rating</option>
-                    {[...Array(10).keys()].map((num) => (
-                      <option key={num + 1} value={num + 1}>
-                        {num + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="commentTextarea">Comment</label>
-                  <textarea
-                    className="form-control"
-                    id="commentTextarea"
-                    rows="3"
-                    placeholder="Enter your comment here..."
-                    onChange={handleCommentChange}
-                  ></textarea>
-                </div>
-                <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+            <label htmlFor="comment">Comment:</label>
+            <textarea id="comment" value={comment} onChange={e => setComment(e.target.value)} />
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+   );
 }
-
-export default AddFeedback;

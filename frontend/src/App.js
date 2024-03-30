@@ -1,9 +1,9 @@
 import './App.css';
-//import Header from './components/Header';
 import Navbar from './components/Navbar';
-import AddFeedback from './components/AddFeedback';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import GetFeedback from './components/GetFeedback';
+import GetOrder from './components/GetOrder';
+import GetOrderInfo from './components/GetOrderInfo'; // Renamed for clarity 
+import AddFeedback from './components/AddFeedback';
 
 function App() {
   return (
@@ -13,8 +13,9 @@ function App() {
       </div>
       <div className='page-content'>
         <Routes>
-          <Route path="/" element={<GetFeedback />} />
-          <Route path="/add" element={<AddFeedback />} />
+          <Route path="/order-history" element={<GetOrder />} />
+          <Route path="/order-history/order/:orderId" element={<GetOrderInfo />} /> // Adjust component
+          <Route path="/order-history/order/:orderId/add-feedback" element={<AddFeedback />} /> 
         </Routes>
       </div>
     </Router>

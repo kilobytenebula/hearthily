@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.order-info-container {
+    background-color: #1F1D2B;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.feedback-container {
+    background-color: #1F1D2B;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.delete-feedback-btn {
+    background-color: #FF4D4D;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-feedback-btn {
+    background-color: #3ec400;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
