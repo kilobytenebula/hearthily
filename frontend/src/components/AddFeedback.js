@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom'; 
+import '../GetOrderInfo.css'
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 export default function GetFeedbackForm() {
     const [rating, setRating] = useState('');
     const [comment, setComment] = useState('');
-    const { id: orderId } = useParams(); 
+    const { orderId } = useParams(); 
     const navigate = useNavigate();
+
+    const handleCancelClick = () => {
+            navigate(`/order-history/order/${orderId}`);
+    };
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -19,7 +25,7 @@ export default function GetFeedbackForm() {
             });
 
             console.log(response.data); 
-            navigate(`/order/${orderId}`); 
+            navigate(`/order-history/order/${orderId}`); 
 
         } catch (error) {
             console.log(error);
@@ -27,14 +33,15 @@ export default function GetFeedbackForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="rating">Rating:</label>
-            <input type="number" id="rating" value={rating} onChange={e => setRating(e.target.value)} />
+        <form onSubmit={handleSubmit} className="add-feedback-form-container">
+            <label htmlFor="rating" className="form-label">Rating:</label> 
+            <input type="number" id="rating" value={rating} onChange={e => setRating(e.target.value)} className="form-input" />
 
-            <label htmlFor="comment">Comment:</label>
-            <textarea id="comment" value={comment} onChange={e => setComment(e.target.value)} />
+            <label htmlFor="comment" className="form-label">Comment:</label>
+            <textarea id="comment" value={comment} onChange={e => setComment(e.target.value)} className="form-textarea" />
 
-            <button type="submit">Submit Feedback</button>
+            <button type="submit" className="submit-button">Submit Feedback</button> 
+            <button type="button" className="cancel-button" onClick={handleCancelClick}>Cancel</button> 
         </form>
-   );
+    );
 }

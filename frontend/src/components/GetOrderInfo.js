@@ -1,22 +1,51 @@
 import React, { useEffect, useState } from "react";
+import copy from 'clipboard-copy';
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../GetOrderInfo.css";
+import AddFeedback from "./AddFeedback";
+const copyicon = require('../icons/copyicon.png');
 
 export default function GetOrderInfo() {
   const [order, setOrder] = useState({});
   const [feedback, setFeedback] = useState([]);
+  const [copyOrderId, setCopyOrderId] = useState('Copy to clipboard');
   const { orderId } = useParams();
-
   const navigate = useNavigate();
 
-  const navigateToAddFeedback = () => {
-    navigate(`/order-details/${orderId}/add-feedback`);
+  const [showAddFeedbackForm, setShowAddFeedbackForm] = useState(false);
+
+  const handleAddFeedbackClick = () => {
+    setShowAddFeedbackForm(true); 
   };
 
-  const navigateToUpdateFeedback = (feedbackId) => {
-    navigate(`/order-details/${orderId}/update-feedback/${feedbackId}`);
+  const navigateToAddFeedback = () => {
+    navigate(`/order-history/order/${orderId}/add-feedback`);
   };
+
+  const navigateToUpdateFeedback = (orderId) => {
+    navigate(`/order-history/order/${orderId}/update-feedback/${orderId}`);
+  };
+
+  function getSizeClass(size) {
+    const sizeMap = {
+      F: 'Full',
+      N: 'Normal'
+    };
+
+    return sizeMap[size] || '';
+  }
+
+  function handleCopyClick() {
+    copy(order._id)
+      .then(() => {
+        setCopyOrderId('Copied!');
+        setTimeout(() => setCopyOrderId(''), 1000);
+      })
+      .catch(() => {
+        setCopyOrderId('Error copying!');
+      });
+  }  
 
   function deleteFeedback(feedbackId) {
     try {
@@ -48,33 +77,60 @@ export default function GetOrderInfo() {
   }, [orderId]);
 
   return (
+    <div>
+      <div className="top-bar">
+        <div className="container-title-text">Order Details</div>
+      </div>
     <div className="order-info">
-      <div className="order-info-container">
         {order._id ? ( // Check if order has an _id property
-          <div className="order-item">
-            <p><strong>Order ID:</strong> {order._id}</p>
-            <p><strong>Meal:</strong> {order.base_name} with {order.portion_name ? order.portion_name.join(", ") : 'No portions selected'}</p> 
-            <p><strong>Portion Size:</strong> {order.portion_size}</p>
-            <p><strong>Quantity:</strong> {order.qty}</p>
-            <p><strong>Date:</strong> {order.date.substring(0, 10)}</p>
-            <p><strong>Time:</strong> {order.date.substring(11, 16)}</p>
-            <p><strong>Total Amount:</strong> {order.total_amount}.00 LKR</p>
+          <div className="order-info-container">
+            <div className="order-header">
+              <div className="order-id"><div>Order ID :</div> {order._id}
+                <div className="copy-container" onClick={handleCopyClick}>
+                    <img src={copyicon} alt="copy"></img>
+                    <span className="tooltiptext">{copyOrderId}</span>
+                </div>
+              </div>
+              <div className="date-time">{order.date.substring(0, 10)} {order.date.substring(11, 16)}</div>
+            </div>
+            <div className="order-info-add">
+              <div className="meal-name">
+              <div>{order.base_name} with {order.portion_name ? order.portion_name.join(", ") : 'No portions selected'}</div>
+              <div>({getSizeClass(order.portion_size)})</div>
+              </div>
+              <div className="qty-row">Quantity : <div>{order.qty}</div></div>
+            </div>
+            <div className="order-payment-info">
+              <div className="order-info-row"><div>Total Amount :</div> <div>{order.total_amount}.00 LKR</div></div>
+            </div>
           </div>
         ) : (
-          <div>Beep boop boop...</div>
+          <div className="order-info-container"><div className="loading-text">Beep boop boop...</div></div>
         )}
-      </div>
     <div className="feedback-container">
     {feedback ? ( // If feedback exists
         <div className="feedback-item">
-            <p>Rating: {feedback.rating}</p>
-            <p>Comment: {feedback.comment}</p>
-            <div className="delete-feedback-btn" onClick={() => deleteFeedback(feedback._id)}>Delete</div>
-            <div className="update-feedback-btn" onClick={() => navigateToUpdateFeedback(feedback._id)}>Update</div>  
+            <div className="order-info-row"><div>Rating:</div> <div>{feedback.rating}</div></div>
+            <div className="order-info-row"><div className="comment-container"><div>Comment:</div> <div className="comment-text">{feedback.comment}</div></div></div>
+            <div className="order-info-row">
+              <div className="feedback-btns">
+                <div className="delete-feedback-btn" onClick={() => deleteFeedback(feedback._id)}>Delete</div>
+                <div className="update-feedback-btn" onClick={() => navigateToUpdateFeedback(order._id)}>Update</div> 
+              </div> 
+            </div> 
         </div>
     ) : ( // If no feedback
-        <button onClick={() => navigateToAddFeedback()}>Add Feedback</button> 
-    )}
+       <>
+           <div className="no-feedback-container">
+            <div>Help us improve! Leave your feedback.</div>
+            <div className='add-feedback-btn' onClick={navigateToAddFeedback}>Add Feedback</div> 
+           </div>
+           {showAddFeedbackForm && (
+               <AddFeedback orderId={orderId} onClose={() => setShowAddFeedbackForm(false)} />
+           )}
+       </>  
+  )}
+    </div>
     </div>
     </div>
   );
