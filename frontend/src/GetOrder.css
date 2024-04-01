@@ -113,3 +113,12 @@ body{
     border: 1px solid #6BE2BE;
     background-color: rgba(107, 226, 190, 0.2);
 }
+
+.loading-orders {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 16px;
+}
