@@ -3,6 +3,7 @@ const router = require("express").Router();
 let Order = require("../models/Order");
 
 router.route("/add").post((req,res)=>{
+    const customer_id = req.body.customer_id;
     const base_name = req.body.base_name;
     const portion_name = req.body.portion_name;
     const portion_size = req.body.portion_size;
@@ -12,6 +13,7 @@ router.route("/add").post((req,res)=>{
     const status = req.body.status;
 
     const newOrder = new Order({
+        customer_id,
         base_name,
         portion_name,
         portion_size,
@@ -36,11 +38,20 @@ router.route("/").get((req,res)=>{
     })
 })
 
+router.route('/:orderId').get(async (req, res) => {
+    let orderId = req.params.orderId;
+
+    const order = await Order.findById(orderId)
+        .then(order => res.status(200).send({ status: "Order fetched", order: order }))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route("/update/:orderid").put(async(req,res)=>{
     let orderId = req.params.orderid;
-    const {base_name, portion_name, portion_size, qty, date, total_amount,status} = req.body;
+    const {customer_id,base_name, portion_name, portion_size, qty, date, total_amount,status} = req.body;
 
     const updateOrder = {
+        customer_id,
         base_name,
         portion_name,
         portion_size,
