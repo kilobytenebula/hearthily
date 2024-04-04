@@ -42,7 +42,6 @@ export default function GetOrderInfo() {
   function getSizeClass(size) {
     const sizeMap = {
       F: 'Full',
-      N: 'Regular',
       R: 'Regular'
     };
 

@@ -5,6 +5,9 @@ import GetOrder from './components/GetOrder';
 import GetOrderInfo from './components/GetOrderInfo'; // Renamed for clarity 
 import AddFeedback from './components/AddFeedback';
 import UpdateFeedback from './components/UpdateFeedback';
+import GetDelivery from './components/GetDelivery';
+import GetDeliveryInfo from './components/GetDeliveryInfo';
+import KitchenTest from './components/KitchenTest';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
           <Route path="/order-history/order/:orderId" element={<GetOrderInfo />} />
           <Route path="/order-history/order/:orderId/add-feedback" element={<AddFeedback />} />
           <Route path="/order-history/order/:orderId/update-feedback/:feedbackId" element={<UpdateFeedback />} />
+          <Route path="/delivery" element={<GetDelivery />} />
+          <Route path="/delivery/:deliveryId" element={<GetDeliveryInfo />} />
+          <Route path="/dkn" element={<KitchenTest />} />
         </Routes>
       </div>
     </Router>
