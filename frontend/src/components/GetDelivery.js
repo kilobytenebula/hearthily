@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../GetDelivery.css';
+import '../css/GetDelivery.css';
 
 export default function GetDelivery() {
   const [deliveryArray, setDeliveryArray] = useState([]);

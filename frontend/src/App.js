@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GetOrder from './components/GetOrder';

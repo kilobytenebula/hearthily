@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import '../GetOrderInfo.css'; // Assuming the relevant CSS file
+import '../css/GetOrderInfo.css'; // Assuming the relevant CSS file
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 

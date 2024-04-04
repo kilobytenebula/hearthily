@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import '../GetDeliveryInfo.css';
+import '../css/GetDeliveryInfo.css';
 
 export default function GetDeliveryInfo() {
     const [delivery, setDelivery] = useState({});

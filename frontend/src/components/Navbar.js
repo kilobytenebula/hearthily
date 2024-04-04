@@ -1,6 +1,6 @@
 import React from 'react';
-import '../navbar.css';
-import '../root.css';
+import '../css/navbar.css';
+import '../css/root.css';
 import { Link } from 'react-router-dom';
 const home = require('../icons/home.png');
 const orderHistory = require('../icons/orderHistory.png');

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "../GetOrderInfo.css";
+import "../css/GetOrderInfo.css";
 import AddFeedback from "./AddFeedback";
 import { FaStar } from "react-icons/fa";
 const copyicon = require('../icons/copyicon.png');
