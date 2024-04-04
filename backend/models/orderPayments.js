@@ -27,6 +27,10 @@ const paymentSchema = new Schema({
         type: String,
         required: true
     },
+    address:{
+        type: String,
+        required: true
+    },
     // paymentSlip:{
     //     data: Buffer,
     //     contentType: String
