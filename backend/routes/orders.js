@@ -8,8 +8,8 @@ router.route("/add").post((req,res)=>{
     const portion_size = req.body.portion_size;
     const qty = Number(req.body.qty);
     const date = new Date();
-    const payment_method = req.body.payment_method;
     const total_amount = Number(req.body.total_amount);
+    const status = req.body.status;
 
     const newOrder = new Order({
         base_name,
@@ -17,12 +17,12 @@ router.route("/add").post((req,res)=>{
         portion_size,
         qty,
         date,
-        payment_method,
-        total_amount
+        total_amount,
+        status
     })
     
-    newOrder.save().then(()=>{
-        res.json("Order Added")
+    newOrder.save().then((order)=>{
+        res.json({ message: "Order Added", orderId: order._id });
     }).catch((err)=>{
         console.log(err);
     })
@@ -38,7 +38,7 @@ router.route("/").get((req,res)=>{
 
 router.route("/update/:orderid").put(async(req,res)=>{
     let orderId = req.params.orderid;
-    const {base_name, portion_name, portion_size, qty, date, payment_method, total_amount} = req.body;
+    const {base_name, portion_name, portion_size, qty, date, total_amount,status} = req.body;
 
     const updateOrder = {
         base_name,
@@ -46,8 +46,8 @@ router.route("/update/:orderid").put(async(req,res)=>{
         portion_size,
         qty,
         date,
-        payment_method,
-        total_amount
+        total_amount,
+        status
     }
 
     const update = await Order.findByIdAndUpdate(orderId, updateOrder)
@@ -70,6 +70,22 @@ router.route("/delete/:orderid").delete(async(req,res)=>{
         res.status(500).send({status: "Error with delete user",error: err.message});
     })
 })
+
+// Route to get the ID of the last added order
+router.get("/lastid", async (req, res) => {
+    try {
+        const lastOrder = await Order.findOne().sort({ _id: -1 });
+        if (!lastOrder) {
+            return res.status(404).json({ message: "No orders found" });
+        }
+        res.status(200).json({orderId: lastOrder._id});
+    } catch (error) {
+        console.error("Error fetching last order:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
 
 module.exports = router;
 
