@@ -1,16 +1,17 @@
 const router = require("express").Router();
-
+const moment = require('moment-timezone');
 let payment = require("../models/OrderPayments"); 
 
 router.route("/add").post(async(req,res)=>{
-    const { orderId,customerId,amount,date,paymentMethod,paymentSlip,isSuccess} = req.body;
-
+    const { orderId,customerId,amount,paymentMethod,address,paymentSlip,isSuccess} = req.body;
+    const currentDate = moment().utc();
     const  newPayment = new payment({
         orderId,
         customerId,
         amount,
-        date,
+        date :currentDate,
         paymentMethod,
+        address,
        // paymentSlip,
         isSuccess
     })
@@ -23,8 +24,8 @@ router.route("/add").post(async(req,res)=>{
 
 })
 
-router.route("/").get((req, res) => {
-    const loggedCustomerId = "60a9b5d6f2cf19454c18c71a";
+router.route("/:customerId").get((req, res) => {
+    const loggedCustomerId = req.params.customerId;
     payment.find({ customerId: loggedCustomerId })
         .then((payments) => {
             res.json(payments);
@@ -45,11 +46,12 @@ router.route("/update/:id").put(async(req,res)=>{
         amount,
         date,
         paymentMethod,
+        address,
        // paymentSlip,
         isSuccess
     }
 
-    const update = await payment.findByIdAndUpdate(userId, updatePaymanet )
+    const update =await payment.findByIdAndUpdate(userId, updatePaymanet )
     .then(()=>{
         res.status(200).send({status: "Updated"})
     }).catch((err)=>{
