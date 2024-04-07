@@ -44,7 +44,7 @@ router.route('/:orderId').get(async (req, res) => {
 
 router.route("/update/:orderId").put(async(req,res)=>{
     let orderId = req.params.orderId;
-    const {base_name, portion_name, portion_size, qty, date, payment_method, total_amount} = req.body;
+    const {base_name, portion_name, portion_size, qty, date, payment_method, total_amount, status} = req.body;
 
     const updateOrder = {
         base_name,
@@ -53,7 +53,8 @@ router.route("/update/:orderId").put(async(req,res)=>{
         qty,
         date,
         payment_method,
-        total_amount
+        total_amount,
+        status
     }
 
     const update = await Order.findByIdAndUpdate(orderId, updateOrder)
