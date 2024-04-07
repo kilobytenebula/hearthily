@@ -50,14 +50,14 @@ export default function GetDelivery() {
         const name = `${correspondingUser?.firstname} ${correspondingUser?.lastname}`;
         const date = correspondingOrder?.date ? new Date(correspondingOrder.date).toLocaleDateString() : '';
         const location = correspondingUser?.address || '';
-        const status = deliveryItem.paymentMethod;
+        const payment = deliveryItem.paymentMethod;
 
         displayData.push({
           deliveryId,
           name,
           date,
           location,
-          status
+          payment
         });
       }
       setDisplayData(displayData);
@@ -77,35 +77,36 @@ export default function GetDelivery() {
       {isLoading ? (
         <div className='loading-deliveries'>Beep boop boop...</div>
       ) : (
-        <div>
-          <div className="fields">
-            <ul>
-              <li className='name'>Customer Name</li>
-              <li className='date'>Date</li>
-              <li className='price'>Location</li>
-              <li className='payment'>Payment</li>
-            </ul>
-          </div>
-          <div className="delivery-container">
-            {displayData.length > 0 ? (
-              displayData.map((item) => (
+        displayData.length > 0 ? (
+          <div>
+            <div className="fields">
+              <ul>
+                <li className='name'>Customer Name</li>
+                <li className='date'>Date</li>
+                <li className='price'>Location</li>
+                <li className='payment'>Payment</li>
+              </ul>
+            </div>
+            <div className="delivery-container">
+              {displayData.map((item) => (
                 <div className="item-delivery" key={item.deliveryId}>
-                  <Link to={`/delivery/${item.deliveryId}`} className="item-link">
-                    <ul >
+                  <Link to={`/delivery/job/${item.deliveryId}`} className="item-link">
+                    <ul>
                       <li className="name">{item.name}</li>
                       <li className="date">{item.date}</li>
                       <li className="price">{item.location}</li>
-                      <li className="payment">{item.status}</li>
+                      <li className="payment">{item.payment}</li>
                     </ul>
                   </Link>
                 </div>
-              ))
-            ) : (
-            <div>No available deliveries.</div>
-            )}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="not-available">No available deliveries. Check back soon!</div>
+        )
       )}
     </div>
   );
+  
 }

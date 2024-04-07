@@ -8,6 +8,7 @@ import UpdateFeedback from './components/UpdateFeedback';
 import GetDelivery from './components/GetDelivery';
 import GetDeliveryInfo from './components/GetDeliveryInfo';
 import KitchenTest from './components/KitchenTest';
+import GetJobHistory from './components/GetJobHistory';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Route path="/order-history/order/:orderId/add-feedback" element={<AddFeedback />} />
           <Route path="/order-history/order/:orderId/update-feedback/:feedbackId" element={<UpdateFeedback />} />
           <Route path="/delivery" element={<GetDelivery />} />
-          <Route path="/delivery/:deliveryId" element={<GetDeliveryInfo />} />
+          <Route path="/delivery/job/:deliveryId" element={<GetDeliveryInfo />} />
           <Route path="/dkn" element={<KitchenTest />} />
+          <Route path="/job-history" element={<GetJobHistory />} />
         </Routes>
       </div>
     </Router>
