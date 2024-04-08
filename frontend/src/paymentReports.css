@@ -1,0 +1,117 @@
+.paymentReportContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+
+}
+.paymentReportContainer .header{
+    font-size: 24px;
+    font-weight: 600;
+}
+.totalOverview{
+    background-color: var(--bg-200);
+    padding: 32px;
+    border-radius: 16px;
+    
+}
+.totalRevenue{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+}
+.totRevenue , .refund , .afterRefund{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 500;
+}
+.navButton {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--bg-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 32px;
+}
+.clicked{
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 32px;
+}
+.overview{
+    padding: 32px;
+    border-radius: 16px;
+    font-size: 20px;
+    background-color: var(--bg-200);
+}
+.codOverview , .btOverview{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* .lists{
+    display: flex;
+    justify-self: flex-end;u
+} */
+.codList , .btList{
+    background-color: var(--bg-200);
+    padding: 32px;
+    border-radius: 16px;
+}
+.listHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    padding-bottom: 32px;
+}
+.list .listItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.searchBar{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+}
+.searchBar input[type="search"] {
+    padding: 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+    margin-right: 5px; /* Add some space between input and button */
+}
+
+.searchBar button {
+    padding: 8px 12px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.searchBar button:hover {
+    background-color: #0056b3; /* Darker shade of the button color on hover */
+}

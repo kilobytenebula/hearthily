@@ -31,6 +31,12 @@ const paymentSchema = new Schema({
         type: String,
         required: true
     },
+    phoneNumber:{
+        type:Number,
+        required: true
+
+    },
+    
     // paymentSlip:{
     //     data: Buffer,
     //     contentType: String

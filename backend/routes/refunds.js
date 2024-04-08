@@ -22,15 +22,13 @@ router.route("/add").post(async(req,res)=>{
     })
 })
 
-router.route("/:id").get((req, res) => {
-    const refundId = req.params.id;
-
-    refund.findById(refundId)
-        .then((refund) => {
-            if (!refund) {
-                return res.status(404).json({ error: "refund not found" });
+router.route("/").get((req, res) => {
+    refund.find()
+        .then((refunds) => {
+            if (!refunds || refunds.length === 0) {
+                return res.status(404).json({ error: "No refunds found" });
             }
-            res.json(refund);
+            res.json(refunds);
         })
         .catch((err) => {
             console.log(err);

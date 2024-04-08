@@ -3,7 +3,7 @@ const moment = require('moment-timezone');
 let payment = require("../models/OrderPayments"); 
 
 router.route("/add").post(async(req,res)=>{
-    const { orderId,customerId,amount,paymentMethod,address,paymentSlip,isSuccess} = req.body;
+    const { orderId,customerId,amount,paymentMethod,address,phoneNumber,paymentSlip,isSuccess} = req.body;
     const currentDate = moment().utc();
     const  newPayment = new payment({
         orderId,
@@ -12,6 +12,7 @@ router.route("/add").post(async(req,res)=>{
         date :currentDate,
         paymentMethod,
         address,
+        phoneNumber,
        // paymentSlip,
         isSuccess
     })
@@ -39,7 +40,7 @@ router.route("/:customerId").get((req, res) => {
 router.route("/update/:id").put(async(req,res)=>{
 
     let userId = req.params.id;
-    const { orderId,customerId,amount,date,paymentMethod,paymentSlip,isSuccess} = req.body;
+    const { orderId,customerId,amount,date,paymentMethod,phoneNumber,paymentSlip,isSuccess} = req.body;
     const  updatePaymanet= {
         orderId,
         customerId,
@@ -47,6 +48,7 @@ router.route("/update/:id").put(async(req,res)=>{
         date,
         paymentMethod,
         address,
+        phoneNumber,
        // paymentSlip,
         isSuccess
     }

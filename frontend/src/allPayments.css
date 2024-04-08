@@ -87,3 +87,19 @@ body {
     line-height: 22.4px;
     white-space: nowrap;
   }
+  .refund-button {
+    display: inline-block;
+    padding:16px 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .refund-button:hover {
+    background-color: var(--orange-200);
+  }
