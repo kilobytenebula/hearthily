@@ -83,7 +83,7 @@ router.route("/delete/:orderid").delete(async(req,res)=>{
 })
 
 // Route to get the ID of the last added order
-router.get("/lastid", async (req, res) => {
+router.get("/lastorder/lastid", async (req, res) => {
     try {
         const lastOrder = await Order.findOne().sort({ _id: -1 });
         if (!lastOrder) {

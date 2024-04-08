@@ -4,6 +4,8 @@ import AllBases from './components/AllBases';
 import AllPortions from './components/AllPortions';
 import Navbar from './components/NavBar';
 import Checkout from './components/Checkout';
+import GetOrderInfo from './components/GetOrderInfo';
+import GetOrder from './components/GetOrder';
 
 
 function App() {
@@ -14,7 +16,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<AllBases/>}/>
           <Route path="/all-portions/:baseId" element={<AllPortions/>}/>
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/checkout/:baseName/:basePrice/:selectedPortions/:total" element={<Checkout/>}/>
+          <Route path="/allBases" element={<AllBases/>}/>
+          <Route path="/order-history" element={<GetOrder />} />
+          <Route path="/order-history/order/:orderId" element={<GetOrderInfo />} />
         </Routes>
       </div>
     </Router>

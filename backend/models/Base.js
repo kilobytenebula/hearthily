@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const baseSchema = new Schema({
+    image_url: {
+        type : String,
+        required: true
+    },
     base_name : {
         type : String,
         required: true
@@ -11,6 +15,10 @@ const baseSchema = new Schema({
     base_type : {
         type : String,
         required: true
+    },
+    category : {
+        type : String,
+        require: true
     },
     reg_price : {
         type : Number,

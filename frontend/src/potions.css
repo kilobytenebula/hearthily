@@ -21,7 +21,8 @@
 }
 .potion-list{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
     gap: 32px;
 }
 .potion-item{

@@ -3,11 +3,13 @@ const router = require("express").Router();
 let Portion = require("../models/Portion");
 
 router.route("/add").post((req,res)=>{
+    const image_url = req.body.image_url;
     const portion_name = req.body.portion_name;
     const portion_type = req.body.portion_type;
     const price = Number(req.body.price);
 
     const newPortion = new Portion({
+        image_url,
         portion_name,
         portion_type,
         price,
