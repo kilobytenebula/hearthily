@@ -3,6 +3,7 @@ import RegisterForm from './components/RegisterForm';
 import AllSupplier from "./pages/AllSupplier";
 import UpdateSupplier from "./components/UpdateSupplier";
 import Dashboard from "./pages/SupplierDashboard";
+import SupplierReport from "./components/SupplierReport";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/add' exact Component={RegisterForm} />
         <Route path='/display' exact Component={AllSupplier} />
         <Route path='/update/:id' exact Component={UpdateSupplier} />
+        <Route path='/display/:id' exact Component={SupplierReport} />
       </Routes>
       </div>
       

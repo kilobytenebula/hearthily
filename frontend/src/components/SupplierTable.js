@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import "../style/SupplierTable.css";
-import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiOutlineDownload } from "react-icons/ai";
 import axios from "axios";// to get data from database
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
+
 
 function SupplierTable(){
 
@@ -48,6 +49,7 @@ function SupplierTable(){
           }
         }
       }
+
     
 
     return(
@@ -87,7 +89,7 @@ function SupplierTable(){
                                 <td>
                                     <Link to={`/update/${supplier._id}`}><AiFillEdit id ="S_update-icon"/></Link>
                                     <botton onClick={() => deleteSupplier(supplier._id)}><AiFillDelete id ="S_delete-icon"/></botton>
-                                    <botton><AiFillEye id ="S_veiw-icon"/></botton>
+                                    <Link to={`/display/${supplier._id}`}><AiOutlineDownload id ="S_down-icon"/></Link>
                                 </td>
                             </tr>
                         ))}     
