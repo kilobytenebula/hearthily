@@ -30,7 +30,7 @@ router.route("/add").post((req,res)=>{
 
 //CURD - dispaly
 //http://localhost:8070/supplier
-router.route("/").get((req,res)=>{
+router.route("/display").get((req,res)=>{
 
     Supplier.find().then((suppliers)=>{
         res.json(suppliers)
@@ -45,10 +45,10 @@ router.route("/").get((req,res)=>{
 router.route("/update/:id").put(async(req,res)=>{
     let userId = req.params.id;
     //const name = req.body.name; can use this also
-    const {supplier_name, catogory, address, email,phone_n,reg_date} = req.body; //destructure
+    const {supplier_name, catogory, address, email, phone_n, reg_date} = req.body; //destructure
 
     //update data
-    const updateStudent = {
+    const updateSupplier = {
         supplier_name,
         catogory,
         address,
@@ -59,7 +59,7 @@ router.route("/update/:id").put(async(req,res)=>{
 
     //if it has student in this database by id
     //(if use email, nic for primary key - findOne)
-    const update = await Supplier.findByIdAndUpdate(userId,updateSupplier).then(()=>{
+    await Supplier.findByIdAndUpdate(userId,updateSupplier).then(()=>{
         res.status(200).send({status: "Supplier Updated"})
     }).catch((err)=>{
         console.log(err);
@@ -76,20 +76,21 @@ router.route("/delete/:id").delete(async(req,res)=> {
     await Supplier.findByIdAndDelete(userId).then(()=>{
         res.status(200).send({status: "Supplier deleted"});
     }).catch((err) => {
-        console.log(err,message);
+        console.log(err.message);
         res.status(500).send({status: "Erro with delete user"});
     })
-})
+});
 
 //only get one user
-router.route("/get/:id").get(async(req,res) => {
+router.route("/display/:id").get(async (req, res) => {
     let userId = req.params.id;
-    const user = await Student.findById(userId).then((student) => {
-        res.status(200).send({status: " user fetched", student})
-    }).catch(() => {
+    const user = await Supplier.findById(userId).then((supplier) =>{
+        res.status(200).send({status:"supplier fetchd",supplier});
+    }).catch ((err) =>{
         console.log(err.message);
-        res.status(500).send({status: "Error with get user", error: err.message});
-    })
-})
+        res.status(500).send({status:"Error retrieving user by ID",error:err.message});
+    }) 
+
+});
 
 module.exports = router;
