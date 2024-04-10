@@ -84,11 +84,11 @@ body{
     text-align: center;
 }
 .price {
-    width: 15%;
+    width: 12%;
     text-align: center;
 }
 .status {
-    width: 20%;
+    width: 23%;
     padding: 0 48px 0 48px;
     text-align: center;
 }
@@ -108,13 +108,23 @@ body{
     border: 1px solid #9290FE;
     background-color: rgba(146, 144, 254, 0.2);
 }
+.of-delivery {
+    color: #9290FE;
+    border: 1px solid #9290FE;
+    background-color: rgba(146, 144, 254, 0.2);
+}
+.on-delivery {
+    color: #9290FE;
+    border: 1px solid #9290FE;
+    background-color: rgba(146, 144, 254, 0.2);
+}
 .completed {
     color: #6BE2BE;
     border: 1px solid #6BE2BE;
     background-color: rgba(107, 226, 190, 0.2);
 }
 
-.loading-orders {
+.loading-orders-kitchen {
     margin-top: 32px;
     background-color: #1F1D2B;
     width: 60%;
