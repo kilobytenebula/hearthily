@@ -9,6 +9,7 @@ import GetDelivery from './components/GetDelivery';
 import GetDeliveryInfo from './components/GetDeliveryInfo';
 import KitchenTest from './components/KitchenTest';
 import GetJobHistory from './components/GetJobHistory';
+import SetKitchenSchedule from './components/SetKitchenSchedule';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/delivery/job/:deliveryId" element={<GetDeliveryInfo />} />
           <Route path="/dkn" element={<KitchenTest />} />
           <Route path="/job-history" element={<GetJobHistory />} />
+          <Route path="/kitchen/order/:orderId" element={<SetKitchenSchedule />} />
         </Routes>
       </div>
     </Router>
