@@ -57,9 +57,9 @@ router.route("/update/:orderId").put(async(req,res)=>{
         status
     }
 
-    const update = await Order.findByIdAndUpdate(orderId, updateOrder)
+    await Order.findByIdAndUpdate(orderId, updateOrder)
     .then(()=>{
-        res.status(200).send({status: "Order updated", order: update})
+        res.status(200).send({status: "Order updated", order: updateOrder})
     }).catch((err)=>{
         console.log(err);
         res.status(500).send({status: "Error with updating data", error: err.message});
