@@ -22,6 +22,10 @@ const deliverySchema = new Schema({
         type: String,
         required: true
     },
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Delivery = mongoose.model('Delivery', deliverySchema);
