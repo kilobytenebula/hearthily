@@ -29,6 +29,7 @@ router.route("/").get((req, res) => {
                 return res.status(404).json({ error: "No refunds found" });
             }
             res.json(refunds);
+            console.log(refunds);
         })
         .catch((err) => {
             console.log(err);

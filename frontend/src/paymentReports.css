@@ -9,7 +9,7 @@
     color: var(--white-100);
 
 }
-.paymentReportContainer .header{
+.paymentReportContainer .paymentReportHeader{
     font-size: 24px;
     font-weight: 600;
 }
@@ -85,17 +85,56 @@
     font-size: 20px;
     padding-bottom: 32px;
 }
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-size: 20px;
+}
 .list .listItem{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.searchBar{
+.listHeader .id{
+    width: 50%;
+}
+.listHeader .date{
+    text-align: center;
+    width: 20%;
+}
+.listHeader .amount{
+    text-align: right;
+    width: 30%;
+}
+
+.listItem .id{
+    width: 50%;
+}
+.listItem .date{
+    text-align: center;
+    width: 20%;
+}
+.listItem .amount{
+    text-align: right;
+    width: 30%;
+}
+
+
+
+.searchBarBT , .searchBarCOD{
     display: flex;
     justify-content: flex-end;
     padding-bottom: 32px;
 }
-.searchBar input[type="search"] {
+.searchBarBT input[type="search"] {
+    padding: 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+    margin-right: 5px; /* Add some space between input and button */
+}
+.searchBarCOD input[type="search"] {
     padding: 8px;
     border: 1px solid var(--white-100);
     width: 260px;
@@ -103,7 +142,15 @@
     margin-right: 5px; /* Add some space between input and button */
 }
 
-.searchBar button {
+.searchBarBT button {
+    padding: 8px 12px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.searchBarCOD button {
     padding: 8px 12px;
     background-color: var(--orange-200);
     color: var(--white-100);

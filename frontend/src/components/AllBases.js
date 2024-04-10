@@ -13,7 +13,7 @@ export default function AllBases(){
         function getBases(){
             axios.get("http://localhost:8050/base/").then((res)=>{
                 setBases(res.data);
-                //console.log(res.data);
+                
             }).catch((err)=>{
                 alert(err.message);
             })

@@ -9,6 +9,7 @@ import PaymentReport from './components/paymentReport'
 import AllBases from './components/AllBases'
 import AllPortions from './components/AllPortions'
 
+
 function App() {
   return (
     <Router>

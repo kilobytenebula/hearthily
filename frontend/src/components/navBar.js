@@ -18,7 +18,7 @@ const navBar = () => {
         
         <div class="navBarItems">
             <ul>
-                <li><div className='navItem '><img src={home} alt="Home"  /></div></li>
+                <li><Link to="/"><div className='navItem '><img src={home} alt="Home"  /></div></Link></li>
                 <li><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></li>
                 <li><Link to="/payments"><div className='navItem active'><img src={paymentHistory} alt="Payment History" title='Payment History' /></div></Link></li>
             </ul>

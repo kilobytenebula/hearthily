@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import '../checkout.css';
 
+
 export default function Checkout(){
 
+
+    
 
     //Bank details show and hide implementation
     const [showBankDetails, setShowBankDetails] =useState(false);
@@ -178,6 +181,7 @@ export default function Checkout(){
             const response = await axios.post('http://localhost:8050/payment/add', data);
             console.log(response.data); 
             window.alert('Order Placed successfully!');
+            window.location.href = '/payments';
             
           } catch (error) {
             console.error('Error:', error); 

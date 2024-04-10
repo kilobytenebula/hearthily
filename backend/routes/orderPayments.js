@@ -25,6 +25,17 @@ router.route("/add").post(async(req,res)=>{
 
 })
 
+router.route("/").get((req, res) => {
+    payment.find()
+        .then((payments) => {
+            res.json(payments);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ error: "Internal Server Error" });
+        });
+});
+
 router.route("/:customerId").get((req, res) => {
     const loggedCustomerId = req.params.customerId;
     payment.find({ customerId: loggedCustomerId })
