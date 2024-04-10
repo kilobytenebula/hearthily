@@ -22,7 +22,8 @@ router.route('/add').post((req, res) => {
         userId,
         isPaid,
         paymentMethod,
-        deliveryStatus
+        deliveryStatus,
+        date: new Date()
     });
 
     // Save the new Delivery object to the database
