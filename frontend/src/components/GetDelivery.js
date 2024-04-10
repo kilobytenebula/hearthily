@@ -48,7 +48,7 @@ export default function GetDelivery() {
 
         const deliveryId = deliveryItem._id;
         const name = `${correspondingUser?.firstname} ${correspondingUser?.lastname}`;
-        const date = correspondingOrder?.date ? new Date(correspondingOrder.date).toLocaleDateString() : '';
+        const date = deliveryItem.date ? new Date(deliveryItem.date).toLocaleDateString() : '';
         const location = correspondingUser?.address || '';
         const payment = deliveryItem.paymentMethod;
 

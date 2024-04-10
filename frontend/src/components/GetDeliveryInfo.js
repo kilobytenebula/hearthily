@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/GetDeliveryInfo.css";
@@ -12,35 +11,47 @@ export default function GetDeliveryInfo() {
   const [user, setUser] = useState({});
   const { deliveryId } = useParams();
   const [copyDeliveryId, setCopyDeliveryId] = useState("Copy to clipboard");
+  const [undoTimer, setUndoTimer] = useState(15);
+  const [tempStatus, setTempStatus] = useState("");
+  const timerRef = useRef(null);
 
   const DELIVERY_STATUS = {
     OF_DELIVERY: "of-delivery",
     ON_DELIVERY: "on-delivery",
     COMPLETED: "completed",
-    UNDO: "on-delivery"
   };
 
-  const updateOrder = status => {
-    axios.put(`http://localhost:8070/order/update/${delivery.orderId}`, { status })
-      .then(response => {
+  const navigate = useNavigate();
+
+  const updateOrder = (orderId, status) => {
+    axios
+      .put(`http://localhost:8070/order/update/${orderId}`, { status })
+      .then((response) => {
         console.log(`Order status updated to ${status}`);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error updating order:", error);
       });
   };
-  
+
+  const addCompletedDelivery = (completedDelivery) => {
+    axios
+      .post("http://localhost:8070/completeddelivery/add", completedDelivery)
+      .then((response) => {
+        console.log("Delivery added to completed deliveries:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error adding delivery to completed deliveries:", error);
+      });
+  };
 
   const useDeliveryAction = () => {
-    const navigate = useNavigate();
-
     const deliveryAction = (deliveryId, action) => {
       const handleError = (error) => {
         console.error("Error updating delivery:", error);
-        // Display error message to the user
       };
 
-      const updateDeliveryAndFetch = status => {
+      const updateDeliveryAndFetch = (status) => {
         axios
           .put(`http://localhost:8070/delivery/${deliveryId}`, {
             deliveryStatus: status,
@@ -62,18 +73,29 @@ export default function GetDeliveryInfo() {
 
       if (action === "accept") {
         updateDeliveryAndFetch(DELIVERY_STATUS.ON_DELIVERY);
-        alert('You accepted a job :)');
+        updateOrder(delivery.orderId, DELIVERY_STATUS.ON_DELIVERY);
+        alert("You accepted a job :)");
       } else if (action === "cancel") {
         updateDeliveryAndFetch(DELIVERY_STATUS.OF_DELIVERY);
-        updateOrder(DELIVERY_STATUS.OF_DELIVERY);
-        alert('You cancelled the job :(');
+        updateOrder(delivery.orderId, DELIVERY_STATUS.OF_DELIVERY);
+        alert("You cancelled the job :(");
+      } else if (action === "countdown") {
+        alert("Congratulations! You completed the job :)");
+        setTempStatus("completed");
+        startUndoTimer();
       } else if (action === "completed") {
         updateDeliveryAndFetch(DELIVERY_STATUS.COMPLETED);
-        updateOrder(DELIVERY_STATUS.COMPLETED);
-        alert('Congratulations! You completed the job :)');
-      } else if (DELIVERY_STATUS.UNDO) {
-        updateDeliveryAndFetch(DELIVERY_STATUS.UNDO);
-        alert('You undid the action :(');
+        updateOrder(delivery.orderId, DELIVERY_STATUS.COMPLETED);
+        const completedDelivery = {
+          deliveryId: delivery._id,
+          userId: delivery.userId,
+        };
+        addCompletedDelivery(completedDelivery);
+      } else if (action === "undo") {
+        clearInterval(timerRef.current);
+        setTempStatus("");
+        setUndoTimer(15); // Reset timer
+        alert("You undid the action :(");
       } else {
         console.error("Invalid action:", action);
       }
@@ -101,6 +123,10 @@ export default function GetDeliveryInfo() {
       .then((response) => {
         const deliveryData = response.data.delivery;
         setDelivery(deliveryData);
+        if (deliveryData.deliveryStatus === DELIVERY_STATUS.COMPLETED) {
+          setTempStatus("completed");
+          startUndoTimer();
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -133,6 +159,19 @@ export default function GetDeliveryInfo() {
     fetchOrdersAndUsers();
   }, [delivery]);
 
+  const startUndoTimer = () => {
+    timerRef.current = setInterval(() => {
+      setUndoTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (undoTimer === 0) {
+      clearInterval(timerRef.current);
+      deliveryAction(delivery._id, "completed");
+    }
+  }, [undoTimer]);
+
   return (
     <div>
       <div className="top-bar">
@@ -150,8 +189,8 @@ export default function GetDeliveryInfo() {
                 </div>
               </div>
               <div className="date-time">
-                {order.date ? (
-                  <div>{order.date.substring(0, 10)}</div>
+                {delivery.date ? (
+                  <div>{delivery.date.substring(0, 10)}</div>
                 ) : (
                   <div>Beep boop boop...</div>
                 )}
@@ -184,19 +223,37 @@ export default function GetDeliveryInfo() {
                 >
                   Accept
                 </div>
-              ) : delivery.deliveryStatus === "on-delivery" ? (
-                <div className="on-delivery-btns">
-                  <div className="cancel-btn" onClick={() => deliveryAction(delivery._id, "cancel")}>
-                    Cancel
-                  </div>
-                  <div className="complete-btn" onClick={() => deliveryAction(delivery._id, "completed")}>
-                    Mark as Completed
-                  </div>
-                </div>
               ) : (
-                <div className="undo-btn" onClick={() => deliveryAction(delivery._id, "undo")}>
-                    Undo
-                </div>
+                delivery.deliveryStatus === "on-delivery" && (
+                  <div className="on-delivery-btns">
+                    {tempStatus !== "completed" && (
+                      <>
+                        <div
+                          className="cancel-btn"
+                          onClick={() => deliveryAction(delivery._id, "cancel")}
+                        >
+                          Cancel
+                        </div>
+                        <div
+                          className="complete-btn"
+                          onClick={() =>
+                            deliveryAction(delivery._id, "countdown")
+                          }
+                        >
+                          Mark as Completed
+                        </div>
+                      </>
+                    )}
+                    {tempStatus === "completed" && (
+                      <div
+                        className="undo-btn"
+                        onClick={() => deliveryAction(delivery._id, "undo")}
+                      >
+                        Undo ({undoTimer})
+                      </div>
+                    )}
+                  </div>
+                )
               )}
             </div>
           </div>
