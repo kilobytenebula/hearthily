@@ -12,7 +12,9 @@ export default function GetOrder() {
       pending: 'Pending',
       completed: 'Completed',
       preparing: 'Preparing',
-      cancelled: 'Cancelled'
+      cancelled: 'Cancelled',
+      'on-delivery': 'On Your Way',
+      'of-delivery': 'Ready for Delivery'
     };
 
     return statusMap[status] || '';
