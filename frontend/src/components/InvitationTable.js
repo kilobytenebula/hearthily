@@ -74,7 +74,10 @@ function InvitationTable(){
                                 <td>{inviter.inviter_name}</td>
                                 <td>{inviter.email}</td>
                                 <td>{inviter.int_date}</td>
-                                <td>{inviter.status}</td>
+                                <td>
+                                    <span className={inviter.status === 'Pending' ? 'pending' : ''}>{inviter.status}
+                                    </span>
+                                </td>
                                 <td> 
                                     <botton id = "SI_update-icon"><AiFillEdit/></botton>
                                     <botton onClick={() => deleteInviter(inviter._id)}><AiFillDelete id ="S_delete-icon"/></botton>
