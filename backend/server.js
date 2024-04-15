@@ -37,6 +37,9 @@ app.use("/supplier",supplierRouter);
 
 //to access shipment.js file in routes folder
 
+//to access inviter.js file in routes folder
+const invitedsupplierRouter  = require("./routes/invitedsuppliers.js");
+app.use("/inviter",invitedsupplierRouter);
 
 //run in port number
 app.listen(PORT, () => {

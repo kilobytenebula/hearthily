@@ -15,7 +15,7 @@ function Menu() {
                 </li>
 
                 <li>
-                    <Link to="#">
+                    <Link to="/invite">
                         <span className="S_title ">Invite</span>
                     </Link >
                 </li>
