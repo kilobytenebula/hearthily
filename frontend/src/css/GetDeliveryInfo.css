@@ -4,6 +4,11 @@ body {
     background-color: #252836;
 }
 
+.delivery-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
 .top-bar {
     display: flex;
     flex-direction: column;

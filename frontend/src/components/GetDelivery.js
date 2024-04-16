@@ -70,7 +70,7 @@ export default function GetDelivery() {
   }, [deliveryArray]);
 
   return (
-    <div>
+    <div className="delivery-container-main">
       <div className="top-bar">
         <div className="container-title-text">Available Jobs</div>
       </div>

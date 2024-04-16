@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/GetOrderInfo.css'; // Assuming the relevant CSS file
 import { useParams, useNavigate } from 'react-router-dom';
@@ -77,7 +77,7 @@ export default function UpdateFeedback() {
   };
 
   return (
-    <div>
+    <div className='add-feedback-main'>
        <div className="top-bar">
         <div className="container-title-text">Update Your Feedback</div>
       </div>

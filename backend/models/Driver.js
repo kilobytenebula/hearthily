@@ -1,27 +1,34 @@
 // Initialize the driver model
 const mongoose = require('mongoose');
 
-//create a schema
+// Create a schema
 const Schema = mongoose.Schema;
 
-//create a driver schema
+// Create a driver schema
 const driverSchema = new Schema({
-    employeeId: {
+    userId: {
         type: String,
         required: true
     },
+    deliveryCount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    avgRating: {
+        type: Number,
+        required: true,
+        default: 0.0
+    },
     isAvailable: {
         type: Boolean,
-        required: true
-    },
-    isTopRated: {
-        type: Boolean,
-        required: true
+        required: true,
+        default: true
     }
 });
 
-//create a model
+// Create a model
 const Driver = mongoose.model('Driver', driverSchema);
 
-//export the model
+// Export the model
 module.exports = Driver;

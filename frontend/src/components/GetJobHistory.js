@@ -8,12 +8,16 @@ export default function GetJobHistory() {
   const [isLoading, setIsLoading] = useState(true);
   const [acceptedDeliveries, setAcceptedDeliveries] = useState([]);
   const [completedDeliveries, setCompletedDeliveries] = useState([]);
+  const driverId = '661bfcaff9b3692a8a15a7f2';
 
   useEffect(() => {
     // Fetch delivery data
     axios.get('http://localhost:8070/delivery/')
       .then(response => {
-        const jobs = response.data.filter(delivery => delivery.deliveryStatus === 'on-delivery' || delivery.deliveryStatus === 'completed');
+        const jobs = response.data.filter(delivery =>
+          (delivery.deliveryStatus === 'on-delivery' || delivery.deliveryStatus === 'completed') &&
+          delivery.driverId === driverId
+        );
         setJobsArray(jobs);
         setIsLoading(false);
       })
@@ -83,7 +87,7 @@ export default function GetJobHistory() {
   }, [jobsArray]);
 
   return (
-    <div>
+    <div className="delivery-container-main">
       <div className="top-bar">
         <div className="container-title-text">Job History</div>
       </div>

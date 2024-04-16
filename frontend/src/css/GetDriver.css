@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.drivers-main {
+    width: display;
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}

@@ -105,7 +105,7 @@ export default function GetOrderInfo() {
   }, [orderId]);
 
   return (
-    <div>
+    <div className="order-info-main">
       <div className="top-bar">
         <div className="container-title-text">Order Details</div>
       </div>

@@ -4,6 +4,16 @@ body {
     background-color: #252836;
 }
 
+.order-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.add-feedback-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
 .top-bar {
     display: flex;
     flex-direction: column;
@@ -97,10 +107,13 @@ body {
 
 .comment-container {
     gap: 16px;
+    width: 100%;
 }
 
 .comment-text {
     display: block;
+    width: 100%;
+    min-height: 100px;
     margin-top: 16px;
     padding: 8px;
     border-radius: 8px;

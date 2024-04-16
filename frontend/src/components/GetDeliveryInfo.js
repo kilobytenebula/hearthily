@@ -14,6 +14,7 @@ export default function GetDeliveryInfo() {
   const [undoTimer, setUndoTimer] = useState(15);
   const [tempStatus, setTempStatus] = useState("");
   const timerRef = useRef(null);
+  const driverId = '661bfcaff9b3692a8a15a7f2'
 
   const DELIVERY_STATUS = {
     OF_DELIVERY: "of-delivery",
@@ -34,14 +35,14 @@ export default function GetDeliveryInfo() {
       });
   };
 
-  const addCompletedDelivery = (completedDelivery) => {
+  const updateDriver = (driverId, isAvailable) => {
     axios
-      .post("http://localhost:8070/completeddelivery/add", completedDelivery)
+      .put(`http://localhost:8070/driver/${driverId}`, { isAvailable })
       .then((response) => {
-        console.log("Delivery added to completed deliveries:", response.data);
+        console.log(`Driver availability updated to ${isAvailable}`);
       })
       .catch((error) => {
-        console.error("Error adding delivery to completed deliveries:", error);
+        console.error("Error updating driver:", error);
       });
   };
 
@@ -51,13 +52,14 @@ export default function GetDeliveryInfo() {
         console.error("Error updating delivery:", error);
       };
 
-      const updateDeliveryAndFetch = (status) => {
+      const updateDeliveryAndFetch = (driverId, deliveryStatus) => {
         axios
           .put(`http://localhost:8070/delivery/${deliveryId}`, {
-            deliveryStatus: status,
+            driverId,
+            deliveryStatus
           })
           .then(() => {
-            console.log(`Delivery status updated to ${status}`);
+            console.log(`Delivery status updated to ${deliveryStatus} for driver ${driverId}`);
             navigate(`/delivery/job/${deliveryId}`);
 
             // Re-fetch delivery details
@@ -72,25 +74,23 @@ export default function GetDeliveryInfo() {
       };
 
       if (action === "accept") {
-        updateDeliveryAndFetch(DELIVERY_STATUS.ON_DELIVERY);
+        updateDeliveryAndFetch(driverId, DELIVERY_STATUS.ON_DELIVERY);
         updateOrder(delivery.orderId, DELIVERY_STATUS.ON_DELIVERY);
+        updateDriver(driverId, false);
         alert("You accepted a job :)");
       } else if (action === "cancel") {
-        updateDeliveryAndFetch(DELIVERY_STATUS.OF_DELIVERY);
+        updateDeliveryAndFetch(null, DELIVERY_STATUS.OF_DELIVERY);
         updateOrder(delivery.orderId, DELIVERY_STATUS.OF_DELIVERY);
+        updateDriver(driverId, true);
         alert("You cancelled the job :(");
       } else if (action === "countdown") {
         alert("Congratulations! You completed the job :)");
         setTempStatus("completed");
         startUndoTimer();
       } else if (action === "completed") {
-        updateDeliveryAndFetch(DELIVERY_STATUS.COMPLETED);
+        updateDeliveryAndFetch(driverId, DELIVERY_STATUS.COMPLETED);
         updateOrder(delivery.orderId, DELIVERY_STATUS.COMPLETED);
-        const completedDelivery = {
-          deliveryId: delivery._id,
-          userId: delivery.userId,
-        };
-        addCompletedDelivery(completedDelivery);
+        updateDriver(driverId, true);
       } else if (action === "undo") {
         clearInterval(timerRef.current);
         setTempStatus("");
@@ -131,8 +131,8 @@ export default function GetDeliveryInfo() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
+  }, [deliveryId, DELIVERY_STATUS.COMPLETED]);
+  
   useEffect(() => {
     const fetchOrdersAndUsers = async () => {
       axios
@@ -144,7 +144,7 @@ export default function GetDeliveryInfo() {
         .catch((error) => {
           console.log(error);
         });
-
+  
       axios
         .get(`http://localhost:8070/user/${delivery.userId}`)
         .then((response) => {
@@ -155,9 +155,9 @@ export default function GetDeliveryInfo() {
           console.log(error);
         });
     };
-
+  
     fetchOrdersAndUsers();
-  }, [delivery]);
+  }, [delivery, delivery._id, deliveryAction]);
 
   const startUndoTimer = () => {
     timerRef.current = setInterval(() => {
@@ -170,10 +170,10 @@ export default function GetDeliveryInfo() {
       clearInterval(timerRef.current);
       deliveryAction(delivery._id, "completed");
     }
-  }, [undoTimer]);
+  }, [undoTimer, delivery._id, deliveryAction]);
 
   return (
-    <div>
+    <div className="delivery-info-main">
       <div className="top-bar">
         <div className="container-title-text">Delivery Details</div>
       </div>

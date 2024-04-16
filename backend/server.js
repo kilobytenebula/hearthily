@@ -41,10 +41,6 @@ app.use('/delivery', deliveryRouter);
 
 const userRouter = require('./routes/user.js');
 app.use('/user', userRouter);
-
-const completeddeliveryRouter = require('./routes/completeddeliveries.js');
-app.use('/completeddelivery', completeddeliveryRouter);
-
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -1,21 +1,22 @@
 //Intializing the express router
 const router = require('express').Router();
-let Driver = require('../models/Driver');
+const Driver = require('../models/Driver');
+const Delivery = require('../models/Delivery');
+const Feedback = require('../models/Feedback');
 
 
 //CRUD starts here
 //1. Create Route
 router.route('/add').post((req, res) => {
     //get data from the request body
-    const employeeId = req.body.employeeId;
-    const isAvailable = req.body.isAvailable;
-    const isTopRated = req.body.isTopRated;
+    const { userId, deliveryCount, avgRating, isAvailable } = req.body;
 
     //create a new driver object
     const newDriver = new Driver({
-        employeeId,
-        isAvailable,
-        isTopRated
+        userId,
+        deliveryCount,
+        avgRating,
+        isAvailable
     });
 
     //save the new driver object to the database
@@ -24,13 +25,70 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//2a. Read Route
-router.route('/').get((req, res) => Driver.find()
-    .then(drivers => res.json(drivers))
-    .catch(err => console.log(err))
-);
+//2a. Fetch all drives
+router.route('/').get(async (req, res) => {
+    try {
+        // Find all drivers
+        const drivers = await Driver.find();
 
-//2b. Read Specific Route
+        // Iterate through each driver
+        for (const driver of drivers) {
+            // Find completed deliveries for the driver
+            const completedDeliveries = await Delivery.find({ driverId: driver._id, deliveryStatus: "completed" });
+            console.log(completedDeliveries);
+
+            // Get the number of completed deliveries
+            const deliveryCount = completedDeliveries.length;
+
+            // If there are no completed deliveries, set average rating to 0
+            let averageRating = 0;
+
+            if (deliveryCount > 0) {
+                // Extract order IDs from completed deliveries
+                const orderIds = completedDeliveries.map(delivery => delivery.orderId);
+
+                // Find feedback for the extracted order IDs
+                const feedback = await Feedback.find({ orderId: { $in: orderIds } });
+
+                // Calculate average rating for the driver
+                let totalRating = 0;
+                if (feedback.length > 0) {
+                    totalRating = feedback.reduce((acc, curr) => acc + curr.rating, 0);
+                }
+                averageRating = feedback.length > 0 ? totalRating / feedback.length : 0;
+            }
+
+            // Check if average rating or delivery count has changed
+            if (driver.avgRating !== averageRating || driver.deliveryCount !== deliveryCount) {
+                // Update the driver document with new values
+                driver.avgRating = averageRating;
+                driver.deliveryCount = deliveryCount;
+
+                // Save the updated driver document back to the database
+                await driver.save();
+            }
+        }
+
+        // Return the list of drivers with updated values
+        const updatedDrivers = await Driver.find();
+        const driverList = updatedDrivers.map(driver => ({
+            _id: driver._id,
+            userId: driver.userId,
+            deliveryCount: driver.deliveryCount,
+            averageRating: driver.avgRating,
+            isAvailable: driver.isAvailable
+        }));
+
+        res.status(200).json({ status: "Driver list fetched", drivers: driverList });
+
+    } catch (error) {
+        console.error('Error fetching driver list:', error);
+        res.status(500).json({ status: "Error fetching driver list", error: error.message });
+    }
+});
+
+
+// 2b. Fetch a specific driver
 router.route('/:id').get(async (req, res) => {
     let driverId = req.params.id;
 
@@ -43,12 +101,10 @@ router.route('/:id').get(async (req, res) => {
 //3. Update Route
 router.route('/:id').put(async (req, res) => {
     let driverId = req.params.id;
-    const { employeeId, isAvailable, isTopRated } = req.body;
+    const { isAvailable } = req.body;
 
     const updateDriver = {
-        employeeId,
-        isAvailable,
-        isTopRated
+        isAvailable
     }
 
     await Driver.findByIdAndUpdate(driverId, updateDriver)

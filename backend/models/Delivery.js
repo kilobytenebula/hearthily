@@ -2,25 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const deliverySchema = new Schema({
-    orderId: {
-        type: String,
-        required: true
-    },
     userId: {
         type: String,
         required: true
     },
-    isPaid: {
-        type: Boolean,
-        required: true,
-    },
-    deliveryStatus: {
+    orderId: {
         type: String,
         required: true
+    },
+    driverId: {
+        type: String,
+        required: false
     },
     paymentMethod: {
         type: String,
         required: true
+    },
+    deliveryStatus: {
+        type: String,
+        required: true,
+        default: 'of-delivery'
     },
     date: {
         type: Date,

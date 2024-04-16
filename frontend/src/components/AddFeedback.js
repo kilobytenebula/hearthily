@@ -59,7 +59,7 @@ export default function GetFeedbackForm() {
     };
 
     return (
-        <div>
+        <div className='add-feedback-main'>
             <div className="top-bar">
         <div className="container-title-text">Add Your Feedback</div>
       </div>

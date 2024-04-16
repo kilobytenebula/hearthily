@@ -6,6 +6,8 @@ body{
 
 .order-history {
     width: display;
+    padding: 32px;
+    margin-left: 10%;
 }
 
 .top-bar {

@@ -51,19 +51,10 @@ router.route('/:id').get(async (req, res) => {
 //3. Update Route
 router.route('/:id').put(async (req, res) => {
     let deliveryId = req.params.id;
-    const { orderId, userId, deliveryStatus, isPaid } = req.body;
-    let paymentMethod = "";
-
-    if (isPaid) {
-        paymentMethod = 'Paid';
-    } else {
-        paymentMethod = 'COD';
-    }
+    const { driverId, deliveryStatus } = req.body;
 
     const updateDelivery = {
-        orderId,
-        userId,
-        paymentMethod,
+        driverId,
         deliveryStatus
     }
 

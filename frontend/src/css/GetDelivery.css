@@ -4,8 +4,10 @@ body {
     background-color: #252836;
 }
 
-.delivery-container {
+.delivery-container-main {
     width: display;
+    padding: 32px;
+    margin-left: 10%;
 }
 
 .job-container {

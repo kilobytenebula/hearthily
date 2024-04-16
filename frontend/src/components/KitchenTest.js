@@ -7,11 +7,9 @@ export default function KitchenTest() {
   const [users, setUsers] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
-      setIsLoading(true);
       try {
         const response = await axios.get("http://localhost:8070/order/");
         // Filter preparing orders and pending orders
@@ -31,7 +29,6 @@ export default function KitchenTest() {
       } catch (error) {
         console.error("Error fetching orders:", error);
       } finally {
-        setIsLoading(false);
       }
     };
 
@@ -71,9 +68,10 @@ export default function KitchenTest() {
     }
     try {
       await axios.post("http://localhost:8070/delivery/add", {
-        orderId: selectedOrder,
         userId: selectedUser,
-        isPaid: false, // Adjust based on your requirements
+        orderId: selectedOrder,
+        paymentMethod: "paid",
+        deliveryStatus: "of-delivery"
       });
       await axios.put(`http://localhost:8070/order/update/${selectedOrder}`, {
         status: "of-delivery",
