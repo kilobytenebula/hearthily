@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/GetDriver.css";
+import DriverReport from "./DriverReport";
 
 const infoIcon = require("../icons/info.png");
 const searchIcon = require("../icons/search.png");
@@ -74,7 +75,7 @@ export default function GetDriver() {
           <div className="container-title-text">Driver Performance</div>
           <div className="search-container">
             <div className="search-icon">
-                <img src={require("../icons/search.png")} alt="search" />
+                <img src={searchIcon} alt="search" />
             </div>
             <input
               type="text"
@@ -84,10 +85,13 @@ export default function GetDriver() {
             />
           </div>
         </div>
+        <div className="driver-report-actions-wrapper">
+            <DriverReport drivers={filteredDrivers} />
+        </div>
         {isLoading ? (
           <div className="loading-drivers">Beep boop boop...</div>
         ) : (
-          <div>
+          <div className="driver-container">
             <div className="fields">
               <ul>
                 <li className="drv-name">Driver Name</li>
