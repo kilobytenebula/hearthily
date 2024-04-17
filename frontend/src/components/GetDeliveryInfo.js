@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../css/GetDeliveryInfo.css";
 import copy from "clipboard-copy";
 const copyicon = require("../icons/copyicon.png");
@@ -77,14 +79,17 @@ export default function GetDeliveryInfo() {
         updateDeliveryAndFetch(driverId, DELIVERY_STATUS.ON_DELIVERY);
         updateOrder(delivery.orderId, DELIVERY_STATUS.ON_DELIVERY);
         updateDriver(driverId, false);
-        alert("You accepted a job :)");
+        toast.success("You accepted a job!");
       } else if (action === "cancel") {
+        if (!window.confirm("Are you sure you want to cancel the job?")) {
+          return;
+        }
         updateDeliveryAndFetch(null, DELIVERY_STATUS.OF_DELIVERY);
         updateOrder(delivery.orderId, DELIVERY_STATUS.OF_DELIVERY);
         updateDriver(driverId, true);
-        alert("You cancelled the job :(");
+        toast.success("You cancelled the job.");
       } else if (action === "countdown") {
-        alert("Congratulations! You completed the job :)");
+        toast.success("Congratulations! You completed the job.");
         setTempStatus("completed");
         startUndoTimer();
       } else if (action === "completed") {
@@ -92,10 +97,13 @@ export default function GetDeliveryInfo() {
         updateOrder(delivery.orderId, DELIVERY_STATUS.COMPLETED);
         updateDriver(driverId, true);
       } else if (action === "undo") {
+        if (!window.confirm("Are you sure you want to undo?")) {
+          return;
+        }
         clearInterval(timerRef.current);
         setTempStatus("");
         setUndoTimer(15); // Reset timer
-        alert("You undid the action :(");
+        toast.success("You undid the action");
       } else {
         console.error("Invalid action:", action);
       }
@@ -177,6 +185,7 @@ export default function GetDeliveryInfo() {
       <div className="top-bar">
         <div className="container-title-text">Delivery Details</div>
       </div>
+      <ToastContainer />
       {delivery._id ? (
         <div className="delivery-info">
           <div className="delivery-info-container">
@@ -257,7 +266,15 @@ export default function GetDeliveryInfo() {
               )}
             </div>
           </div>
-          <div className="address-container"></div>
+          <div className="address-container">
+            {user.address ? (
+              <div className="address-info">
+                <div>{user.address}</div>
+              </div>
+            ) : (
+              <div className="loading-text">Beep boop boop...</div>
+            )}
+          </div>
         </div>
       ) : (
         <div className="delivery-info-container-info">

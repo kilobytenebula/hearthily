@@ -125,12 +125,18 @@ body {
 }
 
 .address-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #1F1D2B;
     width: 35%;
     border-radius: 10px;
     padding: 16px;
 }
-
+.address-info {
+    text-align: center;
+    padding: 8px;
+}
 .action-row {
     display: flex;
     justify-content: right;
