@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/GetOrderInfo.css'; // Assuming the relevant CSS file
+import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css';
+import '../css/GetOrderInfo.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
@@ -11,6 +13,27 @@ export default function UpdateFeedback() {
   const [isLoading, setIsLoading] = useState(true);
   const { orderId } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFeedback = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`http://localhost:8070/feedback/${orderId}`);
+        const feedbackData = response.data; 
+
+        setRating(feedbackData.feedback.rating);
+        setComment(feedbackData.feedback.comment);
+        setFeedbackId(feedbackData.feedback._id);
+
+      } catch (error) {
+        console.error("Error fetching feedback:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchFeedback();
+  }, [orderId]);
 
   const starRating = () => {
     return (
@@ -29,37 +52,17 @@ export default function UpdateFeedback() {
     )
 };
 
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(`http://localhost:8070/feedback/${orderId}`);
-        const feedbackData = response.data; 
-
-        console.log('Full Response Object:', response.data); // Log 1 
-
-        setRating(feedbackData.feedback.rating);
-        setComment(feedbackData.feedback.comment);
-        setFeedbackId(feedbackData.feedback._id);
-
-        setTimeout(() => console.log('Feedback State:', feedbackData), 3000); // Log 3
-
-      } catch (error) {
-        console.error("Error fetching feedback:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchFeedback();
-  }, [orderId]);
-
   const handleCancelClick = () => {
     navigate(`/order-history/order/${orderId}`);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (!rating || !comment) {
+      toast.error('Please provide both a rating and a comment.');
+      return;
+    }
 
     try {
       const response = await axios.put(`http://localhost:8070/feedback/${feedbackId}`, {
@@ -68,8 +71,7 @@ export default function UpdateFeedback() {
         comment
       });
 
-      console.log(response.data); 
-      navigate(`/order-history/order/${orderId}`); 
+      navigate(`/order-history/order/${orderId}?feedbackUpdateSuccess=true`); // Pass query parameter for success
 
     } catch (error) {
       console.log(error);
@@ -78,6 +80,7 @@ export default function UpdateFeedback() {
 
   return (
     <div className='add-feedback-main'>
+       <ToastContainer /> {/* ToastContainer for displaying toast messages */}
        <div className="top-bar">
         <div className="container-title-text">Update Your Feedback</div>
       </div>
@@ -91,9 +94,9 @@ export default function UpdateFeedback() {
           <textarea id="comment" value={comment || ''}
             onChange={e => setComment(e.target.value)}
             className="form-textarea"placeholder="Type your feedback"/>
-  <div className='form-buttons'>
-          <button type="submit" className="submit-button">Update Feedback</button> 
-          <button type="button" className="cancel-button" onClick={handleCancelClick}>Cancel</button> 
+          <div className='form-buttons'>
+            <button type="submit" className="submit-button">Update Feedback</button> 
+            <button type="button" className="cancel-button" onClick={handleCancelClick}>Cancel</button> 
           </div>
         </form>
       )}
