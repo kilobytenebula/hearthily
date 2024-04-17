@@ -55,7 +55,8 @@ router.route('/:id').put(async (req, res) => {
 
     const updateDelivery = {
         driverId,
-        deliveryStatus
+        deliveryStatus,
+        date: new Date()
     }
 
     await Delivery.findByIdAndUpdate(deliveryId, updateDelivery)
