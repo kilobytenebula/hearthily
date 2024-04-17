@@ -1,0 +1,9 @@
+.driver-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+.driver-availability-card {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

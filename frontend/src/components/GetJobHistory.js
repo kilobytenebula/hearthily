@@ -1,170 +1,146 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import '../css/GetDelivery.css';
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "../css/GetDelivery.css";
+import searchIcon from "../icons/search.png";
 
 export default function GetJobHistory() {
   const [jobsArray, setJobsArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [acceptedDeliveries, setAcceptedDeliveries] = useState([]);
-  const [completedDeliveries, setCompletedDeliveries] = useState([]);
-  const driverId = '661bfcaff9b3692a8a15a7f2';
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const driverId = "661bfcaff9b3692a8a15a7f2";
 
   useEffect(() => {
     // Fetch delivery data
-    axios.get('http://localhost:8070/delivery/')
-      .then(response => {
-        const jobs = response.data.filter(delivery =>
-          (delivery.deliveryStatus === 'on-delivery' || delivery.deliveryStatus === 'completed') &&
-          delivery.driverId === driverId
+    axios
+      .get("http://localhost:8070/delivery/")
+      .then((response) => {
+        const jobs = response.data.filter(
+          (delivery) =>
+            (delivery.deliveryStatus === "on-delivery" ||
+              delivery.deliveryStatus === "completed") &&
+            delivery.driverId === driverId
         );
-        setJobsArray(jobs);
-        setIsLoading(false);
+        // Fetch user data for each job
+        Promise.all(
+          jobs.map((job) =>
+            axios.get(`http://localhost:8070/user/${job.userId}`)
+          )
+        )
+          .then((userResponses) => {
+            const jobsWithUserData = jobs.map((job, index) => {
+              const userData = userResponses[index].data.user;
+              return {
+                ...job,
+                name: `${userData.firstname} ${userData.lastname}`,
+                location: userData.address,
+              };
+            });
+            setJobsArray(jobsWithUserData);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.log("User data fetch error:", error);
+            setIsLoading(false);
+          });
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Fetch error:", error);
         setIsLoading(false);
       });
   }, []);
 
-  useEffect(() => {
-    const fetchOrdersAndUsers = async () => {
-      const orders = [];
-      const users = [];
-      const accepted = [];
-      const completed = [];
-
-      for (const jobItem of jobsArray) {
-        try {
-          // Fetch order data
-          const orderResponse = await axios.get(`http://localhost:8070/order/${jobItem.orderId}`);
-          const orderData = orderResponse.data.order;
-          orders.push(orderData);
-
-          // Fetch user data
-          const userResponse = await axios.get(`http://localhost:8070/user/${jobItem.userId}`);
-          const userData = userResponse.data.user;
-          users.push(userData);
-        } catch (error) {
-          console.log(error);
-        }
-
-        const correspondingOrder = orders.find(order => order._id === jobItem.orderId);
-        const correspondingUser = users.find(user => user._id === jobItem.userId);
-
-        const deliveryId = jobItem._id;
-        const name = `${correspondingUser?.firstname} ${correspondingUser?.lastname}`;
-        const date = correspondingOrder?.date ? new Date(correspondingOrder.date).toLocaleDateString() : '';
-        const location = correspondingUser?.address || '';
-        const payment = jobItem.paymentMethod;
-
-        if (jobItem.deliveryStatus === 'on-delivery') {
-          accepted.push({
-            deliveryId,
-            name,
-            date,
-            location,
-            payment
-          });
-        } else if (jobItem.deliveryStatus === 'completed') {
-          completed.push({
-            deliveryId,
-            name,
-            date,
-            location,
-            payment
-          });
-        }
-      }
-      setAcceptedDeliveries(accepted);
-      setCompletedDeliveries(completed);
-    };
-
-    if (jobsArray.length > 0) {
-      fetchOrdersAndUsers();
-    }
-
-  }, [jobsArray]);
+  // Filter deliveries based on search term and filter type
+  const filteredDeliveries = jobsArray.filter(
+    (delivery) =>
+      (delivery.deliveryStatus === filterType || filterType === "all") &&
+      (delivery.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        delivery.deliveryId?.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
   return (
     <div className="delivery-container-main">
       <div className="top-bar">
         <div className="container-title-text">Job History</div>
+        <div className="search-container">
+          <div className="search-icon">
+            <img src={searchIcon} alt="search" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search by name or ID"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
       </div>
+      <div className="filter-buttons">
+        <div
+          className={`filter-btn ${
+            filterType === "all" ? "active-filter" : ""
+          }`}
+          onClick={() => setFilterType("all")}
+        >
+          All
+        </div>
+        <div
+          className={`filter-btn ${
+            filterType === "on-delivery" ? "active-filter" : ""
+          }`}
+          onClick={() => setFilterType("on-delivery")}
+        >
+          Accepted
+        </div>
+        <div
+          className={`filter-btn ${
+            filterType === "completed" ? "active-filter" : ""
+          }`}
+          onClick={() => setFilterType("completed")}
+        >
+          Completed
+        </div>
+      </div>
+
       {isLoading ? (
         <div className="loading-deliveries">Beep boop boop...</div>
       ) : (
         <div className="job-container">
-          <div className="accepted-deliveries-container">
-            <div className="top-bar">
-              <div className="job-container-title-text">Accepted Jobs</div>
-            </div>
-            {acceptedDeliveries.length > 0 ? (
-              <div>
-                <div className="fields">
-                  <ul>
-                    <li className="name">Customer Name</li>
-                    <li className="date">Date</li>
-                    <li className="price">Location</li>
-                    <li className="payment">Payment</li>
-                  </ul>
-                </div>
-                <div className="delivery-container">
-                  {acceptedDeliveries.map((accepted) => (
-                    <div className="item-delivery" key={accepted.deliveryId}>
-                      <Link to={`/delivery/job/${accepted.deliveryId}`} className="item-link">
-                        <ul>
-                          <li className="name">{accepted.name}</li>
-                          <li className="date">{accepted.date}</li>
-                          <li className="price">{accepted.location}</li>
-                          <li className="payment">{accepted.payment}</li>
-                        </ul>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
+          {filteredDeliveries.length > 0 ? (
+            <div>
+              <div className="fields-job">
+                <ul>
+                  <li className="name">Customer Name</li>
+                  <li className="date">Date</li>
+                  <li className="location">Location</li>
+                  <li className="payment">Payment</li>
+                </ul>
               </div>
-            ) : (
-              <div className="not-available">No accepted deliveries yet.</div>
-            )}
-          </div>
-  
-          <div className="completed-deliveries-container">
-            <div className="top-bar">
-              <div className="job-container-title-text">Completed Jobs</div>
-            </div>
-            {completedDeliveries.length > 0 ? (
-              <div>
-                <div className="fields">
-                  <ul>
-                    <li className="name">Customer Name</li>
-                    <li className="date">Date</li>
-                    <li className="price">Location</li>
-                    <li className="payment">Payment</li>
-                  </ul>
-                </div>
-                <div className="delivery-container">
-                  {completedDeliveries.map((completed) => (
-                    <div className="item-delivery" key={completed.deliveryId}>
-                      <Link to={`/delivery/job/${completed.deliveryId}`} className="item-link">
-                        <ul>
-                          <li className="name">{completed.name}</li>
-                          <li className="date">{completed.date}</li>
-                          <li className="price">{completed.location}</li>
-                          <li className="payment">{completed.payment}</li>
-                        </ul>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
+              <div className="delivery-container">
+                {filteredDeliveries.map((delivery) => (
+                  <div className="item-delivery" key={delivery._id}>
+                    <Link
+                      to={`/delivery/job/${delivery._id}`}
+                      className="item-link"
+                    >
+                      <ul>
+                        <li className="name">{delivery.name}</li>
+                        <li className="date">
+                          {new Date(delivery.date).toLocaleDateString()}
+                        </li>
+                        <li className="location">{delivery.location}</li>
+                        <li className="payment">{delivery.paymentMethod}</li>
+                      </ul>
+                    </Link>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <div className="not-available">No completed deliveries yet.</div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="not-available">No deliveries found.</div>
+          )}
         </div>
       )}
-      </div>
+    </div>
   );
-  
 }
