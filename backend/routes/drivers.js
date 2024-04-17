@@ -60,7 +60,7 @@ router.route('/').get(async (req, res) => {
             // Check if average rating or delivery count has changed
             if (driver.avgRating !== averageRating || driver.deliveryCount !== deliveryCount) {
                 // Update the driver document with new values
-                driver.avgRating = averageRating;
+                driver.avgRating = averageRating.toPrecision(2);
                 driver.deliveryCount = deliveryCount;
 
                 // Save the updated driver document back to the database
