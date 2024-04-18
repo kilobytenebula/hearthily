@@ -97,28 +97,100 @@
     justify-content: space-between;
 }
 .listHeader .id{
-    width: 50%;
+    width: 30%;
 }
 .listHeader .date{
     text-align: center;
-    width: 20%;
+    width: 10%;
 }
 .listHeader .amount{
-    text-align: right;
-    width: 30%;
+    text-align: center;
+    width: 25%;
+}
+.listHeader .status{
+
+    text-align: center;
+    width: 10%;
+}
+.listHeader .actions{
+    
+    width: 25%;
 }
 
 .listItem .id{
-    width: 50%;
-}
-.listItem .date{
-    text-align: center;
-    width: 20%;
-}
-.listItem .amount{
-    text-align: right;
+    display: flex;
+    align-items: center;
     width: 30%;
 }
+.listItem .date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+.listItem .amount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+.listItem .status{
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    width: 10%;
+}
+.listItem .actions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25%;
+}
+.listItem .actions .approve{
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.listItem .actions .reject{
+
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+}
+.listItem .actions .refund{
+
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+}
+
+
+
 
 
 
@@ -161,4 +233,38 @@
 
 .searchBar button:hover {
     background-color: #0056b3; /* Darker shade of the button color on hover */
+}
+
+.status .pending{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--orange-100);
+    background-color: rgba(242, 134, 56, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--orange-100);
+}
+.status .approved{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--green-100);
+    background-color: rgba(107, 226, 190, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--green-100);
+}
+.status .rejected{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--red-100);
+    background-color: rgba(250, 16, 16, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--red-100);
 }

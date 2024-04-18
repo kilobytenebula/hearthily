@@ -30,8 +30,8 @@ const refundSchema = new Schema({
     //     contentType: String
     // },
     isSuccess:{
-        type: Boolean,
-        required: true
+        type: String,
+        default: 'pending'
     }
 })
 const refund = mongoose.model("Refunds",refundSchema);

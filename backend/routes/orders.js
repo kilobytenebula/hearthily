@@ -40,7 +40,7 @@ router.route("/").get((req,res)=>{
 
 router.route("/:orderid").get((req, res) => {
     const selectedOrder = req.params.orderid;
-    payment.find({ orderid: selectedOrder })
+    Order.find({ _id: selectedOrder })
         .then((orders) => {
             res.json(orders);
         })

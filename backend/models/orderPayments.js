@@ -42,8 +42,8 @@ const paymentSchema = new Schema({
     //     contentType: String
     // },
     isSuccess:{
-        type: Boolean,
-        required: true
+        type: String,
+        default: 'pending'
     }
 })
 const payment = mongoose.model("orderPayments",paymentSchema);

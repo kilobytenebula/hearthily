@@ -48,29 +48,25 @@ router.route("/:customerId").get((req, res) => {
         });
 });
 
-router.route("/update/:id").put(async(req,res)=>{
+router.route("/update/:orderId").put(async(req,res)=>{
+    const orderId = req.params.orderId;
+    const { isSuccess } = req.body;
 
-    let userId = req.params.id;
-    const { orderId,customerId,amount,date,paymentMethod,phoneNumber,paymentSlip,isSuccess} = req.body;
-    const  updatePaymanet= {
-        orderId,
-        customerId,
-        amount,
-        date,
-        paymentMethod,
-        address,
-        phoneNumber,
-       // paymentSlip,
-        isSuccess
+    try {
+        const updatedPayment = await payment.findOneAndUpdate(
+            { orderId: orderId }, // Find the document with the given orderId
+            { isSuccess: isSuccess }, // Update isSuccess field
+            { new: true } // Return the updated document
+        );
+
+        if (updatedPayment) {
+            res.status(200).send({ status: "Updated", payment: updatedPayment });
+        } else {
+            res.status(404).send({ status: "Not found" });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ status: "Unsuccessful" });
     }
-
-    const update =await payment.findByIdAndUpdate(userId, updatePaymanet )
-    .then(()=>{
-        res.status(200).send({status: "Updated"})
-    }).catch((err)=>{
-        console.log(err)
-        res.status(500).send({status: "unsuccessfull"})
-    })
-})
-
+});
 module.exports = router;

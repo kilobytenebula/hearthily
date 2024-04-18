@@ -39,7 +39,9 @@ export default function PaymentReports(){
         getAllPayments();
 
 
-    }, [])
+    }, []);
+
+
     const totalAmount = allPayments.reduce((accumulator, payment) => accumulator + parseFloat(payment.amount), 0).toFixed(2);
 
     //Retrieving all refunds
@@ -62,7 +64,8 @@ export default function PaymentReports(){
 
     }, [])
 
-    const successfulRefunds = allRefunds.filter(refund => refund.isSuccess);
+    const successfulRefunds = allRefunds.filter(refund => refund.isSuccess === "accepted");
+
 
 
 
@@ -70,7 +73,7 @@ export default function PaymentReports(){
     const successfulRefundOrderIds = successfulRefunds.map(refund => refund.orderId);
 
 
-        const successfulRefundPayments = allPayments.filter(payment => successfulRefundOrderIds.includes(payment.orderId));
+    const successfulRefundPayments = allPayments.filter(payment => successfulRefundOrderIds.includes(payment.orderId));
 
     const totalSuccessfulRefundAmount = successfulRefundPayments.reduce((accumulator, payment) => accumulator + parseFloat(payment.amount), 0).toFixed(2);
 
@@ -108,6 +111,19 @@ export default function PaymentReports(){
             setSearchCodResults(codResults);
         }
     };
+    const updatePayment = async (orderId, isSuccess) => {
+        try {
+            const response = await axios.put(`http://localhost:8050/payment/update/${orderId}`, { isSuccess });
+            console.log(response.data); // Log the response from the API
+        } catch (error) {
+            console.error('Error updating payment:', error);
+        }
+    };
+    const handleUpdatePayment = (orderId, isSuccess) => {
+        updatePayment(orderId, isSuccess);
+     
+    };
+    
 
     
     return(
@@ -181,25 +197,58 @@ export default function PaymentReports(){
                         <div className="id">Order Id</div>
                         <div className="date">Date</div>
                         <div className="amount">Amount</div>
+                        <div className="status">Status</div>
+                        <div className="actions"></div>
                     </div>
                     {searchCodResults.length === 0 && (
                     <div className="list">
-                        {codPayments.map((payment, index) => (
+                        {codPayments.reverse().map((payment, index) => (
                             <div className="listItem" key={index}>
                             <div className="id">{payment.orderId}</div>
                             <div className="date">{payment.date.substring(0, 10)}</div>
                             <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
+                            <div className="status">
+
+                                {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
+                                 {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
+                                {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+
+
+                            </div>
+                             <div className="actions">
+                                {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
+                                    <>
+                                        <button className="approve" onClick={() => handleUpdatePayment(payment.orderId, "approved")}>Approve</button>
+                                        <button className="reject" onClick={() => handleUpdatePayment(payment.orderId, "rejected")}>Reject</button>
+                                    </>
+                                )}
+                             </div>
                             </div>
                         ))}
                         </div>   
                         )}
                         <div className="list">
                             {searchCodResults !== null && ( // Only render the list if searchResults is not null
-                                (searchCodResults).map((payment, index) => (
+                                (searchCodResults).reverse().map((payment, index) => (
                                     <div className="listItem" key={index}>
                                         <div className="id">{payment.orderId}</div>
                                         <div className="date">{payment.date.substring(0, 10)}</div>
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
+                                        <div className="status">
+                                            
+                                             {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                        </div>
+                                         <div className="actions">
+                                         {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
+                                                <>
+                                                    <button className="approve" onClick={() => handleUpdatePayment(payment.orderId, "approved")}>Approve</button>
+                                                    <button className="reject" onClick={() => handleUpdatePayment(payment.orderId, "rejected")}>Reject</button>
+                                                </>
+                                            )}
+                                            
+                                         </div>
                                     </div>
                                 ))
                             )}
@@ -211,26 +260,59 @@ export default function PaymentReports(){
                         <div className="id">Order Id</div>
                         <div className="date">Date</div>
                         <div className="amount">Amount</div>
+                        <div className="status">Status</div>
+                        <div className="actions"></div>
                     </div>
                     <div>
                         {searchResults.length === 0 && (
                             <div className="list">
-                                {btPayments.map((payment, index) => (
+                                {btPayments.reverse().map((payment, index) => (
                                     <div className="listItem" key={index}>
                                         <div className="id">{payment.orderId}</div>
                                         <div className="date">{payment.date.substring(0, 10)}</div>
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
+                                        <div className="status">
+
+                                            {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                        </div>
+                                        <div className="actions">
+
+                                            {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
+                                                <>
+                                                    <button className="approve" onClick={() => handleUpdatePayment(payment.orderId, "approved")}>Approve</button>
+                                                    <button className="reject" onClick={() => handleUpdatePayment(payment.orderId, "rejected")}>Reject</button>
+                                                </>
+                                            )}
+                                            
+
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         )}
                         <div className="list">
                             {searchResults !== null && ( // Only render the list if searchResults is not null
-                                (searchResults).map((payment, index) => (
+                                (searchResults).reverse().map((payment, index) => (
                                     <div className="listItem" key={index}>
                                         <div className="id">{payment.orderId}</div>
                                         <div className="date">{payment.date.substring(0, 10)}</div>
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
+                                        <div className="status">
+                                            {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                        </div>
+                                        <div className="actions">
+                                        {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
+                                                <>
+                                                    <button className="approve" onClick={() => handleUpdatePayment(payment.orderId, "approved")}>Approve</button>
+                                                    <button className="reject" onClick={() => handleUpdatePayment(payment.orderId, "rejected")}>Reject</button>
+                                                </>
+                                            )}
+                                            
+                                        </div>
                                     </div>
                                 ))
                             )}

@@ -8,6 +8,7 @@ import Checkout from './components/checkout';
 import PaymentReport from './components/paymentReport'
 import AllBases from './components/AllBases'
 import AllPortions from './components/AllPortions'
+import RequestedRefunds from './components/requestedRefunds'
 
 
 function App() {
@@ -19,11 +20,12 @@ function App() {
         <Routes>
           <Route exact path="/" element={<AllBases/>}/>
           <Route exact path='/checkout/:baseName/:basePrice/:selectedPortions/:total' element={<Checkout/>}/>
-          <Route exact path='/refund' element={<AllRefunds/>}/>
+          <Route exact path='/refunds' element={<AllRefunds/>}/>
           <Route path="/all-portions/:baseId" element={<AllPortions/>}/>
           <Route exact path='/payments' element={<AllPayments/>}/>
           <Route path='/reqRefun/:orderId' element={<RefundRequest/>}/>
           <Route exact path='/paymentReports' element={<PaymentReport/>}/>
+          <Route exact path='/requestedRefunds' element={<RequestedRefunds/>}/>
         </Routes>
       </div>
       

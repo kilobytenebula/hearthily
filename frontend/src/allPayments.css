@@ -103,3 +103,14 @@ body {
   .refund-button:hover {
     background-color: var(--orange-200);
   }
+  .requestedRefunds{
+    display: inline-block;
+    padding: 16px 32px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 16px;
+    background-color: var(--orange-200);
+    color: #fff;
+    text-decoration: none; 
+    border-radius: 8px;
+    cursor: pointer;
+  }
