@@ -10,6 +10,7 @@ import GetDeliveryInfo from './components/GetDeliveryInfo';
 import KitchenTest from './components/KitchenTest';
 import GetJobHistory from './components/GetJobHistory';
 import GetDriver from './components/GetDriver';
+import GetDriverInfo from './components/GetDriverInfo';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/dkn" element={<KitchenTest />} />
           <Route path="/job-history" element={<GetJobHistory />} />
           <Route path="/drivers" element={<GetDriver />} />
+          <Route path="/driver/:driverId" element={<GetDriverInfo />} />
         </Routes>
     </Router>
   );

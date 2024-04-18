@@ -1,6 +1,8 @@
 //Initialializing express router
 const router = require('express').Router();
 let Delivery = require('../models/Delivery');
+let Feedback = require('../models/Feedback');
+let User = require('../models/User');
 
 //CRUD starts here
 //1. Create Route
@@ -46,6 +48,51 @@ router.route('/:id').get(async (req, res) => {
         .then(delivery => res.status(200).send({ status: "Delivery fetched", delivery: delivery }))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+//2c. Read Specific Driver Route
+router.route('/driver/:id').get(async (req, res) => {
+    try {
+        let driverId = req.params.id;
+
+        // Find deliveries for the given driverId
+        const driverDeliveries = await Delivery.find({ driverId: driverId });
+
+        // Extract orderId from each delivery and fetch corresponding feedback
+        const driverDataPromises = driverDeliveries.map(async (delivery) => {
+            const orderId = delivery.orderId;
+
+            // Find corresponding user for the delivery
+            const user = await User.findById(delivery.userId);
+
+            // Combine first name and last name
+            const cusName = user ? `${user.firstname} ${user.lastname}` : 'Unknown';
+            const cusLocation = user ? `${user.address}` : "Unknown";
+
+            // Find feedback for the delivery
+            const driverFeedback = await Feedback.findOne({ orderId: orderId });
+
+            // Return combined data with name and rating
+            return {
+                delivery: {
+                    ...delivery.toObject(), // Convert Mongoose object to plain JavaScript object
+                    cusName,
+                    cusLocation,
+                    rating: driverFeedback ? driverFeedback.rating : null // Extracting rating if feedback exists
+                }
+            };
+        });
+
+        // Wait for all promises to resolve
+        const driverData = await Promise.all(driverDataPromises);
+
+        res.status(200).json({ status: "Driver data fetched", driverData: driverData });
+    } catch (error) {
+        res.status(400).json({ status: "Error", message: error.message });
+    }
+});
+
+
+
 
 
 //3. Update Route

@@ -43,7 +43,6 @@ export default function GetDelivery() {
           console.log(error);
         }
 
-        const correspondingOrder = orders.find(order => order._id === deliveryItem.orderId);
         const correspondingUser = users.find(user => user._id === deliveryItem.userId);
 
         const deliveryId = deliveryItem._id;

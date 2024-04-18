@@ -65,7 +65,7 @@ export default function UpdateFeedback() {
     }
 
     try {
-      const response = await axios.put(`http://localhost:8070/feedback/${feedbackId}`, {
+      await axios.put(`http://localhost:8070/feedback/${feedbackId}`, {
         orderId,
         rating,
         comment
