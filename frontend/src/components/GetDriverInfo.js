@@ -7,6 +7,8 @@ import badge from "../icons/badge.png";
 export default function GetDriverInfo() {
   const [driver, setDriver] = useState(null);
   const [delivery, setDelivery] = useState([]);
+  const [lastCompletedDelivery, setLastCompletedDelivery] = useState(null);
+  const [currentDeliveryId, setCurrentDeliveryId] = useState(null);
   const [loading, setLoading] = useState(true);
   const { driverId } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +39,8 @@ export default function GetDriverInfo() {
           `http://localhost:8070/delivery/driver/${driverId}`
         );
         const deliveryData = await deliveryResponse.json();
+        const lastCompletedDelivery = deliveryData.lastCompletedDelivery;
+        const currentDeliveryId = deliveryData.currentDeliveryId;
         const deliveries = deliveryData.driverData.map((deliveryItem) => ({
           _id: deliveryItem.delivery._id,
           cusName: deliveryItem.delivery.cusName,
@@ -47,6 +51,8 @@ export default function GetDriverInfo() {
           status: deliveryItem.delivery.deliveryStatus,
         }));
         setDelivery(deliveries);
+        setLastCompletedDelivery(lastCompletedDelivery);
+        setCurrentDeliveryId(currentDeliveryId);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -125,11 +131,11 @@ export default function GetDriverInfo() {
                   <div className="driver-availability-additional">
                     {driver.isAvailable ? (
                       <div className="driver-last-completed-order">
-                        Last Delivery Date: {driver._id}
+                        Last Delivery Date: {lastCompletedDelivery}
                       </div>
                     ) : (
                       <div className="driver-currently-assigned-order">
-                        Current Delivery ID: {driver._id}
+                        Current Delivery ID: {currentDeliveryId}
                       </div>
                     )}
                   </div>
@@ -139,8 +145,9 @@ export default function GetDriverInfo() {
                     <div className="driver-rating">{driver.averageRating}</div>
                     <div className="driver-class">
                       {driver.averageRating > 4.5 && (
-                        <div className="top-rated">
-                          <img src={badge} alt="badge" title={`${driver.name}\nis a Top Rated Driver`} />
+                        <div className="top-rated" title="Top Rated Driver">
+                          <img src={badge} alt="badge"/>
+                          <div className="top-rated-text">Top Rated</div>
                         </div>
                       )}
                     </div>

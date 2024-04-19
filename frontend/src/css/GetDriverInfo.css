@@ -41,13 +41,30 @@
     gap: 16px;
 }
 .driver-rating {
-    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    font-size: 48px;
 }
 .driver-class {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
+}
+.top-rated {
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    background-color: #F28638;
+    border-radius: 4px;
+    cursor: default;
+}
+.top-rated-text {
+    display: flex;
+    align-items: center;
+    padding: 2px;
 }
 .driver-availability-container {
     display: flex;
