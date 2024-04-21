@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import '../paymentReports.css';
+import { CSVLink } from 'react-csv';
+import jsPDF from 'jspdf';
+
+const download = require('../icons/download.png')
 
 export default function PaymentReports(){
 
@@ -124,15 +128,92 @@ export default function PaymentReports(){
      
     };
     
+    const handleDownloadClick = (imageURL) => {
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imageURL;
+        downloadLink.download = 'payment_slip.png'; // Set a default filename for the downloaded image
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
 
+      function getDateOnly(datetimeString) {
+        return datetimeString.split("T")[0];
+    }
+      function generateCSVData(codPayments, btPayments) {
+        const csvData = [
+            ["Bank Transfer Payments"],
+            ["Customer ID", "Order ID", "Amount", "Date"],
+            ...btPayments.map(payment => [payment.customerId, payment.orderId, payment.amount, getDateOnly(payment.date)]),
+            [],
+            ["Cash on Delivery Payments"],
+            ["Customer ID", "Order ID", "Amount", "Date"],
+            ...codPayments.map(payment => [payment.customerId, payment.orderId, payment.amount,getDateOnly(payment.date)])
+        ];
+        return csvData;
+    }
+
+    function generatePDFAndDownload(codPayments, btPayments) {
+        const doc = new jsPDF();
+        
+        doc.setFontSize(12);
+        let yPos = 20;
+    
+        doc.text(20, yPos, "Bank Transfer Payments");
+        btPayments.forEach(payment => {
+            yPos += 10;
+            doc.text(20, yPos, `${payment.customerId}       ${payment.orderId}       ${payment.amount}       ${getDateOnly(payment.date)}`);
+        });
+    
+        yPos += 20;
+        doc.text(20, yPos, "Cash on Delivery Payments");
+        codPayments.forEach(payment => {
+            yPos += 10;
+            doc.text(20, yPos, `${payment.customerId}       ${payment.orderId}       ${payment.amount}       ${getDateOnly(payment.date)}`);
+        });
+        doc.save('report.pdf');
+    }
+    
+
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    const [isReversed, setIsReversed] = useState(false);
+
+    const reverseList = () => {
+        setIsReversed(!isReversed);
+    };
     
     return(
 
 
         <div className="paymentReportContainer">
-            <div className="paymentReportHeader">Revenue Reports</div>
-            <div className="totalOverview">
+            <div className="paymentReportHeader">Revenue Reports
+                <div className="reports">
+                <select className="chooseReport" onChange={(e) => setSelectedOption(e.target.value)}>
+                    <option value="">Get Reports</option>
+                    <option value="csv">CSV</option>
+                    <option value="pdf">PDF</option>
+                </select>
+                {selectedOption === "csv" && (
+                    <CSVLink className="csvButton" data={generateCSVData(codPayments, btPayments)} filename={"report.csv"}>
+                        Download CSV
+                    </CSVLink>
+                )}
+                {selectedOption === "pdf" && (
+                    <button 
+                    onClick={() => generatePDFAndDownload(codPayments, btPayments)}
+                     className="pdfButton">
+                        Download PDF
+                    </button>
+                )}
+                </div>
                 
+            </div>
+            
+            <div className="totalOverview">
+            <div>
+            
+        </div>
                 <div className="totalRevenue">
                     <div className="totRevenue">
                         <div className="title">Total Order Revenue</div>
@@ -261,6 +342,7 @@ export default function PaymentReports(){
                         <div className="date">Date</div>
                         <div className="amount">Amount</div>
                         <div className="status">Status</div>
+                        <div className="slip">Slip</div>
                         <div className="actions"></div>
                     </div>
                     <div>
@@ -271,12 +353,21 @@ export default function PaymentReports(){
                                         <div className="id">{payment.orderId}</div>
                                         <div className="date">{payment.date.substring(0, 10)}</div>
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
+                                        
                                         <div className="status">
 
                                             {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
                                             {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
                                             {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
                                         </div>
+                                        {payment.paymentSlip && ( // Check if paymentSlip exists
+                                            <div className="slip">
+                                            <i className="your-icon-class" onClick={() => handleDownloadClick(payment.paymentSlip.data)}>
+                                                
+                                                <img src={download} alt="Download Icon" />
+                                            </i>
+                                            </div>
+                                        )}
                                         <div className="actions">
 
                                             {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
@@ -304,6 +395,11 @@ export default function PaymentReports(){
                                             {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
                                             {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
                                         </div>
+                                        {payment.paymentSlip && ( // Check if paymentSlip exists
+                                            <div className="slip">
+                                            <button onClick={() => handleDownloadClick(payment.paymentSlip.data)}>Download</button>
+                                            </div>
+                                        )}
                                         <div className="actions">
                                         {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
                                                 <>

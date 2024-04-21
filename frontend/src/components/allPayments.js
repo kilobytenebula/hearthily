@@ -79,7 +79,10 @@ export default function AllPayments() {
                         </div>
                         <div className="paymentInfo">
                             <div className="strong">Payment Status</div>
-                            <div>{payment.isSuccess ? "Completed" : "Pending"}</div>
+                            <div>{payment.isSuccess === "pending" ? "Pending" :
+                                    payment.isSuccess === "approved" ? "Approved" :
+                                    payment.isSuccess === "rejected" ? "Rejected" :
+                                    "Unknown Status"}</div>
                         </div>
                         <div className="paymentInfo">
                             <div></div>

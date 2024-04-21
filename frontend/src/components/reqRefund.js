@@ -1,17 +1,17 @@
 
 import { useParams } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import '../reqRefunds.css';
 
 
 const ReqRefund = () => {
     const { orderId } = useParams();
+    const [payments, setPayments] = useState([]);
     const [mobileNumber,setNumber] =useState("");
     const [reason,setReason] =useState("");
     const [description,setDes] =useState("");
     const customerId = "609c9c918c27e038b0e27b2d";
-    const isSuccess = false;
 
     function sendData(e){
         e.preventDefault();
@@ -24,7 +24,7 @@ const ReqRefund = () => {
             orderId,
             reason,
             description,
-            isSuccess
+            image: { data: image }
 
         }
         axios.post("http://localhost:8050/refund/add",newRefund).then(()=>{
@@ -36,6 +36,45 @@ const ReqRefund = () => {
         console.log(newRefund);
     }
 
+    useEffect(() => {
+        
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8050/payment/get/${orderId}`); 
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                setPayments(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (orderId) {
+            fetchData();
+        }
+    }, [orderId]);
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString(); // Adjust date format as needed
+    }
+
+
+    const [image, setImage] = useState("");
+
+    console.log(image);
+
+
+    function converToBase64(e){
+        console.log(e);
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload =() =>{
+            console.log(reader.result);
+            setImage(reader.result);
+        }
+      }
     return (
         <div className="refundContainer">
             <h2>Refund Request</h2>
@@ -47,18 +86,21 @@ const ReqRefund = () => {
                         <div className='title'>Order ID</div>
                         <div className='id'>{orderId}</div>
                     </div>
-                    <div className='timeOrdered'>
-                        <div className='title'>Time Ordered</div>
-                        <div className='time'>{orderId}</div>
-                    </div>
-                    <div className='usedMethod'>
-                        <div className='title'>Payment Method</div>
-                        <div className='method'>{orderId}</div>
-                    </div>
-                    <div className='paidAmount'>
-                        <div className='title'>Paid Amount</div>
-                        <div className='method'>{orderId}</div>
-                    </div>
+                    {payments.length > 0 && (
+                        <>
+                        <div className='timeOrdered'>
+                            <div className='title'>Date</div>
+                            <div className='time'>{formatDate(payments[0].date)}</div>
+                        </div>
+                        <div className='usedMethod'>
+                            <div className='title'>Payment Method</div>
+                            <div className='method'>{payments[0].paymentMethod === 'BT' ? 'Bank Transfer' : 'Cash on Delivery'}</div>
+                        </div>
+                        <div className='paidAmount'>
+                            <div className='title'>Paid Amount</div>
+                            <div className='method'>{parseFloat(payments[0].amount).toFixed(2)}</div>
+                        </div>
+                    </>)}
                     
                 </div>
                 <form className="refundForm"
@@ -95,6 +137,11 @@ const ReqRefund = () => {
                             <option value="other">Other</option>
                         </select>
 
+                    </div>
+                    <div className='refundImage'>
+                        <di>Upload Image</di>
+                        <input type="file" id="file" accept="image/*" onChange={converToBase64}/>
+                        
                     </div>
                     
                     <div className="inputField">

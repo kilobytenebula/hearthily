@@ -52,21 +52,21 @@ export default function Checkout(){
       }, [customerId]);
 
     // Getting address and phone number from user collection
-    useEffect(() => {
-        const getAddress = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8050/user/getuser/${customerId}`);
-                setAddress(response.data); 
-                console.log(response.data.user.address);
+    // useEffect(() => {
+    //     const getAddress = async () => {
+    //         try {
+    //             const response = await axios.get(`http://localhost:8050/user/getuser/${customerId}`);
+    //             setAddress(response.data); 
+    //             console.log(response.data.user.address);
                 
-            } catch (error) {
-                console.error('Error fetching address:', error);
-            }
-        };
+    //         } catch (error) {
+    //             console.error('Error fetching address:', error);
+    //         }
+    //     };
     
-        getAddress();
+    //     getAddress();
     
-    }, [customerId]);
+    // }, [customerId]);
 
 
     //store input value as a int
@@ -170,8 +170,11 @@ export default function Checkout(){
           amount: finalAmount,
           date: currentDate,
           paymentMethod: lastClickedButton,
-          address: address.user.address,
-          phoneNumber: address.user.phonenumber,
+        //   address: address.user.address,
+            address:"mawanella",
+        //   phoneNumber: address.user.phonenumber,
+        phoneNumber:"0713456785",
+          paymentSlip: { data: image }
            
         };
 
@@ -188,12 +191,23 @@ export default function Checkout(){
             
           };
     };
+
+    const [image, setImage] = useState("");
     const handleSubmit = async (event) => {
         event.preventDefault();
         await addPayment();
       };
 
 
+      function converToBase64(e){
+        console.log(e);
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload =() =>{
+            console.log(reader.result);
+            setImage(reader.result);
+        }
+      }
 
 
     return(
@@ -280,7 +294,8 @@ export default function Checkout(){
                         <div className="rows"><div>Hatton National Bank</div><div>98765432109876</div></div>
                     </div>}
                     {showBankDetails && <div className="uploadPaymentSlip">Upload Payment Slip</div>}
-                    {showBankDetails &&<div className="paymentSlip"><input type="file" accept="image/*" /></div>}
+                    {showBankDetails &&<div className="paymentSlip"><input type="file" accept="image/*" onChange={converToBase64}/>
+                    {image && <img src={image} alt="Payment Slip" />}</div>}
                     
                 </div>
                 <div className="selectAddress">
@@ -289,8 +304,8 @@ export default function Checkout(){
                     </div>
                     <div className="address">
                         
-                        <div>{address && address.user && address.user.address}</div>
-                        <div>{address && address.user && address.user.phonenumber}</div>
+                        {/* <div>{address && address.user && address.user.address}</div>
+                        <div>{address && address.user && address.user.phonenumber}</div> */}
                     </div>
                 </div>
                 <div className="actions">

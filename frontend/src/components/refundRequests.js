@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
 import '../refundRequests.css';
+const download = require('../icons/download.png')
 
 
 export default function RefundRequest(){
@@ -35,6 +36,15 @@ export default function RefundRequest(){
         updateRefund(orderId, isSuccess);
      
     };
+
+    const handleDownloadClick = (imageURL) => {
+
+        const newWindow = window.open();
+        newWindow.document.write(
+            '<html><head><title>Image Preview</title></head><body style="margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh;"><img src="' 
+            + imageURL + '" style="max-width: 100%; max-height: 100%;"></body></html>');
+        
+      };
 
     return(
 
@@ -75,6 +85,14 @@ export default function RefundRequest(){
                             <div className="title">Description</div>
                             <div className="value">{refund.description}</div>
                         </div>
+                        {refund.image && (
+                            <div className="image">
+                                <div className="title">Images</div>
+                                <i className="your-icon-class" onClick={() => handleDownloadClick(refund.image.data)}>       
+                                    <div>Click View</div>
+                                </i>
+                            </div>
+                        )}
                         <div className="status">
                             <div className="title">Status</div>
                             <div className="value">{refund.isSuccess}</div>

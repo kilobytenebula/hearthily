@@ -39,9 +39,10 @@
     display: flex;
     flex-wrap:wrap ;
     justify-content: space-between;
+    gap: 32px;
 }
 .refundReq{
-    width: 44%;
+    width: 43%;
     padding: 32px;
     background-color: var(--bg-200);
     display: flex;
@@ -61,7 +62,7 @@
 .des .value{
     white-space: pre-wrap;
 }
-.refundReq .oid ,.cid, .phone,.reason, .des , .status{
+.refundReq .oid ,.cid, .phone,.reason, .des , .status ,.image{
     display: flex;
     flex-direction: row;
     justify-content: space-between;

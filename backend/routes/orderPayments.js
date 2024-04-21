@@ -13,7 +13,7 @@ router.route("/add").post(async(req,res)=>{
         paymentMethod,
         address,
         phoneNumber,
-       // paymentSlip,
+       paymentSlip,
         isSuccess
     })
     newPayment.save().then(()=>{
@@ -68,5 +68,16 @@ router.route("/update/:orderId").put(async(req,res)=>{
         console.log(err);
         res.status(500).send({ status: "Unsuccessful" });
     }
+});
+router.route("/get/:orderId").get((req, res) => {
+    const orderId = req.params.orderId;
+    payment.find({ orderId: orderId })
+        .then((payments) => {
+            res.json(payments);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ error: "Internal Server Error" });
+        });
 });
 module.exports = router;

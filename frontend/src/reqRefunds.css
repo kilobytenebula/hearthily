@@ -18,6 +18,26 @@ body{
     gap: 8px;
 }
 
+.refundImage{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.refundImage input[type="file"] {
+    background-color: var(--bg-200); /* Set the background color to orange */
+    color: white; /* Set the text color to contrast with the background */
+    border: none; /* Remove the default border */
+    padding: 10px; /* Add some padding for better appearance */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+
+.refundImage label span {
+    font-size: 16px;
+    color:var(--white-100);
+}
 .inputBox {
     width: 400px;
     background-color: var(--bg-200);

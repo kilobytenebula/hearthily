@@ -3,7 +3,7 @@ const router = require("express").Router();
 let refund = require("../models/Refunds"); 
 
 router.route("/add").post(async(req,res)=>{
-    const { customerId,mobileNumber,orderId,reason,description,isSuccess} = req.body;
+    const { customerId,mobileNumber,orderId,reason,description,image} = req.body;
 
     const  newRefund = new refund({
         
@@ -12,8 +12,7 @@ router.route("/add").post(async(req,res)=>{
         orderId,
         reason,
         description,
-       // paymentSlip,
-        isSuccess
+        image,
     })
     newRefund.save().then(()=>{
         res.json("Refund added")

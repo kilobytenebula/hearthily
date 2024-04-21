@@ -25,10 +25,9 @@ const refundSchema = new Schema({
         required: true,
 
     },
-    // image:{
-    //     data: Buffer,
-    //     contentType: String
-    // },
+    image:{
+        data: String
+    },
     isSuccess:{
         type: String,
         default: 'pending'

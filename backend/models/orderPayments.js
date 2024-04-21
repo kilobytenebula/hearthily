@@ -37,10 +37,9 @@ const paymentSchema = new Schema({
 
     },
     
-    // paymentSlip:{
-    //     data: Buffer,
-    //     contentType: String
-    // },
+    paymentSlip:{
+        data: String,
+    },
     isSuccess:{
         type: String,
         default: 'pending'
