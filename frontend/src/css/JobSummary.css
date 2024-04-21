@@ -1,0 +1,65 @@
+.summary-name,
+.summary-date,
+.summary-location,
+.summary-payment,
+.summary-driver {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary-name {
+    width: 30%;
+}
+
+.summary-date {
+    width: 15%;
+    text-align: center;
+}
+
+.summary-location {
+    width: 15%;
+    text-align: center;
+}
+
+.summary-payment {
+    width: 15%;
+    text-align: center;
+}
+
+.summary-driver {
+    width: 25%;
+    text-align: center;
+}
+
+.jobsummary-report-actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+}
+.jobsummary-report-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    border-radius: 10px;
+}
+.jobsummary-report-action-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}

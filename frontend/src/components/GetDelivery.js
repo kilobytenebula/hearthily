@@ -7,6 +7,9 @@ export default function GetDelivery() {
   const [deliveryArray, setDeliveryArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [displayData, setDisplayData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
 
   useEffect(() => {
     // Fetch delivery data
@@ -68,15 +71,78 @@ export default function GetDelivery() {
 
   }, [deliveryArray]);
 
+  // Filter deliveries based on search term and filter type
+  const filteredDeliveries = displayData.filter(
+    (delivery) =>
+      (delivery.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        delivery.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        delivery.payment.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (filterType === "all" || delivery.payment.toLowerCase() === filterType)
+  );
+
+  // Sort filtered deliveries based on sort by type
+  const sortDeliveries = (deliveries) => {
+    switch (sortBy) {
+      case "name":
+        return deliveries.sort((a, b) => a.name.localeCompare(b.name));
+      case "date":
+        return deliveries.sort((a, b) => new Date(b.date) - new Date(a.date));
+      case "location":
+        return deliveries.sort((a, b) => a.location.localeCompare(b.location));
+      case "payment":
+        return deliveries.sort((a, b) => a.payment.localeCompare(b.payment));
+      default:
+        return deliveries;
+    }
+  };
+
   return (
     <div className="delivery-container-main">
       <div className="top-bar">
         <div className="container-title-text">Available Jobs</div>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by customer name, location, or payment"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="filter-buttons">
+        <div
+          className={`filter-btn ${filterType === "all" ? "active-filter" : ""}`}
+          onClick={() => setFilterType("all")}
+        >
+          All ({filteredDeliveries.length})
+        </div>
+        <div
+          className={`filter-btn ${filterType === "cod" ? "active-filter" : ""}`}
+          onClick={() => setFilterType("cod")}
+        >
+          COD ({filteredDeliveries.filter(delivery => delivery.payment === "COD").length})
+        </div>
+        <div
+          className={`filter-btn ${filterType === "paid" ? "active-filter" : ""}`}
+          onClick={() => setFilterType("paid")}
+        >
+          Paid ({filteredDeliveries.filter(delivery => delivery.payment === "Paid").length})
+        </div>
+      </div>
+      <div className="jobhistory-report-actions-wrapper">
+        <div className="sort-menu">
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <option value="name">Sort by Customer Name</option>
+            <option value="date">Sort by Date</option>
+            <option value="location">Sort by Location</option>
+            <option value="payment">Sort by Payment Method</option>
+          </select>
+        </div>
       </div>
       {isLoading ? (
         <div className='loading-deliveries'>Beep boop boop...</div>
       ) : (
-        displayData.length > 0 ? (
+        sortDeliveries(filteredDeliveries).length > 0 ? (
           <div>
             <div className="fields">
               <ul>
@@ -87,7 +153,7 @@ export default function GetDelivery() {
               </ul>
             </div>
             <div className="delivery-container">
-              {displayData.map((item) => (
+              {sortDeliveries(filteredDeliveries).map((item) => (
                 <div className="item-delivery" key={item.deliveryId}>
                   <Link to={`/delivery/job/${item.deliveryId}`} className="item-link">
                     <ul>
@@ -107,5 +173,4 @@ export default function GetDelivery() {
       )}
     </div>
   );
-  
 }

@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../css/GetDelivery.css";
 import searchIcon from "../icons/search.png";
+import JobHistoryReport from "./JobHistoryReport";
 
 export default function GetJobHistory() {
   const [jobsArray, setJobsArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
+
   const driverId = "661bfcaff9b3692a8a15a7f2";
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function GetJobHistory() {
               const userData = userResponses[index].data.user;
               return {
                 ...job,
-                name: `${userData.firstname} ${userData.lastname}`,
+                name: `${userData.name}`,
                 location: userData.address,
               };
             });
@@ -51,13 +54,33 @@ export default function GetJobHistory() {
       });
   }, []);
 
-  // Filter deliveries based on search term and filter type
-  const filteredDeliveries = jobsArray.filter(
-    (delivery) =>
-      (delivery.deliveryStatus === filterType || filterType === "all") &&
-      (delivery.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        delivery.deliveryId?.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  // Filter deliveries based on search term, filter type, and sort order
+  const filteredDeliveries = jobsArray
+    .filter(
+      (delivery) =>
+        (delivery.deliveryStatus === filterType || filterType === "all") &&
+        (delivery.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          delivery.deliveryId?.toLowerCase().includes(searchTerm.toLowerCase()))
+    )
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "date":
+          return new Date(b.date) - new Date(a.date);
+        case "location":
+          return a.location.localeCompare(b.location);
+        case "payment":
+          return a.paymentMethod.localeCompare(b.paymentMethod);
+        default:
+          return 0;
+      }
+    });
+
+  // Function to handle sorting by different criteria
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
 
   return (
     <div className="delivery-container-main">
@@ -82,7 +105,7 @@ export default function GetJobHistory() {
           }`}
           onClick={() => setFilterType("all")}
         >
-          All
+          All ({jobsArray.length})
         </div>
         <div
           className={`filter-btn ${
@@ -90,7 +113,7 @@ export default function GetJobHistory() {
           }`}
           onClick={() => setFilterType("on-delivery")}
         >
-          Accepted
+          Accepted ({jobsArray.filter(job => job.deliveryStatus === "on-delivery").length})
         </div>
         <div
           className={`filter-btn ${
@@ -98,8 +121,19 @@ export default function GetJobHistory() {
           }`}
           onClick={() => setFilterType("completed")}
         >
-          Completed
+          Completed ({jobsArray.filter(job => job.deliveryStatus === "completed").length})
         </div>
+      </div>
+      <div className="jobhistory-report-actions-wrapper">
+        <div className="sort-menu">
+          <select value={sortBy} onChange={handleSortBy}>
+            <option value="name">Sort by Customer Name</option>
+            <option value="date">Sort by Date</option>
+            <option value="location">Sort by Location</option>
+            <option value="payment">Sort by Payment Method</option>
+          </select>
+        </div>
+        <JobHistoryReport deliveries={filteredDeliveries} />
       </div>
 
       {isLoading ? (
