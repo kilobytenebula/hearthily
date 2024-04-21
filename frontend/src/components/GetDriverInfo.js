@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "../css/GetDriverInfo.css";
 import searchIcon from "../icons/search.png";
 import badge from "../icons/badge.png";
+import DriverInfoReport from "./DriverInfoReport";
 
 export default function GetDriverInfo() {
   const [driver, setDriver] = useState(null);
@@ -13,6 +14,7 @@ export default function GetDriverInfo() {
   const { driverId } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDelivery, setFilteredDelivery] = useState([]);
+  const [sortBy, setSortBy] = useState("date");
 
   useEffect(() => {
     async function fetchData() {
@@ -86,21 +88,33 @@ export default function GetDriverInfo() {
     setSearchQuery(e.target.value);
   };
 
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  const sortDelivery = (deliveries) => {
+    switch (sortBy) {
+      case "name":
+        return deliveries.sort((a, b) => a.cusName.localeCompare(b.cusName));
+      case "date":
+        return deliveries.sort((a, b) => new Date(a.date) - new Date(b.date));
+      case "location":
+        return deliveries.sort((a, b) =>
+          a.cusLocation.localeCompare(b.cusLocation)
+        );
+      case "payment":
+        return deliveries.sort((a, b) => a.payment.localeCompare(b.payment));
+      case "rating":
+        return deliveries.sort((a, b) => b.rating - a.rating); // Sorting in descending order
+      default:
+        return deliveries;
+    }
+  };
+
   return (
     <div className="driver-info-main">
       <div className="top-bar">
-        <div className="container-title-text">Driver Details</div>
-        <div className="search-container">
-          <div className="search-icon">
-            <img src={searchIcon} alt="search" />
-          </div>
-          <input
-            type="text"
-            placeholder="Search by name or ID"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-        </div>
+        <div className="container-title-text">Driver Profile</div>
       </div>
       <div className="driver-info-wrapper">
         {loading ? (
@@ -119,7 +133,20 @@ export default function GetDriverInfo() {
                     <div>{driver.contact}</div>
                   </div>
                   <div className="driver-info-row">
-                    <div>Total Jobs:</div> <div>{driver.deliveryCount}</div>
+                    <div>Completed Jobs:</div> <div>{driver.deliveryCount}</div>
+                  </div>
+                </div>
+                <div className="driver-rating-container">
+                  <div className="driver-rating-wrapper">
+                    <div className="driver-rating">{driver.averageRating}</div>
+                    <div className="driver-class">
+                      {driver.averageRating > 4.5 && (
+                        <div className="top-rated" title="Top Rated Driver">
+                          <img src={badge} alt="badge" />
+                          <div className="top-rated-text">Top Rated</div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="driver-availability-container">
@@ -140,23 +167,38 @@ export default function GetDriverInfo() {
                     )}
                   </div>
                 </div>
-                <div className="driver-rating-container">
-                  <div className="driver-rating-wrapper">
-                    <div className="driver-rating">{driver.averageRating}</div>
-                    <div className="driver-class">
-                      {driver.averageRating > 4.5 && (
-                        <div className="top-rated" title="Top Rated Driver">
-                          <img src={badge} alt="badge"/>
-                          <div className="top-rated-text">Top Rated</div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
               </div>
             )}
             <div className="driver-info-completed-deliveries-container">
-              <div className="completed-deliveries-title">Job History</div>
+              <div className="completed-deliveries-header">
+                <div className="completed-deliveries-title">Completed Jobs</div>
+                <div className="search-container">
+                  <div className="search-icon">
+                    <img src={searchIcon} alt="search" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search by customer name or delivery ID"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                  />
+                </div>
+              </div>
+              <div className="driver-info-report-actions-wrapper">
+                <div className="sort-menu">
+                  <select value={sortBy} onChange={handleSortBy}>
+                    <option value="name">Sort by Name</option>
+                    <option value="date">Sort by Date</option>
+                    <option value="location">Sort by Location</option>
+                    <option value="payment">Sort by Payment Method</option>
+                    <option value="rating">Sort by Rating</option>
+                  </select>
+                </div>
+                <DriverInfoReport
+                  driver={driver}
+                  completedDeliveries={sortDelivery(filteredDelivery)}
+                />
+              </div>
               {filteredDelivery.length === 0 ? (
                 <div className="no-completed-jobs">No completed jobs</div>
               ) : (

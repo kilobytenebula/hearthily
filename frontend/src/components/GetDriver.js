@@ -12,6 +12,7 @@ export default function GetDriver() {
     const [tooltip, setTooltip] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredDrivers, setFilteredDrivers] = useState([]);
+    const [sortBy, setSortBy] = useState("rating");
 
     useEffect(() => {
         const fetchDriversAndUsers = async () => {
@@ -69,6 +70,34 @@ export default function GetDriver() {
         setTooltip(`Driver ID: ${driverId}`);
     };
 
+    const handleSortBy = (e) => {
+      setSortBy(e.target.value);
+    };
+  
+    const sortDrivers = (drivers) => {
+      switch (sortBy) {
+        case "name":
+          return drivers.sort((a, b) => a.name.localeCompare(b.name));
+        case "delCount":
+          return drivers.sort((a, b) => b.deliveryCount - a.deliveryCount);
+        case "rating":
+          return drivers.sort((a, b) => b.averageRating - a.averageRating);
+        case "availability":
+          return drivers.sort((a, b) => {
+            if (a.isAvailable && !b.isAvailable) {
+              return -1;
+            } else if (!a.isAvailable && b.isAvailable) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        default:
+          return drivers;
+      }
+    };
+    
+
     return (
       <div className="driver-main">
         <div className="top-bar">
@@ -86,7 +115,15 @@ export default function GetDriver() {
           </div>
         </div>
         <div className="driver-report-actions-wrapper">
-            <DriverReport drivers={filteredDrivers} />
+        <div className="sort-menu">
+                  <select value={sortBy} onChange={handleSortBy}>
+                    <option value="name">Sort by Name</option>
+                    <option value="delCount">Sort by Delivery Count</option>
+                    <option value="rating">Sort by Rating</option>
+                    <option value="availability">Sort by Availability</option>
+                  </select>
+                </div>
+            <DriverReport drivers={sortDrivers(filteredDrivers)} />
         </div>
         {isLoading ? (
           <div className="loading-drivers">Beep boop boop...</div>
