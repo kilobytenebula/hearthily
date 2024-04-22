@@ -67,3 +67,27 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.accept{
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.decline{
+    padding: 12px 24px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}

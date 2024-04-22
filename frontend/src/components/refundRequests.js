@@ -8,6 +8,7 @@ const download = require('../icons/download.png')
 export default function RefundRequest(){
 
     const [refunds, setPayments] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(()=>{
 
@@ -27,7 +28,7 @@ export default function RefundRequest(){
     const updateRefund = async (orderId, isSuccess) => {
         try {
             const response = await axios.put(`http://localhost:8050/refund/update/${orderId}`, { isSuccess });
-            console.log(response.data); // Log the response from the API
+            window.location.reload();
         } catch (error) {
             console.error('Error updating payment:', error);
         }
@@ -45,6 +46,9 @@ export default function RefundRequest(){
             + imageURL + '" style="max-width: 100%; max-height: 100%;"></body></html>');
         
       };
+      const filteredRefunds = refunds.filter(refund =>
+        refund.orderId.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return(
 
@@ -56,14 +60,14 @@ export default function RefundRequest(){
                         <input 
                             type="search" 
                             placeholder="Search by Order Id..." 
-                            
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <button>Search</button>
                  </div>
             </div>
 
             <div className="refundsReqList">
-                {refunds.map((refund, index) => (
+                {filteredRefunds.map((refund, index) => (
                     <div className="refundReq" key={index}>
                         <div className="cid">
                             <div className="title">Customer ID</div>
@@ -101,7 +105,7 @@ export default function RefundRequest(){
                         {refund.isSuccess !== "accepted" && ( // Conditionally render action buttons if isSuccess is not "accepted"
                             <div className="actions">
                                 <button className="accept" onClick={() => handleUpdateRefund(refund.orderId, "accepted")}>Accept</button>
-                                <button className="Decline" onClick={() => handleUpdateRefund(refund.orderId, "declined")}>Decline</button>
+                                <button className="decline" onClick={() => handleUpdateRefund(refund.orderId, "declined")}>Decline</button>
                             </div>
                         )}
                     </div>

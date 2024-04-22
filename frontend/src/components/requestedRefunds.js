@@ -7,7 +7,7 @@ import '../requestedRefunds.css';
 export default function RequestedRefunds() {
 
     const [refunds, setRefunds] = useState([]);
-    const customerId = "6607de0ae6da274300367544";
+    const customerId = "609c9c918c27e038b0e27b2d";
 
     useEffect(() => {
         const fetchData = async () => {
