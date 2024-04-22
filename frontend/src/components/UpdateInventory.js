@@ -8,6 +8,7 @@ export default function UpdateInventory() {
     const [ingredient, setIngredient] = useState('');
     const [qty, setQty] =useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,6 +32,12 @@ export default function UpdateInventory() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+
+        if(!ingredient || !qty){
+            alert('Please fill in all fields');
+            return;
+        }
         try {
             await axios.put(`http://localhost:8070/inventory/update/${inventoryId}`, {
                 ingredient,
@@ -72,13 +79,15 @@ export default function UpdateInventory() {
                     <div className='inventory-item-container'>
                         <label htmlFor="qty">Quantity:</label>
                         <input
-                            type="text"
+                            type="number"
                             id="qty"
                             name="qty"
                             value={qty || ''}
+                            min={0}
                             onChange={e => setQty(e.target.value)}
                         />
                     </div>
+                    {error && <div className="error">{error}</div>}
                     <button type="submit">Update Inventory</button>
                     <button type="button" onClick={handleCancel}>Cancel</button>
                 </form>

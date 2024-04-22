@@ -8,7 +8,7 @@ const inventorySchema = new Schema({
         required: true
     },
     qty: {
-        type: String,
+        type: Number,
         required: true
     }
 })

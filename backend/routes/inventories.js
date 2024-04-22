@@ -3,7 +3,7 @@ let Inventory = require("../models/Inventory");
 
 router.route("/add").post((req,res)=>{
     const ingredient = req.body.ingredient;
-    const qty = req.body.qty;
+    const qty = Number(req.body.qty);
 
     const newInventory = new Inventory({
         ingredient,

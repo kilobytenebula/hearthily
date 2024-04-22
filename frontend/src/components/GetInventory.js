@@ -37,8 +37,9 @@ export default function GetInventory(){
             <div>
               <div className="fields">
                 <ul>
+                  <li className='meal'>Item ID</li>
                   <li className='meal'>Ingredient</li>
-                  <li className='date'>qty</li>
+                  <li className='date'>Quantity</li>
                 </ul>
               </div>
               <div className="order-container">
@@ -47,8 +48,9 @@ export default function GetInventory(){
                     <div className="item" key={inventoryItem._id}>
                       <Link to={`/inventory-record/inventory/${inventoryItem._id}`} className="item"> 
                         <ul>
+                          <li className='meal'>{inventoryItem._id}</li>
                           <li className="meal">{inventoryItem.ingredient}</li>
-                          <li className="date">{inventoryItem.qty}</li>
+                          <li className="date">{inventoryItem.qty}kg</li>
                         </ul>
                       </Link>
                     </div>
