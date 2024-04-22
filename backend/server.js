@@ -36,6 +36,8 @@ const supplierRouter  = require("./routes/suppliers.js");
 app.use("/supplier",supplierRouter);
 
 //to access shipment.js file in routes folder
+const shipmentRouter  = require("./routes/shipments.js");
+app.use("/shipment",shipmentRouter);
 
 //to access inviter.js file in routes folder
 const invitedsupplierRouter  = require("./routes/invitedsuppliers.js");

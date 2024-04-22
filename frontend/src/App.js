@@ -5,6 +5,10 @@ import UpdateSupplier from "./components/UpdateSupplier";
 import Dashboard from "./pages/SupplierDashboard";
 import SupplierReport from "./components/SupplierReport";
 import InvitedSupplier from "./pages/InvitedSupplier";
+import AddShipping from "./pages/AddShipping";
+import DispalyShipment from "./pages/DisplayShipment";
+import SendOrder from "./components/SendOrder";
+import UpdateOrder from "./components/UpdateOrder";
 
 function App() {
   return (
@@ -17,6 +21,10 @@ function App() {
         <Route path='/update/:id' exact Component={UpdateSupplier} />
         <Route path='/display/:id' exact Component={SupplierReport} />
         <Route path='/invite' exact Component={InvitedSupplier} />
+        <Route path='/shipment' exact Component={AddShipping} />
+        <Route path='/displays' exact Component={DispalyShipment} />
+        <Route path='/displays/:id' exact Component={SendOrder} />
+        <Route path='/updates/:id' exact Component={UpdateOrder} />
       </Routes>
       </div>
       

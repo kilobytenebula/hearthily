@@ -15,8 +15,14 @@ function Menu() {
                 </li>
 
                 <li>
-                    <Link to="/invite">
-                        <span className="S_title ">Invite</span>
+                    <Link to="/">
+                        <span className="S_title">Dashbroad</span>
+                    </Link>
+                </li>
+
+                <li>
+                    <Link to='/invite'>
+                        <span className="S_title ">Invitations</span>
                     </Link >
                 </li>
 
@@ -27,26 +33,20 @@ function Menu() {
                 </li>
 
                 <li>
-                    <Link to="#">
-                        <span className="S_title">Messages</span>
+                    <Link to="/shipment">
+                        <span className="S_title">Shippings</span>
                     </Link >
                 </li>
 
                 <li>
-                    <Link to="#">
-                        <span className="S_title">Help</span>
+                    <Link to="/displays">
+                        <span className="S_title">Shipment</span>
                     </Link>
                 </li>
 
                 <li>
                     <Link to="#">
-                        <span className="S_title">Settings</span>
-                    </Link>
-                </li>
-
-                <li>
-                    <Link to="#">
-                        <span className="S_title">Password</span>
+                        <span className="S_title"></span>
                     </Link>
                 </li>
 
@@ -57,7 +57,6 @@ function Menu() {
                 </li>
             </ul>
         </div>
-    
         
     )  
 }

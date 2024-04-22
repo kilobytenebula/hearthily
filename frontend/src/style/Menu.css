@@ -20,7 +20,7 @@
     border-bottom-left-radius: 30px;
 } 
 .S_navigation ul li img{
-    margin-top: 40px;
+    margin-top: 45px;
     margin-left: 5px;
 }
 .S_navigation ul li:hover,
@@ -28,11 +28,11 @@
     background-color: #252836;
 }  
 .S_navigation ul li:nth-child(1) {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     pointer-events: none;
 } 
-.S_navigation ul li:nth-child(7) {
-    margin-bottom: 45px;
+.S_navigation ul li:nth-child(6) {
+    margin-bottom: -25px;
 } 
 .S_navigation ul li a {
     position: relative;
@@ -50,7 +50,7 @@
     position: relative;
     display: block;
     padding: 0 10px;
-    height: 75px;
+    height: 90px;
     line-height: 75px;
     text-align: start;
     white-space: nowrap;   

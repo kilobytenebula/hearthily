@@ -8,17 +8,16 @@ import Search from "../components/Search";
 
 function SupplierTable(){
 
-    const [suppliers, setSuppliers] = useState([]);//add suppliers
+    const [suppliers, setSuppliers] = useState([]);//dispaly suppliers
     const [searchQuery, setSearchQuery] = useState(""); // State for search query
     
-
+    //dispaly suppliers
     useEffect(() => {
         function getSuppliers(){
            axios.get("http://localhost:8070/supplier/display").then((res) => {
-            const formattedSuppliers = res.data.map((supplier) => ({
+                const formattedSuppliers = res.data.map((supplier) => ({
                 ...supplier,
-                // Extracting only the date part from the reg_date field
-                reg_date: new Date(supplier.reg_date).toLocaleDateString(),
+                reg_date: new Date(supplier.reg_date).toLocaleDateString(),// Extracting only the date part from the reg_date field
             }));
             setSuppliers(formattedSuppliers);
            }).catch((err) =>{
@@ -30,8 +29,9 @@ function SupplierTable(){
 
     //search supplier
     const filteredSuppliers = suppliers.filter(supplier =>
-        supplier.supplier_name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+        supplier.supplier_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        supplier.catogory.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     //delete supplier
     const deleteSupplier = async (id) => {

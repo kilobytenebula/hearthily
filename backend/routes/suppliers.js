@@ -30,14 +30,23 @@ router.route("/add").post((req,res)=>{
 
 //CURD - dispaly
 //http://localhost:8070/supplier
-router.route("/display").get((req,res)=>{
+router.route("/display").get(async (req, res) => {
+    try {
+        const { category } = req.query;
+        let query = {};
+        if (category) {
+            query.catogory = category;
+        }
+        const suppliers = await Supplier.find(query);
+        res.json(suppliers);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Error fetching suppliers");
+    }
+});
 
-    Supplier.find().then((suppliers)=>{
-        res.json(suppliers)
-    }).catch((err)=>{
-        console.log(err)
-    })
-})
+
+
 
 //CURD - update
 //http://localhost:8070/supplier/update/(:id)
