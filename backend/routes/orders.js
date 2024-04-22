@@ -53,13 +53,12 @@ router.route("/update/:orderId").put(async(req,res)=>{
         qty,
         date,
         payment_method,
-        total_amount,
-        status
+        total_amount
     }
 
-    await Order.findByIdAndUpdate(orderId, updateOrder)
+    const update = await Order.findByIdAndUpdate(orderId, updateOrder)
     .then(()=>{
-        res.status(200).send({status: "Order updated", order: updateOrder})
+        res.status(200).send({status: "Order updated", order: update})
     }).catch((err)=>{
         console.log(err);
         res.status(500).send({status: "Error with updating data", error: err.message});
@@ -78,5 +77,17 @@ router.route("/delete/:orderId").delete(async(req,res)=>{
     })
 })
 
+router.get("/lastorder/lastid", async (req, res) => {
+    try {
+        const lastOrder = await Order.findOne().sort({ _id: -1 });
+        if (!lastOrder) {
+            return res.status(404).json({ message: "No orders found" });
+        }
+        res.status(200).json({orderId: lastOrder._id});
+    } catch (error) {
+        console.error("Error fetching last order:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 module.exports = router;
 

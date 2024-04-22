@@ -33,18 +33,31 @@ app.use('/driver', driverRouter);
 const feedbackRouter = require('./routes/feedbacks.js');
 app.use('/feedback', feedbackRouter);
 
-const orderRouter = require('./routes/orders.js');
-app.use('/order', orderRouter);
-
 const deliveryRouter = require('./routes/deliveries.js');
 app.use('/delivery', deliveryRouter);
 
-const userRouter = require('./routes/user.js');
-app.use('/user', userRouter);
+const paymentRouter = require("./routes/orderPayments.js")
+app.use("/payment", paymentRouter)
+
+const refundRouter = require("./routes/refunds.js");
+app.use("/refund", refundRouter)
+
+const orderRouter = require("./routes/orders.js");
+app.use("/order",orderRouter);
+
+const baseRouter = require("./routes/bases.js");
+app.use("/base",baseRouter);
+
+const portionRouter = require("./routes/portions.js");
+app.use("/portion",portionRouter);
+
+const loyaltyRouter = require("./routes/loyalty.js");
+app.use("/points", loyaltyRouter)
+
+const userRouteer = require("./routes/user.js");
+app.use("/user", userRouteer);
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-
-
