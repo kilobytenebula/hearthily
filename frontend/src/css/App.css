@@ -1,0 +1,10 @@
+.App {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.fixed-top {
+  position: fixed;
+  z-index: 1000;
+  
+}

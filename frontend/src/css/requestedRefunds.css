@@ -1,0 +1,54 @@
+.reqRefundsBody{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+}
+
+.refundsBody {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.refunds {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 46%;
+
+    background-color: var(--bg-200);
+    border-radius: 16px;
+    padding: 16px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 16px;
+    color: var(--white-100);
+    border: 1px solid rgba(244, 244, 244, 0.2);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.refundRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.delete{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.delete button{
+    display: inline-block;
+    padding:16px 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}

@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.delivery-container-main {
+    width: display;
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.filter-buttons {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.filter-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}
+
+.filter-btn.active-filter {
+    color: #fff;
+    background-color: #F28638;
+}
+
+.filter-btn:hover {
+    color: #fff;
+    background-color: #F28638;
+    border-color: #F28638;
+}
+
+.job-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 16px;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.fields-job ul {
+    font-weight: 600;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.delivery-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 8px;
+}
+
+.item-delivery {
+    background-color: #1F1D2B;
+    border-radius: 10px;
+    display: flex;
+}
+
+.item-delivery ul {
+    width: 100%;
+    font-weight: 400;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.item-link {
+    width: 100%;
+}
+
+.item-delivery a:visited,
+a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.name,
+.date,
+.location,
+.payment {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.name {
+    width: 40%;
+}
+
+.date {
+    width: 20%;
+    text-align: center;
+}
+
+.location {
+    width: 25%;
+    text-align: center;
+}
+
+.payment {
+    width: 15%;
+    text-align: center;
+}
+
+.loading-deliveries {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 16px;
+}
+
+.bottom-bar {
+    margin-top: 64px;
+}
+
+.not-available {
+    margin-top: 16px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F1D2B;
+    border-radius: 10px;
+}
+
+.job-container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.accepted-deliveries-container {
+    padding: 16px;
+    border: 1px solid #F28638;
+    border-radius: 8px;
+}
+
+.completed-deliveries-container {
+    padding: 16px;
+    border: 1px solid #F28638;
+    border-radius: 8px;
+}
+
+.jobhistory-report-actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+}
+.jobhistory-report-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    border-radius: 10px;
+}
+.jobhistory-report-action-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}

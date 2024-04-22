@@ -1,0 +1,318 @@
+.paymentReportContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+
+}
+.paymentReportContainer .paymentReportHeader{
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.csvButton{
+    font-size: 18px;
+}
+.chooseReport{
+    appearance: none;
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color:var(--bg-200);
+    color: var(--white-100);
+}
+.csvButton ,.pdfButton{
+    text-decoration: none;
+    font-size: 14px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 100;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    border-radius: 8px;
+    margin-left: 16px;
+    color: var(--white-100);
+    border: none;
+
+}
+.totalOverview{
+    background-color: var(--bg-200);
+    padding: 32px;
+    border-radius: 16px;
+    
+}
+.totalRevenue{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+}
+.totRevenue , .refund , .afterRefund{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 500;
+}
+.navButton {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--bg-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 32px;
+}
+.clicked{
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 32px;
+}
+.overview{
+    padding: 32px;
+    border-radius: 16px;
+    font-size: 20px;
+    background-color: var(--bg-200);
+}
+.codOverview , .btOverview{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* .lists{
+    display: flex;
+    justify-self: flex-end;u
+} */
+.codList , .btList{
+    background-color: var(--bg-200);
+    padding: 32px;
+    border-radius: 16px;
+}
+.listHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    padding-bottom: 32px;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-size: 20px;
+}
+.list .listItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.listHeader .id{
+    width: 25%;
+}
+.listHeader .date{
+    text-align: center;
+    width: 10%;
+}
+.listHeader .amount{
+    text-align: center;
+    width: 20%;
+}
+.listHeader .status{
+
+    display: flex;
+    justify-content: center;
+    width: 10%;
+}
+.listHeader .slip{
+
+    margin-left: 32px;
+    width: 10%;
+    text-align: center;
+}
+.listHeader .actions{
+    
+    width: 25%;
+}
+
+.listItem .id{
+    display: flex;
+    align-items: center;
+    width: 25%;
+}
+.listItem .date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+.listItem .amount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+.listItem .status{
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    width: 10%;
+}
+.listItem .slip{
+
+    margin-left: 32px;
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    width: 10%;
+}
+
+.listItem .actions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25%;
+}
+.listItem .actions .approve{
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.listItem .actions .reject{
+
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+}
+.listItem .actions .refund{
+
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+.searchBarBT , .searchBarCOD{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+}
+.searchBarBT input[type="search"] {
+    padding: 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+    margin-right: 5px; /* Add some space between input and button */
+}
+.searchBarCOD input[type="search"] {
+    padding: 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+    margin-right: 5px; /* Add some space between input and button */
+}
+
+.searchBarBT button {
+    padding: 8px 12px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.searchBarCOD button {
+    padding: 8px 12px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.searchBar button:hover {
+    background-color: #0056b3; /* Darker shade of the button color on hover */
+}
+
+.status .pending{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--orange-100);
+    background-color: rgba(242, 134, 56, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--orange-100);
+}
+.status .approved{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--green-100);
+    background-color: rgba(107, 226, 190, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--green-100);
+}
+.status .rejected{
+    font-size: 16px;
+    font-weight: 100;
+    color: var(--red-100);
+    background-color: rgba(250, 16, 16, 0.2) !important;
+    padding: 8px 24px;
+    width: 160px;
+    text-align: center;
+    border-radius: 16px;
+    border: 1px solid var(--red-100);
+}

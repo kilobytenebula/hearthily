@@ -1,0 +1,116 @@
+@import url('root.css');
+body {
+    margin:0;
+}
+.frame{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+
+}
+.titleBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 32px;
+}
+.heading{
+    font-size: 24px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 700;
+    color: var(--white-100);
+}
+.allPaymentContainer {
+    display: flex;
+   
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap:32px;
+}
+
+.PaymentContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 46%;
+    background-color: var(--bg-200);
+    border-radius: 16px;
+    padding: 16px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 16px;
+    color: var(--white-100);
+    border: 1px solid rgba(244, 244, 244, 0.2);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    
+}
+.paymentInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.strong {
+    font-weight: 600;
+}
+.bottom-right-button {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+}
+.button {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 16px;
+    position: relative;
+    background-color: var(--bg-100);
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #f4f4f433;
+  }
+  .button .apply {
+    position: relative;
+    width: fit-content;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: var(--collection-1-white-100);
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22.4px;
+    white-space: nowrap;
+  }
+  .refund-button {
+    display: inline-block;
+    padding:16px 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .refund-button:hover {
+    background-color: var(--orange-200);
+  }
+  .requestedRefunds{
+    display: inline-block;
+    padding: 16px 32px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-size: 16px;
+    background-color: var(--orange-200);
+    color: #fff;
+    text-decoration: none; 
+    border-radius: 8px;
+    cursor: pointer;
+  }
