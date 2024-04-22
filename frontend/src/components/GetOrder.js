@@ -6,6 +6,8 @@ import '../css/GetOrder.css';
 export default function GetOrder() {
   const [order, setOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [records, setRecords] = useState([]);
+  const customerId = "609c9c918c27e038b0e27b2d"; 
 
   function getStatusClass(status) {
     const statusMap = {
@@ -24,8 +26,10 @@ export default function GetOrder() {
     const fetchOrder = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('http://localhost:8070/order/');
-        setOrder(response.data);
+        const response = await axios.get(`http://localhost:8070/order/customer/${customerId}`);
+        setOrder(response.data.orders);
+        setRecords(response.data.orders);
+        console.log("Orders",response.data.orders);
       } catch (error) {
         console.error('Error fetching orders:', error);
         // Consider setting an error state variable to display an error message
@@ -37,11 +41,22 @@ export default function GetOrder() {
     fetchOrder();
   }, []);
 
+  const Filter =(event) =>{
+    setRecords(order.filter(f => 
+      f.base_name.toLowerCase().includes(event.target.value) ||
+      f.portion_name.some(portion => portion.toLowerCase().includes(event.target.value)) ||
+      f.total_amount.toString().includes(event.target.value) ||
+      f.status.toString().includes(event.target.value)
+    ));
+  }
+
   return (
     <div className="order-history">
       <div className="top-bar">
         <div className="container-title-text">Order History</div>
-        <div className="search-container"></div>
+        <div className="search-container">
+          <input type="text" className="search" placeholder='Search..' onChange={Filter} />
+        </div>
       </div>
       {isLoading ? (
         <div className='loading-orders'>Beep boop boop...</div>
@@ -56,8 +71,8 @@ export default function GetOrder() {
             </ul>
           </div>
           <div className="order-container">
-            {order.length > 0 ? (
-              order.map((orderItem) => (
+            {records.length > 0 ? (
+              records.map((orderItem) => (
                 <div className="item" key={orderItem._id}>
                   <Link to={`/order-history/order/${orderItem._id}`} className="item">
                     <ul>

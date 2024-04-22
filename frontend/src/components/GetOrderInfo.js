@@ -121,6 +121,39 @@ export default function GetOrderInfo() {
     fetchOrderAndFeedback();
   }, [orderId]);
 
+  function handleCancelOrder() {
+    const confirmed = window.confirm("Are you sure you want to cancel the order?");
+    
+    if (confirmed) {
+      const orderCreationTime = new Date(order.date); // Convert order creation time to Date object
+      const currentTime = new Date(); // Current time
+      
+      // Calculate the difference in milliseconds
+      const timeDifference = currentTime.getTime() - orderCreationTime.getTime();
+      
+      // Convert milliseconds to minutes
+      const timeDifferenceInMinutes = timeDifference / (1000 * 60);
+      
+      if (timeDifferenceInMinutes <= 5) {
+        // Order can be deleted
+        axios.delete(`http://localhost:8070/order/delete/${orderId}`)
+          .then(() => {
+            alert("Order cancelled successfully.");
+            window.location.href = "/order-history";
+          })
+          .catch(error => {
+            console.error("Error cancelling order:", error);
+            alert("Error cancelling order");
+          });
+      } else {
+        // Order cannot be deleted after 5 minutes
+        alert("Order cannot be cancelled after 5 minutes of creation.");
+      }
+    } else {
+      // User clicked cancel, do nothing
+    }
+  };
+  
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('feedbackSuccess')) {
@@ -202,6 +235,10 @@ export default function GetOrderInfo() {
           <div className="loading-text">Beep boop boop...</div>
         </div>
       )}
+      <div>
+        <button type="button" onClick={handleCancelOrder}>Cancel Order</button>
+      </div>
     </div>
-  );
+    
+  )
 }

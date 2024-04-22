@@ -69,6 +69,9 @@ app.use("/shipment",shipmentRouter);
 const invitedsupplierRouter  = require("./routes/invitedsuppliers.js");
 app.use("/inviter",invitedsupplierRouter);
 
+const inventoryRouter = require("./routes/inventories.js");
+app.use("/inventory",inventoryRouter);
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

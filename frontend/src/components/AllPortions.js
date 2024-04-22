@@ -17,11 +17,15 @@ export default function AllPortions(){
     const [selctedSize, setSelectedSize] = useState('');
     let [qty, setQty] = useState(1);
     const [total, setTotal] = useState(baseDetails.reg_price);
+    const customerId = "609c9c918c27e038b0e27b2d";
+    const status = "Pending";
+    // const [orderId, setOrderId] = useState('');
+
 
     useEffect(()=>{
         
         function getPortions(){
-            axios.get("http://localhost:8050/portion/").then((res)=>{
+            axios.get("http://localhost:8070/portion/").then((res)=>{
                 setPortions(res.data);
             }).catch((err)=>{
                 alert(err.message);
@@ -29,7 +33,7 @@ export default function AllPortions(){
         }
 
         function getBaseDetails() {
-            axios.get(`http://localhost:8050/base/`).then((res) => {
+            axios.get(`http://localhost:8070/base/`).then((res) => {
                 
                 const specificBase = res.data.find(base => base._id === baseId);
                 if (specificBase) {
@@ -97,13 +101,15 @@ export default function AllPortions(){
         const portionNames = selectedPortion.map(portion => portion.name);
         
         const newOrder = {
+            customer_id:customerId,
             base_name: baseDetails.base_name,
             portion_name: portionNames,
             portion_size: selctedSize,
             qty: qty,
-            total_amount: total
+            total_amount: total,
+            status: status
         };
-        axios.post("http://localhost:8050/order/add",newOrder).then(()=>{
+        axios.post("http://localhost:8070/order/add",newOrder).then(()=>{
             alert("Order Added")
         }).catch((err)=>{
             alert(err)
@@ -192,10 +198,10 @@ export default function AllPortions(){
                     </div>
                     <div className="button-container">
                         <div className="">
-                           <Link 
-                            to={`/checkout/${baseDetails.base_name}/${selectedSizePrice}/${JSON.stringify(selectedPortion)}/${total}`}> 
+                           <Link   
+                             to={`/checkout/${baseDetails.base_name}/${selectedSizePrice}/${JSON.stringify(selectedPortion)}/${total}`}>  
                              <button type="button" onClick={addOrder}>Checkout</button>
-                           </Link>
+                           </Link>   
                             
                         </div>
                     </div>

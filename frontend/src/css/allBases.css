@@ -33,8 +33,12 @@ body{
 }
 .bases-list{
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row;   */
+    flex-wrap: wrap;
+    /* justify-content: center;  */
+
     gap: 32px;
+    
     
 }
 .base_item{
@@ -45,4 +49,12 @@ body{
     width: 200px;
     background-color: var(--bg-200);
     border-radius: 16px;
+}
+
+/* .base-image{
+     
+} */
+
+.base-category{
+    margin-bottom: 16px;
 }

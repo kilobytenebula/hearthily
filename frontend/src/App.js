@@ -43,6 +43,9 @@ import AddShipping from "./pages/AddShipping";
 import DispalyShipment from "./pages/DisplayShipment";
 import SendOrder from "./components/SendOrder";
 import UpdateOrder from "./components/UpdateOrder";
+import GetInventory from './components/GetInventory';
+import UpdateInventory from './components/UpdateInventory';
+import OrderHistory from './components/OrderHistory';
 
 function App() {
   return (
@@ -104,6 +107,10 @@ function App() {
         <Route path='/displays/:id' exact Component={SendOrder} />
         <Route path='/updates/:id' exact Component={UpdateOrder} />
           
+        {/* thej */}
+        <Route path="/inventory-record" element={<GetInventory/>} />
+        <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
+        <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
         </Routes>
       </div>
     </Router>
