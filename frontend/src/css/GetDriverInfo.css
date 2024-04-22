@@ -1,0 +1,157 @@
+.driver-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+.driver-info-wrapper {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.driver-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.driver-info-pane {
+    background-color: #1F1D2B;
+    width: 35%;
+    border-radius: 10px;
+    padding: 32px;
+}
+.driver-info-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.driver-rating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F1D2B;
+    width: 35%;
+    border-radius: 10px;
+    padding: 32px;
+}
+.driver-rating-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.driver-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    font-size: 48px;
+}
+.driver-class {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+.top-rated {
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    background-color: #F28638;
+    border-radius: 4px;
+    cursor: default;
+}
+.top-rated-text {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+.driver-availability-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F1D2B;
+    text-align: center;
+    border-radius: 10px;
+    padding: 32px;
+}
+.driver-availability-container-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.driver-availability-additional {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    
+    font-size: 12px;
+}
+.completed-deliveries-title {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+.completed-deliveries-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+.driver-info-report-actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    border-radius: 10px;
+}
+.driver-info-report-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    border-radius: 10px;
+}
+.driver-info-cusname,
+.driver-info-date,
+.driver-info-location,
+.driver-info-payment,
+.driver-info-rating {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.driver-info-cusname {
+    width: 30%;
+}
+
+.driver-info-date {
+    width: 20%;
+    text-align: center;
+}
+
+.driver-info-location {
+    width: 20%;
+    text-align: center;
+}
+
+.driver-info-payment {
+    width: 15%;
+    text-align: center;
+}
+.driver-info-rating {
+    width: 15%;
+    text-align: center;
+}
