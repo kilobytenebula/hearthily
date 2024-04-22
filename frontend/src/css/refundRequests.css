@@ -1,0 +1,93 @@
+.allRefundsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+
+}
+.allRefundsContainer .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.allRefundsContainer .refundRequestTitle{
+    font-size: 24px;
+    font-weight: 600;
+}
+.refundSearchBar input[type="search"] {
+    padding: 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+    margin-right: 5px; /* Add some space between input and button */
+}
+.refundSearchBar button {
+    padding: 8px 12px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.refundsReqList{
+    display: flex;
+    flex-wrap:wrap ;
+    justify-content: space-between;
+    gap: 32px;
+}
+.refundReq{
+    width: 43%;
+    padding: 32px;
+    background-color: var(--bg-200);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 16px;
+    font-size: 20px;
+    height: fit-content;
+}
+.refundReq .title{
+    width: 30%;
+}
+.refundReq .value{
+    width: 70%;
+    text-align: end;
+}
+.des .value{
+    white-space: pre-wrap;
+}
+.refundReq .oid ,.cid, .phone,.reason, .des , .status ,.image{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.accept{
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}
+.decline{
+    padding: 12px 24px;
+    background-color: var(--bg-100);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: 16px;
+}

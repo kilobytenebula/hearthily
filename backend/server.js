@@ -1,36 +1,40 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const dotenv = require("dotenv");
-
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const dotenv = require('dotenv').config();
 const app = express();
-require("dotenv").config();
 
-const PORT = process.env.PORT || 8050;
-
+//defining port numbers
+const PORT = process.env.PORT || 8070;
 app.use(cors());
 app.use(bodyParser.json());
 
-// payment Db connection
-const DB_NAME = "hearthily_db";
+//connecting to the database
 const URL = process.env.MONGODB_URL;
 
-mongoose.connect(URL,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: DB_NAME
-})
+mongoose.connect(URL, {
+    //useCreateIndex: true,
+    //useNewUrlParser: true,
+    //useUnifiedTopology: true,
+    //useFindAndModify: false
+});
+
 
 const connection = mongoose.connection;
+connection.once("open", () => {
+    console.log("MongoDB connection success!");
+});
 
+//importing the routes
+const driverRouter = require('./routes/drivers.js');
+app.use('/driver', driverRouter);
 
-connection.once("open", ()=>{
-    console.log("connected");
+const feedbackRouter = require('./routes/feedbacks.js');
+app.use('/feedback', feedbackRouter);
 
-})
-
-
+const deliveryRouter = require('./routes/deliveries.js');
+app.use('/delivery', deliveryRouter);
 
 const paymentRouter = require("./routes/orderPayments.js")
 app.use("/payment", paymentRouter)
@@ -38,8 +42,8 @@ app.use("/payment", paymentRouter)
 const refundRouter = require("./routes/refunds.js");
 app.use("/refund", refundRouter)
 
-const ordereRouter = require("./routes/orders.js");
-app.use("/order",ordereRouter);
+const orderRouter = require("./routes/orders.js");
+app.use("/order",orderRouter);
 
 const baseRouter = require("./routes/bases.js");
 app.use("/base",baseRouter);
@@ -53,6 +57,7 @@ app.use("/points", loyaltyRouter)
 const userRouteer = require("./routes/user.js");
 app.use("/user", userRouteer);
 
-app.listen(PORT,() => {
-    console.log(`up and running on ${PORT}`)
-})
+//starting the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

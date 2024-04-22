@@ -10,7 +10,6 @@ router.route("/add").post((req,res)=>{
     const date = new Date();
     const payment_method = req.body.payment_method;
     const total_amount = Number(req.body.total_amount);
-    const status = "pending";
 
     const newOrder = new Order({
         base_name,
@@ -19,8 +18,7 @@ router.route("/add").post((req,res)=>{
         qty,
         date,
         payment_method,
-        total_amount,
-        status
+        total_amount
     })
     
     newOrder.save().then(()=>{
@@ -30,28 +28,23 @@ router.route("/add").post((req,res)=>{
     })
 })
 
-router.route("/").get((req,res)=>{
-    Order.find().then((orders)=>{
-        res.json(orders)
-    }).catch((err)=>{
-        console.log(err)
-    })
-})
+router.route('/').get((req, res) => Order.find()
+    .then(orders => res.json(orders))
+    .catch(err => console.log(err))
+);
 
-router.route("/:orderid").get((req, res) => {
-    const selectedOrder = req.params.orderid;
-    Order.find({ _id: selectedOrder })
-        .then((orders) => {
-            res.json(orders);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json({ error: "Internal Server Error" });
-        });
+
+router.route('/:orderId').get(async (req, res) => {
+    let orderId = req.params.orderId;
+
+    const order = await Order.findById(orderId)
+        .then(order => res.status(200).send({ status: "Order fetched", order: order }))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
-router.route("/update/:orderid").put(async(req,res)=>{
-    let orderId = req.params.orderid;
-    const {base_name, portion_name, portion_size, qty, date, payment_method, total_amount} = req.body;
+
+router.route("/update/:orderId").put(async(req,res)=>{
+    let orderId = req.params.orderId;
+    const {base_name, portion_name, portion_size, qty, date, payment_method, total_amount, status} = req.body;
 
     const updateOrder = {
         base_name,
@@ -72,8 +65,8 @@ router.route("/update/:orderid").put(async(req,res)=>{
     })
 })
 
-router.route("/delete/:orderid").delete(async(req,res)=>{
-    let orderId = req.params.orderid;
+router.route("/delete/:orderId").delete(async(req,res)=>{
+    let orderId = req.params.orderId;
 
     await Order.findByIdAndDelete(orderId)
     .then(()=>{
