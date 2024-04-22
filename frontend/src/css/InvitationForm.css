@@ -1,0 +1,97 @@
+.SIR_container{
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    padding: 30px;
+    margin: 20px auto;
+    box-shadow: 0 15px 20px  #1F1D2B;
+    margin-top: 100px;
+    background-color: #1F1D2B;
+    margin-left: 500px;
+    margin-right: 300px;
+}
+
+.SIR_SupName{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EA7C69;
+    margin-bottom: 30px;
+}
+
+.SIR_input-box{
+    display: flex;
+    margin-bottom: 25px;
+    margin-right: 20px;
+}
+.SIR_input-box:first-child{
+    display: flex;
+    margin-top: 25px;
+    margin-right: 20px;
+}
+
+.SIR_input-box label{
+    width: 150px;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 45px;
+    color: white;
+}
+
+.SIR_input-box .text{
+    width: 100%;
+}
+.SIR_input-box .SIR_input{
+    width: 320px;
+    height: 35px;
+    font-size: 19px;
+    border-radius: 5px;
+}
+
+.SIR_input-box .SIR_selecter{
+    position: relative;
+    width: 100%;
+    height: 37px;
+    margin-bottom: 5px;
+    margin-left: 58px;
+}
+
+.SIR_input-box .SIR_selecter select{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 315px;
+    height: 38px;
+    border: 1px solid;
+    padding: 8px 8px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+
+.SIR_input-box .SIR_selecter:before{
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    border: 8px solid;
+    border-color: #1F1D2B transparent transparent transparent;
+    pointer-events: none;
+}
+
+.SIR_button .SIR_btn{
+    width: 80%;
+    padding: 8px 10px;
+    font-size: 20px;
+    border: 0;
+    background: #EA7C69;
+    cursor: pointer;
+    border-radius: 3px;
+    outline: none;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: white;
+}

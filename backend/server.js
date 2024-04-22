@@ -57,6 +57,18 @@ app.use("/points", loyaltyRouter)
 const userRouteer = require("./routes/user.js");
 app.use("/user", userRouteer);
 
+//to access supplier.js file in routes folder
+const supplierRouter  = require("./routes/suppliers.js");
+app.use("/supplier",supplierRouter);
+
+//to access shipment.js file in routes folder
+const shipmentRouter  = require("./routes/shipments.js");
+app.use("/shipment",shipmentRouter);
+
+//to access inviter.js file in routes folder
+const invitedsupplierRouter  = require("./routes/invitedsuppliers.js");
+app.use("/inviter",invitedsupplierRouter);
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

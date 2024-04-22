@@ -1,0 +1,85 @@
+.S_details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-left: 300px;
+    margin-right: 100px;
+    padding: 100px 20px; 
+} 
+.S_details .S_supplier {
+    position: relative;
+    display: grid;
+    min-height: 250px;
+    background: #1F1D2B;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    color: white;
+} 
+.S_details .S_cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.S_details .S_supplier table thead tr {
+    color: white;
+    border-bottom: 1px solid #EA7C69;
+  }
+.S_cardHeader .S_cardName {
+    font-weight: 600;
+    color: white;
+    font-size: 30px;
+}
+.S_cardHeader .S_cardbtn {
+    position: relative;
+    padding: 5px 10px;
+    background: #EA7C69;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}  
+.S_details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.S_details table thead td {
+    font-weight: 600;
+    font-size: 20px;
+}
+.S_details .S_supplier table td {
+    padding: 20px;
+}
+
+#S_delete-icon{
+  margin-right: 7px;
+  
+}
+
+#S_update-icon{
+  color: white;
+  margin-right: 7px;
+}
+
+#S_down-icon{
+  color: white;
+}
+
+
+
+  .details .supplir table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  .details .supplir table tr td:last-child {
+    text-align: end;
+  }
+  .details .supplir table tr td:nth-child(2) {
+    text-align: end;
+  }
+  .details .supplir table tr td:nth-child(3) {
+    text-align: center;
+  }

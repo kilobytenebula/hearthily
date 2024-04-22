@@ -1,0 +1,86 @@
+.S_navigation {
+    position:fixed;
+    width: 125px;
+    height: 100%;
+    background: #1F1D2B;
+    border-left: 10px solid #1F1D2B;
+    transition: 0.5s;  
+} 
+.S_navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+} 
+.S_navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+} 
+.S_navigation ul li img{
+    margin-top: 45px;
+    margin-left: 5px;
+}
+.S_navigation ul li:hover,
+.S_navigation ul li.hovered {
+    background-color: #252836;
+}  
+.S_navigation ul li:nth-child(1) {
+    margin-bottom: 60px;
+    pointer-events: none;
+} 
+.S_navigation ul li:nth-child(6) {
+    margin-bottom: -25px;
+} 
+.S_navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #EA7C69;
+}
+.S_navigation ul li:hover a,
+.S_navigation ul li.hovered a {
+    color: white;
+}  
+.S_navigation ul li a .S_title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 90px;
+    line-height: 75px;
+    text-align: start;
+    white-space: nowrap;   
+}
+
+
+/* --------- curve outside ---------- */
+.S_navigation ul li:hover a::before,
+.S_navigation ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px #252836;
+    pointer-events: none;
+}
+.S_navigation ul li:hover a::after,
+.S_navigation ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px #252836;
+    pointer-events: none;
+}
