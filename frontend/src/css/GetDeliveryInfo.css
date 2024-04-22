@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.delivery-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.delivery-info {
+    display: flex;
+    width: 100%;
+    margin-top: 32px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.delivery-info-container {
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.delivery-header {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 8px;
+    font-weight: 600;
+    justify-content: space-between;
+}
+
+.delivery-id {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.copy-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    font-size: 12px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.copy-container:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+.user-details {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 32px;
+    background-color: #252836;
+}
+
+.loading-text {
+    padding: 16px;
+}
+
+.delivery-info-container-info {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content
+}
+
+.delivery-info-row {
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.delivery-payment-row {
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.delivery-paid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.delivery-payment-info {
+    font-weight: 600;
+}
+
+.address-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F1D2B;
+    width: 35%;
+    border-radius: 10px;
+    padding: 16px;
+}
+.address-info {
+    text-align: center;
+    padding: 8px;
+}
+.action-row {
+    display: flex;
+    justify-content: right;
+    background-color: #252836;
+    padding-top: 16px;
+}
+
+.accept-btn {
+    background-color: #F28638;
+    color: #FFF;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.on-delivery-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.cancel-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #FF7360;
+    background-color: rgba(255, 114, 96, 0.2);
+    cursor: pointer;
+}
+.undo-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #FF7360;
+    background-color: rgba(255, 114, 96, 0.2);
+    cursor: pointer;
+}
+
+.complete-btn {
+    background-color: #F28638;
+    color: #FFF;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}

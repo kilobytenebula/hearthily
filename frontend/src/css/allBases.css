@@ -10,9 +10,7 @@ body{
     margin-left: 10%;
     width: 100%;
     padding: 32px;
-    /* height: 100vh; */
-    height:auto;
-    /* overflow-x: hidden;  */
+    height: 100vh;
 }
 .headerContainer{
     display: flex;

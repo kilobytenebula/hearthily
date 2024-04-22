@@ -1,0 +1,33 @@
+ 
+  /* Dropdown select element */
+  .sort-menu select {
+    padding: 4px 8px;
+    font-size: 16px;
+    border: 1px solid #F4F4F4;
+    background-color: var(--bg-100);
+    color: var(--text-light);
+    border-radius: 5px;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for dropdown select */
+  .sort-menu select:hover {
+    background-color: var(--bg-200);
+  }
+  
+  /* Styling the arrow icon */
+  .sort-menu select::-ms-expand {
+    display: none; /* Hide default arrow icon for IE */
+  }
+  
+  /* Styling options within the dropdown */
+  .sort-menu select option {
+    background-color: var(--bg-100);
+    color: var(--text-light);
+  }
+  
+  /* Hover effect for options within the dropdown */
+  .sort-menu select option:hover {
+    background-color: var(--bg-200);
+  }

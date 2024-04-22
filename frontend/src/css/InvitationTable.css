@@ -1,0 +1,72 @@
+.SI_details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-left: 300px;
+    margin-right: 100px;
+    padding: 100px 20px; 
+} 
+.SI_details .SI_supplier {
+    position: relative;
+    display: grid;
+    min-height: 250px;
+    background: #1F1D2B;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    color: white;
+} 
+.SI_details .SI_cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.SI_details .SI_supplier table thead tr {
+    color: white;
+    border-bottom: 1px solid #EA7C69;
+  }
+.SI_cardHeader .SI_cardName {
+    font-weight: 600;
+    color: white;
+    font-size: 30px;
+}
+.SI_cardHeader .SI_cardbtn {
+    position: relative;
+    padding: 5px 10px;
+    background: #EA7C69;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}  
+.SI_details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.SI_details table thead td {
+    font-weight: 600;
+    font-size: 20px;
+}
+.SI_details .SI_supplier table td {
+    padding: 20px;
+}
+
+#SI_delete-icon{
+  margin-left: 7px; 
+  
+}
+
+#SI_update-icon{
+  color: #1F1D2B;
+  margin-right: 10px;
+}
+
+.pending {
+    color: #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    border-radius: 40px;
+    display: inline-block; 
+    padding: 4px 12px;
+  }

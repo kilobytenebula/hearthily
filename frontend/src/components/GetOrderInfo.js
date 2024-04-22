@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import copy from 'clipboard-copy';
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import "../GetOrderInfo.css";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import "../css/GetOrderInfo.css";
 import AddFeedback from "./AddFeedback";
 import { FaStar } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const copyicon = require('../icons/copyicon.png');
 
 export default function GetOrderInfo() {
@@ -13,6 +16,7 @@ export default function GetOrderInfo() {
   const [copyOrderId, setCopyOrderId] = useState('Copy to clipboard');
   const { orderId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showAddFeedbackForm, setShowAddFeedbackForm] = useState(false);
 
   const navigateToAddFeedback = () => {
@@ -42,7 +46,6 @@ export default function GetOrderInfo() {
   function getSizeClass(size) {
     const sizeMap = {
       F: 'Full',
-      N: 'Regular',
       R: 'Regular'
     };
 
@@ -77,15 +80,28 @@ export default function GetOrderInfo() {
   }
 
   function deleteFeedback(feedbackId) {
+    if (!window.confirm('Are you sure you want to delete this feedback?')) {
+      return;
+    }
     try {
       axios
         .delete(`http://localhost:8070/feedback/${feedbackId}`)
-        .then(res => console.log(res.data))
+        .then(res => {
+          console.log(res.data);
+          // Show toast message
+          toast.success('Feedback deleted successfully!');
+          // Refetch feedback data
+          axios.get(`http://localhost:8070/feedback/${orderId}`)
+            .then(response => {
+              setFeedback(response.data.feedback);
+            })
+            .catch(error => console.log(error));
+        })
         .catch(error => console.log(error));
     } catch (error) {
       console.log(error);
     }
-  }
+  }  
 
   useEffect(() => {
     const fetchOrderAndFeedback = async () => {
@@ -96,7 +112,6 @@ export default function GetOrderInfo() {
         ]);
 
         setOrder(orderResponse.data.order);
-        console.log("Order:",orderResponse.data.order);
         setFeedback(feedbackResponse.data.feedback);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -139,12 +154,23 @@ export default function GetOrderInfo() {
     }
   };
   
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('feedbackSuccess')) {
+      toast.success('Feedback submitted successfully!');
+    }
+
+    if (params.get('feedbackUpdateSuccess')) {
+      toast.success('Feedback updated successfully!');
+    }
+  }, [location.search]);
 
   return (
-    <div className="order-container">
+    <div className="order-info-main">
       <div className="top-bar">
         <div className="container-title-text">Order Details</div>
       </div>
+      <ToastContainer />
       {order._id ? (
         <div className="order-info">
           <div className="order-info-container">

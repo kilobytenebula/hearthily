@@ -1,0 +1,31 @@
+.S_search-container{
+    background-color: #393C49 ;
+    width: 260px;
+    border-radius: 10px;
+    height: 2.5rem;
+    margin-left: 1200px;
+    padding: 0 20px;
+    margin-top: -15px;
+    display: inline-block;  
+    text-align: center;
+    vertical-align: middle;
+}
+
+.S_search-text{
+    background-color: transparent;
+    border: none;
+    height: 2.5rem;
+    margin-left: 12px;
+    font-size: 15px; 
+    color: white;
+}
+
+.S_search-text:focus{
+    outline: none;
+}
+
+#S_search-icon{
+    color: white;
+    margin-bottom: -3px;
+    margin-right: 2px;
+}

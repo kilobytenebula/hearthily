@@ -1,0 +1,133 @@
+body{
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.kitchen-test {
+    width: display;
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.fields-kitchen {
+    margin-top: 32px;
+}
+
+.fields-kitchen ul {
+    font-weight: 600;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.order-container-kitchen {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 8px;
+}
+
+.item-kitchen {
+    background-color: #1F1D2B;
+    border-radius: 10px;
+}
+
+.item-kitchen ul {
+    font-weight: 400;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.item-kitchen a:visited, a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.meal-kitchen, .date-kitchen {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.meal-kitchen {
+    width: 50%;
+}
+
+.date-kitchen {
+    width: 50%;
+    text-align: center;
+}
+
+.loading-orders {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 16px;
+}
+
+.kitchen-action-btns {
+    background-color: #F28638;
+    width: fit-content;
+    color: #FFF;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.parent-container {
+    background-color: #1F1D2B;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.dropdowns-container {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 16px;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dropdown-container select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+.actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 16px;
+}

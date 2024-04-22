@@ -1,0 +1,41 @@
+.S_R_report-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #EA7C69;
+    border-radius: 5px;
+    background-color: #1F1D2B;
+    margin-top: 20px;
+    color: white;
+}
+
+.S_R_details {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.S_R_detail {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.S_R_label {
+    font-weight: bold;
+}
+
+.S_R_value {
+    margin-left: 15px;
+}
+
+.S_R_print-button {
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #EA7C69;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -1,4 +1,3 @@
-
 //Initializing the express router
 const router = require('express').Router();
 
@@ -53,7 +52,7 @@ router.route('/:id').put(async (req, res) => {
     }
 
     await Feedback.findByIdAndUpdate(feedbackId, updateFeedback)
-        .then(() => res.status(200).send({ status: "Feedback updated"}))
+        .then(() => res.status(200).send({ status: "Feedback updated", feedback: updateFeedback }))
         .catch(err => res.status(500).send({ status: "Error with updating data", error: err.message }));
 });
 

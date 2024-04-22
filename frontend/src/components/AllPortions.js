@@ -117,7 +117,6 @@ export default function AllPortions(){
     }
 
 
-
     return(
         <div className="container">
 
