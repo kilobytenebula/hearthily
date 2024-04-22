@@ -2,11 +2,11 @@ const router = require("express").Router();
 let Inventory = require("../models/Inventory");
 
 router.route("/add").post((req,res)=>{
-    const ingrediant = req.body.ingrediant;
-    const qty = Number(req.body.qty);
+    const ingredient = req.body.ingredient;
+    const qty = req.body.qty;
 
     const newInventory = new Inventory({
-        ingrediant,
+        ingredient,
         qty
     })
 
@@ -33,22 +33,27 @@ router.route('/:inventoryId').get(async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route("/update/:inventoryId").put(async(req,res)=>{
-    let inventoryId = req.params.inventoryId;
-    const {ingrediant,qty} = req.body;
+router.route("/update/:inventoryId").put(async (req, res) => {
+    try {
+        let inventoryId = req.params.inventoryId;
+        const { ingredient, qty } = req.body;
 
-    const updateInventory = {
-        ingrediant,
-        qty
-    }
+        const updateInventory = {
+            ingredient,
+            qty
+        };
 
-    const update = await Order.findByIdAndUpdate(inventoryId, updateInventory)
-    .then(()=>{
-        res.status(200).send({status: "Inventory updated", inventory: update})
-    }).catch((err)=>{
+        const update = await Inventory.findByIdAndUpdate(inventoryId, updateInventory, { new: true });
+        if (!update) {
+            return res.status(404).send({ status: "Inventory not found" });
+        }
+
+        return res.status(200).send({ status: "Inventory updated", inventory: update });
+    } catch (err) {
         console.log(err);
-        res.status(500).send({status: "Error with updating data", error: err.message});
-    })
-})
+        return res.status(500).send({ status: "Error with updating data", error: err.message });
+    }
+});
+
 
 module.exports = router;

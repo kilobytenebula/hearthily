@@ -17,6 +17,8 @@ export default function AllPortions(){
     const [selctedSize, setSelectedSize] = useState('');
     let [qty, setQty] = useState(1);
     const [total, setTotal] = useState(baseDetails.reg_price);
+    const customerId = "609c9c918c27e038b0e27b2d";
+    const status = "Pending";
     // const [orderId, setOrderId] = useState('');
 
 
@@ -99,13 +101,13 @@ export default function AllPortions(){
         const portionNames = selectedPortion.map(portion => portion.name);
         
         const newOrder = {
-            customer_id:"ss44",
+            customer_id:customerId,
             base_name: baseDetails.base_name,
             portion_name: portionNames,
             portion_size: selctedSize,
             qty: qty,
             total_amount: total,
-            status: "preparing"
+            status: status
         };
         axios.post("http://localhost:8070/order/add",newOrder).then(()=>{
             alert("Order Added")

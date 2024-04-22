@@ -46,29 +46,49 @@ router.route('/:orderId').get(async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route("/update/:orderid").put(async(req,res)=>{
-    let orderId = req.params.orderid;
-    const {customer_id,base_name, portion_name, portion_size, qty, date, total_amount,status} = req.body;
+router.route('/customer/:customerId').get(async (req, res) => {
+    let customerId = req.params.customerId;
 
-    const updateOrder = {
-        customer_id,
-        base_name,
-        portion_name,
-        portion_size,
-        qty,
-        date,
-        total_amount,
-        status
+    try {
+        const orders = await Order.find({ customer_id: customerId });
+        if (!orders || orders.length === 0) {
+            return res.status(404).json({ message: 'No orders found for the customer' });
+        }
+        return res.status(200).json({ status: "Orders fetched", orders: orders });
+    } catch (err) {
+        console.error('Error fetching orders:', err);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
+});
 
-    const update = await Order.findByIdAndUpdate(orderId, updateOrder)
-    .then(()=>{
-        res.status(200).send({status: "Order updated", order: update})
-    }).catch((err)=>{
+router.route("/update/:orderid").put(async (req, res) => {
+    try {
+        let orderId = req.params.orderid;
+        const { customer_id, base_name, portion_name, portion_size, qty, date, total_amount, status } = req.body;
+
+        const updateOrder = {
+            customer_id,
+            base_name,
+            portion_name,
+            portion_size,
+            qty,
+            date,
+            total_amount,
+            status
+        };
+
+        const update = await Order.findByIdAndUpdate(orderId, updateOrder);
+        if (!update) {
+            return res.status(404).send({ status: "Order not found" });
+        }
+
+        return res.status(200).send({ status: "Order updated", order: update });
+    } catch (err) {
         console.log(err);
-        res.status(500).send({status: "Error with updating data", error: err.message});
-    })
-})
+        return res.status(500).send({ status: "Error with updating data", error: err.message });
+    }
+});
+
 
 router.route("/delete/:orderid").delete(async(req,res)=>{
     let orderId = req.params.orderid;

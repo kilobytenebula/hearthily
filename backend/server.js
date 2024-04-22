@@ -37,6 +37,9 @@ app.use("/order",ordereRouter);
 const feedbackRouter = require('./routes/feedbacks.js');
 app.use('/feedback', feedbackRouter);
 
+const inventoryRouter = require("./routes/inventories.js");
+app.use("/inventory",inventoryRouter);
+
 app.listen(PORT, () =>{
     console.log(`Server is up and running on port number: ${PORT}`)
 })

@@ -71,7 +71,7 @@ body{
     text-align: center;
     text-decoration: none;
 }
-.meal, .date, .price, .status{
+.meal, .date, .price, .status, .orderid, .qty, .size{
     padding: 16px;
     display: flex;
     flex-direction: column;

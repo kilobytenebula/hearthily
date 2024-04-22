@@ -6,6 +6,9 @@ import Navbar from './components/NavBar';
 import Checkout from './components/Checkout';
 import GetOrderInfo from './components/GetOrderInfo';
 import GetOrder from './components/GetOrder';
+import GetInventory from './components/GetInventory';
+import UpdateInventory from './components/UpdateInventory';
+import OrderHistory from './components/OrderHistory';
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
           <Route path="/allBases" element={<AllBases/>}/>
           <Route path="/order-history" element={<GetOrder />} />
           <Route path="/order-history/order/:orderId" element={<GetOrderInfo />} />
+          <Route path="/inventory-record" element={<GetInventory/>} />
+          <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
+          <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
         </Routes>
       </div>
     </Router>
