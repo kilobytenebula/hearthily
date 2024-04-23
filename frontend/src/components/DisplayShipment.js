@@ -1,5 +1,4 @@
 import React from "react";
-import Menu from "./Menu";
 import "../css/DisplayShipment.css";
 import ShipmentTable from "./ShipmentTable";
 
@@ -11,7 +10,6 @@ function DispalyShipment() {
   
     return (
       <div className="S_container">
-        <Menu />
         <div className="SS_title">
           <span>Shipment</span>
           <span className="date">{formattedDate}</span>

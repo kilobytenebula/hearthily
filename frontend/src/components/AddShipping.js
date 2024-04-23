@@ -1,5 +1,4 @@
 import React from "react";
-import Menu2 from "./Menu";
 import "../css/AllSupplier.css";
 import OrderForm from "./OrderForm";
 import DocumentTitle from "./DocumentTitle";
@@ -13,7 +12,6 @@ function AddShipping() {
 
     return (
       <div className="S_container">
-        <Menu2 />
         <div className="SS_title">
           <span>Make a Shipping</span>
           <span className="date">{formattedDate}</span>

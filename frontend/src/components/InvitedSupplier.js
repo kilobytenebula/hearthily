@@ -1,6 +1,5 @@
 import React from "react";
 import "../css/InvitedSupplier.css";
-import Menu2 from "./Menu";
 import InvitationTable from "./InvitationTable";
 
 
@@ -11,7 +10,6 @@ function InvitedSupplier() {
   
     return (
       <div className="S_container">
-        <Menu2/>
         <div className="SS_title">
           <span>Invitation to supplier</span>
           <span className="date">{formattedDate}</span>

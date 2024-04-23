@@ -98,7 +98,6 @@ function App() {
           <Route path='*' element={<NotFound />} />
 
           {/* osh */}
-          <Route path='/supplier-dashboard' exact Component={Dashboard} />
           <Route path='/add' exact Component={RegisterForm} />
           <Route path='/display' exact Component={AllSupplier} />
           <Route path='/update/:id' exact Component={UpdateSupplier} />

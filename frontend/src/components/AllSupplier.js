@@ -1,5 +1,4 @@
 import React from "react";
-import Menu from "./Menu";
 import SupplierTable from "./SupplierTable";
 import "../css/AllSupplier.css";
 
@@ -10,7 +9,6 @@ function AllSupplier() {
   
     return (
       <div className="S_container">
-        <Menu />
         <div className="SS_title">
           <span>Suppliers</span>
           <span className="date">{formattedDate}</span>
