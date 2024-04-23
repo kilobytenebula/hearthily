@@ -1,4 +1,4 @@
-import yup from 'yup';
+const yup = require('yup');
 
 const roleType = ['kitchen', 'system_admin', 'user', 'delivery_driver'];
 const genderType = ['male', 'female'];
@@ -28,4 +28,4 @@ class EmpYup {
     });
 }
 
-export default new EmpYup();
+module.exports = new EmpYup();

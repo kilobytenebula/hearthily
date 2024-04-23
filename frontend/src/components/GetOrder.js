@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../css/GetOrder.css';
+import searchIcon from '../icons/search.png';
+import { useAuth } from '../Services/Auth/AuthContext';
 
 export default function GetOrder() {
   const [order, setOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [records, setRecords] = useState([]);
-  const customerId = "609c9c918c27e038b0e27b2d"; 
+  const { userId } = useAuth();
 
   function getStatusClass(status) {
     const statusMap = {
@@ -26,7 +28,8 @@ export default function GetOrder() {
     const fetchOrder = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:8070/order/customer/${customerId}`);
+        console.log("ID", userId);
+        const response = await axios.get(`http://localhost:3500/order/customer/${userId}`);
         setOrder(response.data.orders);
         setRecords(response.data.orders);
         console.log("Orders",response.data.orders);
@@ -55,7 +58,10 @@ export default function GetOrder() {
       <div className="top-bar">
         <div className="container-title-text">Order History</div>
         <div className="search-container">
-          <input type="text" className="search" placeholder='Search..' onChange={Filter} />
+        <div className="search-icon">
+            <img src={searchIcon} alt="search" />
+          </div>
+          <input type="text" className="search" placeholder='Search by meal, amount, or status' onChange={Filter} />
         </div>
       </div>
       {isLoading ? (
@@ -89,7 +95,7 @@ export default function GetOrder() {
                 </div>
               ))
             ) : (
-              <div>No orders found.</div>
+              <div className="not-available">No available orders. :(</div>
             )}
           </div>
         </div>

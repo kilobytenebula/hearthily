@@ -1,13 +1,11 @@
 import React from "react";
-import "../pages/SupplierDashboard.css";
-import Menu from "../components/Menu";
-import Search from "../components/Search";
+import "../css/SupplierDashboard.css";
+import Search from "./Search";
 
 function Dashboard(){
 
     return(
         <div className="S_container">
-            <Menu/>
             <div className="SS_title">
                 <span>Suppliers</span>
             </div>

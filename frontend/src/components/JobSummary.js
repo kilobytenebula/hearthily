@@ -5,6 +5,7 @@ import "../css/GetDelivery.css";
 import "../css/JobSummary.css";
 import searchIcon from "../icons/search.png";
 import JobSummaryReport from "./JobSummaryReport";
+import DocumentTitle from "./DocumentTitle";
 
 export default function JobSummary() {
   const [jobsArray, setJobsArray] = useState([]);
@@ -13,10 +14,12 @@ export default function JobSummary() {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
 
+  DocumentTitle("Job Summary");
+
   useEffect(() => {
     const fetchDeliveries = async () => {
       try {
-        const response = await axios.get("http://localhost:8070/delivery/");
+        const response = await axios.get("http://localhost:3500/delivery/");
         const deliveries = response.data;
         const jobsWithUserData = await Promise.all(
           deliveries.map(async (delivery) => {
@@ -26,15 +29,15 @@ export default function JobSummary() {
             let custLocation = "Unknown";
             if (delivery.driverId) {
               const driverResponse = await axios.get(
-                `http://localhost:8070/driver/${delivery.driverId}`
+                `http://localhost:3500/driver/${delivery.driverId}`
               );
               const driverData = driverResponse.data.driver;
               const driverUserResponse = await axios.get(
-                `http://localhost:8070/user/${driverData.userId}`
+                `http://localhost:3500/user/${driverData.userId}`
               );
               const tempuserId = "6623f8eb4e06c62c5ff68977";
               const userResponse = await axios.get(
-                `http://localhost:8070/user/${tempuserId}`
+                `http://localhost:3500/user/${tempuserId}`
               );
               const driverUserData = driverUserResponse.data.user;
               const userData = userResponse.data.user;
@@ -52,7 +55,6 @@ export default function JobSummary() {
             };
           })
         );
-        console.log(jobsWithUserData);
         setJobsArray(jobsWithUserData);
         setIsLoading(false);
       } catch (error) {

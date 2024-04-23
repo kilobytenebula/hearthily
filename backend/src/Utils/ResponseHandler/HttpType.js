@@ -85,5 +85,5 @@ class HttpType {
       return message ? message.code : "Unknown Code"
     }
   }
-  
-  export default HttpType ;
+
+ module.exports = HttpType;

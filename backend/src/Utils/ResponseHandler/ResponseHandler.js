@@ -1,4 +1,4 @@
-import HttpType from "./HttpType.js";
+const HttpType = require('./HttpType')
 
 const response = (res, code, data) => {
     const status = HttpType.getStatus(code)
@@ -9,4 +9,5 @@ const response = (res, code, data) => {
     }
     return res.status(code).json(payLoad);
 }
-export default response
+
+module.exports = response;

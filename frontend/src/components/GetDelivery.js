@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/GetDelivery.css';
+import DocumentTitle from "./DocumentTitle";
 
 export default function GetDelivery() {
   const [deliveryArray, setDeliveryArray] = useState([]);
@@ -11,9 +12,11 @@ export default function GetDelivery() {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
 
+  DocumentTitle("Available Jobs");
+
   useEffect(() => {
     // Fetch delivery data
-    axios.get('http://localhost:8070/delivery/')
+    axios.get('http://localhost:3500/delivery/')
       .then(response => {
         const deliveryData = response.data.filter(delivery => delivery.deliveryStatus === 'of-delivery'); 
         setDeliveryArray(deliveryData);
@@ -34,12 +37,12 @@ export default function GetDelivery() {
       for (const deliveryItem of deliveryArray) {
         try {
           // Fetch order data
-          const orderResponse = await axios.get(`http://localhost:8070/order/${deliveryItem.orderId}`);
+          const orderResponse = await axios.get(`http://localhost:3500/order/${deliveryItem.orderId}`);
           const orderData = orderResponse.data.order;
           orders.push(orderData);
 
           // Fetch user data
-          const userResponse = await axios.get(`http://localhost:8070/user/${deliveryItem.userId}`);
+          const userResponse = await axios.get(`http://localhost:3500/user/${deliveryItem.userId}`);
           const userData = userResponse.data.user;
           users.push(userData);
         } catch (error) {

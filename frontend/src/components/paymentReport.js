@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../paymentReports.css';
+import '../css/paymentReports.css';
 import { CSVLink } from 'react-csv';
 import jsPDF from 'jspdf';
 
@@ -33,7 +33,7 @@ export default function PaymentReports(){
     useEffect(()=>{
 
         function getAllPayments(){
-            axios.get("http://localhost:8050/payment/")
+            axios.get("http://localhost:3500/payment/")
             .then((res)=>{
                 setAllPayments(res.data);
             }).catch((err)=>{
@@ -56,7 +56,7 @@ export default function PaymentReports(){
     useEffect(()=>{
 
         function getAllRefunds(){
-            axios.get("http://localhost:8050/refund/")
+            axios.get("http://localhost:3500/refund/")
             .then((res)=>{
                 setAllRefunds(res.data);
             }).catch((err)=>{
@@ -117,7 +117,7 @@ export default function PaymentReports(){
     };
     const updatePayment = async (orderId, isSuccess) => {
         try {
-            const response = await axios.put(`http://localhost:8050/payment/update/${orderId}`, { isSuccess });
+            const response = await axios.put(`http://localhost:3500/payment/update/${orderId}`, { isSuccess });
             console.log(response.data); // Log the response from the API
         } catch (error) {
             console.error('Error updating payment:', error);

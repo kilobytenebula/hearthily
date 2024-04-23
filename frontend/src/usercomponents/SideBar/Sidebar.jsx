@@ -2,8 +2,6 @@ import React from 'react'
 import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import Authenticate from '../../Store/Authenticate'
 import Toaster from '../../Utils/Constants/Toaster'
-import LocalStore from '../../Store/LocalStore'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
 
 export default function Sidebar() {
     const location = useLocation()

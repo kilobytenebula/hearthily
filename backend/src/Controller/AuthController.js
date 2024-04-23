@@ -1,11 +1,10 @@
-import User from "../Modal/User.js";
-import response from "../Utils/ResponseHandler/ResponseHandler.js";
-import ResTypes from "../Utils/ResponseHandler/ResTypes.js";
-import bcrypt from "bcryptjs";
-import generateToken from "../Utils/Token/generateToken.js";
-import EmailSender from "../Utils/EmailSender/EmailSender.js";
-import passwordReset from "../Utils/EmailSender/RePasswordTemp.js";
-
+const User = require("../Modal/User.js");
+const response = require("../Utils/ResponseHandler/ResponseHandler.js");
+const ResTypes = require("../Utils/ResponseHandler/ResTypes.js");
+const bcrypt = require("bcryptjs");
+const generateToken = require("../Utils/Token/generateToken.js");
+const EmailSender = require("../Utils/EmailSender/EmailSender.js");
+const passwordReset = require("../Utils/EmailSender/RePasswordTemp.js");
 
 class AuthController {
 
@@ -27,24 +26,24 @@ class AuthController {
     }
     //create SignIn
     signIn = async (req, res) => {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
 
-        try {
-            const user = await User.findOne({ email })
-            if (!user) {
-                return response(res, 404, ResTypes.errors.no_user);
-            }
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return response(res, 403, ResTypes.errors.invalid_password)
-            }
-            const token = generateToken(user)
-            return response(res, 201, { email, token, role: user.role, ...ResTypes.successMessages.login_successful })
-        } catch (error) {
-            console.error(error)
-            return response(res, 500, error)
+    try {
+        const user = await User.findOne({ email })
+        if (!user) {
+            return response(res, 404, ResTypes.errors.no_user);
         }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return response(res, 403, ResTypes.errors.invalid_password)
+        }
+        const token = generateToken(user);
+        return response(res, 201, { id: user._id, email, token, role: user.role, ...ResTypes.successMessages.login_successful });
+    } catch (error) {
+        console.error(error)
+        return response(res, 500, error)
     }
+}
     // Forgot Password
     forgotPassword = async (req, res) => {
         const { nic, newPassword } = req.body;
@@ -123,4 +122,4 @@ class AuthController {
 
 }
 
-export default AuthController = new AuthController()
+module.exports = new AuthController();

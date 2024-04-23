@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import '../allBases.css'
+import '../css/allBases.css'
 
 
 export default function AllBases(){
@@ -15,7 +15,7 @@ export default function AllBases(){
 
     useEffect(()=>{
         function getBases(){
-            axios.get("http://localhost:8070/base/").then((res)=>{
+            axios.get("http://localhost:3500/base/").then((res)=>{
                 setBases(res.data);
                 setRecords(res.data);
                 setDefaultBases(res.data.filter(base => base.category === selectedCategory));

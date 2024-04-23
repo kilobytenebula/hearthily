@@ -18,7 +18,7 @@ export default function UpdateFeedback() {
     const fetchFeedback = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:8070/feedback/${orderId}`);
+        const response = await axios.get(`http://localhost:3500/feedback/${orderId}`);
         const feedbackData = response.data; 
 
         setRating(feedbackData.feedback.rating);
@@ -65,7 +65,7 @@ export default function UpdateFeedback() {
     }
 
     try {
-      await axios.put(`http://localhost:8070/feedback/${feedbackId}`, {
+      await axios.put(`http://localhost:3500/feedback/${feedbackId}`, {
         orderId,
         rating,
         comment
