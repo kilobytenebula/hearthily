@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
-import '../allPayments.css';
+import '../css/allPayments.css';
 
 export default function AllPayments() {
     const [payments, setPayments] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../UpdateInventory.css';
+import '../css/UpdateInventory.css';
 
 export default function UpdateInventory() {
     const { inventoryId } = useParams();

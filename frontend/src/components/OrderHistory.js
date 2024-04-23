@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {CSVLink} from 'react-csv';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import '../GetOrder.css';
+import '../css/GetOrder.css';
 
 
 export default function GetOrder() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/InvitationForm.css";
+import "../css/InvitationForm.css";
 import axios from "axios";
 
 function InvitationForm() {

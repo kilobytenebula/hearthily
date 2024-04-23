@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "../style/UpdateOrder.css";
+import "../css/UpdateOrder.css";
 
 function UpdateOrder() {
     const { id } = useParams()

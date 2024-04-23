@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../paymentReports.css';
+import '../css/paymentReports.css';
 import { CSVLink } from 'react-csv';
 import jsPDF from 'jspdf';
 

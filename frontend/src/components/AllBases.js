@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import '../allBases.css'
+import '../css/allBases.css'
 
 
 export default function AllBases(){

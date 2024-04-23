@@ -1,5 +1,5 @@
 import React from 'react';
-import '../navBar.css';
+import '../css/navbar.css';
 import { Link } from 'react-router-dom';
 const home = require('../icons/home.png');
 const orderHistory = require('../icons/orderHistory.png');

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "../style/SupplierTable.css";
+import "../css/SupplierTable.css";
 import { AiFillDelete, AiFillEdit, AiOutlineDownload } from "react-icons/ai";
 import axios from "axios";// to get data from database
 import { Link } from "react-router-dom";

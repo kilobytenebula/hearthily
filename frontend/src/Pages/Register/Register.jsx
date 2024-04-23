@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { NavLink, useNavigate, Navigate } from 'react-router-dom'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import AuthYup from '../../Validation/Auth/AuthYup';
 import AuthService from '../../Services/Auth/AuthService';
 import ResponseHandler from '../../Utils/Constants/ResponseHandler';
 import Toaster from '../../Utils/Constants/Toaster';
-import bg from "../../../public/assets/images/backgrounds/bglogs.jpeg"
 
 export default function Register() {
     const [loading, setLoading] = useState(false)

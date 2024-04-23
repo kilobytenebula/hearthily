@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/SupplierDashboard.css";
+import "../css/SupplierDashboard.css";
 import Menu from "./Menu";
 import Search from "./Search";
 

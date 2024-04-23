@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from "react";
-import "../style/OrderForm.css";
+import "../css/OrderForm.css";
 import axios from "axios";
 
 function OrderForm(){

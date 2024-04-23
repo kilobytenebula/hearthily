@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../Components/Header/Header'
-import Sidebar from '../Components/SideBar/Sidebar'
+import Header from '../usercomponents/Header/Header'
+import Sidebar from '../usercomponents/SideBar/Sidebar'
 import LocalStore from '../Store/LocalStore'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 

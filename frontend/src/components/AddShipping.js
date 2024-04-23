@@ -1,6 +1,6 @@
 import React from "react";
 import Menu2 from "./Menu";
-import "../pages/AllSupplier.css";
+import "../css/AllSupplier.css";
 import OrderForm from "./OrderForm";
 
 function AddShipping() {

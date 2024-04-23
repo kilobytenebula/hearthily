@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../style/InvitationTable.css";
+import "../css/InvitationTable.css";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import axios from "axios";// to get data from database
 import Search from "../components/Search";

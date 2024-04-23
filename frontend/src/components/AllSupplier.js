@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "./Menu";
 import SupplierTable from "./SupplierTable";
-import "../pages/AllSupplier.css";
+import "../css/AllSupplier.css";
 
 function AllSupplier() {
     const today = new Date(); // Get current date

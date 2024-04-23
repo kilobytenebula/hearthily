@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import "../pages/DisplayShipment.css";
+import "../css/DisplayShipment.css";
 import ShipmentTable from "./ShipmentTable";
 
 

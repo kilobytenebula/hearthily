@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import axios from "axios";
-import "../style/SupplierReport.css";
+import "../css/SupplierReport.css";
 
 function SupplierReport() {
     const { id } = useParams();

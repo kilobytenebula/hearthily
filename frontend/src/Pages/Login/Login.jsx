@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate, Navigate, Link } from 'react-router-dom'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
-import bg from "../../../public/assets/images/backgrounds/bglogs.jpeg"
 import AuthService from '../../Services/Auth/AuthService'
 import Toaster from '../../Utils/Constants/Toaster'
 import { useFormik } from 'formik'
-import ResponseHandler from '../../Utils/Constants/ResponseHandler'
 import AuthYup from '../../Validation/Auth/AuthYup'
 import LocalStore from '../../Store/LocalStore'
 

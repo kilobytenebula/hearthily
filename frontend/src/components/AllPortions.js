@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import '../potions.css'
+import '../css/potions.css'
 
 export default function AllPortions(){
     const [portions, setPortions] = useState([]);

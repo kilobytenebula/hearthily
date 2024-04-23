@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../style/ShipmentTable.css";
+import "../css/ShipmentTable.css";
 import { AiFillDelete, AiFillEdit, AiFillEye, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";

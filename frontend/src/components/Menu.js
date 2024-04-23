@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/Menu.css";
+import "../css/Menu.css";
 import { Link } from "react-router-dom";
 const logo = require('../icons/logo.png');
 

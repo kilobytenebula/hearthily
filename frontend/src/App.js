@@ -55,7 +55,7 @@ function App() {
         <ToastContainer />
         <Routes>
           {/* rash */}
-          <Route exact path="/" element={<AllBases/>}/>
+          <Route exact path="/order" element={<AllBases/>}/>
           <Route exact path='/checkout/:baseName/:basePrice/:selectedPortions/:total' element={<Checkout/>}/>
           <Route exact path='/refunds' element={<AllRefunds/>}/>
           <Route path="/all-portions/:baseId" element={<AllPortions/>}/>
@@ -79,39 +79,39 @@ function App() {
 
           {/* ash */}
           <Route path='/' element={<Login />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgotPassword' element={<ForgotPassword />} />
-        <Route path='/changePassword' element={<ChangePassword />} />
-        <Route path='/resetPassword' element={<ResetByEmail />} />
-        <Route path='/main' element={<Main />} >
-          <Route index element={ <UserStack />} />
-          <Route path='user' element={<UserStack />} >
-            <Route index element={<Home/>}/>
-            <Route path='home' element={<Home/>}/>
-            <Route path='empEdit' element={<EmpProfile/>}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route path='/changePassword' element={<ChangePassword />} />
+          <Route path='/resetPassword' element={<ResetByEmail />} />
+          <Route path='/main' element={<Main />} >
+            <Route index element={ <UserStack />} />
+            <Route path='user' element={<UserStack />} >
+              <Route index element={<Home/>}/>
+              <Route path='home' element={<Home/>}/>
+              <Route path='empEdit' element={<EmpProfile/>}/>
+            </Route>
           </Route>
-        </Route>
-        <Route path='/notallowed' element={<NotAuthorized />} />
-        <Route path='*' element={<NotFound />} />
+          <Route path='/notallowed' element={<NotAuthorized />} />
+          <Route path='*' element={<NotFound />} />
 
-        {/* osh */}
-        <Route path='/' exact Component={Dashboard} />
-        <Route path='/add' exact Component={RegisterForm} />
-        <Route path='/display' exact Component={AllSupplier} />
-        <Route path='/update/:id' exact Component={UpdateSupplier} />
-        <Route path='/display/:id' exact Component={SupplierReport} />
-        <Route path='/invite' exact Component={InvitedSupplier} />
-        <Route path='/shipment' exact Component={AddShipping} />
-        <Route path='/displays' exact Component={DispalyShipment} />
-        <Route path='/displays/:id' exact Component={SendOrder} />
-        <Route path='/updates/:id' exact Component={UpdateOrder} />
-          
-        {/* thej */}
-        <Route path="/inventory-record" element={<GetInventory/>} />
-        <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
-        <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
-        </Routes>
+          {/* osh */}
+          <Route path='/supplier-dashboard' exact Component={Dashboard} />
+          <Route path='/add' exact Component={RegisterForm} />
+          <Route path='/display' exact Component={AllSupplier} />
+          <Route path='/update/:id' exact Component={UpdateSupplier} />
+          <Route path='/display/:id' exact Component={SupplierReport} />
+          <Route path='/invite' exact Component={InvitedSupplier} />
+          <Route path='/shipment' exact Component={AddShipping} />
+          <Route path='/displays' exact Component={DispalyShipment} />
+          <Route path='/displays/:id' exact Component={SendOrder} />
+          <Route path='/updates/:id' exact Component={UpdateOrder} />
+            
+          {/* thej */}
+          <Route path="/inventory-record" element={<GetInventory/>} />
+          <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
+          <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
+          </Routes>
       </div>
     </Router>
   );

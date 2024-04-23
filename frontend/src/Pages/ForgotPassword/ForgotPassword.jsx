@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import AuthYup from '../../Validation/Auth/AuthYup'
 import AuthService from '../../Services/Auth/AuthService'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
 import Toaster from '../../Utils/Constants/Toaster'
-import ResponseHandler from '../../Utils/Constants/ResponseHandler'
-import bg from "../../../public/assets/images/backgrounds/bglogs.jpeg"
+import bg from "../../images/backgrounds/bglogs.jpeg"
 
 export default function ForgotPassword() {
     const [loading, setLoading] = useState(false)

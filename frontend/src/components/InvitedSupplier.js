@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/InvitedSupplier.css";
+import "../css/InvitedSupplier.css";
 import Menu2 from "./Menu";
 import InvitationTable from "./InvitationTable";
 

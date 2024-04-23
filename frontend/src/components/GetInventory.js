@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import '../GetOrder.css';
+import '../css/GetOrder.css';
 
 export default function GetInventory(){
     const [inventory, setInventory] = useState([]);
