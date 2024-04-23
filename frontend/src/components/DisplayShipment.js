@@ -1,7 +1,7 @@
 import React from "react";
-import Menu from "../components/Menu";
+import Menu from "./Menu";
 import "../pages/DisplayShipment.css";
-import ShipmentTable from "../components/ShipmentTable";
+import ShipmentTable from "./ShipmentTable";
 
 
 function DispalyShipment() {

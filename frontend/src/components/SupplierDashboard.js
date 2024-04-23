@@ -1,7 +1,7 @@
 import React from "react";
 import "../pages/SupplierDashboard.css";
-import Menu from "../components/Menu";
-import Search from "../components/Search";
+import Menu from "./Menu";
+import Search from "./Search";
 
 function Dashboard(){
 

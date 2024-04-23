@@ -1,23 +1,23 @@
 import React from "react";
-import Menu from "../components/Menu";
-import SupplierTable from "../components/SupplierTable";
+import Menu2 from "./Menu";
 import "../pages/AllSupplier.css";
+import OrderForm from "./OrderForm";
 
-function AllSupplier() {
+function AddShipping() {
     const today = new Date(); // Get current date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString(undefined, options); // Format date as Monday, January 1, 2023
   
     return (
       <div className="S_container">
-        <Menu />
+        <Menu2 />
         <div className="SS_title">
-          <span>Suppliers</span>
+          <span>Make a Shipping</span>
           <span className="date">{formattedDate}</span>
         </div>
-        <SupplierTable />
+        <OrderForm/>
       </div>
     );
   }
 
-export default AllSupplier;
+export default AddShipping;

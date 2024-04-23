@@ -1,7 +1,7 @@
 import React from "react";
 import "../pages/InvitedSupplier.css";
-import Menu2 from "../components/Menu";
-import InvitationTable from "../components/InvitationTable";
+import Menu2 from "./Menu";
+import InvitationTable from "./InvitationTable";
 
 
 function InvitedSupplier() {
