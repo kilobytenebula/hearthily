@@ -4,6 +4,7 @@ import "../css/GetDriverInfo.css";
 import searchIcon from "../icons/search.png";
 import badge from "../icons/badge.png";
 import DriverInfoReport from "./DriverInfoReport";
+import DocumentTitle from "./DocumentTitle";
 
 export default function GetDriverInfo() {
   const [driver, setDriver] = useState(null);
@@ -16,11 +17,13 @@ export default function GetDriverInfo() {
   const [filteredDelivery, setFilteredDelivery] = useState([]);
   const [sortBy, setSortBy] = useState("date");
 
+  DocumentTitle("Driver Profile");
+
   useEffect(() => {
     async function fetchData() {
       try {
         const driverResponse = await fetch(
-          `http://localhost:8070/driver/${driverId}`
+          `http://localhost:3500/driver/${driverId}`
         );
         const driverData = await driverResponse.json();
         const userData = await fetchUserData(driverData.driver.userId);
@@ -38,7 +41,7 @@ export default function GetDriverInfo() {
         setDriver(combinedData);
 
         const deliveryResponse = await fetch(
-          `http://localhost:8070/delivery/driver/${driverId}`
+          `http://localhost:3500/delivery/driver/${driverId}`
         );
         const deliveryData = await deliveryResponse.json();
         const lastCompletedDelivery = deliveryData.lastCompletedDelivery;
@@ -75,7 +78,7 @@ export default function GetDriverInfo() {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8070/user/${userId}`);
+      const response = await fetch(`http://localhost:3500/user/${userId}`);
       const userData = await response.json();
       return userData.user;
     } catch (error) {

@@ -5,6 +5,7 @@ import {CSVLink} from 'react-csv';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import '../css/GetOrder.css';
+import DocumentTitle from './DocumentTitle';
 
 
 export default function GetOrder() {
@@ -12,6 +13,8 @@ export default function GetOrder() {
   const [isLoading, setIsLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+
+  DocumentTitle("My Orders");
 
   function getStatusClass(status) {
     const statusMap = {
@@ -28,7 +31,7 @@ export default function GetOrder() {
     const fetchOrder = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('http://localhost:8070/order/');
+        const response = await axios.get('http://localhost:3500/order/');
         setOrder(response.data);
         setRecords(response.data);
       } catch (error) {

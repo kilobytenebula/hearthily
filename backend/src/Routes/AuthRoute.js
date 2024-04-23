@@ -3,7 +3,7 @@ const AuthController = require("../Controller/AuthController");
 const AuthYup = require("../Utils/Validation/AuthYup");
 const validateScehma = require("../Middleware/ValidateSchema");
 
-router.post("/register", validateScehma(AuthYup.registerSchcema), AuthController.signUp)
+router.post("/register", validateScehma(AuthYup.registerSchema), AuthController.signUp)
 router.post("/login", validateScehma(AuthYup.loginSchema), AuthController.signIn)
 router.post("/forgotPassword", validateScehma(AuthYup.forgotPassword), AuthController.forgotPassword)
 

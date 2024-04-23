@@ -27,7 +27,7 @@ const ReqRefund = () => {
             image: { data: image }
 
         }
-        axios.post("http://localhost:8050/refund/add",newRefund).then(()=>{
+        axios.post("http://localhost:3500/refund/add",newRefund).then(()=>{
             alert("Added");
         }).catch((err)=>{
             alert("err");
@@ -40,7 +40,7 @@ const ReqRefund = () => {
         
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8050/payment/get/${orderId}`); 
+                const response = await fetch(`http://localhost:3500/payment/get/${orderId}`); 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }

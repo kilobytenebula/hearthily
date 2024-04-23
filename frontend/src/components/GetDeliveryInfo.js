@@ -4,6 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../css/GetDeliveryInfo.css";
+import DocumentTitle from "./DocumentTitle";
 import copy from "clipboard-copy";
 const copyicon = require("../icons/copyicon.png");
 
@@ -18,6 +19,8 @@ export default function GetDeliveryInfo() {
   const timerRef = useRef(null);
   const driverId = '661bfcaff9b3692a8a15a7f2'
 
+  DocumentTitle("Delivery Details");
+
   const DELIVERY_STATUS = {
     OF_DELIVERY: "of-delivery",
     ON_DELIVERY: "on-delivery",
@@ -28,7 +31,7 @@ export default function GetDeliveryInfo() {
 
   const updateOrder = (orderId, status) => {
     axios
-      .put(`http://localhost:8070/order/update/${orderId}`, { status })
+      .put(`http://localhost:3500/order/update/${orderId}`, { status })
       .then((response) => {
         console.log(`Order status updated to ${status}`);
       })
@@ -39,7 +42,7 @@ export default function GetDeliveryInfo() {
 
   const updateDriver = (driverId, isAvailable) => {
     axios
-      .put(`http://localhost:8070/driver/${driverId}`, { isAvailable })
+      .put(`http://localhost:3500/driver/${driverId}`, { isAvailable })
       .then((response) => {
         console.log(`Driver availability updated to ${isAvailable}`);
       })
@@ -56,7 +59,7 @@ export default function GetDeliveryInfo() {
 
       const updateDeliveryAndFetch = (driverId, deliveryStatus) => {
         axios
-          .put(`http://localhost:8070/delivery/${deliveryId}`, {
+          .put(`http://localhost:3500/delivery/${deliveryId}`, {
             driverId,
             deliveryStatus
           })
@@ -66,7 +69,7 @@ export default function GetDeliveryInfo() {
 
             // Re-fetch delivery details
             axios
-              .get(`http://localhost:8070/delivery/${deliveryId}`)
+              .get(`http://localhost:3500/delivery/${deliveryId}`)
               .then((response) => {
                 setDelivery(response.data.delivery);
               })
@@ -127,7 +130,7 @@ export default function GetDeliveryInfo() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8070/delivery/${deliveryId}`)
+      .get(`http://localhost:3500/delivery/${deliveryId}`)
       .then((response) => {
         const deliveryData = response.data.delivery;
         setDelivery(deliveryData);
@@ -144,7 +147,7 @@ export default function GetDeliveryInfo() {
   useEffect(() => {
     const fetchOrdersAndUsers = async () => {
       axios
-        .get(`http://localhost:8070/order/${delivery.orderId}`)
+        .get(`http://localhost:3500/order/${delivery.orderId}`)
         .then((response) => {
           const orderData = response.data.order;
           setOrder(orderData);
@@ -154,7 +157,7 @@ export default function GetDeliveryInfo() {
         });
   
       axios
-        .get(`http://localhost:8070/user/${delivery.userId}`)
+        .get(`http://localhost:3500/user/${delivery.userId}`)
         .then((response) => {
           const userData = response.data.user;
           setUser(userData);

@@ -26,24 +26,24 @@ class AuthController {
     }
     //create SignIn
     signIn = async (req, res) => {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
 
-        try {
-            const user = await User.findOne({ email })
-            if (!user) {
-                return response(res, 404, ResTypes.errors.no_user);
-            }
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return response(res, 403, ResTypes.errors.invalid_password)
-            }
-            const token = generateToken(user)
-            return response(res, 201, { email, token, role: user.role, ...ResTypes.successMessages.login_successful })
-        } catch (error) {
-            console.error(error)
-            return response(res, 500, error)
+    try {
+        const user = await User.findOne({ email })
+        if (!user) {
+            return response(res, 404, ResTypes.errors.no_user);
         }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return response(res, 403, ResTypes.errors.invalid_password)
+        }
+        const token = generateToken(user);
+        return response(res, 201, { id: user._id, email, token, role: user.role, ...ResTypes.successMessages.login_successful });
+    } catch (error) {
+        console.error(error)
+        return response(res, 500, error)
     }
+}
     // Forgot Password
     forgotPassword = async (req, res) => {
         const { nic, newPassword } = req.body;

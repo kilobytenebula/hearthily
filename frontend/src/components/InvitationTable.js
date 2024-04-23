@@ -13,7 +13,7 @@ function InvitationTable(){
     //display invited suppliers in page
     useEffect(() => {
         function getInviter() {
-            axios.get("http://localhost:8070/inviter/invite").then((res) => {
+            axios.get("http://localhost:3500/inviter/invite").then((res) => {
                 const inviters = res.data.map((inviter) => ({
                     ...inviter,
                     int_date: new Date(inviter.int_date).toLocaleDateString(),
@@ -31,7 +31,7 @@ function InvitationTable(){
         const confirmDelete = window.confirm("Are you sure you want to delete this Inviter?");
         if (confirmDelete) {
           try {
-            await axios.delete(`http://localhost:8070/inviter/delete/${id}`);
+            await axios.delete(`http://localhost:3500/inviter/delete/${id}`);
             setInviters((prevSuppliers) =>
               prevSuppliers.filter((supplier) => supplier._id !== id)
             );

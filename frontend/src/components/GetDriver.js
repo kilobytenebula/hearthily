@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/GetDriver.css";
 import DriverReport from "./DriverReport";
+import DocumentTitle from "./DocumentTitle";
 
 const infoIcon = require("../icons/info.png");
 const searchIcon = require("../icons/search.png");
@@ -15,16 +16,18 @@ export default function GetDriver() {
   const [sortBy, setSortBy] = useState("rating");
   const [availabilityFilter, setAvailabilityFilter] = useState("all");
 
+  DocumentTitle("Driver Perfomance");
+
   useEffect(() => {
     const fetchDriversAndUsers = async () => {
       try {
-        const driversResponse = await fetch("http://localhost:8070/driver/");
+        const driversResponse = await fetch("http://localhost:3500/driver/");
         const driversData = await driversResponse.json();
 
         const usersData = [];
         for (const driver of driversData.drivers) {
           const userResponse = await fetch(
-            `http://localhost:8070/user/${driver.userId}`
+            `http://localhost:3500/user/${driver.userId}`
           );
           const userData = await userResponse.json();
           usersData.push(userData.user);
@@ -128,30 +131,30 @@ export default function GetDriver() {
         </div>
       </div>
       <div className="filter-buttons">
-        <button
+        <div
           className={`filter-btn ${
             availabilityFilter === "all" ? "active-filter" : ""
           }`}
           onClick={() => handleAvailabilityFilter("all")}
         >
           All ({countDeliveries("all")})
-        </button>
-        <button
+        </div>
+        <div
           className={`filter-btn ${
             availabilityFilter === "available" ? "active-filter" : ""
           }`}
           onClick={() => handleAvailabilityFilter("available")}
         >
           Available ({countDeliveries("available")})
-        </button>
-        <button
+        </div>
+        <div
           className={`filter-btn ${
             availabilityFilter === "unavailable" ? "active-filter" : ""
           }`}
           onClick={() => handleAvailabilityFilter("unavailable")}
         >
           Unavailable ({countDeliveries("unavailable")})
-        </button>
+        </div>
       </div>
       <div className="driver-report-actions-wrapper">
         <div className="sort-menu">

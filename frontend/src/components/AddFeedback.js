@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../css/GetOrderInfo.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import DocumentTitle from './DocumentTitle';
 
 export default function GetFeedbackForm() {
     const [rating, setRating] = useState('');
@@ -12,6 +13,8 @@ export default function GetFeedbackForm() {
     const [comment, setComment] = useState('');
     const { orderId } = useParams(); 
     const navigate = useNavigate();
+
+    DocumentTitle("Add Feedback");
 
     const starRating = () => {
         return (
@@ -50,7 +53,7 @@ export default function GetFeedbackForm() {
         }
 
         try {
-            const response = await axios.post(`http://localhost:8070/feedback/add`, {
+            const response = await axios.post(`http://localhost:3500/feedback/add`, {
                 orderId,
                 rating,
                 comment

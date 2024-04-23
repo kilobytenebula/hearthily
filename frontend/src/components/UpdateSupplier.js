@@ -13,7 +13,7 @@ function UpdateSupplier() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8070/supplier/display/${id}`);
+      const response = await axios.get(`http://localhost:3500/supplier/display/${id}`);
       const supplier = response.data.supplier;
 
       setName(supplier.supplier_name);
@@ -39,7 +39,7 @@ function UpdateSupplier() {
       reg_date,
     };
 
-    await axios.put(`http://localhost:8070/supplier/update/${id}`, updatedSupplier).then(()=>{
+    await axios.put(`http://localhost:3500/supplier/update/${id}`, updatedSupplier).then(()=>{
         setName("");
         setCat("");
         setAddress("");

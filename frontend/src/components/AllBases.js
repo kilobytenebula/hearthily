@@ -15,7 +15,7 @@ export default function AllBases(){
 
     useEffect(()=>{
         function getBases(){
-            axios.get("http://localhost:8070/base/").then((res)=>{
+            axios.get("http://localhost:3500/base/").then((res)=>{
                 setBases(res.data);
                 setRecords(res.data);
                 setDefaultBases(res.data.filter(base => base.category === selectedCategory));

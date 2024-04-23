@@ -4,6 +4,7 @@ import axios from "axios";
 import "../css/GetDelivery.css";
 import searchIcon from "../icons/search.png";
 import JobHistoryReport from "./JobHistoryReport";
+import DocumentTitle from "./DocumentTitle";
 
 export default function GetJobHistory() {
   const [jobsArray, setJobsArray] = useState([]);
@@ -12,12 +13,14 @@ export default function GetJobHistory() {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
 
+  DocumentTitle("Job History");
+
   const driverId = "661bfcaff9b3692a8a15a7f2";
 
   useEffect(() => {
     // Fetch delivery data
     axios
-      .get("http://localhost:8070/delivery/")
+      .get("http://localhost:3500/delivery/")
       .then((response) => {
         const jobs = response.data.filter(
           (delivery) =>
@@ -28,7 +31,7 @@ export default function GetJobHistory() {
         // Fetch user data for each job
         Promise.all(
           jobs.map((job) =>
-            axios.get(`http://localhost:8070/user/${job.userId}`)
+            axios.get(`http://localhost:3500/user/${job.userId}`)
           )
         )
           .then((userResponses) => {

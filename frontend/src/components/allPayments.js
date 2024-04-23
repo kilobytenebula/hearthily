@@ -9,7 +9,7 @@ export default function AllPayments() {
 
     useEffect(() => {
         function getPayments() {
-            axios.get(`http://localhost:8050/payment/${customerId}`)
+            axios.get(`http://localhost:3500/payment/${customerId}`)
                 .then((res) => {
                     setPayments(res.data);
                 })
@@ -27,7 +27,7 @@ export default function AllPayments() {
             const mealDetails = {};
             for (const payment of payments) {
                 try {
-                    const response = await axios.get(`http://localhost:8050/order/${payment.orderId}`);
+                    const response = await axios.get(`http://localhost:3500/order/${payment.orderId}`);
                     mealDetails[payment.orderId] = response.data[0].base_name;                ;
                 } catch (error) {
                     console.error("Error fetching meal details:", error);

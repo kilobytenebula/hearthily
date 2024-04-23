@@ -3,6 +3,7 @@ import './css/sort.css';
 import AllPayments from './components/allPayments';
 import NavBAr from './components/navBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './Services/Auth/AuthContext';
 import RefundRequest from './components/reqRefund';
 import AllRefunds from './components/refundRequests'
 import Checkout from './components/checkout';
@@ -51,6 +52,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <AuthProvider>
         <NavBAr/>
         <ToastContainer />
         <Routes>
@@ -112,6 +114,7 @@ function App() {
           <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
           <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
           </Routes>
+        </AuthProvider>
       </div>
     </Router>
   );

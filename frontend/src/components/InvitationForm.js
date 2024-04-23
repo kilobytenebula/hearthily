@@ -17,7 +17,7 @@ function InvitationForm() {
     };
 
     axios
-      .post("http://localhost:8070/inviter/add", newInviter)
+      .post("http://localhost:3500/inviter/add", newInviter)
       .then(() => {
         setIName("");
         setIEmail("");
@@ -49,7 +49,7 @@ function InvitationForm() {
       inviter_name
     };
 
-    axios.post('http://localhost:8070/inviter/sending', emailData)
+    axios.post('http://localhost:3500/inviter/sending', emailData)
       .then((res) => {
         console.log(res.data); // Log the response from the backend
         alert('Email sent successfully');

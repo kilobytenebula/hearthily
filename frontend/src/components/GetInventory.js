@@ -11,7 +11,7 @@ export default function GetInventory(){
         const fetchInventory = async () => {
             setIsLoading(true);
             try{
-                const response = await axios.get('http://localhost:8070/inventory/');
+                const response = await axios.get('http://localhost:3500/inventory/');
                 setInventory(response.data);
             }catch (error) {
                 console.error('Error fetching orders:', error);

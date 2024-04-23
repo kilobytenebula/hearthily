@@ -7,6 +7,7 @@ import AddFeedback from "./AddFeedback";
 import { FaStar } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DocumentTitle from "./DocumentTitle";
 
 const copyicon = require('../icons/copyicon.png');
 
@@ -26,6 +27,8 @@ export default function GetOrderInfo() {
   const navigateToUpdateFeedback = (orderId) => {
     navigate(`/order-history/order/${orderId}/update-feedback/${orderId}`);
   };
+
+  DocumentTitle("Order Details");
 
   function starRating(currentRating) {
     return (

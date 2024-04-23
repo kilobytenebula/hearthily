@@ -15,7 +15,7 @@ export default function UpdateInventory() {
         const fetchInventoryItem = async () => {
             setIsLoading(true);
             try {
-                const response = await axios.get(`http://localhost:8070/inventory/${inventoryId}`);
+                const response = await axios.get(`http://localhost:3500/inventory/${inventoryId}`);
                 const inventoryData = response.data;
 
                 setIngredient(inventoryData.inventory.ingredient);
@@ -39,7 +39,7 @@ export default function UpdateInventory() {
             return;
         }
         try {
-            await axios.put(`http://localhost:8070/inventory/update/${inventoryId}`, {
+            await axios.put(`http://localhost:3500/inventory/update/${inventoryId}`, {
                 ingredient,
                 qty
             });

@@ -3,7 +3,7 @@ const router = require("express").Router();
 let Order = require("../models/Order");
 
 router.route("/add").post((req,res)=>{
-    const customer_id = req.body.customer_id;
+    const customerId = req.body.customerId;
     const base_name = req.body.base_name;
     const portion_name = req.body.portion_name;
     const portion_size = req.body.portion_size;
@@ -13,7 +13,7 @@ router.route("/add").post((req,res)=>{
     const status = req.body.status;
 
     const newOrder = new Order({
-        customer_id,
+        customerId,
         base_name,
         portion_name,
         portion_size,
@@ -50,7 +50,7 @@ router.route('/customer/:customerId').get(async (req, res) => {
     let customerId = req.params.customerId;
 
     try {
-        const orders = await Order.find({ customer_id: customerId });
+        const orders = await Order.find({ customerId: customerId });
         if (!orders || orders.length === 0) {
             return res.status(404).json({ message: 'No orders found for the customer' });
         }

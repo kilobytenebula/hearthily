@@ -11,7 +11,7 @@ function ShipmentTable() {
 
   useEffect(() => {
     // Fetch shipment details from backend when the component mounts
-    axios.get("http://localhost:8070/shipment/displays")
+    axios.get("http://localhost:3500/shipment/displays")
       .then((response) => {
         setShipments(response.data);
       })
@@ -29,7 +29,7 @@ function ShipmentTable() {
   // Function to prompt PDF content
   const promptPDFContent = async (orderId) => {
     try {
-      const response = await axios.get(`http://localhost:8070/shipment/get/${orderId}`, { responseType: 'arraybuffer' });
+      const response = await axios.get(`http://localhost:3500/shipment/get/${orderId}`, { responseType: 'arraybuffer' });
       const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
       const pdfUrl = URL.createObjectURL(pdfBlob);
       window.open(pdfUrl);
@@ -44,7 +44,7 @@ function ShipmentTable() {
     const confirmDelete = window.confirm("Are you sure you want to delete this supplier?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8070/shipment/delete/${id}`);
+        await axios.delete(`http://localhost:3500/shipment/delete/${id}`);
         setShipments((prevShipments) =>
         prevShipments.filter((shipment) => shipment._id !== id)
         );

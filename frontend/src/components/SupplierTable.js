@@ -14,7 +14,7 @@ function SupplierTable(){
     //dispaly suppliers
     useEffect(() => {
         function getSuppliers(){
-           axios.get("http://localhost:8070/supplier/display").then((res) => {
+           axios.get("http://localhost:3500/supplier/display").then((res) => {
                 const formattedSuppliers = res.data.map((supplier) => ({
                 ...supplier,
                 reg_date: new Date(supplier.reg_date).toLocaleDateString(),// Extracting only the date part from the reg_date field
@@ -38,7 +38,7 @@ function SupplierTable(){
         const confirmDelete = window.confirm("Are you sure you want to delete this supplier?");
         if (confirmDelete) {
           try {
-            await axios.delete(`http://localhost:8070/supplier/delete/${id}`);
+            await axios.delete(`http://localhost:3500/supplier/delete/${id}`);
             setSuppliers((prevSuppliers) =>
               prevSuppliers.filter((supplier) => supplier._id !== id)
             );

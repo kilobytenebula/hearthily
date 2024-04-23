@@ -41,7 +41,7 @@ export default function Checkout(){
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`http://localhost:8050/points/${customerId}`);
+            const response = await axios.get(`http://localhost:3500/points/${customerId}`);
             setPoints(response.data.points);
           } catch (error) {
             console.error('Error fetching loyalty points:', error);
@@ -55,7 +55,7 @@ export default function Checkout(){
     // useEffect(() => {
     //     const getAddress = async () => {
     //         try {
-    //             const response = await axios.get(`http://localhost:8050/user/getuser/${customerId}`);
+    //             const response = await axios.get(`http://localhost:3500/user/getuser/${customerId}`);
     //             setAddress(response.data); 
     //             console.log(response.data.user.address);
                 
@@ -101,7 +101,7 @@ export default function Checkout(){
       // Call API to get current loyalty points
           const newAmount = points - valueToStore;
           try {
-            const response = await fetch(`http://localhost:8050/points/update/${customerId}`, {
+            const response = await fetch(`http://localhost:3500/points/update/${customerId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,12 +110,12 @@ export default function Checkout(){
                 
                 body: JSON.stringify({ points: newAmount })
             });
-            const pointsResponse = await axios.get(`http://localhost:8050/points/${customerId}`);
+            const pointsResponse = await axios.get(`http://localhost:3500/points/${customerId}`);
             const currentPoints = pointsResponse.data.points;
 
       // Calculate new loyalty points
          const newPoints = currentPoints + loyaltyPointsToAdd;
-            await axios.put(`http://localhost:8050/points/update/${customerId}`, { points: newPoints });
+            await axios.put(`http://localhost:3500/points/update/${customerId}`, { points: newPoints });
 
             if (!response.ok) {
                 throw new Error('Failed to update points');
@@ -139,7 +139,7 @@ export default function Checkout(){
       useEffect(() => {
         async function fetchLastOrderId() {
             try {
-                const response = await axios.get("http://localhost:8050/order/lastorder/lastid");
+                const response = await axios.get("http://localhost:3500/order/lastorder/lastid");
                 if (response.data && response.data.orderId) {
                     setLastOrderId(response.data.orderId);
                     console.log("orderId:",response.data.orderId )
@@ -180,7 +180,7 @@ export default function Checkout(){
 
         try {
             
-            const response = await axios.post('http://localhost:8050/payment/add', data);
+            const response = await axios.post('http://localhost:3500/payment/add', data);
             console.log(response.data); 
             window.alert('Order Placed successfully!');
             window.location.href = '/payments';

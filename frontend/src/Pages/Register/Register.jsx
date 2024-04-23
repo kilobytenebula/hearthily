@@ -31,6 +31,7 @@ export default function Register() {
                 }
             } catch (error) {
                 ResponseHandler.handleResponse(error)
+                console.log('Error', error.response.data.data.message);
             } finally {
                 setLoading(false)
                 Toaster.dismissLoadingToast()
@@ -39,7 +40,7 @@ export default function Register() {
     })
     return (
         <>
-            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#1F1D2B' }}>
+            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center">
                 <div className="d-flex align-items-center justify-content-center w-100">
                     <div className="row justify-content-center w-100">
                         <div className="col-md-8 col-lg-6 col-xxl-3">

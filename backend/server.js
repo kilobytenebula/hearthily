@@ -4,21 +4,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 const app = express();
+const cookieParser = require('cookie-parser');
 
 //defining port numbers
-const PORT = process.env.PORT || 8070;
+const PORT = process.env.PORT || 3500;
 app.use(cors());
 app.use(bodyParser.json());
 
 //connecting to the database
 const URL = process.env.MONGODB_URL;
 
-mongoose.connect(URL, {
-    //useCreateIndex: true,
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true,
-    //useFindAndModify: false
-});
+mongoose.connect(URL, {});
 
 
 const connection = mongoose.connection;
@@ -73,11 +69,12 @@ const inventoryRouter = require("./routes/inventories.js");
 app.use("/inventory",inventoryRouter);
 
 const AuthRoute = require('./src/routes/AuthRoute');
-app.use('/api/v1/auth', AuthRoute)
+app.use('/api/v1/auth', AuthRoute);
 
 const EmpRoute = require('./src/routes/EmpRoute');
-app.use('/api/v1/employee',EmpRoute)
+app.use('/api/v1/employee',EmpRoute);
 
+app.use(cookieParser());
 
 //starting the server
 app.listen(PORT, () => {
