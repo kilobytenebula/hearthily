@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require('../models/User'); // Import your User model
+const User = require('../src/Modal/User'); // Import your User model
 
 router.route("/getuser/:customerId").get(async (req, res) => {
     const loggedCustomerId = req.params.customerId;
@@ -17,8 +17,6 @@ router.route("/getuser/:customerId").get(async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-module.exports = router;
-let User = require("../models/User")
 
 router.route('/:userId').get(async (req, res) => {
     let userId = req.params.userId;

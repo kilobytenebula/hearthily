@@ -1,10 +1,8 @@
-import express from 'express';
-import EmpController from '../Controller/EmpController.js';
-import validateSchema from '../Middleware/ValidateSchema.js';
-import EmpYup from '../Utils/Validation/EmpYup.js';
-import validateToken from '../Middleware/ValidateToken.js';
-
-const router = express.Router();
+const router = require('express').Router();
+const EmpController = require('../Controller/EmpController');
+const EmpYup = require('../Utils/Validation/EmpYup');
+const validateSchema = require('../Middleware/ValidateSchema');
+const validateToken = require('../Middleware/ValidateToken');
 
 // Route to handle getting an employee by ID
 router.post('/getEmployee', validateToken, validateSchema(EmpYup.getEmp), EmpController.getEmployee);
@@ -15,4 +13,4 @@ router.delete('/deleteEmployee', validateToken, validateSchema(EmpYup.dltEmp), E
 // Route to handle updating an employee by ID
 router.put('/updateEmployee', validateToken, validateSchema(EmpYup.updateEmployee), EmpController.updateEmployee);
 
-export default router;
+module.exports = router;

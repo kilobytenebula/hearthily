@@ -3,7 +3,7 @@ const router = require("express").Router();
 let Delivery = require("../models/Delivery");
 let Feedback = require("../models/Feedback");
 let Driver = require("../models/Driver");
-let User = require("../models/User");
+let User = require("../src/Modal/User");
 
 //CRUD starts here
 //1. Create Route

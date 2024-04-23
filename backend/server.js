@@ -72,6 +72,13 @@ app.use("/inviter",invitedsupplierRouter);
 const inventoryRouter = require("./routes/inventories.js");
 app.use("/inventory",inventoryRouter);
 
+const AuthRoute = require('./src/routes/AuthRoute');
+app.use('/api/v1/auth', AuthRoute)
+
+const EmpRoute = require('./src/routes/EmpRoute');
+app.use('/api/v1/employee',EmpRoute)
+
+
 //starting the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -1,11 +1,10 @@
-import User from "../Modal/User.js";
-import response from "../Utils/ResponseHandler/ResponseHandler.js";
-import ResTypes from "../Utils/ResponseHandler/ResTypes.js";
-import bcrypt from "bcryptjs";
-import generateToken from "../Utils/Token/generateToken.js";
-import EmailSender from "../Utils/EmailSender/EmailSender.js";
-import passwordReset from "../Utils/EmailSender/RePasswordTemp.js";
-
+const User = require("../Modal/User.js");
+const response = require("../Utils/ResponseHandler/ResponseHandler.js");
+const ResTypes = require("../Utils/ResponseHandler/ResTypes.js");
+const bcrypt = require("bcryptjs");
+const generateToken = require("../Utils/Token/generateToken.js");
+const EmailSender = require("../Utils/EmailSender/EmailSender.js");
+const passwordReset = require("../Utils/EmailSender/RePasswordTemp.js");
 
 class AuthController {
 
@@ -123,4 +122,4 @@ class AuthController {
 
 }
 
-export default AuthController = new AuthController()
+module.exports = new AuthController();

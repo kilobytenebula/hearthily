@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer';
-import response from '../ResponseHandler/ResponseHandler.js';
+const nodemailer = require('nodemailer');
+const { response } = require('../ResponseHandler/ResponseHandler');
 
 class EmailSender {
     constructor() {
@@ -38,4 +38,5 @@ class EmailSender {
         return res.status(404).json({ message: err })
     }
 }
-export default EmailSender = new EmailSender()
+
+module.exports = new EmailSender();
