@@ -69,6 +69,7 @@
     flex-direction: column;
     gap: 16px;
     width: 25%;
+    width: 660px;
     background-color: var(--bg-200);
     padding: 32px;
 }

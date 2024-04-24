@@ -77,7 +77,7 @@ const ReqRefund = () => {
       }
     return (
         <div className="refundContainer">
-            <h2>Refund Request</h2>
+            <div className='heading'>Refund Request</div>
 
             <div className='details'>
 
