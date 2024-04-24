@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
-import '../allPayments.css';
+import '../css/allPayments.css';
 
 export default function AllPayments() {
     const [payments, setPayments] = useState([]);
-    const customerId = "6607de0ae6da274300367544";
+    const customerId = "66279ba428c2bd21af0ac912";
 
     useEffect(() => {
         function getPayments() {
-            axios.get(`http://localhost:8050/payment/${customerId}`)
+            axios.get(`http://localhost:3500/payment/${customerId}`)
                 .then((res) => {
                     setPayments(res.data);
                 })
@@ -27,8 +27,9 @@ export default function AllPayments() {
             const mealDetails = {};
             for (const payment of payments) {
                 try {
-                    const response = await axios.get(`http://localhost:8050/order/${payment.orderId}`);
-                    mealDetails[payment.orderId] = response.data[0].base_name;                ;
+                    const response = await axios.get(`http://localhost:3500/order/${payment.orderId}`);
+                    console.log("ff", response.data);
+                    mealDetails[payment.orderId] = response.data.order.base_name;
                 } catch (error) {
                     console.error("Error fetching meal details:", error);
                 }
@@ -71,7 +72,7 @@ export default function AllPayments() {
                         </div>
                         <div className="paymentInfo">
                             <div className="strong">Time Ordered</div>
-                            <div>{payment.date}</div>
+                            <div>{new Date(payment.date).toLocaleString("en-US", { timeZone: "Asia/Colombo" }).substring(0, 15).replace("T", " ")}</div>
                         </div>
                         <div className="paymentInfo">
                             <div className="strong">Payment Method</div>

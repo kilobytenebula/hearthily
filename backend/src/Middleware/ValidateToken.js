@@ -1,7 +1,7 @@
-import Jwt  from "jsonwebtoken";
-import User from "../Modal/User.js";
-import response from "../Utils/ResponseHandler/ResponseHandler.js";
-import ResTypes from "../Utils/ResponseHandler/ResTypes.js";
+const Jwt = require("jsonwebtoken");
+const User = require("../Modal/User.js");
+const response = require("../Utils/ResponseHandler/ResponseHandler.js");
+const ResTypes = require("../Utils/ResponseHandler/ResTypes.js");
 
 const validateToken = (req,res,next) => {
     const authHeader = req.headers.authorization;
@@ -21,4 +21,5 @@ const validateToken = (req,res,next) => {
         next();
     })
 }
-export default validateToken
+
+module.exports = validateToken;

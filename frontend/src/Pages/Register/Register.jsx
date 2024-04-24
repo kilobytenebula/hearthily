@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { NavLink, useNavigate, Navigate } from 'react-router-dom'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import AuthYup from '../../Validation/Auth/AuthYup';
 import AuthService from '../../Services/Auth/AuthService';
 import ResponseHandler from '../../Utils/Constants/ResponseHandler';
 import Toaster from '../../Utils/Constants/Toaster';
-import bg from "../../../public/assets/images/backgrounds/bglogs.jpeg"
 
 export default function Register() {
     const [loading, setLoading] = useState(false)
@@ -33,6 +31,7 @@ export default function Register() {
                 }
             } catch (error) {
                 ResponseHandler.handleResponse(error)
+                console.log('Error', error.response.data.data.message);
             } finally {
                 setLoading(false)
                 Toaster.dismissLoadingToast()
@@ -41,7 +40,7 @@ export default function Register() {
     })
     return (
         <>
-            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#1F1D2B' }}>
+            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center">
                 <div className="d-flex align-items-center justify-content-center w-100">
                     <div className="row justify-content-center w-100">
                         <div className="col-md-8 col-lg-6 col-xxl-3">

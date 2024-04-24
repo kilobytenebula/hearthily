@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const moment = require('moment-timezone');
-let payment = require("../models/OrderPayments"); 
+let payment = require("../models/orderPayments"); 
 
 router.route("/add").post(async(req,res)=>{
     const { orderId,customerId,amount,paymentMethod,address,phoneNumber,paymentSlip,isSuccess} = req.body;

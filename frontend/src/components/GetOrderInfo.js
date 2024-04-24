@@ -7,6 +7,7 @@ import AddFeedback from "./AddFeedback";
 import { FaStar } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DocumentTitle from "./DocumentTitle";
 
 const copyicon = require('../icons/copyicon.png');
 
@@ -26,6 +27,8 @@ export default function GetOrderInfo() {
   const navigateToUpdateFeedback = (orderId) => {
     navigate(`/order-history/order/${orderId}/update-feedback/${orderId}`);
   };
+
+  DocumentTitle("Order Details");
 
   function starRating(currentRating) {
     return (
@@ -85,13 +88,13 @@ export default function GetOrderInfo() {
     }
     try {
       axios
-        .delete(`http://localhost:8070/feedback/${feedbackId}`)
+        .delete(`http://localhost:3500/feedback/${feedbackId}`)
         .then(res => {
           console.log(res.data);
           // Show toast message
           toast.success('Feedback deleted successfully!');
           // Refetch feedback data
-          axios.get(`http://localhost:8070/feedback/${orderId}`)
+          axios.get(`http://localhost:3500/feedback/${orderId}`)
             .then(response => {
               setFeedback(response.data.feedback);
             })
@@ -107,8 +110,8 @@ export default function GetOrderInfo() {
     const fetchOrderAndFeedback = async () => {
       try {
         const [orderResponse, feedbackResponse] = await Promise.all([
-          axios.get(`http://localhost:8070/order/${orderId}`),
-          axios.get(`http://localhost:8070/feedback/${orderId}`)
+          axios.get(`http://localhost:3500/order/${orderId}`),
+          axios.get(`http://localhost:3500/feedback/${orderId}`)
         ]);
 
         setOrder(orderResponse.data.order);
@@ -136,10 +139,10 @@ export default function GetOrderInfo() {
       
       if (timeDifferenceInMinutes <= 5) {
         // Order can be deleted
-        axios.delete(`http://localhost:8070/order/delete/${orderId}`)
+        axios.delete(`http://localhost:3500/order/delete/${orderId}`)
           .then(() => {
             alert("Order cancelled successfully.");
-            window.location.href = "/order-history";
+            navigate("/order-history");
           })
           .catch(error => {
             console.error("Error cancelling order:", error);
@@ -236,7 +239,7 @@ export default function GetOrderInfo() {
         </div>
       )}
       <div>
-        <button type="button" onClick={handleCancelOrder}>Cancel Order</button>
+        <div type="button" onClick={handleCancelOrder} className="cancel-btn">Cancel Order</div>
       </div>
     </div>
     

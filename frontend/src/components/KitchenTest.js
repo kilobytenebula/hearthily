@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/KitchenTest.css";
+import DocumentTitle from "./DocumentTitle";
 
 export default function KitchenTest() {
   const [orders, setOrders] = useState([]);
@@ -8,10 +9,12 @@ export default function KitchenTest() {
   const [selectedOrder, setSelectedOrder] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
 
+  DocumentTitle("Kitchen Test");
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:8070/order/");
+        const response = await axios.get("http://localhost:3500/order/");
         // Filter preparing orders and pending orders
         const preparingOrders = response.data.filter(
           (orderItem) => orderItem.status === "preparing"
@@ -35,8 +38,11 @@ export default function KitchenTest() {
     // Fetch users
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:8070/user/");
-        setUsers(response.data);
+        const response = await axios.get("http://localhost:3500/user/");
+        const avbUsers = response.data.filter(
+          (user) => user.role === "user"
+        ); 
+        setUsers(avbUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -52,7 +58,7 @@ export default function KitchenTest() {
       return;
     }
     try {
-      await axios.put(`http://localhost:8070/order/update/${selectedOrder}`, {
+      await axios.put(`http://localhost:3500/order/update/${selectedOrder}`, {
         status: "preparing",
       });
       alert("Order prepared!");
@@ -67,13 +73,16 @@ export default function KitchenTest() {
       return;
     }
     try {
-      await axios.post("http://localhost:8070/delivery/add", {
+      const paymentResponse = await axios.get(`http://localhost:3500/payment/get/${selectedOrder}`);
+      const paymentMethod = paymentResponse.data[0].paymentMethod;
+      console.log(paymentMethod);
+      await axios.post("http://localhost:3500/delivery/add", {
         userId: selectedUser,
         orderId: selectedOrder,
-        paymentMethod: "paid",
+        paymentMethod: paymentMethod,
         deliveryStatus: "of-delivery"
       });
-      await axios.put(`http://localhost:8070/order/update/${selectedOrder}`, {
+      await axios.put(`http://localhost:3500/order/update/${selectedOrder}`, {
         status: "of-delivery",
       });
       alert("Order marked for delivery!");
@@ -125,7 +134,7 @@ export default function KitchenTest() {
                     <option
                       key={user._id}
                       value={user._id}
-                    >{`${user.firstname} ${user.lastname}`}</option>
+                    >{`${user.name}`}</option>
                   ))}
                 </select>
               </>

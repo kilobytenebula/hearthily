@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import '../reqRefunds.css';
+import '../css/reqRefunds.css';
 
 
 const ReqRefund = () => {
@@ -27,7 +27,7 @@ const ReqRefund = () => {
             image: { data: image }
 
         }
-        axios.post("http://localhost:8050/refund/add",newRefund).then(()=>{
+        axios.post("http://localhost:3500/refund/add",newRefund).then(()=>{
             alert("Added");
         }).catch((err)=>{
             alert("err");
@@ -40,7 +40,7 @@ const ReqRefund = () => {
         
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8050/payment/get/${orderId}`); 
+                const response = await fetch(`http://localhost:3500/payment/get/${orderId}`); 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
@@ -77,7 +77,7 @@ const ReqRefund = () => {
       }
     return (
         <div className="refundContainer">
-            <h2>Refund Request</h2>
+            <div className='heading'>Refund Request</div>
 
             <div className='details'>
 

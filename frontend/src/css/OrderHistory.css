@@ -1,0 +1,218 @@
+/* .sort-arrow{
+    width: 30%;
+    height: 30%;
+}
+
+.search-container{
+    margin-left: auto;
+}
+
+.search{
+    padding : 8px;
+    border: 1px solid var(--white-100);
+    width: 260px;
+    border-radius: 4px;
+}
+
+.chooseReport{
+    margin-left: auto;
+    appearance: none;
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color:var(--bg-200);
+    color: var(--white-100);
+}
+
+.csvButton{
+    font-size: 18px;
+}
+
+.csvButton ,.pdfButton{
+    text-decoration: none;
+    font-size: 14px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 100;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    border-radius: 8px;
+    margin-left: 16px;
+    color: var(--white-100);
+    border: none;
+
+}
+
+.report-container{
+    margin-left: auto;
+}
+.order-history{
+    width: 100%;
+    margin-left: 10%;
+    padding: 32px;
+}
+.table{
+    width: 100%;
+}
+.orderids, .meals{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+
+}
+.orderids{
+    width: 10%;
+    align-items: start;
+    padding-left: 32px;
+}
+.meals{
+    align-items: start;
+    width: 10%;
+}
+ */
+.orderHistory{
+    margin-left: 10%;
+    padding: 32px;
+    width: 100%;
+    font-family: "Poppins-Medium", Helvetica ;
+}
+
+.orderHistoryTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.orderHistoryTitle .title{
+    font-weight: 600;
+    font-size: 24px;
+}
+.search {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(244, 244, 244, 0.5);
+    background-color: var(--bg-200);
+    width: 200px;
+  }
+.chooseReport{
+    margin-left: auto;
+    appearance: none;
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color:var(--bg-200);
+    color: var(--white-100);
+    cursor: pointer;
+}
+.report-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.csvButton{
+    font-size: 18px;
+}
+.csvButton ,.pdfButton{
+    text-decoration: none;
+    font-size: 14px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 100;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    border-radius: 8px;
+    margin-left: 16px;
+    color: var(--white-100);
+    border: none;
+    cursor: pointer;
+
+}
+.tableTitles ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 16px;
+    
+    
+}
+.tableTitles ul li{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: 600;
+    
+    
+}
+.orderItems ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    padding: 16px;
+    background-color: var(--bg-200);
+    border-radius: 12px;
+    
+}
+.tableTitles ul .mealName{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.orderId{
+    
+    width: 20%;
+}
+
+.mealName{
+    padding-left: 16px;
+    width: 20%;
+}
+.orderDate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 32px;
+    width: 15%;
+}
+.qt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 8%;
+}
+.portionSize{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 12%;
+}
+.totalPrice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+}
+.orderStatus{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import '../potions.css'
+import '../css/potions.css'
+import { useAuth } from "../Services/Auth/AuthContext";
 
 export default function AllPortions(){
     const [portions, setPortions] = useState([]);
@@ -14,18 +15,18 @@ export default function AllPortions(){
     });
     const [loading, setLoading] = useState(true); // Loading state
     const [selectedSizePrice, setSelectedSizePrice] = useState(null);
-    const [selctedSize, setSelectedSize] = useState('');
+    const [selctedSize, setSelectedSize] = useState('R');
     let [qty, setQty] = useState(1);
     const [total, setTotal] = useState(baseDetails.reg_price);
-    const customerId = "609c9c918c27e038b0e27b2d";
-    const status = "Pending";
+    const { userId } = useAuth();
+    const status = "pending";
     // const [orderId, setOrderId] = useState('');
 
 
     useEffect(()=>{
         
         function getPortions(){
-            axios.get("http://localhost:8070/portion/").then((res)=>{
+            axios.get("http://localhost:3500/portion/").then((res)=>{
                 setPortions(res.data);
             }).catch((err)=>{
                 alert(err.message);
@@ -33,7 +34,7 @@ export default function AllPortions(){
         }
 
         function getBaseDetails() {
-            axios.get(`http://localhost:8070/base/`).then((res) => {
+            axios.get(`http://localhost:3500/base/`).then((res) => {
                 
                 const specificBase = res.data.find(base => base._id === baseId);
                 if (specificBase) {
@@ -101,7 +102,7 @@ export default function AllPortions(){
         const portionNames = selectedPortion.map(portion => portion.name);
         
         const newOrder = {
-            customer_id:customerId,
+            customerId: userId,
             base_name: baseDetails.base_name,
             portion_name: portionNames,
             portion_size: selctedSize,
@@ -109,7 +110,7 @@ export default function AllPortions(){
             total_amount: total,
             status: status
         };
-        axios.post("http://localhost:8070/order/add",newOrder).then(()=>{
+        axios.post("http://localhost:3500/order/add",newOrder).then(()=>{
             alert("Order Added")
         }).catch((err)=>{
             alert(err)
@@ -125,10 +126,11 @@ export default function AllPortions(){
             <div className="potion-list">
                 {portions.map((portion)=>(
                     <div key={portion._id} className="potion-item">
-                        <h2>{portion.portion_name}</h2>
-                       
-                        <p>Price: {portion.price}LKR</p>
-                        <button onClick={()=>handleAddPortion(portion.portion_name, portion.price)}>Add</button>
+                        <div className="potion-item-name">{portion.portion_name}</div>
+                       <div className="portion-bottom-part">
+                        <div className="portion-price"><div>Price</div><div>{portion.price} LKR </div></div>
+                        <button className="portion-add-button" onClick={()=>handleAddPortion(portion.portion_name, portion.price)}>Add</button>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -147,29 +149,29 @@ export default function AllPortions(){
                         <p>Loading...</p>
                     ) : (
                         <>
-                            <p> {baseDetails.base_name}</p>
-                            <p>{baseDetails.reg_price}LKR</p>
+                            <div>{baseDetails.base_name}</div> 
+                            <div>{baseDetails.reg_price}LKR</div>
                         </>
                     )}
                 </div>
-                <div className="side-container">
+                <div className="side-container side-container-qty">
                     <div className="side-item">Qty</div>
                     <div className="side-item">
-                        <button onClick={()=>increment()}>+</button>
+                        <button className="plus" onClick={()=>increment()}>+</button>
                         {qty}
-                        <button onClick={()=>decrement()}>-</button>
+                        <button className="minus" onClick={()=>decrement()}>-</button>
                     </div>
                 </div>
                 
                 <div className="side-heading">Choice of size</div>
                 <div className="side-container">
-                    <div className="side-item">
-                        <input type="radio" name="portion-size" id="regular" onChange={()=>handleSizeChange(baseDetails.reg_price,'R')} ></input>
+                    <div className="side-item radio" >
+                        <input type="radio" name="portion-size" id="regular" onChange={()=>handleSizeChange(baseDetails.reg_price,'R')}  checked = {selctedSize =='R'}></input>
                         <label name="portion-size">Regular</label>
                     </div>
                 </div>
                 <div className="side-container">
-                    <div className="side-item">
+                    <div className="side-item radio">
                         <input type="radio" name="portion-size" id="full" onChange={()=>handleSizeChange(baseDetails.full_price,'F')}></input>
                         <label name="portion-size">Full</label>
                     </div>
@@ -177,7 +179,7 @@ export default function AllPortions(){
                         +{baseDetails.full_price}LKR
                     </div>
                 </div>
-                <div className="side-heading">Curry Pairings</div>
+                <div className="side-heading curry-pairings">Curry Pairings</div>
                 <div className="side-container">
                     <div className="side-itme">Item</div>
                     <div className="side-item">Price</div>
@@ -197,6 +199,7 @@ export default function AllPortions(){
                         <div>{total}LKR</div>
                     </div>
                     <div className="button-container">
+                        <div></div>
                         <div className="">
                            <Link   
                              to={`/checkout/${baseDetails.base_name}/${selectedSizePrice}/${JSON.stringify(selectedPortion)}/${total}`}>  

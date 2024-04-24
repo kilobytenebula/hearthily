@@ -4,6 +4,8 @@ import axios from "axios";
 import "../css/GetDelivery.css";
 import searchIcon from "../icons/search.png";
 import JobHistoryReport from "./JobHistoryReport";
+import DocumentTitle from "./DocumentTitle";
+import { useAuth } from "../Services/Auth/AuthContext";
 
 export default function GetJobHistory() {
   const [jobsArray, setJobsArray] = useState([]);
@@ -11,24 +13,26 @@ export default function GetJobHistory() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
+  const { userId } = useAuth();
 
-  const driverId = "661bfcaff9b3692a8a15a7f2";
+  DocumentTitle("Job History");
+
 
   useEffect(() => {
     // Fetch delivery data
     axios
-      .get("http://localhost:8070/delivery/")
+      .get("http://localhost:3500/delivery/")
       .then((response) => {
         const jobs = response.data.filter(
           (delivery) =>
             (delivery.deliveryStatus === "on-delivery" ||
               delivery.deliveryStatus === "completed") &&
-            delivery.driverId === driverId
+            delivery.driverId === userId
         );
         // Fetch user data for each job
         Promise.all(
           jobs.map((job) =>
-            axios.get(`http://localhost:8070/user/${job.userId}`)
+            axios.get(`http://localhost:3500/user/${job.userId}`)
           )
         )
           .then((userResponses) => {

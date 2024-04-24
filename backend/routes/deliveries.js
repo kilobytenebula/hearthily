@@ -3,27 +3,21 @@ const router = require("express").Router();
 let Delivery = require("../models/Delivery");
 let Feedback = require("../models/Feedback");
 let Driver = require("../models/Driver");
-let User = require("../models/User");
+let User = require("../src/Modal/User");
 
 //CRUD starts here
 //1. Create Route
 router.route("/add").post((req, res) => {
   // Get data from the request body
-  const { orderId, userId, isPaid } = req.body;
+  const { orderId, userId, paymentMethod } = req.body;
   const deliveryStatus = "of-delivery";
-  let paymentMethod = "";
-
-  if (isPaid) {
-    paymentMethod = "Paid";
-  } else {
-    paymentMethod = "COD";
-  }
+  const driverId = null;
 
   // Create a new Delivery object
   const newDelivery = new Delivery({
     orderId,
     userId,
-    isPaid,
+    driverId,
     paymentMethod,
     deliveryStatus,
     date: new Date(),
@@ -103,7 +97,7 @@ router.route("/driver/:id").get(async (req, res) => {
       const user = await User.findById(delivery.userId);
 
       // Combine first name and last name
-      const cusName = user ? `${user.firstname} ${user.lastname}` : "Unknown";
+      const cusName = user ? `${user.name}` : "Unknown";
       const cusLocation = user ? `${user.address}` : "Unknown";
 
       // Find feedback for the delivery
