@@ -1,5 +1,7 @@
 import React from 'react';
-import '../navBar.css';
+import '../css/navbar.css';
+import '../css/root.css';
+import { Link } from 'react-router-dom';
 const home = require('../icons/home.png');
 const orderHistory = require('../icons/orderHistory.png');
 const paymentHistory = require('../icons/paymentHistory.png')
@@ -8,17 +10,15 @@ const logout = require('../icons/logout.png')
 const logo = require('../icons/logo.png')
 
 
-
-
-const navBar = () => {
+const Navbar = () => {
   return (
-    <div class="navBar fixed-top">
-        <div className='logoContainer'><img src={logo} alt="Logo" class="logo"></img></div>
+    <div className="navBar fixed-top">
+        <div className='logoContainer'><img src={logo} alt="Logo" className="logo"></img></div>
         
-        <div class="navBarItems">
+        <div className="navBarItems">
             <ul>
-                <li><div className='navItem active '><img src={home} alt="Home"  /></div></li>
-                <li><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></li>
+                <li><div className='navItem '><img src={home} alt="Home"  /></div></li>
+                <Link to="/order-history"><li><div className='navItem active'><img src={orderHistory} alt="Order History" title='Order History' /></div></li></Link> 
                 <li><div className='navItem'><img src={paymentHistory} alt="Payment History" title='Payment History' /></div></li>
             </ul>
             <ul>
@@ -31,4 +31,4 @@ const navBar = () => {
   );
 };
 
-export default navBar;
+export default Navbar;
