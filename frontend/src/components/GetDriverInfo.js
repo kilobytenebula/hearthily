@@ -40,10 +40,12 @@ export default function GetDriverInfo() {
           isAvailable: driverData.driver.isAvailable,
         };
         setDriver(combinedData);
-        setUserId(driverData.driver.userId);
-
+        console.log("Driver User ID:", driverData.driver.userId);
+        // Move setting of userId inside the fetchData function after fetchUserData resolves
+        setUserId(driverData.driver.userId); // <-- Move this line here
+  
         const deliveryResponse = await fetch(
-          `http://localhost:3500/delivery/driver/${userId}`
+          `http://localhost:3500/delivery/driver/${driverData.driver.userId}` // <-- Use driverData.driver.userId directly here
         );
         const deliveryData = await deliveryResponse.json();
         const lastCompletedDelivery = deliveryData.lastCompletedDelivery;
@@ -66,9 +68,10 @@ export default function GetDriverInfo() {
         setLoading(false);
       }
     }
-
+  
     fetchData();
   }, [driverId]);
+  
 
   useEffect(() => {
     // Filter deliveries based on search query
