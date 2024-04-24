@@ -59,39 +59,50 @@ export default function UpdateInventory() {
     }
 
     return (
-        <div className='inventory-container'>
+        <div className='inventory-main'>
+        <div className='update-inventory-container'>
             <div className='title-container'>Update Inventory</div>
-            {isLoading ? (
-                <div>Loading...</div>
-            ) : (
-                <form onSubmit={handleSubmit}>
-                    <div className='inventory-item-container'>
-                        <label htmlFor="ingredient">Ingredient:</label>
-                        <input
-                            type="text"
-                            id="ingredient"
-                            name="ingredient"
-                            value={ingredient || ''}
-                            onChange={e => setIngredient(e.target.value)}
-                        />
-
-                    </div>
-                    <div className='inventory-item-container'>
-                        <label htmlFor="qty">Quantity:</label>
-                        <input
-                            type="number"
-                            id="qty"
-                            name="qty"
-                            value={qty || ''}
-                            min={0}
-                            onChange={e => setQty(e.target.value)}
-                        />
-                    </div>
-                    {error && <div className="error">{error}</div>}
-                    <button type="submit">Update Inventory</button>
-                    <button type="button" onClick={handleCancel}>Cancel</button>
-                </form>
-            )}
+            <div className="form-container">
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    <form onSubmit={handleSubmit}>
+                        <div className='update-item-container'>
+                            <div className='form-label'><label htmlFor="ingredient">Ingredient</label></div>
+                            <div className='input-item'>
+                                <input
+                                    type="text"
+                                    id="ingredient"
+                                    name="ingredient"
+                                    value={ingredient || ''}
+                                    onChange={e => setIngredient(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className='update-item-container'>
+                            <div className='form-label'><label htmlFor="qty" className='form-label'>Quantity</label></div>
+                            <div className='input-item'>
+                                <input
+                                    type="number"
+                                    id="qty"
+                                    name="qty"
+                                    value={qty || ''}
+                                    min={0}
+                                    onChange={e => setQty(e.target.value)}
+                                />
+                            </div>    
+                        </div>
+                        {error && <div className="error">{error}</div>}
+                        <div className='btn-container'>
+                            <button type="submit">Update Inventory</button>
+                            <button type="button" onClick={handleCancel}>Cancel</button>
+                        </div>
+                        
+                    </form>
+                )}
+            </div>
+            
+        </div>
         </div>
     );
     

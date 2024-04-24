@@ -1,0 +1,112 @@
+/* .inventory-record{
+    width: 100%;
+    margin-left: 10%;
+    padding: 32px;
+}
+
+.inventoryTitles ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 0;
+    width: 100%;
+}
+.inventoryTitles ul li{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    padding: 0 16px;
+    font-weight: 600;
+}
+.in-item ul{
+    font-weight: 400;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    padding: 0;
+}
+.in-item ul li{
+    
+    padding: 16px;
+}
+.get-inventory-container{
+    padding: 0 32px;
+}
+.inven-item{
+    width: 100%;
+}
+.itemId{
+    width:30%;
+}
+.ingredient{
+    width: 30%;
+} */
+.inventory-main {
+    display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.top-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.get-inventory-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+ .inventory-record{
+    width: 100%;
+    margin-left: 10%;
+    padding: 32px;
+    font-family: "Poppins-Medium", Helvetica ;
+}
+.content{
+    padding-top: 32px;
+}
+.inventoryTitles{
+    padding-bottom: 16px;
+}
+.inventoryTitles ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    font-size: 16px;
+    font-weight: 600;
+    
+}
+.inven-item  a:visited, a:link {
+    text-decoration: none;
+    color: inherit;
+}
+.inven-item{
+    display: flex;
+    flex-direction: column;
+    
+}
+.inven-item ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 24px;
+    background-color: var(--bg-200);
+    border-radius: 12px;
+    margin: 0;
+    
+}
+.in-item {
+    margin: 0;
+    text-decoration: none;
+    color: inherit; /* Keeps the default text color */
+  }
+.itemId{
+    width: 50%;
+}
+.ingredient{
+    width: 30%;
+}
+.qtys{
+    width: 20%;
+}
