@@ -142,7 +142,7 @@ export default function GetOrderInfo() {
         axios.delete(`http://localhost:3500/order/delete/${orderId}`)
           .then(() => {
             alert("Order cancelled successfully.");
-            window.location.href = "/order-history";
+            navigate("/order-history");
           })
           .catch(error => {
             console.error("Error cancelling order:", error);
@@ -239,7 +239,7 @@ export default function GetOrderInfo() {
         </div>
       )}
       <div>
-        <button type="button" onClick={handleCancelOrder}>Cancel Order</button>
+        <div type="button" onClick={handleCancelOrder} className="cancel-btn">Cancel Order</div>
       </div>
     </div>
     

@@ -2,10 +2,13 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import '../css/GetOrder.css';
+import '../css/GetInventory.css';
+
 
 export default function GetInventory(){
     const [inventory, setInventory] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [records, setRecords] = useState([]);
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -23,34 +26,42 @@ export default function GetInventory(){
         fetchInventory();
     }, []);
 
+    const Filter =(event) =>{
+      setRecords(inventory.filter(f => 
+        f._id.toLowerCase().includes(event.target.value) ||
+        f.ingredient.toLowerCase().includes(event.target.value)
+      ));
+    }
+
     return (
-        <div className="order-history">
+      <div className='inventory-main'>
+        <div className="inventory-record">
           <div className="top-bar">
-            <div className="container-title-text">Inventory</div>
-            {/* <div className="search-container">
-              <input type="text" className="search" placeholder='Search..' onChange={Filter} />
-            </div> */}
+            <div className="container-title-text">Inventory Records</div>
+            <div className="search-container">
+              <input type="text" className="search" placeholder='Search..' onChange={Filter}/>
+            </div>
           </div>
           {isLoading ? (
-            <div className='loading-orders'>Beep boop boop...</div>
+            <div className='loading-inventory'>Beep boop boop...</div>
           ) : (
-            <div>
-              <div className="fields">
+            <div className='content'>
+              <div className="inventoryTitles">
                 <ul>
-                  <li className='meal'>Item ID</li>
-                  <li className='meal'>Ingredient</li>
-                  <li className='date'>Quantity</li>
+                  <li className='itemId'>Item ID</li>
+                  <li className='ingredient'>Ingredient</li>
+                  <li className='qtys'>Quantity</li>
                 </ul>
               </div>
-              <div className="order-container">
+              <div className="get-inventory-container">
                 {inventory.length > 0 ? (
                   inventory.map((inventoryItem) => (
-                    <div className="item" key={inventoryItem._id}>
-                      <Link to={`/inventory-record/inventory/${inventoryItem._id}`} className="item"> 
+                    <div className="inven-item" key={inventoryItem._id}>
+                      <Link to={`/inventory-record/inventory/${inventoryItem._id}`} className="in-item"> 
                         <ul>
-                          <li className='meal'>{inventoryItem._id}</li>
-                          <li className="meal">{inventoryItem.ingredient}</li>
-                          <li className="date">{inventoryItem.qty}kg</li>
+                          <li className='itemId'>{inventoryItem._id}</li>
+                          <li className="ingredient">{inventoryItem.ingredient}</li>
+                          <li className="qtys">{inventoryItem.qty}kg</li>
                         </ul>
                       </Link>
                     </div>
@@ -61,6 +72,7 @@ export default function GetInventory(){
               </div>
             </div>
           )}
+        </div>
         </div>
       );
 }
