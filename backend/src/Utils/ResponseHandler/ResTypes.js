@@ -68,4 +68,4 @@ class ResTypes {
     };
   }
   
-  export default ResTypes = new ResTypes()
+  module.exports = new ResTypes();

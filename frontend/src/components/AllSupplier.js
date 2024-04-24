@@ -1,24 +1,21 @@
 import React from "react";
-import Menu from "../components/Menu";
-import "../pages/DisplayShipment.css";
-import ShipmentTable from "../components/ShipmentTable";
+import SupplierTable from "./SupplierTable";
+import "../css/AllSupplier.css";
 
-
-function DispalyShipment() {
+function AllSupplier() {
     const today = new Date(); // Get current date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = today.toLocaleDateString(undefined, options); // Format date as Monday, January 1, 2023
   
     return (
       <div className="S_container">
-        <Menu />
         <div className="SS_title">
-          <span>Shipment</span>
+          <span>Suppliers</span>
           <span className="date">{formattedDate}</span>
         </div>
-        <ShipmentTable/>
+        <SupplierTable />
       </div>
     );
   }
 
-export default DispalyShipment;
+export default AllSupplier;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "../style/UpdateOrder.css";
+import "../css/UpdateOrder.css";
 
 function UpdateOrder() {
     const { id } = useParams()
@@ -13,7 +13,7 @@ function UpdateOrder() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:8070/shipment/displays/${id}`);
+      const response = await axios.get(`http://localhost:3500/shipment/displays/${id}`);
       const shipment = response.data.shipment;
 
       setName(shipment.supplier_name);
@@ -36,7 +36,7 @@ function UpdateOrder() {
     formData.append("ship_date", ship_date);
 
     try {
-      await axios.put(`http://localhost:8070/shipment/updates/${id}`, formData, {
+      await axios.put(`http://localhost:3500/shipment/updates/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

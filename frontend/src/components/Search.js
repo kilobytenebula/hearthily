@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/Search.css";
+import "../css/Search.css";
 import { FaSearch } from "react-icons/fa";
 
 function Search({ setSearchQuery }) { // Destructure setSearchQuery from props

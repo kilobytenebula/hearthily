@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from "react";
-import "../style/OrderForm.css";
+import "../css/OrderForm.css";
 import axios from "axios";
 
 function OrderForm(){
@@ -15,7 +15,7 @@ function OrderForm(){
   useEffect(() => {
     if (catogory) {
       axios
-        .get(`http://localhost:8070/supplier/display?category=${catogory}`)
+        .get(`http://localhost:3500/supplier/display?category=${catogory}`)
         .then((res) => {
           setSuppliers(res.data);
         })
@@ -75,7 +75,7 @@ function OrderForm(){
       formData.append(key, newShipment[key]);
     }
 
-    await axios.post("http://localhost:8070/shipment/ship", formData, {
+    await axios.post("http://localhost:3500/shipment/ship", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }

@@ -1,5 +1,5 @@
 import React, {useState}from "react";
-import "../style/RegisterForm.css";
+import "../css/RegisterForm.css";
 import axios from "axios";
 
 
@@ -25,7 +25,7 @@ function RegisterForm(){
             reg_date
         }
 
-        axios.post("http://localhost:8070/supplier/add",newSupplier).then(()=>{
+        axios.post("http://localhost:3500/supplier/add",newSupplier).then(()=>{
             setName("");
             setCat("");
             setAddress("");

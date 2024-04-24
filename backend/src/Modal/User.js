@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const urlPic = [
     "https://avatars.githubusercontent.com/u/54225118?v=4",
@@ -69,5 +69,6 @@ const userSchema = new mongoose.Schema(
         timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
     }
 );
+
 const User = mongoose.model('User', userSchema);
-export default User;
+module.exports = User;

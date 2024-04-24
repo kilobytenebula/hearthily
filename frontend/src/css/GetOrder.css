@@ -67,7 +67,7 @@ body{
 .status-dyn {
     display: inline-block;
     border-radius: 16px;
-    padding: 4px 8px;
+    padding: 4px 8px !important;
     text-align: center;
     text-decoration: none;
 }

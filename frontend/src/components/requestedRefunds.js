@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
-import '../requestedRefunds.css';
+import '../css/requestedRefunds.css';
 
 
 export default function RequestedRefunds() {
@@ -12,7 +12,7 @@ export default function RequestedRefunds() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8050/refund/${customerId}`);
+                const response = await axios.get(`http://localhost:3500/refund/${customerId}`);
                 setRefunds(response.data);
             } catch (error) {
                 console.error("Error fetching refunds:", error);
@@ -24,9 +24,9 @@ export default function RequestedRefunds() {
     const handleDelete = async (refundId) => {
         try {
             // Make delete request to your backend API with the refundId
-            await axios.delete(`http://localhost:8050/refund/delete/${refundId}`);
+            await axios.delete(`http://localhost:3500/refund/delete/${refundId}`);
             // After successful deletion, fetch refunds again to update the UI
-            const response = await axios.get(`http://localhost:8050/refund/${customerId}`);
+            const response = await axios.get(`http://localhost:3500/refund/${customerId}`);
             setRefunds(response.data);
         } catch (error) {
             console.error("Error deleting refund:", error);
@@ -69,9 +69,10 @@ export default function RequestedRefunds() {
                             {refund.isSuccess !== "accepted" && (
                                     
                                     <div className="delete">
-                                        <div></div>
+                                        {/* <div><Link to={`/reqRefun/${}`} className="refund-button">Request Refund</Link></div> */}
                                         <button onClick={() => handleDelete(refund._id)}>Delete</button>
                                     </div>
+                                    
                                 )}
                         </div>
                     ))}

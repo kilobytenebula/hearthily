@@ -35,6 +35,5 @@ src/config/env/development.env
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
 yarn.lock
 package-lock.json
