@@ -1,0 +1,318 @@
+body {
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.order-info-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.add-feedback-main {
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.order-info {
+    display: flex;
+    width: 100%;
+    margin-top: 32px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.order-info-container {
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content
+}
+
+.order-info-container-update {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content
+}
+
+.order-info-container-info {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content
+}
+
+.order-header {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 8px;
+    font-weight: 600;
+    justify-content: space-between;
+}
+
+.order-info-add {
+    padding: 32px;
+    background-color: #252836;
+}
+
+.order-info-label {
+    font-weight: 500;
+}
+
+.date-time {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.qty-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.meal-name {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.order-payment-info {
+    font-weight: 600;
+}
+
+.feedback-container {
+    background-color: #1F1D2B;
+    width: 35%;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.comment-container {
+    gap: 16px;
+    width: 100%;
+}
+
+.comment-text {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    margin-top: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #F28638;
+    margin-bottom: 32px;
+}
+
+.feedback-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+}
+
+.delete-feedback-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #FF7360;
+    background-color: rgba(255, 114, 96, 0.2);
+    cursor: pointer;
+}
+
+.update-feedback-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}
+
+.cancel-btn {
+    display: inline-block;
+    width: fit-content;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}
+
+.order-info-row {
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.order-id {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.copy-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    font-size: 12px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.copy-container:hover .tooltiptext {
+    visibility: visible;
+}
+
+.no-feedback-container {
+    display: flex;
+    height: 100%;
+    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-feedback-btn {
+    display: inline-block;
+    border-radius: 16px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}
+
+.loading-text {
+    padding: 16px;
+}
+
+.add-feedback-form-container {
+    flex: 1;
+    background-color: #1F1D2B;
+    width: 100%;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 32px;
+  }
+
+  .add-feedback-form-container label {
+    font-weight: 500; 
+    display: block;
+    margin-bottom: 8px; 
+  }
+
+  .add-feedback-form-container textarea {
+    height: 200px;
+  }
+  
+  .add-feedback-form-container input[type="number"],
+  .add-feedback-form-container textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #F28638;
+    background-color: #1F1D2B;
+    margin-bottom: 16px; 
+    color: #fff;
+  }
+  
+  .add-feedback-form-container button[type="submit"] {
+    display: inline-block;
+    border-radius: 16px;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 16px;  
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+  }
+  
+  .add-feedback-form-container button[type="button"] { /* Style for the "Close" button */
+    background-color: transparent;
+    color: #666; /* Example color, adjust as needed */
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+
+  .star-rating-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .star-rating-container-info {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .ratings-radio {
+    display: none;
+  }
+
+  .star {
+    cursor: pointer;
+  }
+
+  .form-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }

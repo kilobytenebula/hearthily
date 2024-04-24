@@ -23,7 +23,7 @@ export default function EmpProfile() {
                 const result = await EmpService.updateEmployee(values);
                 if (result.data.code === 200) {
                     Toaster.justToast('success', 'updated User', () => {
-                        navigate('/main/user/home')
+                        navigate('/main/user/empEdit')
                     });
                 }
             } catch (error) {
@@ -70,7 +70,7 @@ export default function EmpProfile() {
         fetchEmployeeDetails();
     }, [empEmail]);
     return (
-        <div className="body-wrapper">
+        <div className="body-wrapper" style={{"margin-left": '10%'}}>
             <div className="container-fluid">
                 {/*  Row 1 */}
                 <div className="row">

@@ -1,0 +1,136 @@
+body{
+    margin: 0;
+    color: #F4F4F4;
+    background-color: #252836;
+}
+
+.order-history {
+    width: display;
+    padding: 32px;
+    margin-left: 10%;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-title-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.fields {
+    margin-top: 32px;
+}
+
+.fields ul {
+    font-weight: 600;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    gap: 8px;
+}
+
+.item {
+    background-color: #1F1D2B;
+    border-radius: 10px;
+}
+
+.item ul {
+    font-weight: 400;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.item a:visited, a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.status-dyn {
+    display: inline-block;
+    border-radius: 16px;
+    padding: 4px 8px !important;
+    text-align: center;
+    text-decoration: none;
+}
+.meal, .date, .price, .status{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.meal {
+    width: 50%;
+}
+.date {
+    width: 15%;
+    text-align: center;
+}
+.price {
+    width: 12%;
+    text-align: center;
+}
+.status {
+    width: 23%;
+    padding: 0 48px 0 48px;
+    text-align: center;
+}
+.pending {
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+}
+.cancelled {
+    color: #F28638;
+    border: 1px solid #FF7360;
+    background-color: rgba(255, 114, 96, 0.2);
+}
+
+.preparing {
+    color: #9290FE;
+    border: 1px solid #9290FE;
+    background-color: rgba(146, 144, 254, 0.2);
+}
+.of-delivery {
+    color: #9290FE;
+    border: 1px solid #9290FE;
+    background-color: rgba(146, 144, 254, 0.2);
+}
+.on-delivery {
+    color: #9290FE;
+    border: 1px solid #9290FE;
+    background-color: rgba(146, 144, 254, 0.2);
+}
+.completed {
+    color: #6BE2BE;
+    border: 1px solid #6BE2BE;
+    background-color: rgba(107, 226, 190, 0.2);
+}
+
+.loading-orders-kitchen {
+    margin-top: 32px;
+    background-color: #1F1D2B;
+    width: 60%;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 16px;
+}

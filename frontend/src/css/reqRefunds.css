@@ -1,0 +1,114 @@
+body{
+    background-color: var(--bg-100);
+}
+.refundContainer{
+   
+    margin-left: 10%;
+    padding: 32px;
+    color: var(--white-100);
+    
+    height: 100vh;
+
+} 
+.inputField{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 8px;
+}
+
+
+.refundImage{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.refundImage input[type="file"] {
+    background-color: var(--bg-200); /* Set the background color to orange */
+    color: white; /* Set the text color to contrast with the background */
+    border: none; /* Remove the default border */
+    padding: 10px; /* Add some padding for better appearance */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+
+.refundImage label span {
+    font-size: 16px;
+    color:var(--white-100);
+}
+.inputBox {
+    width: 400px;
+    background-color: var(--bg-200);
+    color: var(--white-100);
+    height: 48px;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    padding: 0 16px 0 16px;
+}
+#reason {
+    width: 432px;
+    background-color: var(--bg-200);
+    color: var(--white-100);
+    height: 48px;
+    border-radius: 8px;
+    border: none;
+    padding: 0 16px 0 16px;
+}
+#description{
+    width: 100%;
+    background-color: var(--bg-200);
+    color: var(--white-100);
+    height: 160px;
+    border-radius: 8px;
+    border: none;
+    padding: 0 16px 0 16px;
+
+}
+.inputField .submitButton {
+    padding: 16px 32px;
+    font-size: 12px; 
+    background-color: var(--orange-200); 
+    color: #fff; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer; 
+    width: 100px;
+  }
+.details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.orderDetails{
+
+    background-color: var(--bg-200);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 32px;
+    margin-top: 32px;
+    padding: 32px;
+    height: fit-content;
+    border-radius: 16px;
+    
+}
+.idContainer,
+.timeOrdered,
+.usedMethod,
+.paidAmount{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px 0 16px 0;
+}
+
+.refundForm{
+    
+}
+
+

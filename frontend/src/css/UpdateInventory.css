@@ -1,0 +1,53 @@
+.update-inventory-container{
+    padding: 32px;
+    margin-left: 10%;
+}
+.title-container{
+    font-size: 24px;
+}
+.form-container{
+    padding: 32px;
+    margin-left: 230px;
+    margin-top: 100px ;
+    background-color: #1F1D2B;
+    border-radius: 8px;
+}
+.update-item-container{
+    margin-bottom: 15px;
+    display: flex;
+    gap:50px;
+}
+.form-label{
+    font-size: 20px;
+    width:100px;
+    color: #F4F4F4;
+}
+
+input[type="text"],
+input[type="number"]{
+    padding: 12px 24px;
+    border-radius: 8px;
+    /* border: 1px solid rgba(244, 244, 244, 0.5);
+    background-color: var(--bg-200); */
+    width: 300px;
+}
+.btn-container{
+    margin-left: auto;
+    width:200px;
+   
+}
+.btn-container button{
+    padding: 12px 14px 12px 14px;
+    border-radius: 16px;
+    background-color: var(--orange-200);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 0%;
+    width: 200px;
+    color: #F4F4F4;
+}
+
+
+

@@ -1,0 +1,42 @@
+.navBar{
+    width: 10%;
+    height: 100vh;
+    background-color: var(--bg-200);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.navBarItems{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 83%;
+    padding-top: 32px;
+}
+.navBarItems ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    color: var(--white-100);
+}
+.logoContainer {
+    height: 17%;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+.navItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 32px;
+    border-radius: 8px;
+}
+.navItem.active{
+    background-color: var(--orange-200);
+}

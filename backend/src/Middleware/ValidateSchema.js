@@ -1,4 +1,4 @@
-import response from "../Utils/ResponseHandler/ResponseHandler.js";
+const response = require("../Utils/ResponseHandler/ResponseHandler.js")
 
 
 function validateScehma(schema){
@@ -12,4 +12,5 @@ function validateScehma(schema){
         }
     }
 }
-export default validateScehma;
+
+module.exports = validateScehma;

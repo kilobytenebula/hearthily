@@ -1,0 +1,27 @@
+*{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #252836;
+}
+
+.SS_title{
+    background-color: #252836;
+    width: 260px;
+    border-radius: 10px;
+    height: 2.5rem;
+    margin-left: 150px;
+    padding: 0 20px;
+    margin-top: 40px;
+    display: inline-block;  
+    text-align: end;
+    color: white;
+    font-size: 40PX;
+    vertical-align: middle; 
+}

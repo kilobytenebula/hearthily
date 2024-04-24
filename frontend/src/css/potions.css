@@ -1,0 +1,146 @@
+.container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--white-100);
+    background-color: var(--bg-100);
+    margin-left: 10%;
+    /* padding: 32px; */
+    padding: 0;
+
+    height: 100vh;
+}
+.content{
+    padding: 32px;
+}
+.header{
+    font-size: 24px;
+    margin-bottom: 32px;
+}
+.potion-list{
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    gap: 32px;
+}
+.portion-bottom-part{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.potion-item{
+
+    padding: 16px 16px 32px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    background-color: var(--bg-200);
+    border-radius: 16px;
+}
+.potion-item-name{
+    padding: 16px 32px 16px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+.portion-price{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+.portion-add-button{
+    margin-top: 32px;
+    padding: 8px 32px 8px 32px;
+    border-radius: 8px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    font-size: 16px;
+
+}
+
+.mealbar{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 25%;
+    width: 660px;
+    background-color: var(--bg-200);
+    padding: 32px;
+}
+
+.side-heading{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.side-container{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.selected-portions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+}
+
+.button-container{
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-container button{
+    padding: 8px 24px 8px 24px;
+    border-radius: 8px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+}
+.side-item button{
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: var(--bg-100);
+    border: 1px solid var(--white-100);
+    color: var(--white-100);
+    font-weight: 700;
+
+    
+}
+.side-item .minus{
+    margin-left: 12px;
+}
+.side-item .plus{
+    margin-right: 12px;
+}
+.radio{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+}
+.side-container-qty{
+    margin-bottom: 16px;
+}
+.curry-pairings{
+    margin-top: 16px;
+}
+.selected-portions-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+

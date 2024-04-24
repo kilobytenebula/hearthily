@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate, Navigate, Link } from 'react-router-dom'
-import logo from "../../../public/assets/images/logos/logo.jpeg"
-import bg from "../../../public/assets/images/backgrounds/bglogs.jpeg"
 import AuthService from '../../Services/Auth/AuthService'
 import Toaster from '../../Utils/Constants/Toaster'
 import { useFormik } from 'formik'
-import ResponseHandler from '../../Utils/Constants/ResponseHandler'
 import AuthYup from '../../Validation/Auth/AuthYup'
 import LocalStore from '../../Store/LocalStore'
+import { useAuth } from '../../Services/Auth/AuthContext'
 
 export default function Login() {
     const [loading, setLoading] = useState(false)
+    const { login } = useAuth();
     const navigate = useNavigate()
     const initValues = {
         email: '',
@@ -25,11 +24,12 @@ export default function Login() {
             try {
                 const result = await AuthService.authLogin(values)
                 if (result.data.code === 201) {
-                    const { token, email, role } = result.data.data;
-                    LocalStore.storeToken({ token, role, email });
+                    const { token, email, role, id } = result.data.data;
+                    LocalStore.storeToken({ token, role, email, id });
+                    login(role, id);
                     Toaster.justToast('success', result.data.data.message, () => {
                         Toaster.dismissLoadingToast()
-                        navigate('/main/user/home')
+                        navigate('/order')
                     })
                 }
             } catch (error) {
@@ -43,7 +43,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: '#1F1D2B' }}>
+            <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center">
                 <div className="d-flex align-items-center justify-content-center w-100">
                     <div className="row justify-content-center w-100">
                         <div className="col-md-8 col-lg-6 col-xxl-3">
