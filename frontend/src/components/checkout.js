@@ -53,21 +53,21 @@ export default function Checkout(){
       }, [customerId]);
 
     // Getting address and phone number from user collection
-    // useEffect(() => {
-    //     const getAddress = async () => {
-    //         try {
-    //             const response = await axios.get(`http://localhost:3500/user/getuser/${customerId}`);
-    //             setAddress(response.data); 
-    //             console.log(response.data.user.address);
+    useEffect(() => {
+        const getAddress = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3500/user/${customerId}`);
+                setAddress(response.data); 
+                console.log("dgds" ,response.data.user.address);
                 
-    //         } catch (error) {
-    //             console.error('Error fetching address:', error);
-    //         }
-    //     };
+            } catch (error) {
+                console.error('Error fetching address:', error);
+            }
+        };
     
-    //     getAddress();
+        getAddress();
     
-    // }, [customerId]);
+    }, [customerId]);
 
 
     //store input value as a int
@@ -171,8 +171,7 @@ export default function Checkout(){
           amount: finalAmount,
           date: currentDate,
           paymentMethod: lastClickedButton,
-        //   address: address.user.address,
-            address:"mawanella",
+        address: address.user.address,
         //   phoneNumber: address.user.phonenumber,
         phoneNumber:"0713456785",
           paymentSlip: { data: image }
@@ -281,7 +280,7 @@ export default function Checkout(){
 
                 </div>
             </div>
-            <div className="checkout-payment">
+            <div className="checkoutPayment">
                 <div className="paymentMethod">
                     <div className="header">
                         Select Payment Method
@@ -305,8 +304,8 @@ export default function Checkout(){
                     </div>
                     <div className="address">
                         
-                        {/* <div>{address && address.user && address.user.address}</div>
-                        <div>{address && address.user && address.user.phonenumber}</div> */}
+                        <div>{address && address.user && address.user.address}</div>
+                        <div>{address && address.user && address.user.phonenumber}</div>
                     </div>
                 </div>
                 <div className="actions">
