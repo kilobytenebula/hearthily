@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../css/GetOrder.css';
+import searchIcon from '../icons/search.png';
+import { useAuth } from '../Services/Auth/AuthContext';
+import DocumentTitle from './DocumentTitle';
 
 export default function GetOrder() {
   const [order, setOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [records, setRecords] = useState([]);
+  const { userId } = useAuth();
+
+  DocumentTitle("My Orders");
 
   function getStatusClass(status) {
     const statusMap = {
@@ -24,8 +31,11 @@ export default function GetOrder() {
     const fetchOrder = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('http://localhost:8070/order/');
-        setOrder(response.data);
+        console.log("ID", userId);
+        const response = await axios.get(`http://localhost:3500/order/customer/${userId}`);
+        setOrder(response.data.orders);
+        setRecords(response.data.orders);
+        console.log("Orders",response.data.orders);
       } catch (error) {
         console.error('Error fetching orders:', error);
         // Consider setting an error state variable to display an error message
@@ -37,11 +47,25 @@ export default function GetOrder() {
     fetchOrder();
   }, []);
 
+  const Filter =(event) =>{
+    setRecords(order.filter(f => 
+      f.base_name.toLowerCase().includes(event.target.value) ||
+      f.portion_name.some(portion => portion.toLowerCase().includes(event.target.value)) ||
+      f.total_amount.toString().includes(event.target.value) ||
+      f.status.toString().includes(event.target.value)
+    ));
+  }
+
   return (
     <div className="order-history">
       <div className="top-bar">
         <div className="container-title-text">Order History</div>
-        <div className="search-container"></div>
+        <div className="search-container">
+        <div className="search-icon">
+            <img src={searchIcon} alt="search" />
+          </div>
+          <input type="text" className="search" placeholder='Search by meal, amount, or status' onChange={Filter} />
+        </div>
       </div>
       {isLoading ? (
         <div className='loading-orders'>Beep boop boop...</div>
@@ -56,8 +80,8 @@ export default function GetOrder() {
             </ul>
           </div>
           <div className="order-container">
-            {order.length > 0 ? (
-              order.map((orderItem) => (
+            {records.length > 0 ? (
+              records.map((orderItem) => (
                 <div className="item" key={orderItem._id}>
                   <Link to={`/order-history/order/${orderItem._id}`} className="item">
                     <ul>
@@ -74,7 +98,7 @@ export default function GetOrder() {
                 </div>
               ))
             ) : (
-              <div>No orders found.</div>
+              <div className="not-available">No available orders. :(</div>
             )}
           </div>
         </div>

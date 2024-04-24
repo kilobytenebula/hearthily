@@ -3,14 +3,18 @@ const router = require("express").Router();
 let Base = require("../models/Base");
 
 router.route("/add").post((req,res)=>{
+    const image_url = req.body.image_url;
     const base_name = req.body.base_name;
     const base_type = req.body.base_type;
+    const category = req.body.category;
     const reg_price = Number(req.body.reg_price);
     const full_price = Number(req.body.full_price);
 
     const newBase = new Base({
+        image_url,
         base_name,
         base_type,
+        category,
         reg_price,
         full_price,
     })

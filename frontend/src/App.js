@@ -3,6 +3,7 @@ import './css/sort.css';
 import AllPayments from './components/allPayments';
 import NavBAr from './components/navBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './Services/Auth/AuthContext';
 import RefundRequest from './components/reqRefund';
 import AllRefunds from './components/refundRequests'
 import Checkout from './components/checkout';
@@ -34,25 +35,29 @@ import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
 import ChangePassword from './Pages/ForgotPassword/ChangePassword'
 import ResetByEmail from './Pages/ForgotPassword/ResetByEmail'
 import RegisterForm from './components/RegisterForm';
-import AllSupplier from "./pages/AllSupplier";
+import AllSupplier from "./components/AllSupplier";
 import UpdateSupplier from "./components/UpdateSupplier";
-import Dashboard from "./pages/SupplierDashboard";
+import Dashboard from "./components/SupplierDashboard";
 import SupplierReport from "./components/SupplierReport";
-import InvitedSupplier from "./pages/InvitedSupplier";
-import AddShipping from "./pages/AddShipping";
-import DispalyShipment from "./pages/DisplayShipment";
+import InvitedSupplier from "./components/InvitedSupplier";
+import AddShipping from "./components/AddShipping";
+import DispalyShipment from "./components/DisplayShipment";
 import SendOrder from "./components/SendOrder";
 import UpdateOrder from "./components/UpdateOrder";
+import GetInventory from './components/GetInventory';
+import UpdateInventory from './components/UpdateInventory';
+import OrderHistory from './components/OrderHistory';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <AuthProvider>
         <NavBAr/>
         <ToastContainer />
         <Routes>
           {/* rash */}
-          <Route exact path="/" element={<AllBases/>}/>
+          <Route exact path="/order" element={<AllBases/>}/>
           <Route exact path='/checkout/:baseName/:basePrice/:selectedPortions/:total' element={<Checkout/>}/>
           <Route exact path='/refunds' element={<AllRefunds/>}/>
           <Route path="/all-portions/:baseId" element={<AllPortions/>}/>
@@ -76,35 +81,39 @@ function App() {
 
           {/* ash */}
           <Route path='/' element={<Login />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgotPassword' element={<ForgotPassword />} />
-        <Route path='/changePassword' element={<ChangePassword />} />
-        <Route path='/resetPassword' element={<ResetByEmail />} />
-        <Route path='/main' element={<Main />} >
-          <Route index element={ <UserStack />} />
-          <Route path='user' element={<UserStack />} >
-            <Route index element={<Home/>}/>
-            <Route path='home' element={<Home/>}/>
-            <Route path='empEdit' element={<EmpProfile/>}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route path='/changePassword' element={<ChangePassword />} />
+          <Route path='/resetPassword' element={<ResetByEmail />} />
+          <Route path='/main' element={<Main />} >
+            <Route index element={ <UserStack />} />
+            <Route path='user' element={<UserStack />} >
+              <Route index element={<Home/>}/>
+              <Route path='home' element={<Home/>}/>
+              <Route path='empEdit' element={<EmpProfile/>}/>
+            </Route>
           </Route>
-        </Route>
-        <Route path='/notallowed' element={<NotAuthorized />} />
-        <Route path='*' element={<NotFound />} />
+          <Route path='/notallowed' element={<NotAuthorized />} />
+          <Route path='*' element={<NotFound />} />
 
-        {/* osh */}
-        <Route path='/' exact Component={Dashboard} />
-        <Route path='/add' exact Component={RegisterForm} />
-        <Route path='/display' exact Component={AllSupplier} />
-        <Route path='/update/:id' exact Component={UpdateSupplier} />
-        <Route path='/display/:id' exact Component={SupplierReport} />
-        <Route path='/invite' exact Component={InvitedSupplier} />
-        <Route path='/shipment' exact Component={AddShipping} />
-        <Route path='/displays' exact Component={DispalyShipment} />
-        <Route path='/displays/:id' exact Component={SendOrder} />
-        <Route path='/updates/:id' exact Component={UpdateOrder} />
-          
-        </Routes>
+          {/* osh */}
+          <Route path='/add' exact Component={RegisterForm} />
+          <Route path='/display' exact Component={AllSupplier} />
+          <Route path='/update/:id' exact Component={UpdateSupplier} />
+          <Route path='/display/:id' exact Component={SupplierReport} />
+          <Route path='/invite' exact Component={InvitedSupplier} />
+          <Route path='/shipment' exact Component={AddShipping} />
+          <Route path='/displays' exact Component={DispalyShipment} />
+          <Route path='/displays/:id' exact Component={SendOrder} />
+          <Route path='/updates/:id' exact Component={UpdateOrder} />
+            
+          {/* thej */}
+          <Route path="/inventory-record" element={<GetInventory/>} />
+          <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
+          <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
+          </Routes>
+        </AuthProvider>
       </div>
     </Router>
   );

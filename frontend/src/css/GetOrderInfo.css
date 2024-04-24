@@ -158,6 +158,22 @@ body {
     cursor: pointer;
 }
 
+.cancel-btn {
+    display: inline-block;
+    width: fit-content;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F28638;
+    border: 1px solid #F28638;
+    background-color: rgba(255, 181, 114, 0.2);
+    cursor: pointer;
+}
+
 .order-info-row {
     display: flex;
     width: 100%;

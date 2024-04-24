@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../checkout.css';
+import '../css/checkout.css';
 
 
 export default function Checkout(){
@@ -11,6 +11,7 @@ export default function Checkout(){
 
     //Bank details show and hide implementation
     const [showBankDetails, setShowBankDetails] =useState(false);
+    const navigate = useNavigate();
 
     const handleBTClick=() =>{
 
@@ -34,14 +35,14 @@ export default function Checkout(){
     const [address, setAddress] = useState([]);
     const [inputValue, setInputValue] = useState(0);
     const [lastOrderId, setLastOrderId] = useState('');
-    const customerId = "6607de0ae6da274300367544";
+    const customerId = "66279ba428c2bd21af0ac912";
     const [lastClickedButton, setLastClickedButton] = useState(null);
     
     //Retrive available loyalty points
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`http://localhost:8050/points/${customerId}`);
+            const response = await axios.get(`http://localhost:3500/points/${customerId}`);
             setPoints(response.data.points);
           } catch (error) {
             console.error('Error fetching loyalty points:', error);
@@ -52,21 +53,21 @@ export default function Checkout(){
       }, [customerId]);
 
     // Getting address and phone number from user collection
-    // useEffect(() => {
-    //     const getAddress = async () => {
-    //         try {
-    //             const response = await axios.get(`http://localhost:8050/user/getuser/${customerId}`);
-    //             setAddress(response.data); 
-    //             console.log(response.data.user.address);
+    useEffect(() => {
+        const getAddress = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3500/user/${customerId}`);
+                setAddress(response.data); 
+                console.log("dgds" ,response.data.user.address);
                 
-    //         } catch (error) {
-    //             console.error('Error fetching address:', error);
-    //         }
-    //     };
+            } catch (error) {
+                console.error('Error fetching address:', error);
+            }
+        };
     
-    //     getAddress();
+        getAddress();
     
-    // }, [customerId]);
+    }, [customerId]);
 
 
     //store input value as a int
@@ -101,7 +102,7 @@ export default function Checkout(){
       // Call API to get current loyalty points
           const newAmount = points - valueToStore;
           try {
-            const response = await fetch(`http://localhost:8050/points/update/${customerId}`, {
+            const response = await fetch(`http://localhost:3500/points/update/${customerId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,12 +111,12 @@ export default function Checkout(){
                 
                 body: JSON.stringify({ points: newAmount })
             });
-            const pointsResponse = await axios.get(`http://localhost:8050/points/${customerId}`);
+            const pointsResponse = await axios.get(`http://localhost:3500/points/${customerId}`);
             const currentPoints = pointsResponse.data.points;
 
       // Calculate new loyalty points
          const newPoints = currentPoints + loyaltyPointsToAdd;
-            await axios.put(`http://localhost:8050/points/update/${customerId}`, { points: newPoints });
+            await axios.put(`http://localhost:3500/points/update/${customerId}`, { points: newPoints });
 
             if (!response.ok) {
                 throw new Error('Failed to update points');
@@ -139,7 +140,7 @@ export default function Checkout(){
       useEffect(() => {
         async function fetchLastOrderId() {
             try {
-                const response = await axios.get("http://localhost:8050/order/lastorder/lastid");
+                const response = await axios.get("http://localhost:3500/order/lastorder/lastid");
                 if (response.data && response.data.orderId) {
                     setLastOrderId(response.data.orderId);
                     console.log("orderId:",response.data.orderId )
@@ -170,8 +171,7 @@ export default function Checkout(){
           amount: finalAmount,
           date: currentDate,
           paymentMethod: lastClickedButton,
-        //   address: address.user.address,
-            address:"mawanella",
+        address: address.user.address,
         //   phoneNumber: address.user.phonenumber,
         phoneNumber:"0713456785",
           paymentSlip: { data: image }
@@ -180,10 +180,10 @@ export default function Checkout(){
 
         try {
             
-            const response = await axios.post('http://localhost:8050/payment/add', data);
+            const response = await axios.post('http://localhost:3500/payment/add', data);
             console.log(response.data); 
             window.alert('Order Placed successfully!');
-            window.location.href = '/payments';
+            navigate('/payments');
             
           } catch (error) {
             console.error('Error:', error); 
@@ -208,6 +208,26 @@ export default function Checkout(){
             setImage(reader.result);
         }
       }
+
+      function handleCancelOrder() {
+        const confirmed = window.confirm("Are you sure you want to cancel the order?");
+        
+        if (confirmed) {
+            console.log("Button clicked");
+            axios.delete(`http://localhost:3500/order/delete/${lastOrderId}`)
+                .then(() => {
+                    alert("Order cancelled successfully.");
+                    setLastOrderId('');
+                    navigate("/order");
+                })
+                .catch(error => {
+                    console.error("Error cancelling order:", error);
+                    alert("Error cancelling order");
+                });
+        } else {
+            // User clicked cancel, do nothing
+        }
+    };
 
 
     return(
@@ -280,7 +300,7 @@ export default function Checkout(){
 
                 </div>
             </div>
-            <div className="payment">
+            <div className="checkoutPayment">
                 <div className="paymentMethod">
                     <div className="header">
                         Select Payment Method
@@ -304,12 +324,12 @@ export default function Checkout(){
                     </div>
                     <div className="address">
                         
-                        {/* <div>{address && address.user && address.user.address}</div>
-                        <div>{address && address.user && address.user.phonenumber}</div> */}
+                        <div>{address && address.user && address.user.address}</div>
+                        <div>{address && address.user && address.user.phonenumber}</div>
                     </div>
                 </div>
                 <div className="actions">
-                    <button className="cancel">Cancel</button>
+                    <button className="cancel" onClick={handleCancelOrder}>Cancel</button>
                     <button className="placeOrder" onClick={handleSubmit}>Place Order</button>
                 </div>
             </div>

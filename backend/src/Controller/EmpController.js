@@ -1,6 +1,7 @@
-import User from "../Modal/User.js";
-import response from "../Utils/ResponseHandler/ResponseHandler.js";
-import ResTypes from "../Utils/ResponseHandler/ResTypes.js";
+const User = require("../Modal/User.js");
+const response = require("../Utils/ResponseHandler/ResponseHandler.js");
+const ResTypes = require("../Utils/ResponseHandler/ResTypes.js");
+
 class UserController {
     // Method to get an user by ID
     getEmployee = async (req, res) => {
@@ -48,4 +49,4 @@ class UserController {
     }
 }
 
-export default UserController = new UserController();
+module.exports = new UserController();

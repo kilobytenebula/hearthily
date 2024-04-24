@@ -157,4 +157,5 @@ function passwordReset(token) {
     </html>
     `
 }
-export default passwordReset;
+
+module.exports = passwordReset;

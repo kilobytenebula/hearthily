@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const portionSchema = new Schema({
+    image_url : {
+        type : String,
+        required: true
+    },
     portion_name : {
         type : String,
         required: true

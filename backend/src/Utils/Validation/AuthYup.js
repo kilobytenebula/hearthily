@@ -1,4 +1,4 @@
-import yup from 'yup'
+const yup = require('yup');
 
 class AuthYup {
     registerSchema = yup.object({
@@ -16,5 +16,4 @@ class AuthYup {
     })
 }
 
-
-export default AuthYup = new AuthYup();
+module.exports = new AuthYup();

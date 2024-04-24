@@ -4,10 +4,12 @@ import "../css/GetDriverInfo.css";
 import searchIcon from "../icons/search.png";
 import badge from "../icons/badge.png";
 import DriverInfoReport from "./DriverInfoReport";
+import DocumentTitle from "./DocumentTitle";
 
 export default function GetDriverInfo() {
   const [driver, setDriver] = useState(null);
   const [delivery, setDelivery] = useState([]);
+  const [userId, setUserId] = useState(null);
   const [lastCompletedDelivery, setLastCompletedDelivery] = useState(null);
   const [currentDeliveryId, setCurrentDeliveryId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,18 +18,20 @@ export default function GetDriverInfo() {
   const [filteredDelivery, setFilteredDelivery] = useState([]);
   const [sortBy, setSortBy] = useState("date");
 
+  DocumentTitle("Driver Profile");
+
   useEffect(() => {
     async function fetchData() {
       try {
         const driverResponse = await fetch(
-          `http://localhost:8070/driver/${driverId}`
+          `http://localhost:3500/driver/${driverId}`
         );
         const driverData = await driverResponse.json();
         const userData = await fetchUserData(driverData.driver.userId);
         const combinedData = {
           _id: driverData.driver._id,
-          name: `${userData.firstname} ${userData.lastname}`,
-          contact: userData.phonenumber,
+          name: `${userData.name}`,
+          contact: userData.phonenumber ? userData.phonenumber : "n/a",
           deliveryCount: driverData.driver.deliveryCount,
           averageRating:
             driverData.driver.avgRating > 0
@@ -36,9 +40,12 @@ export default function GetDriverInfo() {
           isAvailable: driverData.driver.isAvailable,
         };
         setDriver(combinedData);
-
+        console.log("Driver User ID:", driverData.driver.userId);
+        // Move setting of userId inside the fetchData function after fetchUserData resolves
+        setUserId(driverData.driver.userId); // <-- Move this line here
+  
         const deliveryResponse = await fetch(
-          `http://localhost:8070/delivery/driver/${driverId}`
+          `http://localhost:3500/delivery/driver/${driverData.driver.userId}` // <-- Use driverData.driver.userId directly here
         );
         const deliveryData = await deliveryResponse.json();
         const lastCompletedDelivery = deliveryData.lastCompletedDelivery;
@@ -61,9 +68,10 @@ export default function GetDriverInfo() {
         setLoading(false);
       }
     }
-
+  
     fetchData();
   }, [driverId]);
+  
 
   useEffect(() => {
     // Filter deliveries based on search query
@@ -75,7 +83,7 @@ export default function GetDriverInfo() {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8070/user/${userId}`);
+      const response = await fetch(`http://localhost:3500/user/${userId}`);
       const userData = await response.json();
       return userData.user;
     } catch (error) {

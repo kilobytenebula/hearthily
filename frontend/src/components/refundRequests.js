@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
-import '../refundRequests.css';
+import '../css/refundRequests.css';
 const download = require('../icons/download.png')
 
 
@@ -13,7 +13,7 @@ export default function RefundRequest(){
     useEffect(()=>{
 
         function getRefunds(){
-            axios.get(`http://localhost:8050/refund`)
+            axios.get(`http://localhost:3500/refund`)
                 .then((res) => {
                     console.log(res.data);
                     setPayments(res.data);
@@ -27,7 +27,7 @@ export default function RefundRequest(){
 
     const updateRefund = async (orderId, isSuccess) => {
         try {
-            const response = await axios.put(`http://localhost:8050/refund/update/${orderId}`, { isSuccess });
+            const response = await axios.put(`http://localhost:3500/refund/update/${orderId}`, { isSuccess });
             window.location.reload();
         } catch (error) {
             console.error('Error updating payment:', error);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import axios from "axios";
-import "../style/SendOrder.css";
+import "../css/SendOrder.css";
 
 function SendOrder() {
     const { id } = useParams();
@@ -16,7 +16,7 @@ function SendOrder() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:8070/shipment/displays/${id}`);
+                const response = await axios.get(`http://localhost:3500/shipment/displays/${id}`);
                 const shipment = response.data.shipment;
 
                 setName(shipment.supplier_name);
@@ -34,7 +34,7 @@ function SendOrder() {
 
     const sendEmail = async () => {
         try {
-            await axios.post(`http://localhost:8070/shipment/sending`);
+            await axios.post(`http://localhost:3500/shipment/sending`);
             alert("Email sent successfully");
         } catch (error) {
             console.error("Error sending email:", error);

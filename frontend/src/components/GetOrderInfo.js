@@ -7,6 +7,7 @@ import AddFeedback from "./AddFeedback";
 import { FaStar } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DocumentTitle from "./DocumentTitle";
 
 const copyicon = require('../icons/copyicon.png');
 
@@ -26,6 +27,8 @@ export default function GetOrderInfo() {
   const navigateToUpdateFeedback = (orderId) => {
     navigate(`/order-history/order/${orderId}/update-feedback/${orderId}`);
   };
+
+  DocumentTitle("Order Details");
 
   function starRating(currentRating) {
     return (
@@ -85,13 +88,13 @@ export default function GetOrderInfo() {
     }
     try {
       axios
-        .delete(`http://localhost:8070/feedback/${feedbackId}`)
+        .delete(`http://localhost:3500/feedback/${feedbackId}`)
         .then(res => {
           console.log(res.data);
           // Show toast message
           toast.success('Feedback deleted successfully!');
           // Refetch feedback data
-          axios.get(`http://localhost:8070/feedback/${orderId}`)
+          axios.get(`http://localhost:3500/feedback/${orderId}`)
             .then(response => {
               setFeedback(response.data.feedback);
             })
@@ -107,8 +110,8 @@ export default function GetOrderInfo() {
     const fetchOrderAndFeedback = async () => {
       try {
         const [orderResponse, feedbackResponse] = await Promise.all([
-          axios.get(`http://localhost:8070/order/${orderId}`),
-          axios.get(`http://localhost:8070/feedback/${orderId}`)
+          axios.get(`http://localhost:3500/order/${orderId}`),
+          axios.get(`http://localhost:3500/feedback/${orderId}`)
         ]);
 
         setOrder(orderResponse.data.order);
@@ -121,6 +124,39 @@ export default function GetOrderInfo() {
     fetchOrderAndFeedback();
   }, [orderId]);
 
+  function handleCancelOrder() {
+    const confirmed = window.confirm("Are you sure you want to cancel the order?");
+    
+    if (confirmed) {
+      const orderCreationTime = new Date(order.date); // Convert order creation time to Date object
+      const currentTime = new Date(); // Current time
+      
+      // Calculate the difference in milliseconds
+      const timeDifference = currentTime.getTime() - orderCreationTime.getTime();
+      
+      // Convert milliseconds to minutes
+      const timeDifferenceInMinutes = timeDifference / (1000 * 60);
+      
+      if (timeDifferenceInMinutes <= 5) {
+        // Order can be deleted
+        axios.delete(`http://localhost:3500/order/delete/${orderId}`)
+          .then(() => {
+            alert("Order cancelled successfully.");
+            navigate("/order-history");
+          })
+          .catch(error => {
+            console.error("Error cancelling order:", error);
+            alert("Error cancelling order");
+          });
+      } else {
+        // Order cannot be deleted after 5 minutes
+        alert("Order cannot be cancelled after 5 minutes of creation.");
+      }
+    } else {
+      // User clicked cancel, do nothing
+    }
+  };
+  
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('feedbackSuccess')) {
@@ -202,6 +238,10 @@ export default function GetOrderInfo() {
           <div className="loading-text">Beep boop boop...</div>
         </div>
       )}
+      <div>
+        <div type="button" onClick={handleCancelOrder} className="cancel-btn">Cancel Order</div>
+      </div>
     </div>
-  );
+    
+  )
 }
