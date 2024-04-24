@@ -39,7 +39,10 @@ export default function KitchenTest() {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("http://localhost:3500/user/");
-        setUsers(response.data);
+        const avbUsers = response.data.filter(
+          (user) => user.role === "user"
+        ); 
+        setUsers(avbUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -70,10 +73,13 @@ export default function KitchenTest() {
       return;
     }
     try {
+      const paymentResponse = await axios.get(`http://localhost:3500/payment/get/${selectedOrder}`);
+      const paymentMethod = paymentResponse.data[0].paymentMethod;
+      console.log(paymentMethod);
       await axios.post("http://localhost:3500/delivery/add", {
         userId: selectedUser,
         orderId: selectedOrder,
-        paymentMethod: "paid",
+        paymentMethod: paymentMethod,
         deliveryStatus: "of-delivery"
       });
       await axios.put(`http://localhost:3500/order/update/${selectedOrder}`, {
@@ -128,7 +134,7 @@ export default function KitchenTest() {
                     <option
                       key={user._id}
                       value={user._id}
-                    >{`${user.firstname} ${user.lastname}`}</option>
+                    >{`${user.name}`}</option>
                   ))}
                 </select>
               </>

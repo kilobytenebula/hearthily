@@ -14,8 +14,6 @@ export default function GetOrder() {
   const [records, setRecords] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  DocumentTitle("My Orders");
-
   function getStatusClass(status) {
     const statusMap = {
       pending: 'Pending',

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../css/checkout.css';
 
@@ -11,6 +11,7 @@ export default function Checkout(){
 
     //Bank details show and hide implementation
     const [showBankDetails, setShowBankDetails] =useState(false);
+    const navigate = useNavigate();
 
     const handleBTClick=() =>{
 
@@ -34,7 +35,7 @@ export default function Checkout(){
     const [address, setAddress] = useState([]);
     const [inputValue, setInputValue] = useState(0);
     const [lastOrderId, setLastOrderId] = useState('');
-    const customerId = "6607de0ae6da274300367544";
+    const customerId = "66279ba428c2bd21af0ac912";
     const [lastClickedButton, setLastClickedButton] = useState(null);
     
     //Retrive available loyalty points
@@ -183,7 +184,7 @@ export default function Checkout(){
             const response = await axios.post('http://localhost:3500/payment/add', data);
             console.log(response.data); 
             window.alert('Order Placed successfully!');
-            window.location.href = '/payments';
+            navigate('/payments');
             
           } catch (error) {
             console.error('Error:', error); 
@@ -280,7 +281,7 @@ export default function Checkout(){
 
                 </div>
             </div>
-            <div className="payment">
+            <div className="checkout-payment">
                 <div className="paymentMethod">
                     <div className="header">
                         Select Payment Method

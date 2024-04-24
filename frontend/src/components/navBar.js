@@ -31,7 +31,7 @@ const NavBar = () => {
         
         <div class="navBarItems">
             <ul>
-                {(userRole !== 'admin' && userRole !== 'inventory') && <li><Link to="/order"><div className='navItem '><img src={home} alt="Home" title='Home' /></div></Link></li>}
+                {userRole === 'user' && <li><Link to="/order"><div className='navItem '><img src={home} alt="Home" title='Home' /></div></Link></li>}
                 {userRole === 'user' && <li><Link to="/order-history"><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></Link></li>}
                 {userRole === 'user' && <li><Link to="/payments"><div className='navItem'><img src={paymentHistory} alt="Payment History" title='Payment History' /></div></Link></li>}
                 {userRole === 'admin' && <li><Link to="/refunds"><div className='navItem'><img src={refund} alt="Refunds" title="Refunds"></img></div></Link></li>}

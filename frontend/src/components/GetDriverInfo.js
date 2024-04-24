@@ -9,6 +9,7 @@ import DocumentTitle from "./DocumentTitle";
 export default function GetDriverInfo() {
   const [driver, setDriver] = useState(null);
   const [delivery, setDelivery] = useState([]);
+  const [userId, setUserId] = useState(null);
   const [lastCompletedDelivery, setLastCompletedDelivery] = useState(null);
   const [currentDeliveryId, setCurrentDeliveryId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,8 +30,8 @@ export default function GetDriverInfo() {
         const userData = await fetchUserData(driverData.driver.userId);
         const combinedData = {
           _id: driverData.driver._id,
-          name: `${userData.firstname} ${userData.lastname}`,
-          contact: userData.phonenumber,
+          name: `${userData.name}`,
+          contact: userData.phonenumber ? userData.phonenumber : "n/a",
           deliveryCount: driverData.driver.deliveryCount,
           averageRating:
             driverData.driver.avgRating > 0
@@ -39,9 +40,10 @@ export default function GetDriverInfo() {
           isAvailable: driverData.driver.isAvailable,
         };
         setDriver(combinedData);
+        setUserId(driverData.driver.userId);
 
         const deliveryResponse = await fetch(
-          `http://localhost:3500/delivery/driver/${driverId}`
+          `http://localhost:3500/delivery/driver/${userId}`
         );
         const deliveryData = await deliveryResponse.json();
         const lastCompletedDelivery = deliveryData.lastCompletedDelivery;

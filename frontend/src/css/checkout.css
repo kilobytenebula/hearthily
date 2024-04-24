@@ -133,7 +133,7 @@
 
 }
 /* payment section */
-.payment{
+.checkout-payment{
     padding: 32px;
     background-color: var(--bg-200);
     width: 40%;

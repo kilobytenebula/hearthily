@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom';
 import '../css/GetOrder.css';
 import searchIcon from '../icons/search.png';
 import { useAuth } from '../Services/Auth/AuthContext';
+import DocumentTitle from './DocumentTitle';
 
 export default function GetOrder() {
   const [order, setOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const { userId } = useAuth();
+
+  DocumentTitle("My Orders");
 
   function getStatusClass(status) {
     const statusMap = {
