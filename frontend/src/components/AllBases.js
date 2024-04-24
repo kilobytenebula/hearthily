@@ -51,14 +51,16 @@ export default function AllBases(){
     return(
         <div className="container1">
             <div className="headerContainer">
-                <div className="heading">What are you craving today?</div>
+                <div className="head-and-search">
+                <div className="allbases-heading">What are you craving today?</div>
                 <div className="search-container">
                     <input type="text" className="search" placeholder='Search..' onChange={Filter} />
                 </div>
+                </div>
                 <ul>
-                    <li onClick={()=> setSelectedCategory("Sri Lankan Dishes")}>Sri Lankan Dishes</li>
-                    <li onClick={()=> setSelectedCategory("Bakery Items")}>Bakery Items</li>
-                    <li onClick={()=> setSelectedCategory("Beverages")}>Beverages</li>
+                    <li onClick={()=> setSelectedCategory("Sri Lankan Dishes")} className={selectedCategory === "Sri Lankan Dishes" ? "selected" : ""}>Sri Lankan Dishes</li>
+                    <li onClick={()=> setSelectedCategory("Bakery Items")} className={selectedCategory === "Bakery Items" ? "selected" : ""}>Bakery Items</li>
+                    <li onClick={()=> setSelectedCategory("Beverages")} className={selectedCategory === "Beverages" ? "selected" : ""}>Beverages</li>
                 </ul>
             </div>
             
@@ -68,10 +70,12 @@ export default function AllBases(){
                     <div className="bases-list">
                         {riceBases.map((base) => (
                             <div key={base._id} className="base_item">
-                                <h2>{base.base_name}</h2>
-                                <p>Reg price: {base.reg_price}LKR</p>
-                                <p>Full price: {base.full_price}LKR</p>
-                                <Link to={`/all-portions/${base._id}`}>Portions</Link>
+                                <div className="base-name">{base.base_name}</div>
+                                <div className="base-bottom">
+                                <div className="base-reg-price"><div>Reg price</div><div>{base.reg_price} LKR</div></div>
+                                <div className="base-full-price"><div>Full price</div><div> {base.full_price} LKR</div></div>
+                                <Link className="base-action" to={`/all-portions/${base._id}`}>Select</Link>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -79,11 +83,13 @@ export default function AllBases(){
                     <div className="bases-list">
                         {otherBases.map((base) => (
                             <div key={base._id} className="base_item">
-                                <h2>{base.base_name}</h2>
-                                <p>Reg price: {base.reg_price}LKR</p>
-                                <p>Full price: {base.full_price}LKR</p>
-                                <Link to={`/all-portions/${base._id}`}>Portions</Link>
+                            <div className="base-name">{base.base_name}</div>
+                            <div className="base-bottom">
+                            <div className="base-reg-price"><div>Reg price</div><div>{base.reg_price} LKR</div></div>
+                            <div className="base-full-price"><div>Full price</div><div> {base.full_price} LKR</div></div>
+                            <Link className="base-action" to={`/all-portions/${base._id}`}>Select</Link>
                             </div>
+                        </div>
                         ))}
                     </div>
                 </div>
