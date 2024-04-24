@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../Services/Auth/AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../css/GetDeliveryInfo.css";
@@ -17,7 +18,8 @@ export default function GetDeliveryInfo() {
   const [undoTimer, setUndoTimer] = useState(15);
   const [tempStatus, setTempStatus] = useState("");
   const timerRef = useRef(null);
-  const driverId = '661bfcaff9b3692a8a15a7f2'
+  const { userId } = useAuth();
+  const driverId = userId;
 
   DocumentTitle("Delivery Details");
 

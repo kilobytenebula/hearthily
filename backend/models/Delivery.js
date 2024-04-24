@@ -12,7 +12,8 @@ const deliverySchema = new Schema({
     },
     driverId: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     paymentMethod: {
         type: String,

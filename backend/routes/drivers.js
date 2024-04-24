@@ -34,7 +34,7 @@ router.route('/').get(async (req, res) => {
         // Iterate through each driver
         for (const driver of drivers) {
             // Find completed deliveries for the driver
-            const completedDeliveries = await Delivery.find({ driverId: driver._id, deliveryStatus: "completed" });
+            const completedDeliveries = await Delivery.find({ driverId: driver.userId, deliveryStatus: "completed" });
 
             // Get the number of completed deliveries
             const deliveryCount = completedDeliveries.length;

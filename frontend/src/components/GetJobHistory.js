@@ -5,6 +5,7 @@ import "../css/GetDelivery.css";
 import searchIcon from "../icons/search.png";
 import JobHistoryReport from "./JobHistoryReport";
 import DocumentTitle from "./DocumentTitle";
+import { useAuth } from "../Services/Auth/AuthContext";
 
 export default function GetJobHistory() {
   const [jobsArray, setJobsArray] = useState([]);
@@ -12,10 +13,10 @@ export default function GetJobHistory() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
+  const { userId } = useAuth();
 
   DocumentTitle("Job History");
 
-  const driverId = "661bfcaff9b3692a8a15a7f2";
 
   useEffect(() => {
     // Fetch delivery data
@@ -26,7 +27,7 @@ export default function GetJobHistory() {
           (delivery) =>
             (delivery.deliveryStatus === "on-delivery" ||
               delivery.deliveryStatus === "completed") &&
-            delivery.driverId === driverId
+            delivery.driverId === userId
         );
         // Fetch user data for each job
         Promise.all(

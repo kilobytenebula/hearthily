@@ -52,7 +52,7 @@ export default function GetDelivery() {
         const correspondingUser = users.find(user => user._id === deliveryItem.userId);
 
         const deliveryId = deliveryItem._id;
-        const name = `${correspondingUser?.firstname} ${correspondingUser?.lastname}`;
+        const name = `${correspondingUser?.name}`;
         const date = deliveryItem.date ? new Date(deliveryItem.date).toLocaleDateString() : '';
         const location = correspondingUser?.address || '';
         const payment = deliveryItem.paymentMethod;
