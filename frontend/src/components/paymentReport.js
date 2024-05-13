@@ -3,10 +3,13 @@ import axios from "axios";
 import '../css/paymentReports.css';
 import { CSVLink } from 'react-csv';
 import jsPDF from 'jspdf';
+import { useNavigate } from 'react-router-dom';
+
 
 const download = require('../icons/download.png')
 
 export default function PaymentReports(){
+    const navigate = useNavigate();
 
     const [showBTOverview, setShowBTOverview] = useState(false); // State to manage BT overview visibility
     const [showBTList, setShowBTList] = useState(false);
@@ -118,11 +121,23 @@ export default function PaymentReports(){
     const updatePayment = async (orderId, isSuccess) => {
         try {
             const response = await axios.put(`http://localhost:3500/payment/update/${orderId}`, { isSuccess });
-            console.log(response.data); // Log the response from the API
+            console.log(response.data); // Log the response from the APIpaymentReports
+
+            axios.get("http://localhost:3500/payment/")
+            .then((res)=>{
+                setAllPayments(res.data);
+            }).catch((err)=>{
+                alert(err.message);
+            })
+            
+    
+
+
         } catch (error) {
             console.error('Error updating payment:', error);
         }
     };
+    
     const handleUpdatePayment = (orderId, isSuccess) => {
         updatePayment(orderId, isSuccess);
      

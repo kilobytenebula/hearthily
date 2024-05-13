@@ -35,6 +35,24 @@ router.route("/").get((req, res) => {
             res.status(500).json({ error: "Internal Server Error" });
         });
 });
+
+router.route("/get/:id").get((req, res) => {
+    const refundId = req.params.id;
+
+    refund.findById(refundId)
+        .then((refund) => {
+            if (!refund) {
+                return res.status(404).json({ error: "Refund not found" });
+            }
+            res.json(refund);
+            console.log(refund);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: "Internal Server Error" });
+        });
+});
+
 router.route("/:customerId").get((req, res) => {
     const customerId = req.params.customerId;
 
@@ -86,6 +104,26 @@ router.route("/delete/:id").delete((req, res) => {
             res.status(500).send({ status: "Unsuccessful" });
         });
 });
+
+router.put('/refundEdit/:id', async (req, res) => {
+    const { id } = req.params;
+    const { mobileNumber, reason, description } = req.body; // Extract specific fields
+
+    try {
+        const existingRefund = await refund.findById(id);
+
+        
+        // Check if the status is pending, if so, don't update i
+        const update = { mobileNumber, reason, description };
+        // If status is not pending, update all fields
+        const updatedRefund = await refund.findByIdAndUpdate(id, update, { new: true });
+        res.json(updatedRefund);
+    } catch (error) {
+        console.error('Error updating refund:', error);
+        res.status(500).json({ message: 'Internal Server Error', });
+    }
+});
+
 
 
 module.exports = router;

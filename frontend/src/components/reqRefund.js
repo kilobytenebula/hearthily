@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import '../css/reqRefunds.css';
-
+import { useAuth } from '../Services/Auth/AuthContext';
+import { toast } from 'react-toastify';
 
 const ReqRefund = () => {
     const { orderId } = useParams();
@@ -11,7 +12,8 @@ const ReqRefund = () => {
     const [mobileNumber,setNumber] =useState("");
     const [reason,setReason] =useState("");
     const [description,setDes] =useState("");
-    const customerId = "609c9c918c27e038b0e27b2d";
+    const { userId } = useAuth();
+    const customerId = userId;
 
     function sendData(e){
         e.preventDefault();
@@ -75,6 +77,29 @@ const ReqRefund = () => {
             setImage(reader.result);
         }
       }
+
+      const handleChange = (e) => {
+        const inputValue = e.target.value;
+        
+        // Validate input to allow only 10 digits starting with "07"
+        if (inputValue.length === 10) {
+            // Validate input to allow only digits starting with "07"
+            const isValidInput = /^\d{10}$/.test(inputValue) && inputValue.startsWith("07");
+
+            if (isValidInput || inputValue === "") {
+                // If the input is valid or empty, update the state
+                setNumber(inputValue);
+            } else {
+                // If the input is invalid, display a toast notification
+                toast.error('Invalid mobile number. Please enter a 10-digit number starting with "07"');
+            }
+        } else {
+            // If input length is not 10 characters, update the state without displaying a toast
+            setNumber(inputValue);
+        }
+    };
+    
+      
     return (
         <div className="refundContainer">
             <div className='heading'>Refund Request</div>
@@ -110,13 +135,7 @@ const ReqRefund = () => {
                     <div className="inputField">
                         <label for = "number">Mobile Numeber</label>
                         <input id ="number" className="inputBox" type="tel" 
-                        onChange={(e)=>{
-
-                            setNumber(e.target.value);
-
-
-                        }}
-
+                        onChange={handleChange}
                         ></input>
                     </div>
                     

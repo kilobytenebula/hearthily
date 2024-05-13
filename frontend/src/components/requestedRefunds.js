@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
 import '../css/requestedRefunds.css';
+import { useAuth } from '../Services/Auth/AuthContext';
 
 
 export default function RequestedRefunds() {
 
     const [refunds, setRefunds] = useState([]);
-    const customerId = "609c9c918c27e038b0e27b2d";
+    const { userId } = useAuth();
+    const customerId = userId;
+
+    
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log("ggv",customerId);
             try {
                 const response = await axios.get(`http://localhost:3500/refund/${customerId}`);
                 setRefunds(response.data);
@@ -23,9 +28,8 @@ export default function RequestedRefunds() {
 
     const handleDelete = async (refundId) => {
         try {
-            // Make delete request to your backend API with the refundId
+            
             await axios.delete(`http://localhost:3500/refund/delete/${refundId}`);
-            // After successful deletion, fetch refunds again to update the UI
             const response = await axios.get(`http://localhost:3500/refund/${customerId}`);
             setRefunds(response.data);
         } catch (error) {
@@ -69,7 +73,7 @@ export default function RequestedRefunds() {
                             {refund.isSuccess !== "accepted" && (
                                     
                                     <div className="delete">
-                                        {/* <div><Link to={`/reqRefun/${}`} className="refund-button">Request Refund</Link></div> */}
+                                        <div><Link to={`/refundEdit/${refund._id}`} className="refund-button">Update Refund</Link></div>
                                         <button onClick={() => handleDelete(refund._id)}>Delete</button>
                                     </div>
                                     

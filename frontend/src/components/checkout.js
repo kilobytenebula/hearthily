@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../Services/Auth/AuthContext";
 import '../css/checkout.css';
 
 
@@ -35,7 +36,9 @@ export default function Checkout(){
     const [address, setAddress] = useState([]);
     const [inputValue, setInputValue] = useState(0);
     const [lastOrderId, setLastOrderId] = useState('');
-    const customerId = "66279ba428c2bd21af0ac912";
+
+    const { userId } = useAuth();
+    const customerId = userId;
     const [lastClickedButton, setLastClickedButton] = useState(null);
     
     //Retrive available loyalty points
