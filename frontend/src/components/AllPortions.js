@@ -52,6 +52,7 @@ export default function AllPortions(){
         getBaseDetails();
         
     },[baseId]);
+   
 
     useEffect(() => {
         setTotal(baseDetails.reg_price);
@@ -126,8 +127,9 @@ export default function AllPortions(){
             <div className="potion-list">
                 {portions.map((portion)=>(
                     <div key={portion._id} className="potion-item">
+                        <img className="portion-circle-img" src={portion.image_url}></img>
                         <div className="potion-item-name">{portion.portion_name}</div>
-                       <div className="portion-bottom-part">
+                        <div className="portion-bottom-part">
                         <div className="portion-price"><div>Price</div><div>{portion.price} LKR </div></div>
                         <button className="portion-add-button" onClick={()=>handleAddPortion(portion.portion_name, portion.price)}>Add</button>
                         </div>
@@ -205,6 +207,7 @@ export default function AllPortions(){
                              to={`/checkout/${baseDetails.base_name}/${selectedSizePrice}/${JSON.stringify(selectedPortion)}/${total}`}>  
                              <button type="button" onClick={addOrder}>Checkout</button>
                            </Link>   
+                           {console.log("price",selectedSizePrice)}
                             
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-//Initialize the feedback model
+//Initialize feedback model
 const mongoose = require('mongoose');
 
 //create a schema

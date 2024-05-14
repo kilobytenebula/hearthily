@@ -1,7 +1,7 @@
 import './css/App.css';
 import './css/sort.css';
 import AllPayments from './components/allPayments';
-import NavBAr from './components/navBar';
+import NavBAr from './components/NavBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Services/Auth/AuthContext';
 import RefundRequest from './components/reqRefund';
@@ -21,7 +21,7 @@ import KitchenTest from './components/KitchenTest';
 import GetJobHistory from './components/GetJobHistory';
 import GetDriver from './components/GetDriver';
 import GetDriverInfo from './components/GetDriverInfo';
-import JobSummary from './components/JobSummary';
+import GetDeliverySummary from './components/GetDeliverySummary';
 import Main from './Pages/Main'
 import { ToastContainer } from 'react-toastify'
 import Login from './Pages/Login/Login'
@@ -37,7 +37,6 @@ import ResetByEmail from './Pages/ForgotPassword/ResetByEmail'
 import RegisterForm from './components/RegisterForm';
 import AllSupplier from "./components/AllSupplier";
 import UpdateSupplier from "./components/UpdateSupplier";
-import Dashboard from "./components/SupplierDashboard";
 import SupplierReport from "./components/SupplierReport";
 import InvitedSupplier from "./components/InvitedSupplier";
 import AddShipping from "./components/AddShipping";
@@ -48,6 +47,14 @@ import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
 import EditRefund from './components/refundEdit';
+import AdminPage from './Pages/AdminPage/AdminPage';
+import UserReport from './Pages/AdminPage/UserReport';
+import ChefsList from './components/ChefsList';
+import BaseList from './components/BaseList';
+import KitchenPanel from './components/KitchenPanel';
+import PortionList from './components/PortionList';
+import AddBase from './components/AddBase';
+import AddPortion from './components/AddPortion';
 
 function App() {
   return (
@@ -79,7 +86,7 @@ function App() {
           <Route path="/job-history" element={<GetJobHistory />} />
           <Route path="/drivers" element={<GetDriver />} />
           <Route path="/driver/:driverId" element={<GetDriverInfo />} />
-          <Route path="/job-summary" element={<JobSummary />} />
+          <Route path="/delivery-summary" element={<GetDeliverySummary />} />
 
           {/* ash */}
           <Route path='/' element={<Login />} />
@@ -88,6 +95,8 @@ function App() {
           <Route path='/forgotPassword' element={<ForgotPassword />} />
           <Route path='/changePassword' element={<ChangePassword />} />
           <Route path='/resetPassword' element={<ResetByEmail />} />
+          <Route path='/adminPage' element={<AdminPage />} />
+          <Route path='/userReport' element={<UserReport />} />
           <Route path='/main' element={<Main />} >
             <Route index element={ <UserStack />} />
             <Route path='user' element={<UserStack />} >
@@ -114,6 +123,14 @@ function App() {
           <Route path="/inventory-record" element={<GetInventory/>} />
           <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
           <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
+
+          {/* dimalsha */}
+          <Route path="/kitchen-panel" element={<KitchenPanel />} />
+          <Route path="/chefs-list" element={<ChefsList />} />
+          <Route path="/base-list" element={<BaseList />} />
+          <Route path="/portion-list" element={<PortionList />} />
+          <Route path="/add-base" element={<AddBase />} />
+          <Route path="/add-portion" element={<AddPortion />} />
           </Routes>
         </AuthProvider>
       </div>

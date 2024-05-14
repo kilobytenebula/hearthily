@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import {CSVLink} from 'react-csv';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import '../css/GetOrder.css';
-import DocumentTitle from './DocumentTitle';
+import '../css/OrderHistory.css';
+const arrow = require('../icons/sort-arrow.png');
 
 
 export default function GetOrder() {
@@ -13,6 +13,8 @@ export default function GetOrder() {
   const [isLoading, setIsLoading] = useState(true);
   const [records, setRecords] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [sortBy, setSortBy] = useState(null);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   function getStatusClass(status) {
     const statusMap = {
@@ -52,6 +54,23 @@ export default function GetOrder() {
     ));
   }
 
+  const sortData = (key) => {
+    let sortedRecords = [...records];
+    if (sortBy === key) {
+      sortedRecords.reverse();
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      sortedRecords.sort((a, b) => {
+        if (a[key] < b[key]) return sortOrder === 'asc' ? -1 : 1;
+        if (a[key] > b[key]) return sortOrder === 'asc' ? 1 : -1;
+        return 0;
+      });
+      setSortBy(key);
+      setSortOrder('asc');
+    }
+    setRecords(sortedRecords);
+  };
+
   const exportToCSV = () => {
     const csvData = order.map(orderItem => ({
       'Order ID': orderItem._id,
@@ -84,13 +103,17 @@ export default function GetOrder() {
   };
 
   return (
-    <div className="order-history">
-      <div className="top-bar">
-        <div className="container-title-text">Order History</div>
-        <div className="search-container">
-          <input type="text" className="search" placeholder='Search..' onChange={Filter} />
+    <div className='inventory-main'>
+    <div className="orderHistory">
+      <div className="topBar">
+        <div className='orderHistoryTitle'>
+          <div className='title'>Order History</div>
+          {/* <div className="search-container"> */}
+            <input type="text" className="search" placeholder='Search..' onChange={Filter} />
+          {/* </div> */}
         </div>
-        <div>
+        
+        <div className='report-container'>
             <select className="chooseReport" onChange={(e) => setSelectedOption(e.target.value)}>
                 <option value="">Get Reports</option>
                 <option value="csv">CSV</option>
@@ -113,30 +136,30 @@ export default function GetOrder() {
       {isLoading ? (
         <div className='loading-orders'>Beep boop boop...</div>
       ) : (
-        <div>
-          <div className="fields">
+        <div className='historyTable'>
+          <div className="tableTitles">
             <ul>
-              <li className='orderid'>Order ID</li> 
-              <li className='meal'>Meals</li>
-              <li className='date'>Date</li>
-              <li className='qty'>Qty</li>
-              <li className='size'>Portion Size</li>
-              <li className='price'>Price</li>
-              <li className='status'>Status</li>
+              <li className='orderId'>Order ID</li> 
+              <li className='mealName'>Meals</li>
+              <li className='orderDate'>Date <img src={arrow} alt="sorting arrow" className='sort-arrow' onClick={() => sortData('date')}/></li>
+              <li className='qt'>Qty</li>
+              <li className='portionSize'>Portion Size</li>
+              <li className='totPrice'>Price <img src={arrow} alt="sorting arrow" className='sort-arrow' onClick={() => sortData('total_amount')}/></li>
+              <li className='orderStatus'>Status</li>
             </ul>
           </div>
-          <div className="order-container">
+          <div className="orderDetails">
             {order.length > 0 ? (
               records.map((orderItem) => (
-                <div className="item" key={orderItem._id}>
+                <div className="orderItems" key={orderItem._id}>
                     <ul>
-                      <li className="orderid">{orderItem._id}</li>
-                      <li className="meal">{orderItem.base_name} with {orderItem.portion_name.join(', ')}</li>
-                      <li className="date">{orderItem.date.substring(0, 10)}</li>
-                      <li className="qty">{orderItem.qty}</li>
-                      <li className="size">{orderItem.portion_size}</li>
-                      <li className="price">{orderItem.total_amount}.00 LKR</li>
-                      <li className="status">
+                      <li className="orderId">{orderItem._id}</li>
+                      <li className="mealName">{orderItem.base_name} with {orderItem.portion_name.join(', ')}</li>
+                      <li className="orderDate">{orderItem.date.substring(0, 10)}</li>
+                      <li className="qt">{orderItem.qty}</li>
+                      <li className="portionSize">{orderItem.portion_size}</li>
+                      <li className="totalPrice">{orderItem.total_amount}.00 LKR</li>
+                      <li className="orderStatus">
                         <div className={`status-dyn ${orderItem.status}`}>
                           {getStatusClass(orderItem.status)}
                         </div>
@@ -150,6 +173,7 @@ export default function GetOrder() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }

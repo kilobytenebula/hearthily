@@ -2,7 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import logoImage from "../icons/logo.png";
 
-const JobSummaryReport = ({ deliveries }) => {
+const DeliverySummaryReport = ({ deliveries }) => {
     const handleDownloadCSV = () => {
         // Generate CSV data
         const csvData = deliveries.map(delivery => ({
@@ -41,7 +41,7 @@ const JobSummaryReport = ({ deliveries }) => {
             link.setAttribute("href", url);
     
             // Set the link's download attribute to specify the filename
-            link.setAttribute("download", "job_summary_report.csv");
+            link.setAttribute("download", "delivery_summary_report.csv");
     
             // Append the link to the document body
             document.body.appendChild(link);
@@ -83,7 +83,7 @@ const JobSummaryReport = ({ deliveries }) => {
         doc.setFont("helvetica", "bold");
         doc.setFontSize(16);
         doc.setTextColor(textColor);
-        doc.text("Job Summary Report", doc.internal.pageSize.getWidth() / 2, margin + (headerHeight / 2), null, null, "center");
+        doc.text("Delivery Summary Report", doc.internal.pageSize.getWidth() / 2, margin + (headerHeight / 2), null, null, "center");
     
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
@@ -150,15 +150,15 @@ deliveries.forEach(delivery => {
 
     
         // Save the PDF with the specified filename
-        doc.save("job_summary_report.pdf");
+        doc.save("delivery_summary_report.pdf");
     };    
     
     return (
-        <div className="jobsummary-report-actions">
-            <div className="jobsummary-report-action-btn" onClick={handleDownloadPDF}>Download PDF Report</div>
-            <div className="jobsummary-report-action-btn" onClick={handleDownloadCSV}>Download CSV Report</div>
+        <div className="deliverysummary-report-actions">
+            <div className="deliverysummary-report-action-btn" onClick={handleDownloadPDF}>Download PDF Report</div>
+            <div className="deliverysummary-report-action-btn" onClick={handleDownloadCSV}>Download CSV Report</div>
         </div>
     );
 };
 
-export default JobSummaryReport;
+export default DeliverySummaryReport;

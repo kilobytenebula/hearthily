@@ -3,7 +3,7 @@ import axios from "axios";
 import "../css/ShipmentTable.css";
 import { AiFillDelete, AiFillEdit, AiFillEye, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Search from "../components/Search";
+import Search from "./Search";
 
 function ShipmentTable() {
   const [shipments, setShipments] = useState([]);

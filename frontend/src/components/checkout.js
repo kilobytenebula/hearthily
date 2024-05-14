@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -40,6 +41,8 @@ export default function Checkout(){
     const { userId } = useAuth();
     const customerId = userId;
     const [lastClickedButton, setLastClickedButton] = useState(null);
+
+    console.log("details",basePrice);
     
     //Retrive available loyalty points
     useEffect(() => {
@@ -221,6 +224,26 @@ export default function Checkout(){
      
 
 
+      function handleCancelOrder() {
+        const confirmed = window.confirm("Are you sure you want to cancel the order?");
+        
+        if (confirmed) {
+            console.log("Button clicked");
+            axios.delete(`http://localhost:3500/order/delete/${lastOrderId}`)
+                .then(() => {
+                    alert("Order cancelled successfully.");
+                    setLastOrderId('');
+                    navigate("/order");
+                })
+                .catch(error => {
+                    console.error("Error cancelling order:", error);
+                    alert("Error cancelling order");
+                });
+        } else {
+            // User clicked cancel, do nothing
+        }
+    };
+
 
     return(
 
@@ -321,8 +344,8 @@ export default function Checkout(){
                     </div>
                 </div>
                 <div className="actions">
-                    <button className="cancel">Cancel</button>
-                    <button className="placeOrder" onClick={handleSubmit}  >Place Order</button>
+                    <button className="cancel" onClick={handleCancelOrder}>Cancel</button>
+                    <button className="placeOrder" onClick={handleSubmit}>Place Order</button>
                 </div>
             </div>
         </div>

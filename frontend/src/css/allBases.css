@@ -35,6 +35,10 @@ body{
     color: var(--orange-200);
 }
 
+.category-list{
+    cursor: pointer;
+}
+
 .allbases-heading{
     font-size: 24px;
     font-weight: 700;
@@ -53,8 +57,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     width: 260px;
+    margin-top: 100px;
     background-color: var(--bg-200);
     border-radius: 16px;
 }
@@ -65,6 +69,7 @@ body{
     align-items: center;
 }
 .base-name{
+    margin-top: -100px;
     padding: 32px 32px 16px 32px;
     font-size: 18px;
     font-weight: 600;
@@ -99,4 +104,15 @@ body{
 
 .base-category{
     margin-bottom: 16px;
+}
+.base-category-other{
+    margin-top: 20px;
+}
+.base-circle-img{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 150px; /* Adjust as needed */
+    height: 150px;
 }

@@ -1,0 +1,145 @@
+.kitchen-list-main {
+  width: display;
+  padding: 32px;
+  margin-left: 10%;
+}
+
+.orders {
+  padding-left: 20px; /* Add space between filters and orders */
+  display: flex;
+  flex-wrap: wrap; /* Enable wrapping */
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  position: relative;
+}
+
+/* Search Bar */
+.search-bar {
+  position: absolute; /* Position the search bar absolutely */
+  top: 50px; /* Adjust top position */
+  right: 70px; /* Adjust right position */
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.search-bar input[type="text"] {
+  border-radius: 25px; /* Round corners of the input box */
+  padding: 10px 40px 10px 15px; /* Adjust padding */
+  border: none; /* Remove border */
+  outline: none; /* Remove outline */
+}
+
+.search-icon {
+  position: absolute; /* Position the search icon absolutely */
+  right: 15px; /* Adjust right position */
+  color: #f28638; /* Change color to orange */
+}
+
+/* Orders Heading */
+.orders-heading {
+  color: #f28638; /* Set text color to orange */
+  text-align: center; /* Center align the text */
+  margin-top: 20px; /* Add space between filter and order parts */
+  margin-bottom: 20px; /* Add space between filter and order parts */
+  right: 700px;
+  position: fixed;
+}
+
+/* Filters */
+.filters h4 {
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.ant-checkbox-group {
+  display: grid;
+  grid-template-rows: repeat(4, auto); /* 4 rows */
+}
+
+.ant-checkbox-wrapper {
+  color: white; /* Change text color to white */
+}
+
+/* Orders Container */
+.orders-container {
+  display: flex;
+  flex-wrap: wrap; /* Enable wrapping */
+  justify-content: space-between; /* Distribute items evenly */
+  margin-top: 32px;
+}
+
+.col-md-9 {
+  margin-left: 120px;
+}
+
+/* Order Card */
+.order-card {
+  background-color: #1f1d2b;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 20px; /* Add space between columns */
+  margin-bottom: 20px; /* Add space between rows */
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(30.33% - 20px); /* One-third width with spacing */
+}
+
+.order-card p {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.order-card ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: #fff;
+}
+
+.order-card ul li {
+  margin-bottom: 5px;
+}
+
+/* View More Button */
+.view-more-button {
+  background-color: #ffb572; /* Set orange background color */
+  color: #fff; /* Set text color to white */
+  border: none; /* Remove border */
+  padding: 8px 16px; /* Adjust padding */
+  border-radius: 20px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+  display: inline-block; /* Make the button inline-block */
+  text-align: center; /* Center-align text */
+  line-height: 20px; /* Set line height to vertically center text */
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.view-more-button:hover {
+  background-color: #f28638;
+}
+
+
+.submit-button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 16px; /* Adjust padding */
+  border-radius: 20px; /* Add border radius for rounded corners */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker Green */
+}
+
+.fant-checkbox-group {
+  display: flex;
+  flex-direction: row !important;
+}

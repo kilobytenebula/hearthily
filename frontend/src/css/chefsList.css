@@ -1,0 +1,57 @@
+.fields-chef ul {
+  font-weight: 600;
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+
+.chef-id,
+.chef-name,
+.orders-comp {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chef-id {
+  width: 10%;
+  text-align: left;
+}
+
+.chef-name {
+  width: 70%;
+  text-align: center;
+}
+
+.orders-comp {
+  width: 20%;
+  text-align: center;
+}
+
+.chef-container {
+  margin-top: 32px;
+}
+
+.chefs-report-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: end;
+}
+
+.chefs-report-action-btn {
+    display: inline-block;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--white-100);
+    background-color: var(--orange-200);
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@ import "../css/SupplierTable.css";
 import { AiFillDelete, AiFillEdit, AiOutlineDownload } from "react-icons/ai";
 import axios from "axios";// to get data from database
 import { Link } from "react-router-dom";
-import Search from "../components/Search";
+import Search from "./Search";
 
 
 function SupplierTable(){
