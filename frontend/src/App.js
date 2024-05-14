@@ -46,6 +46,7 @@ import UpdateOrder from "./components/UpdateOrder";
 import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
+import ShipmentReport from './components/ShipmentReport';
 import EditRefund from './components/refundEdit';
 import AdminPage from './Pages/AdminPage/AdminPage';
 import UserReport from './Pages/AdminPage/UserReport';
@@ -118,6 +119,7 @@ function App() {
           <Route path='/displays' exact Component={DispalyShipment} />
           <Route path='/displays/:id' exact Component={SendOrder} />
           <Route path='/updates/:id' exact Component={UpdateOrder} />
+          <Route path='/shipment-report' exact Component={ShipmentReport} />
             
           {/* thej */}
           <Route path="/inventory-record" element={<GetInventory/>} />

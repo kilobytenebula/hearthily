@@ -16,15 +16,11 @@
   background-color: #252836;
   width: 300px;
   border-radius: 10px;
-  height: 2.5rem;
   margin-left: 40px;
-  padding: 0 20px;
-  margin-top: 10px;
-  display: inline-block;  
+  margin-top: 10px; 
   text-align:left;
   color: white;
   font-size: 40px;
-  vertical-align: middle; 
 }
 
 .SI_title .date {

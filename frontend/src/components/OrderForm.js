@@ -1,6 +1,7 @@
 import React, {useState, useEffect}from "react";
 import "../css/OrderForm.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function OrderForm(){
 
@@ -10,6 +11,7 @@ function OrderForm(){
   const [order_list, setOrder] = useState(null);
   const [ship_date, setDate] = useState("");
   const [suppliers, setSuppliers] = useState([]);
+  const navigate = useNavigate();
 
   // Function to fetch supplier details based on category
   useEffect(() => {
@@ -53,40 +55,48 @@ function OrderForm(){
   }
 
   // Function to handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
   e.preventDefault();
 
-  try {
-    const formData = new FormData();
-    formData.append("file", order_list); // Append the file object, not just its name
+  const formData = new FormData();
+  formData.append("file", order_list); // Append the file object, not just its name
 
-    const formattedDate = new Date(ship_date).toISOString();
+  const formattedDate = new Date(ship_date).toISOString();
 
-    const newShipment = {
-      supplier_name,
-      catogory, 
-      email,
-      ship_date: formattedDate,
-      status: "pending"
-    };
+  const newShipment = {
+    supplier_name,
+    catogory, 
+    email,
+    ship_date: formattedDate,
+    delived_date:"",
+    status: "Pending"
+  };
 
-    // Combine form data and shipment data
-    for (let key in newShipment) {
-      formData.append(key, newShipment[key]);
-    }
+  // Combine form data and shipment data
+  for (let key in newShipment) {
+    formData.append(key, newShipment[key]);
+  }
 
-    await axios.post("http://localhost:3500/shipment/ship", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
+  axios.post("http://localhost:3500/shipment/ship", 
+      formData,
+      {
+          headers: {
+              "Content-Type": "multipart/form-data"
+          }
       }
-    });
-
+  )
+  .then((res) => {
     alert("Shipment added successfully");
-    window.location.href = "/displays";
-  } catch (error) {
-    console.error(error);
-    alert("Failed to add shipment");
-  }};
+    navigate("/displays");
+    
+  })
+  .catch((err) => {
+      console.error(err);
+      alert("Failed to add shipment");
+  });
+}
+
+
 
   return(
     <div className="SO_container"> 
@@ -158,7 +168,7 @@ function OrderForm(){
           </div>
 
           <div className="SO_button">
-            <button type="submit" className="SO_btn">Order</button>
+            <button type="submit" className="SO_btn">Register</button>
           </div>
         </div>
       </form>

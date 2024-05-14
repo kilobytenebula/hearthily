@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/DisplayShipment.css";
 import ShipmentTable from "./ShipmentTable";
+import NavBar from "./navBar";
 
 
 function DispalyShipment() {
@@ -10,6 +11,7 @@ function DispalyShipment() {
   
     return (
       <div className="S_container">
+        <NavBar/>
         <div className="SS_title">
           <span>Shipment</span>
           <span className="date">{formattedDate}</span>

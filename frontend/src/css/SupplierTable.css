@@ -40,6 +40,7 @@
     text-decoration: none;
     color: var(--white);
     border-radius: 6px;
+    font-size: 18px;
 }  
 .S_details table {
     width: 100%;
@@ -55,16 +56,18 @@
 
 #S_delete-icon{
   margin-right: 7px;
-  
+  font-size: 15px;
 }
 
 #S_update-icon{
   color: white;
   margin-right: 7px;
+  font-size: 15px;
 }
 
 #S_down-icon{
   color: white;
+  font-size: 15px;
 }
 
 

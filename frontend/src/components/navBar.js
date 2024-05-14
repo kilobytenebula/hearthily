@@ -16,7 +16,7 @@ const logout = require('../icons/logout.png');
 const logo = require('../icons/logo.png');
 const paymentReports = require('../icons/reports.png');
 const refund = require('../icons/refund.png');
-const airplane = require('../icons/airplane-land.png');
+//const airplane = require('../icons/airplane-land.png');
 const box = require('../icons/box.png');
 const mail = require('../icons/mail-add.png');
 const ship = require('../icons/ship.png');
@@ -30,7 +30,7 @@ const NavBar = () => {
   const Navigate = useNavigate();
   return (
     <div>
-      {(userRole !== null) && 
+      {(userRole !== null || userRole === 'supplier') && 
     <div class="navBar fixed-top">
         <div className='logoContainer'><img src={logo} alt="Logo" class="logo"></img></div>
         
@@ -45,7 +45,10 @@ const NavBar = () => {
                 {userRole === 'admin' && <li><Link to="/delivery-summary"><div className='navItem'><img src={delivery} alt="Job Summary" title='Job Summary' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/delivery"><div className='navItem'><img src={delivery} alt="Available Jobs" title='Available Jobs' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/job-history"><div className='navItem'><img src={jobHistory} alt="Job History" title='Job History' /></div></Link></li>}
-
+                 
+                {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
@@ -62,6 +65,7 @@ const NavBar = () => {
                 {userRole === 'ktn_manager' && <li><Link to="/chefs-list"><div className='navItem'><img src={chefsList} alt="chefs" title='chefs' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/base-list"><div className='navItem'><img src={addBases} alt="bases" title='bases' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/portion-list"><div className='navItem'><img src={addPortion} alt="portions" title='portions' /></div></Link></li>}
+
             </ul>
             <ul>
                 <li><Link to="/main/user/empEdit"><div className='navItem'><img src={settings} alt="Payment History" title='Settings' /></div></Link></li>

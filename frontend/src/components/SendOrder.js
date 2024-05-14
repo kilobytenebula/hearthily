@@ -34,15 +34,22 @@ function SendOrder() {
 
     const sendEmail = async () => {
         try {
-            await axios.post(`http://localhost:3500/shipment/sending`);
+            const data = {
+                email: email, // Add the recipient email address here
+                supplier_name: supplier_name,
+                catogory: catogory
+            };
+            await axios.post(`http://localhost:3500/shipment/sending/${id}`, data);
             alert("Email sent successfully");
         } catch (error) {
             console.error("Error sending email:", error);
             alert("Failed to send email");
         }
     };
+    
+    
 
-    const handlePrint = useReactToPrint({
+   const handlePrint = useReactToPrint({
         content: () => ComponentRef.current,
         documentTitle:"Supplier Report",
         onAfterPrint:()=>alert("Supplier Report Successfully Download")

@@ -27,7 +27,6 @@ function SupplierReport() {
                 setPhone(supplier.phone_n);
                 const formattedDate = new Date(supplier.reg_date).toISOString().split('T')[0];
                 setDate(formattedDate);
-
             } catch (error) {
                 console.error("Error fetching supplier:", error);
             }
@@ -38,40 +37,35 @@ function SupplierReport() {
     const handlePrint = useReactToPrint({
         content: () => ComponentRef.current,
         documentTitle:"Supplier Report",
-        onAfterPrint:()=> {
-            alert("Supplier Report Successfully Download");
-            window.location.href = "/display";// Navigate to the second page
-        }
+        onAfterPrint:()=>alert("Supplier Report Successfully Download")
     });
 
     return (
-        <div className="S_R_report-container">
-            <div ref={ComponentRef} >
-                <h2 className="S_R_details">Supplier Details</h2>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Name:</span>
-                    <span className="S_R_value">{supplier_name}</span>
-                </div>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Category:</span>
-                    <span className="S_R_value">{category}</span>
-                </div>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Address:</span>
-                    <span className="S_R_value">{address}</span>
-                </div>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Email:</span>
-                    <span className="S_R_value">{email}</span>
-                </div>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Phone Number:</span>
-                    <span className="S_R_value">{phone_n}</span>
-                </div>
-                <div className="S_R_detail">
-                    <span className="S_R_label">Register Date:</span>
-                    <span className="S_R_value">{reg_date}</span>
-                </div>
+        <div ref={ComponentRef} className="S_R_report-container">
+            <h2 className="S_R_details">Supplier Details</h2>
+            <div className="S_R_detail">
+                <span className="S_R_label">Name:</span>
+                <span className="S_R_value">{supplier_name}</span>
+            </div>
+            <div className="S_R_detail">
+                <span className="S_R_label">Category:</span>
+                <span className="S_R_value">{category}</span>
+            </div>
+            <div className="S_R_detail">
+                <span className="S_R_label">Address:</span>
+                <span className="S_R_value">{address}</span>
+            </div>
+            <div className="S_R_detail">
+                <span className="S_R_label">Email:</span>
+                <span className="S_R_value">{email}</span>
+            </div>
+            <div className="S_R_detail">
+                <span className="S_R_label">Phone Number:</span>
+                <span className="S_R_value">{phone_n}</span>
+            </div>
+            <div className="S_R_detail">
+                <span className="S_R_label">Register Date:</span>
+                <span className="S_R_value">{reg_date}</span>
             </div>
             <button onClick={handlePrint} className="S_R_print-button">Print PDF</button>
         </div>
