@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from "react";
 import "../css/SupplierTable.css";
 import { AiFillDelete, AiFillEdit, AiOutlineDownload } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";// to get data from database
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SupplierTable(){
 
     const [suppliers, setSuppliers] = useState([]);//dispaly suppliers
     const [searchQuery, setSearchQuery] = useState(""); // State for search query
+    const navigate = useNavigate;
     
     //dispaly suppliers
     useEffect(() => {
@@ -21,7 +25,7 @@ function SupplierTable(){
             }));
             setSuppliers(formattedSuppliers);
            }).catch((err) =>{
-                alert(err.message);
+            toast(err.message);
            })
         }
         getSuppliers();
@@ -36,16 +40,19 @@ function SupplierTable(){
     //delete supplier
     const deleteSupplier = async (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this supplier?");
+        if(!confirmDelete) {
+            return;
+        }
         if (confirmDelete) {
           try {
             await axios.delete(`http://localhost:3500/supplier/delete/${id}`);
             setSuppliers((prevSuppliers) =>
               prevSuppliers.filter((supplier) => supplier._id !== id)
             );
-            alert("Supplier deleted successfully");
+            toast.success("Supplier deleted successfully!");
           } catch (error) {
             console.error("Error deleting supplier:", error);
-            alert("Error deleting supplier");
+            toast.error("Error deleting supplier");
           }
         }
       }
@@ -55,6 +62,7 @@ function SupplierTable(){
     return(
         <div>
             <Search setSearchQuery={setSearchQuery}/>
+            
         <div className="S_details">
             <div className="S_supplier">
                 <div class="S_cardHeader">
@@ -97,7 +105,7 @@ function SupplierTable(){
                 </table>
             </div>
         </div>
-
+        <ToastContainer />
         </div>
     )
 }

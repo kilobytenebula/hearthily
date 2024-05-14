@@ -102,4 +102,28 @@ router.route("/display/:id").get(async (req, res) => {
 
 });
 
+
+/*// Get count of all suppliers
+router.route("/count/all").get(async (req, res) => {
+    try {
+      const count = await Supplier.countDocuments();
+      res.json({ count });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error fetching supplier count");
+    }
+});
+
+// Get count of suppliers by category
+router.route("/count/category").get(async (req, res) => {
+    try {
+      const { category } = req.query;
+      const count = await Supplier.countDocuments({ catogory: category });
+      res.json({ count });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error fetching supplier count by category");
+    }
+});*/
+
 module.exports = router;

@@ -61,6 +61,16 @@ function InvitationForm() {
       });
   };
 
+  // Handle key down event to restrict input to letters only
+  function handleNameKeyDown(event) {
+    const key = event.key;
+    const isLetter = /^[a-zA-Z\s]*$/.test(key);
+
+    if (!isLetter && key !== 'Backspace' && key !== 'Delete' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
+        event.preventDefault();
+    }
+}
+
   return (
     <div className="SIR_container">
       <form onSubmit={(e) => { e.preventDefault(); sendIData(); }}>
@@ -76,6 +86,7 @@ function InvitationForm() {
               onChange={(e) => {
                 setIName(e.target.value);
               }}
+              onKeyPress={handleNameKeyDown}
             />
           </div>
 

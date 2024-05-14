@@ -51,7 +51,7 @@ function InvitationTable(){
         <div className="SI_details">
             <div className="SI_supplier">
                 <div class="SI_cardHeader">
-                    <span className="SI_cardName">Supplier List</span>
+                    <span className="SI_cardName">Inviter List</span>
                 </div>
     
                 <table>
@@ -75,8 +75,7 @@ function InvitationTable(){
                                 <td>{inviter.email}</td>
                                 <td>{inviter.int_date}</td>
                                 <td>
-                                    <span className={inviter.status === 'Pending' ? 'pending' : ''}>{inviter.status}
-                                    </span>
+                                    <span className={inviter.status === 'Pending' ? 'pending' : ''}>{inviter.status}</span>
                                 </td>
                                 <td> 
                                     <botton id = "SI_update-icon"><AiFillEdit/></botton>

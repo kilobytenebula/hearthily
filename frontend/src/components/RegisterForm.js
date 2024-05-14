@@ -1,6 +1,9 @@
 import React, {useState}from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/RegisterForm.css";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function RegisterForm(){
@@ -11,6 +14,7 @@ function RegisterForm(){
     const [email, setEmail] = useState("");
     const [phone_n, setPhone] = useState("");
     const [reg_date, setDate] = useState("");
+    const navigate = useNavigate();
 
     //to submit form
     function sendData(e) {
@@ -30,12 +34,12 @@ function RegisterForm(){
             setCat("");
             setAddress("");
             setEmail("");
-            alert("New Supplier Added Successfully");
-            window.location.href = "/display";// Navigate to the second page
+            toast.success("New Supplier Added Successfully");
+            navigate("/display");// Navigate to the second page
 
         }).catch((err) =>{
             console.error(err);
-            alert("New Supplier Can Not Add");
+            toast.error("New Supplier Can Not Add");
         });
 
     }
@@ -50,6 +54,37 @@ function RegisterForm(){
     return `${yyyy}-${mm}-${dd}`;
   }
 
+  // validate telephone number
+  function handleKeyPress(event) {
+    
+    const key = event.key;
+    const inputValue = event.target.value;
+
+    // Check if the pressed key is a number or a valid character like backspace or delete
+    const isValidInput = /^[0-9\b]+$/.test(key);
+
+    const newLength = inputValue.length + 1;
+
+    if (newLength > 10 && key !== '\b') {
+        event.preventDefault();
+    }
+
+    // If the pressed key is not a number or a valid character, prevent it from being entered into the input field
+    if (!isValidInput) {
+        event.preventDefault();
+    }
+    }
+
+    // Handle key down event to restrict input to letters only
+    function handleNameKeyDown(event) {
+        const key = event.key;
+        const isLetter = /^[a-zA-Z\s]*$/.test(key);
+
+        if (!isLetter && key !== 'Backspace' && key !== 'Delete' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
+            event.preventDefault();
+        }
+    }
+
 
     return(
         <div className="SR_container">
@@ -62,7 +97,8 @@ function RegisterForm(){
                         <input type="text" className="SR_input" required
                         onChange={(e)=>{
                             setName(e.target.value);
-                        }}></input>
+                        }}
+                        onKeyPress={handleNameKeyDown}></input>
 
                     </div>
 
@@ -77,9 +113,9 @@ function RegisterForm(){
                                 <option value={"Vegetables"}>Vegetables</option>
                                 <option value={"Fruits"}>Fruits</option>
                                 <option value={"Meats"}>Meats</option>
-                                <option value={"Sea Foods"}>Sea Foods</option>
+                                <option value={"Sea_Foods"}>Sea Foods</option>
                                 <option value={"Spices"}>Spices</option>
-                                <option value={"Kitchen Equipment"}>Kitchen Equipment</option>
+                                <option value={"Kitchen_Equipment"}>Kitchen Equipment</option>
                                 <option value={"Packing"}>Packing</option>
                             </select>
                         </div>
@@ -107,7 +143,8 @@ function RegisterForm(){
                         <input type="text" className="SR_input" pattern ="0[0-9]{9}" required
                         onChange={(e)=>{
                             setPhone(e.target.value);
-                        }}></input>
+                        }}
+                        onKeyPress={handleKeyPress}></input>
                     </div>
 
                     <div className="SR_input-box">
@@ -115,7 +152,8 @@ function RegisterForm(){
                         <input type="date" className="SR_input"required min={getTodayDate()} max={getTodayDate()}
                         onChange={(e)=>{
                             setDate(e.target.value);
-                        }}></input>
+                        }}
+                        ></input>
                     </div>
 
                     <div className="SR_button">
@@ -123,6 +161,7 @@ function RegisterForm(){
                     </div>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     )
 }

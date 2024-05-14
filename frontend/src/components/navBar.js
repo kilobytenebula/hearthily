@@ -15,7 +15,7 @@ const logout = require('../icons/logout.png');
 const logo = require('../icons/logo.png');
 const paymentReports = require('../icons/reports.png');
 const refund = require('../icons/refund.png');
-const airplane = require('../icons/airplane-land.png');
+//const airplane = require('../icons/airplane-land.png');
 const box = require('../icons/box.png');
 const mail = require('../icons/mail-add.png');
 const ship = require('../icons/ship.png');
@@ -25,7 +25,7 @@ const NavBar = () => {
   const Navigate = useNavigate();
   return (
     <div>
-      {(userRole !== null) && 
+      {(userRole !== null || userRole === 'supplier') && 
     <div class="navBar fixed-top">
         <div className='logoContainer'><img src={logo} alt="Logo" class="logo"></img></div>
         
@@ -41,10 +41,10 @@ const NavBar = () => {
                 {userRole === 'admin' && <li><Link to="/drivers"><div className='navItem'><img src={drivers} alt="Driver Perfomance" title='Driver Perfomance' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/delivery"><div className='navItem'><img src={delivery} alt="Available Jobs" title='Available Jobs' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/job-history"><div className='navItem'><img src={jobHistory} alt="Job History" title='Job History' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/shipment"><div className='navItem'><img src={ship} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}
+                
                 {}
             </ul>
             <ul>

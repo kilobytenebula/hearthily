@@ -1,0 +1,70 @@
+.SSR_details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-left: 200px;
+    margin-right: 100px;
+    padding: 100px 20px;  /* Remove or adjust this padding */
+  }
+  
+  .SSR_details .SSR_supplier {
+    position: relative;
+    min-height: 250px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    color: black;
+    text-align: center;
+  }
+  
+  .SSR_details .SSR_cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+  
+  .SSR_cardHeader .SSR_cardName {
+    font-weight: 600;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .SSR_details table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .SSR_details table th,
+  .SSR_details table td {
+    padding: 20px;
+    border: 1px solid black;
+  }
+  
+  .SSR_details table thead td {
+    font-weight: 600;
+    font-size: 20px;
+    background-color: white;
+  }
+  
+  .SSR_print-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #EA7C69;
+    color: #fff;
+    border: none;
+    margin-left: 250px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.filter-container{
+    margin-top: 50px;
+    margin-left: 800px;
+}

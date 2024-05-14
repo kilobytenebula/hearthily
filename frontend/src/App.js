@@ -37,7 +37,6 @@ import ResetByEmail from './Pages/ForgotPassword/ResetByEmail'
 import RegisterForm from './components/RegisterForm';
 import AllSupplier from "./components/AllSupplier";
 import UpdateSupplier from "./components/UpdateSupplier";
-import Dashboard from "./components/SupplierDashboard";
 import SupplierReport from "./components/SupplierReport";
 import InvitedSupplier from "./components/InvitedSupplier";
 import AddShipping from "./components/AddShipping";
@@ -47,6 +46,7 @@ import UpdateOrder from "./components/UpdateOrder";
 import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
+import ShipmentReport from './components/ShipmentReport';
 
 function App() {
   return (
@@ -107,6 +107,7 @@ function App() {
           <Route path='/displays' exact Component={DispalyShipment} />
           <Route path='/displays/:id' exact Component={SendOrder} />
           <Route path='/updates/:id' exact Component={UpdateOrder} />
+          <Route path='/shipment-report' exact Component={ShipmentReport} />
             
           {/* thej */}
           <Route path="/inventory-record" element={<GetInventory/>} />

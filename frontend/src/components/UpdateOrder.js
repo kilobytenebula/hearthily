@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../css/UpdateOrder.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UpdateOrder() {
-    const { id } = useParams()
-    const [supplier_name, setName] = useState("");
-    const [catogory, setCat] = useState("");
-    const [email, setEmail] = useState("");
-    const [order_list, setOrder] = useState(null);
-    const [ship_date, setDate] = useState("");
+  const { id } = useParams();
+  const [supplier_name, setName] = useState("");
+  const [catogory, setCat] = useState("");
+  const [email, setEmail] = useState("");
+  const [order_list, setOrder] = useState(null);
+  const [ship_date, setDate] = useState("");
+  const [delived_date, setDDate] = useState("");
+  const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -19,8 +25,13 @@ function UpdateOrder() {
       setName(shipment.supplier_name);
       setCat(shipment.catogory);
       setEmail(shipment.email);
+      const file = new File([shipment.order_list], shipment.order_list);
+      setOrder(file);
       const formattedDate = new Date(shipment.ship_date).toISOString().split('T')[0];
       setDate(formattedDate);
+      const formattedDDate = shipment.delived_date ? new Date(shipment.delived_date).toISOString().split('T')[0] : "";
+      setDDate(formattedDDate);
+      setStatus(shipment.status);
     }
     fetchData();
   }, [id]);
@@ -28,27 +39,40 @@ function UpdateOrder() {
   const updateShipment = async (e) => {
     e.preventDefault();
 
+    const updatedShipment = {
+      supplier_name,
+      catogory,
+      email,
+      ship_date,
+      delived_date,
+      status
+    };
+
     const formData = new FormData();
-    formData.append("file", order_list);
-    formData.append("supplier_name", supplier_name);
-    formData.append("catogory", catogory);
-    formData.append("email", email);
-    formData.append("ship_date", ship_date);
-
-    try {
-      await axios.put(`http://localhost:3500/shipment/updates/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
-      alert("Order Updated Successfully");
-      window.location.href = "/displays"; // Navigate to the second page
-    } catch (error) {
-      console.error(error);
-      alert("Order Can Not Update");
+    
+    for (const key in updatedShipment) {
+      formData.append(key, updatedShipment[key]);
     }
-  };
 
+    if (order_list) {
+      formData.append("file", order_list);
+    }
+
+    // Make axios PUT request with FormData
+    await axios.put(`http://localhost:3500/shipment/updates/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then((res) => {
+      toast.success("Order Updated Successfully");
+      navigate("/displays");
+    })
+    .catch((err) => {
+      console.error(err);
+      toast.error("Order Can Not Update");
+    });
+  };
 
   return (
     <div className="SR_container">
@@ -106,13 +130,11 @@ function UpdateOrder() {
 
           <div className="SR_input-box">
             <label htmlFor="order">Order List</label>
-            <input
+            <input accept="application/pdf"
               type="file"
               className="SR_input"
-              required
-              value={order_list}
               onChange={(e) => {
-                setOrder(e.target.files[0]);
+                setOrder(e.target.files[0]); // Set the order_list state with the selected file
               }}
             ></input>
           </div>
@@ -130,11 +152,45 @@ function UpdateOrder() {
             ></input>
           </div>
 
+          <div className="SR_input-box">
+            <label htmlFor="date">Delivered Date</label>
+            <input
+              type="date"
+              className="SR_input"
+              value={delived_date}
+              onChange={(e) => {
+                setDDate(e.target.value);
+              }}
+              disabled={status !== "Received"}
+            ></input>
+          </div>
+
+          <div className="SR_input-box">
+            <label htmlFor="status">Status</label>
+            <div className="SR_selecter" required>
+              <select
+                className="SR_input"
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                }}
+              >
+                <option value="">Select Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Declined">Declined</option>
+                <option value="Received">Received</option>
+                <option value="Sending">Sending</option>
+              </select>
+            </div>
+          </div>
+
           <div className="SR_button">
             <button type="submit" className="SR_btn"> Update </button>
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

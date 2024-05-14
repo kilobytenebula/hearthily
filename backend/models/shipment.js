@@ -27,6 +27,9 @@ const shipmentSchema = new Schema({
         type: Date,
         required: true
     },
+    delived_date:{
+        type: Date,
+    },
     status: {
         type : String,
         required: true,

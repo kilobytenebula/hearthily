@@ -4,8 +4,8 @@
     padding: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-gap: 30px;
-    margin-left: 300px;
+    grid-gap: 10px;
+    margin-left: 120px;
     margin-right: 100px;
     padding: 100px 20px; 
 } 
@@ -21,7 +21,7 @@
 } 
 .ST_details .ST_cardHeader {
     display: flex;
-    justify-content: space-between;
+    
     align-items: flex-start;
     margin-bottom: 30px;
 }
@@ -36,12 +36,26 @@
 }
 .ST_cardHeader .ST_cardbtn {
     position: relative;
-    padding: 5px 10px;
+    padding: 9px 15px;
     background: #EA7C69;
     text-decoration: none;
     color: var(--white);
     border-radius: 6px;
-}  
+    margin-left: 50px;
+    font-size: 18px;
+} 
+.ST_cardHeader .ST_cardbt{
+  position: relative;
+  padding: 9px 15px;
+  background: #EA7C69;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+  margin-left: 750px;
+  font-size: 18px;
+} 
+
+
 .ST_details table {
     width: 100%;
     border-collapse: collapse;
@@ -51,25 +65,73 @@
     font-size: 20px;
 }
 .ST_details .ST_supplier table td {
-    padding: 20px;
+    padding: 18px;
 }
 
 #ST_delete-icon{
   margin-right: 7px; 
+  font-size: 15px;
 }
 
 #ST_update-icon{
   color: white;
   margin-right: 7px;
+  font-size: 15px;
 }
 
 #ST_email-icon{
-  color: white;
+  color: var(--white-100);
+  font-size: 15px;
 }
 
 #ST_view-icon{
     align-items: end;
+    font-size: 15px;
 }
+
+.pending {
+  color: var(--orange-200);
+  background-color: rgba(255, 181, 114, 0.2);
+  border-radius: 40px;
+  display: inline-block; 
+  padding: 4px 12px;
+  border: 1px solid var(--orange-200);
+}
+.received {
+  color: var(--green-100);
+  background-color: rgba(192, 181, 114, 0.2);
+  border-radius: 40px;
+  display: inline-block; 
+  padding: 4px 12px;
+  border: 1px solid var(--green-100);
+}
+
+.sending{
+  color: var(--purple-100);
+  background-color: rgba(164, 114, 183, 0.2);
+  border-radius: 40px;
+  display: inline-block; 
+  padding: 4px 12px;
+  border: 1px solid var(--purple-100);
+}
+.declined{
+  color: var(--red-100);
+  background-color: rgba(224, 114, 85, 0.2);
+  border-radius: 40px;
+  display: inline-block; 
+  padding: 4px 12px;
+  border: 1px solid var(--red-100);
+}
+.accepted{
+  color: var(--white-100);
+  background-color: rgba(255, 181, 114, 0.2);
+  border-radius: 40px;
+  display: inline-block; 
+  padding: 4px 12px;
+  border: 1px solid var(--white-100);
+}
+
+
 
 .details .supplir table tbody tr:hover {
     background: var(--blue);

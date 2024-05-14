@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/InvitedSupplier.css";
 import InvitationTable from "./InvitationTable";
+import NavBar from "./navBar";
 
 
 function InvitedSupplier() {
@@ -10,6 +11,7 @@ function InvitedSupplier() {
   
     return (
       <div className="S_container">
+        <NavBar/>
         <div className="SS_title">
           <span>Invitation to supplier</span>
           <span className="date">{formattedDate}</span>

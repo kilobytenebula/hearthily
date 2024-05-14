@@ -4,7 +4,7 @@ const multer = require("multer");
 const nodemailer = require("nodemailer");
 const path = require("path");
 
-// Multer configuration 
+/// Multer configuration 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "./files"); // Destination directory for storing uploaded files
@@ -47,7 +47,7 @@ router.route("/ship").post(upload.single("file"), (req, res)=>{
 
 //CURD - dispaly
 //http://localhost:8070/shipment/displays
-router.route("/displays").get((req,res)=>{
+router.route("/shipments").get((req,res)=>{
 
     Shipment.find().then((shipments)=>{
         res.json(shipments)
@@ -56,34 +56,54 @@ router.route("/displays").get((req,res)=>{
     })
 })
 
-//CURD - update
-//http://localhost:8070/shipment/update/(:id)
-//get data to update using id to identify the student
-router.route("/update/:id").put(async(req,res)=>{
-    let userId = req.params.id;
-    //const name = req.body.name; can use this also
-    const {shipment_ID, supplier_name, catogory, order_list, status} = req.body; //destructure
-
-    //update data
-    const updateShipment = {
-        shipment_ID,
-        supplier_name,
-        catogory,
-        order_list,
-        ship_date,
-        status
-    }
-
-    //if it has student in this database by id
-    //(if use email, nic for primary key - findOne)
-    await Shipment.findByIdAndUpdate(userId,updateShipment).then(()=>{
-        res.status(200).send({status: "Shipment Updated"})
-    }).catch((err)=>{
+// Get shipments by status
+router.route("/shipments/:status").get((req, res) => {
+    const { status } = req.params;
+    Shipment.find({ status })
+      .then((shipments) => {
+        res.json(shipments);
+      })
+      .catch((err) => {
         console.log(err);
-        res.status(500).send({status: "Error with updating data"});
-    }) 
+        res.status(500).send("Error fetching shipments by status");
+      });
+  });
 
-})
+//CURD - update
+//http://localhost:8070/shipment/updates/(:id)
+//get data to update using id to identify the student
+router.route("/updates/:id").put(upload.single("file"), async(req, res) => {
+    try {
+        const userId = req.params.id;
+        const { supplier_name, catogory, email, ship_date, delived_date, status } = req.body;
+        let order_list = null;
+
+        if (req.file) {
+            order_list = req.file.filename;
+        }
+
+        // Find the shipment by ID and update its details
+        const updatedShipment = await Shipment.findByIdAndUpdate(userId, {
+            supplier_name,
+            catogory,
+            email,
+            order_list,
+            ship_date,
+            delived_date,
+            status
+        });
+
+        if (!updatedShipment) {
+            return res.status(404).send({ status: "Shipment not found" });
+        }
+
+        return res.status(200).send({ status: "Shipment Updated" });
+    } catch (error) {
+        console.error("Error updating shipment:", error);
+        return res.status(500).send({ status: "Error with updating shipment" });
+    }
+});
+
 
 //CRUD - delete
 //http://localhost:8070/shipment/delete/
@@ -122,39 +142,58 @@ const transporter = nodemailer.createTransport({
 
 
 // Route to send emails for order
-router.post("/sending", upload.single("file"), async (req, res) => {
+router.post("/sending/:id", async (req, res) => {
     const { email, supplier_name, catogory } = req.body;
-  
+    const shipmentId = req.params.id;
+
     try {
-      // Email template
-      const emailContent = `
-        <p>Hello, ${supplier_name}</p>
-        <p>You have a new order:</p>
-        <p>Category: ${catogory}</p>
-        <p>Please find the attached PDF for more details.</p>
-        <p>Thank you!</p>
-      `;
-  
-      // Attach PDF file
-      const attachment = {
-        path: path.join(__dirname, "../files", req.file.filename),
-      };
-  
-      // Send email
-      const info = await transporter.sendMail({
-        to: email,
-        subject: 'New Order Details',
-        html: emailContent,
-        attachments: [attachment]
-      });
-  
-      console.log("Email sent: ", info.response);
-      res.status(200).json({ message: 'Email sent successfully' });
+        // Retrieve shipment details
+        let shipment = await Shipment.findById(shipmentId);
+
+        // Check if the shipment has already been sent
+        if (shipment.status === "Sent Email") {
+            return res.status(400).json({ error: "Email already sent to this supplier" });
+        }
+
+        // Email template
+        const emailContent = `
+            <p>Hello, ${supplier_name}</p>
+            <p>You have a new order:</p>
+            <p>Category: ${catogory}</p>
+            <p>Please find the attached PDF for more details.</p>
+            <p>Thank you!</p>
+        `;
+
+        // Attach PDF file
+        const attachment = {
+            filename: shipment.order_list,
+            path: path.join(__dirname, "../files", shipment.order_list)
+        };
+
+        // Send email
+        const info = await transporter.sendMail({
+            from: {
+                name: "Hearthily",
+                address: 'indudunu22@gmail.com'
+            },
+            to: email,
+            subject: 'New Order Details',
+            html: emailContent,
+            attachments: [attachment]
+        });
+
+        // Update shipment status to "sent"
+        shipment.status = "Sending";
+        await shipment.save();
+
+        console.log("Email sent: ", info.response);
+        res.status(200).json({ message: 'Email sent successfully' });
     } catch (error) {
-      console.error("Error sending email: ", error);
-      res.status(500).json({ error: 'Failed to send email' });
+        console.error("Error sending email: ", error);
+        res.status(500).json({ error: 'Failed to send email' });
     }
-  });
+});
+
   
   
 
