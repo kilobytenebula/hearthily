@@ -21,7 +21,7 @@
 }
 /* meal section */
 
-.selectedMeal .meal{
+.selectedMeal .c-meal{
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -32,13 +32,16 @@
 }
 
 
-.name{
+.c-name{
 
+    font-size: 18px;
     width: 70%;
 }
 
-.item .price{
+.item .c-price{
     width: 20%;
+
+    font-size: 18px;
     display: flex;
     flex-direction: row;
     justify-content: right;

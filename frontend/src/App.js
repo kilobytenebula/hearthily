@@ -46,6 +46,7 @@ import UpdateOrder from "./components/UpdateOrder";
 import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
+import EditRefund from './components/refundEdit';
 import AdminPage from './Pages/AdminPage/AdminPage';
 import UserReport from './Pages/AdminPage/UserReport';
 import ChefsList from './components/ChefsList';
@@ -72,6 +73,7 @@ function App() {
           <Route path='/reqRefun/:orderId' element={<RefundRequest/>}/>
           <Route exact path='/paymentReports' element={<PaymentReport/>}/>
           <Route exact path='/requestedRefunds' element={<RequestedRefunds/>}/>
+          <Route exact path='/refundEdit/:id' element={<EditRefund/>}/>
 
           {/* sav */}
           <Route path="/order-history" element={<GetOrder />} />

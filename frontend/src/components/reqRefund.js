@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import '../css/reqRefunds.css';
-
+import { useAuth } from '../Services/Auth/AuthContext';
+import { toast } from 'react-toastify';
 
 const ReqRefund = () => {
     const { orderId } = useParams();
@@ -11,7 +12,8 @@ const ReqRefund = () => {
     const [mobileNumber,setNumber] =useState("");
     const [reason,setReason] =useState("");
     const [description,setDes] =useState("");
-    const customerId = "609c9c918c27e038b0e27b2d";
+    const { userId } = useAuth();
+    const customerId = userId;
 
     function sendData(e){
         e.preventDefault();
@@ -75,6 +77,34 @@ const ReqRefund = () => {
             setImage(reader.result);
         }
       }
+
+      const handleChange = (e) => {
+        const inputValue = e.target.value;
+        
+        setNumber(inputValue);
+    };
+    
+    function handleKeyPress(event) {
+        // Get the key that was pressed
+        const key = event.key;
+        const inputValue = event.target.value;
+    
+        // Check if the pressed key is a number or a valid character like backspace or delete
+        const isValidInput = /^[0-9\b]+$/.test(key);
+
+        const newLength = inputValue.length + 1;
+
+        if (newLength > 10 && key !== '\b') {
+            event.preventDefault();
+        }
+    
+        // If the pressed key is not a number or a valid character, prevent it from being entered into the input field
+        if (!isValidInput) {
+            event.preventDefault();
+        }
+    }
+    
+      
     return (
         <div className="refundContainer">
             <div className='heading'>Refund Request</div>
@@ -110,13 +140,7 @@ const ReqRefund = () => {
                     <div className="inputField">
                         <label for = "number">Mobile Numeber</label>
                         <input id ="number" className="inputBox" type="tel" 
-                        onChange={(e)=>{
-
-                            setNumber(e.target.value);
-
-
-                        }}
-
+                        onChange={handleChange} onKeyPress={handleKeyPress}
                         ></input>
                     </div>
                     

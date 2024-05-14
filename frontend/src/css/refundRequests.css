@@ -24,6 +24,7 @@
     padding: 8px;
     border: 1px solid var(--white-100);
     width: 260px;
+    font-size: 16px;
     border-radius: 4px;
     margin-right: 5px; /* Add some space between input and button */
 }
@@ -42,7 +43,7 @@
     gap: 32px;
 }
 .refundReq{
-    width: 43%;
+    width: 48%;
     padding: 32px;
     background-color: var(--bg-200);
     display: flex;
@@ -62,7 +63,7 @@
 .des .value{
     white-space: pre-wrap;
 }
-.refundReq .oid ,.cid, .phone,.reason, .des , .status ,.image{
+.refundReq .oid ,.cid, .phone,.reason, .des , .statuses ,.image{
     display: flex;
     flex-direction: row;
     justify-content: space-between;

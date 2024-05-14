@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../Services/Auth/AuthContext";
 import '../css/checkout.css';
 
 
@@ -36,7 +37,9 @@ export default function Checkout(){
     const [address, setAddress] = useState([]);
     const [inputValue, setInputValue] = useState(0);
     const [lastOrderId, setLastOrderId] = useState('');
-    const customerId = "66279ba428c2bd21af0ac912";
+
+    const { userId } = useAuth();
+    const customerId = userId;
     const [lastClickedButton, setLastClickedButton] = useState(null);
 
     console.log("details",basePrice);
@@ -198,19 +201,28 @@ export default function Checkout(){
     const [image, setImage] = useState("");
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (lastClickedButton === 'BT' && !isPaymentSlipUploaded) {
+            alert('Please upload the payment slip before placing the order.');
+            return;
+        }
         await addPayment();
       };
 
-
+    const [isPaymentSlipUploaded, setIsPaymentSlipUploaded] = useState(false);
       function converToBase64(e){
+        
         console.log(e);
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload =() =>{
             console.log(reader.result);
             setImage(reader.result);
+            setIsPaymentSlipUploaded(true);
+            
         }
       }
+     
+
 
       function handleCancelOrder() {
         const confirmed = window.confirm("Are you sure you want to cancel the order?");
@@ -239,20 +251,20 @@ export default function Checkout(){
 
             <div className="selectedMeal">
                 <div className="header">Checkout</div>
-                <div className="meal">
+                <div className="c-meal">
                     <div className="itemList">
                         <div className="item">
                             
-                            <div className="name">{baseName}</div>
-                            <div className="price">{basePrice} LKR</div>
+                            <div className="c-name">{baseName}</div>
+                            <div className="c-price">{basePrice} LKR</div>
 
                         </div>
                     </div>
                     <div className="itemList">
                         {parsedPortions.map((portion, index) => (
                         <div className="item" key={index}>
-                            <div className="name">{portion.name}</div>
-                            <div className="price">{portion.price} LKR</div>
+                            <div className="c-name">{portion.name}</div>
+                            <div className="c-price">{portion.price} LKR</div>
                         </div>
                         ))}
                     </div>
