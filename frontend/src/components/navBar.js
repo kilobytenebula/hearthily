@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Services/Auth/AuthContext';
-import Authenticate from '../Store/Authenticate'
+import LogoutButton from '../Store/HandleLogout';
 import Toaster from '../Utils/Constants/Toaster';
 const home = require('../icons/home.png');
 const jobHistory = require('../icons/history.png');
@@ -41,16 +41,15 @@ const NavBar = () => {
                 {userRole === 'admin' && <li><Link to="/refunds"><div className='navItem'><img src={refund} alt="Refunds" title="Refunds"></img></div></Link></li>}
                 {userRole === 'admin' && <li><Link to="/admin-panel-order-history"><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></Link></li>}
                 {userRole === 'admin' && <li><Link to="/paymentReports"><div className='navItem'><img src={paymentReports} alt="Payment Reports" title="Payment Reports"></img></div></Link></li>}
-                {/* {userRole === 'admin' && <li><Link to="/job-summary"><div className='navItem'><img src={delivery} alt="Job Summary" title='Job Summary' /></div></Link></li>} */}
-                {userRole === 'admin' && <li><Link to="/drivers"><div className='navItem'><img src={drivers} alt="Driver Perfomance" title='Driver Perfomance' /></div></Link></li>}
+                {userRole === 'admin' && <li><Link to="/delivery-summary"><div className='navItem'><img src={delivery} alt="Job Summary" title='Job Summary' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/delivery"><div className='navItem'><img src={delivery} alt="Available Jobs" title='Available Jobs' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/job-history"><div className='navItem'><img src={jobHistory} alt="Job History" title='Job History' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/shipment"><div className='navItem'><img src={ship} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
-                {}
-                {/* kitchen manager */}
+                
+                 {/* kitchen manager */}
                 {userRole === 'ktn_manager' && <li><Link to="/kitchen-panel"><div className='navItem'><img src={orderList} alt="orders" title='orders' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/chefs-list"><div className='navItem'><img src={chefsList} alt="chefs" title='chefs' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/base-list"><div className='navItem'><img src={addBases} alt="bases" title='bases' /></div></Link></li>}
@@ -58,12 +57,10 @@ const NavBar = () => {
             </ul>
             <ul>
                 <li><Link to="/main/user/empEdit"><div className='navItem'><img src={settings} alt="Payment History" title='Settings' /></div></Link></li>
-                <li><div className='navItem' onClick={() => {
-                  Toaster.justToast('info', 'Logging out', () => {
-                    Authenticate.logoutUser();
-                    Navigate('/login');
-                  })
-                }}><img src={logout} alt="logout" title='Logout' style={{cursor: 'pointer'}} /></div></li>
+                <li>
+        {/* Render the LogoutButton component and pass Toaster and Navigate props */}
+        <LogoutButton Toaster={Toaster} Navigate={Navigate} />
+      </li>
             </ul>
         </div>
     </div>
