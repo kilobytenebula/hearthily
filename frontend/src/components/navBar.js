@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Services/Auth/AuthContext';
-import Authenticate from '../Store/Authenticate'
+import LogoutButton from '../Store/HandleLogout';
 import Toaster from '../Utils/Constants/Toaster';
 const home = require('../icons/home.png');
 const jobHistory = require('../icons/history.png');
@@ -47,12 +47,10 @@ const NavBar = () => {
             </ul>
             <ul>
                 <li><Link to="/main/user/empEdit"><div className='navItem'><img src={settings} alt="Payment History" title='Settings' /></div></Link></li>
-                <li><div className='navItem' onClick={() => {
-                  Toaster.justToast('info', 'Logging out', () => {
-                    Authenticate.logoutUser();
-                    Navigate('/login');
-                  })
-                }}><img src={logout} alt="logout" title='Logout' style={{cursor: 'pointer'}} /></div></li>
+                <li>
+        {/* Render the LogoutButton component and pass Toaster and Navigate props */}
+        <LogoutButton Toaster={Toaster} Navigate={Navigate} />
+      </li>
             </ul>
         </div>
     </div>
