@@ -7,7 +7,7 @@ import searchIcon from "../icons/search.png";
 
 export default function KitchenPanel() {
   const [orders, setOrders] = useState([]);
-  const [baseTypeFilter, setBaseTypeFilter] = useState(null);
+  const [baseTypeFilter, setBaseTypeFilter] = useState("Rice");
   const [searchQuery, setSearchQuery] = useState("");
 
   DocumentTitle("Kitchen List");
@@ -97,7 +97,7 @@ export default function KitchenPanel() {
                 <strong>Base Name:</strong> {order.base_name}
               </p>
               <p>
-                <strong>Portion Name:</strong>
+                <strong>Portion {order.portion_name.length > 1 ? 'Names' : 'Name'}:</strong>
               </p>
               <ul>
                 {order.portion_name.map((portion, i) => (

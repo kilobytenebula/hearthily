@@ -50,10 +50,7 @@ const NavBar = () => {
                 {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/shipment"><div className='navItem'><img src={ship} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/shipment"><div className='navItem'><img src={airplane} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/inventory-record"><div className='navItem'><img src={box} alt="Inventory Record" title='Inventory Record' /></div></Link></li>}
                 
                 {userRole === 'inventory' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
