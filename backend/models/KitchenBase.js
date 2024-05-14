@@ -5,31 +5,27 @@ const Schema = mongoose.Schema;
 const kitchenBaseSchema = new Schema({
     id: {
         type: Number,
-        required: true,
+        required: false,
     },
     name: {
         type: String,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
+        required: false,
     },
     category: {
         type: String,
-        required: true,
+        required: false,
     },
     m_type: {
         type: String,
-        required: true,
+        required: false,
     },
     reg_price: {
         type: Number,
-        required: true,
+        required: false,
     },
     full_price: {
         type: Number,
-        required: true,
+        required: false,
     },
     date: {
         type: Date,
@@ -37,7 +33,7 @@ const kitchenBaseSchema = new Schema({
     },
     available: {
         type: Boolean,
-        default: true,
+        default: false,
     },
 });
 

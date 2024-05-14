@@ -51,6 +51,7 @@ import ChefsList from './components/ChefsList';
 import BaseList from './components/BaseList';
 import KitchenPanel from './components/KitchenPanel';
 import PortionList from './components/PortionList';
+import AddBase from './components/AddBase';
 
 function App() {
   return (
@@ -122,6 +123,7 @@ function App() {
           <Route path="/chefs-list" element={<ChefsList />} />
           <Route path="/base-list" element={<BaseList />} />
           <Route path="/portion-list" element={<PortionList />} />
+          <Route path="/add-base" element={<AddBase />} />
           </Routes>
         </AuthProvider>
       </div>

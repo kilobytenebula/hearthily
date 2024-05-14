@@ -11,7 +11,7 @@ export default function KitchenPanel(){
 
   const getAllOrders = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4001/api/orders", {
+      const { data } = await axios.get("http://localhost:3500/kitchenOrder/orders", {
         params: {
           base_type: baseTypeFilter,
         },
@@ -25,7 +25,7 @@ export default function KitchenPanel(){
   const searchOrders = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4001/api/orders/search",
+        "http://localhost:3500/kitchenOrder/orders/search",
         {
           params: {
             base_name: searchQuery,
@@ -63,7 +63,7 @@ export default function KitchenPanel(){
     console.log("Submit clicked for order", index);
     try {
       const updatedOrder = { ...orders[index], status: "completed" };
-      const response = await axios.put(`http://localhost:4001/api/orders/${updatedOrder._id}`, updatedOrder);
+      const response = await axios.put(`http://localhost:3500/kitchenOrder/orders/${updatedOrder._id}`, updatedOrder);
       const updatedOrders = [...orders];
       updatedOrders[index] = response.data;
       setOrders(updatedOrders);

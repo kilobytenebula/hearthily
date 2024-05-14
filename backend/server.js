@@ -90,6 +90,10 @@ app.use("/kitchenBase", kitchenBase);
 const kitchenChef = require("./routes/kitchenChef.js");
 app.use("/kitchenChef", kitchenChef);
 
+//to access kitchenOrder.js file in routes folder
+const kitchenOrder = require("./routes/kitchenOrders.js");
+app.use("/kitchenOrder", kitchenOrder);
+
 
 
 app.use(cookieParser());

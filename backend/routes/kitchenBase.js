@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Base = require('../models/Base');
+const Kitchenbases = require('../models/KitchenBase');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 // Upload base image
-router.post("/upload/base", upload.single('base'), (req, res) => {
+router.post("/upload/base", upload.single('Kitchenbases'), (req, res) => {
     res.json({
         success: 1,
         message: "Base image uploaded successfully",
@@ -24,7 +24,7 @@ router.post("/upload/base", upload.single('base'), (req, res) => {
 
 // Add base
 router.post('/addbase', async (req, res) => {
-    let bases = await Base.find({});
+    let bases = await Kitchenbases.find({});
     let id;
     if(bases.length > 0) 
     {
@@ -35,10 +35,9 @@ router.post('/addbase', async (req, res) => {
     else{
         id=1;
     }
-    const base = new Base({
+    const base = new Kitchenbases({
         id: id,
         name: req.body.name,
-        image: req.body.image,
         category: req.body.category,
         m_type: req.body.m_type,
         reg_price: req.body.reg_price,
@@ -55,7 +54,7 @@ router.post('/addbase', async (req, res) => {
 
 // Remove base
 router.post('/removebase', async (req, res) => {
-    await Base.findOneAndDelete({ id: req.body.id });
+    await Kitchenbases.findOneAndDelete({ id: req.body.id });
     console.log("Removed");
     res.json({ 
         success: true, 
@@ -65,7 +64,7 @@ router.post('/removebase', async (req, res) => {
 
 // Get all bases
 router.get('/allbases', async (req, res) => {
-    let bases = await Base.find({});
+    let bases = await Kitchenbases.find({});
     console.log("All bases Fetched");
     res.send(bases);
 });
