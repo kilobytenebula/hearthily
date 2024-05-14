@@ -53,7 +53,7 @@ export default function AdminPage() {
 
     return (
         <div>
-            <div style={{ backgroundColor: '#393C49', width: '260px', borderRadius: '10px', height: '2.5rem', marginLeft: '950px', padding: '0 20px', marginTop: '90px', display: 'inline-block', textAlign: 'center', verticalAlign: 'middle' }}>
+            <div style={{ backgroundColor: '#393C49', width: '260px', borderRadius: '10px', height: '2.5rem', marginLeft: '1015px', padding: '0 20px', marginTop: '40px', display: 'inline-block', textAlign: 'center', verticalAlign: 'middle' }}>
                 <FaSearch id="S_search-icon" style={{ color: 'white', marginBottom: '-3px', marginRight: '2px' }} />
                 <input
                     className="S_search-text"
@@ -66,7 +66,7 @@ export default function AdminPage() {
                 />
             </div>
 
-            <div className="ST_details" style={{ position: 'relative', width: '100%', display: 'grid', gridTemplateColumns: '2fr 1fr', gridGap: '30px', marginLeft: '200px', marginRight: '100px', padding: '100px 20px' }}>
+            <div className="ST_details" style={{position: 'relative', width: '100%', display: 'grid', gridTemplateColumns: '2fr 1fr', gridGap: '30px', marginLeft: '250px', marginRight: '100px', padding: '100px 20px'}}>
                 <div className="ST_supplier" style={{ position: 'relative', display: 'grid', minHeight: '250px', background: '#1F1D2B', padding: '20px', boxShadow: '0 7px 25px rgba(0, 0, 0, 0.08)', borderRadius: '20px', color: 'white' }}>
                     <div className="ST_cardHeader" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <span className="ST_cardName" style={{ fontWeight: '600', color: 'white', fontSize: '30px' }}>User List</span>
