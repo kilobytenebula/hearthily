@@ -28,7 +28,14 @@ export default function RefundRequest(){
     const updateRefund = async (orderId, isSuccess) => {
         try {
             const response = await axios.put(`http://localhost:3500/refund/update/${orderId}`, { isSuccess });
-            window.location.reload();
+            axios.get(`http://localhost:3500/refund`)
+                .then((res) => {
+                    console.log(res.data);
+                    setPayments(res.data);
+                })
+                .catch((err) => {
+                    alert(err.message);
+                });
         } catch (error) {
             console.error('Error updating payment:', error);
         }
@@ -97,7 +104,7 @@ export default function RefundRequest(){
                                 </i>
                             </div>
                         )}
-                        <div className="status">
+                        <div className="statuses">
                             <div className="title">Status</div>
                             <div className="value">{refund.isSuccess}</div>
                         </div>

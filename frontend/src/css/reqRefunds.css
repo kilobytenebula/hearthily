@@ -64,7 +64,7 @@ body{
     height: 160px;
     border-radius: 8px;
     border: none;
-    padding: 0 16px 0 16px;
+    padding: 16px;
 
 }
 .inputField .submitButton {

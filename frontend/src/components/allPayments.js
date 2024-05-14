@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
 import '../css/allPayments.css';
+import { useAuth } from '../Services/Auth/AuthContext';
 
 export default function AllPayments() {
     const [payments, setPayments] = useState([]);
-    const customerId = "66279ba428c2bd21af0ac912";
+    const { userId } = useAuth();
+    const customerId = userId;
 
     useEffect(() => {
         function getPayments() {

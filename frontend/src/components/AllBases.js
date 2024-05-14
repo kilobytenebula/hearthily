@@ -57,7 +57,7 @@ export default function AllBases(){
                     <input type="text" className="search" placeholder='Search..' onChange={Filter} />
                 </div>
                 </div>
-                <ul>
+                <ul className="category-list">
                     <li onClick={()=> setSelectedCategory("Sri Lankan Dishes")} className={selectedCategory === "Sri Lankan Dishes" ? "selected" : ""}>Sri Lankan Dishes</li>
                     <li onClick={()=> setSelectedCategory("Bakery Items")} className={selectedCategory === "Bakery Items" ? "selected" : ""}>Bakery Items</li>
                     <li onClick={()=> setSelectedCategory("Beverages")} className={selectedCategory === "Beverages" ? "selected" : ""}>Beverages</li>
@@ -70,6 +70,7 @@ export default function AllBases(){
                     <div className="bases-list">
                         {riceBases.map((base) => (
                             <div key={base._id} className="base_item">
+                                <img className="base-circle-img" src={base.image_url}></img>
                                 <div className="base-name">{base.base_name}</div>
                                 <div className="base-bottom">
                                 <div className="base-reg-price"><div>Reg price</div><div>{base.reg_price} LKR</div></div>
@@ -79,10 +80,11 @@ export default function AllBases(){
                             </div>
                         ))}
                     </div>
-                    <div className="base-category">Others</div>
+                    <div className="base-category-other">Others</div>
                     <div className="bases-list">
                         {otherBases.map((base) => (
                             <div key={base._id} className="base_item">
+                            <img className="base-circle-img" src={base.image_url}></img>
                             <div className="base-name">{base.base_name}</div>
                             <div className="base-bottom">
                             <div className="base-reg-price"><div>Reg price</div><div>{base.reg_price} LKR</div></div>
@@ -99,10 +101,10 @@ export default function AllBases(){
                 <div className="bases-list">
                     {filteredBases.map((base) => (
                         <div key={base._id} className="base_item">
-                            <h2>{base.base_name}</h2>
-                            <p>Reg price: {base.reg_price}LKR</p>
-                            <p>Full price: {base.full_price}LKR</p>
-                            <Link to={`/all-portions/${base._id}`}>Portions</Link>
+                            <img className="base-circle-img" src={base.image_url}></img>
+                            <div className="base-name">{base.base_name}</div>
+                            <div className="base-reg-price">Price: {base.reg_price}LKR</div>
+                            <Link className="base-action" to={`/all-portions/${base._id}`}>Select</Link>
                         </div>
                     ))}
                 </div>

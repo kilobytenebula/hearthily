@@ -144,7 +144,7 @@ export default function GetOrder() {
               <li className='orderDate'>Date <img src={arrow} alt="sorting arrow" className='sort-arrow' onClick={() => sortData('date')}/></li>
               <li className='qt'>Qty</li>
               <li className='portionSize'>Portion Size</li>
-              <li className='totalPrice'>Price <img src={arrow} alt="sorting arrow" className='sort-arrow' onClick={() => sortData('date')}/></li>
+              <li className='totPrice'>Price <img src={arrow} alt="sorting arrow" className='sort-arrow' onClick={() => sortData('total_amount')}/></li>
               <li className='orderStatus'>Status</li>
             </ul>
           </div>

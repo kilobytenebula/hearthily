@@ -1,0 +1,78 @@
+.add-base {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 30px 50px;
+    margin-left: 10%;
+    border-radius: 6px;
+}
+
+.addbase-itemfield {
+    width: 75%;
+    color: #f9f8fa;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.addbase-itemfield input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    padding-left: 15px;
+    border: 1px solid #c3c3c3;
+    outline: none;
+    color: #7b7b7b;
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+.error {
+    color:  #f58437;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block; /* Ensure error messages are displayed as block elements */
+}
+
+.addbase-price {
+    display: flex;
+    gap: 5px;
+}
+
+.addbase-price .addbase-itemfield {
+    margin-right: 5px;
+}
+
+.addbase-price input {
+    width: 300px;
+}
+
+.add-base-selector {
+    padding: 10px;
+    width: 400px;
+    height: 50px;
+    font-size: 14px;
+    color: #7b7b7b;
+    border: 1px solid #7b7b7b8d;
+    border-radius: 4px;
+}
+
+.addbase-thumbnail-img {
+    height: 120px;
+    width: 120px;
+    border-radius: 10px;
+    object-fit: contain;
+    margin: 10px 0px;
+}
+
+.addbase-btn {
+    margin-top: 20px;
+    width: 160px;
+    height: 50px;
+    border-radius: 6px;
+    background: #f58437;
+    border: none;
+    cursor: pointer;
+    color: #f9f8fa;
+    font-size: 16px;
+    font-weight: 500;
+}

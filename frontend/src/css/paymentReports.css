@@ -283,35 +283,35 @@
     background-color: #0056b3; /* Darker shade of the button color on hover */
 }
 
-.status .pending{
-    font-size: 16px;
+.status .p-pending{
+    font-size: 12px;
     font-weight: 100;
     color: var(--orange-100);
     background-color: rgba(242, 134, 56, 0.2) !important;
-    padding: 8px 24px;
-    width: 160px;
+    padding: 4px 24px;
+    width: 120px;
     text-align: center;
     border-radius: 16px;
     border: 1px solid var(--orange-100);
 }
-.status .approved{
-    font-size: 16px;
+.status .p-approved{
+    font-size: 12px;
     font-weight: 100;
     color: var(--green-100);
     background-color: rgba(107, 226, 190, 0.2) !important;
-    padding: 8px 24px;
-    width: 160px;
+    padding: 4px 24px;
+    width: 120px;
     text-align: center;
     border-radius: 16px;
     border: 1px solid var(--green-100);
 }
-.status .rejected{
-    font-size: 16px;
+.status .p-rejected{
+    font-size: 12px;
     font-weight: 100;
     color: var(--red-100);
     background-color: rgba(250, 16, 16, 0.2) !important;
     padding: 8px 24px;
-    width: 160px;
+    width: 120px;
     text-align: center;
     border-radius: 16px;
     border: 1px solid var(--red-100);
