@@ -3,7 +3,7 @@ const router = express.Router();
 const Chef = require('../models/chef');
 
 // Get all chefs
-router.get('/', async (req, res) => {
+router.get('/chefs', async (req, res) => {
   try {
     const chefs = await Chef.find();
     res.json(chefs);
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 // Create a new chef
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
   const chef = new Chef({
     chef_id: req.body.chef_id,
     chef_name: req.body.chef_name,

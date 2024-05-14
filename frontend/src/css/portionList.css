@@ -1,0 +1,58 @@
+.list-portion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    padding: 20px;
+    border-radius: 6px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-width: 1500px;
+    padding: 30px 50px;
+    margin: 20px 30px;
+    background: #1f1d2b;
+}
+
+.list-portion h1 {
+    margin-bottom: 20px;
+    color: #f9f8fa;
+}
+
+.listportion-format-main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr auto;
+    gap: 10px;
+    width: 100%;
+    color: #f9f8fa;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.listportion-allportions {
+    width: 100%;
+}
+
+.listportion-format {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.listportion-portion-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.listportion-remove-icon {
+    width: 20px;
+    height: auto;
+    justify-self: center;
+}
+
+.listportion-remove-icon:hover {
+    opacity: 0.7;
+}
