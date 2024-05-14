@@ -305,9 +305,9 @@ export default function PaymentReports(){
                             <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
                             <div className="status">
 
-                                {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
-                                 {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
-                                {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                {payment.isSuccess === "pending" && <div className="p-pending">Pending</div>}
+                                 {payment.isSuccess === "approved" && <div className="p-approved">Approved</div>}
+                                {payment.isSuccess === "rejected" && <div className="p-rejected">Rejected</div>}
 
 
                             </div>
@@ -332,9 +332,9 @@ export default function PaymentReports(){
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
                                         <div className="status">
                                             
-                                             {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
-                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
-                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                             {payment.isSuccess === "pending" && <div className="p-pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="p-approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="p-rejected">Rejected</div>}
                                         </div>
                                          <div className="actions">
                                          {payment.isSuccess === "pending" && ( // Only render buttons if isSuccess is "Pending"
@@ -371,9 +371,9 @@ export default function PaymentReports(){
                                         
                                         <div className="status">
 
-                                            {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
-                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
-                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                            {payment.isSuccess === "pending" && <div className="p-pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="p-approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="p-rejected">Rejected</div>}
                                         </div>
                                         {payment.paymentSlip && ( // Check if paymentSlip exists
                                             <div className="slip">
@@ -406,9 +406,9 @@ export default function PaymentReports(){
                                         <div className="date">{payment.date.substring(0, 10)}</div>
                                         <div className="amount">{parseFloat(payment.amount).toFixed(2)} LKR</div>
                                         <div className="status">
-                                            {payment.isSuccess === "pending" && <div className="pending">Pending</div>}
-                                            {payment.isSuccess === "approved" && <div className="approved">Approved</div>}
-                                            {payment.isSuccess === "rejected" && <div className="rejected">Rejected</div>}
+                                            {payment.isSuccess === "pending" && <div className="p-pending">Pending</div>}
+                                            {payment.isSuccess === "approved" && <div className="p-approved">Approved</div>}
+                                            {payment.isSuccess === "rejected" && <div className="p-rejected">Rejected</div>}
                                         </div>
                                         {payment.paymentSlip && ( // Check if paymentSlip exists
                                             <div className="slip">

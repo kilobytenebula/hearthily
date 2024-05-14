@@ -81,23 +81,28 @@ const ReqRefund = () => {
       const handleChange = (e) => {
         const inputValue = e.target.value;
         
-        // Validate input to allow only 10 digits starting with "07"
-        if (inputValue.length === 10) {
-            // Validate input to allow only digits starting with "07"
-            const isValidInput = /^\d{10}$/.test(inputValue) && inputValue.startsWith("07");
-
-            if (isValidInput || inputValue === "") {
-                // If the input is valid or empty, update the state
-                setNumber(inputValue);
-            } else {
-                // If the input is invalid, display a toast notification
-                toast.error('Invalid mobile number. Please enter a 10-digit number starting with "07"');
-            }
-        } else {
-            // If input length is not 10 characters, update the state without displaying a toast
-            setNumber(inputValue);
-        }
+        setNumber(inputValue);
     };
+    
+    function handleKeyPress(event) {
+        // Get the key that was pressed
+        const key = event.key;
+        const inputValue = event.target.value;
+    
+        // Check if the pressed key is a number or a valid character like backspace or delete
+        const isValidInput = /^[0-9\b]+$/.test(key);
+
+        const newLength = inputValue.length + 1;
+
+        if (newLength > 10 && key !== '\b') {
+            event.preventDefault();
+        }
+    
+        // If the pressed key is not a number or a valid character, prevent it from being entered into the input field
+        if (!isValidInput) {
+            event.preventDefault();
+        }
+    }
     
       
     return (
@@ -135,7 +140,7 @@ const ReqRefund = () => {
                     <div className="inputField">
                         <label for = "number">Mobile Numeber</label>
                         <input id ="number" className="inputBox" type="tel" 
-                        onChange={handleChange}
+                        onChange={handleChange} onKeyPress={handleKeyPress}
                         ></input>
                     </div>
                     

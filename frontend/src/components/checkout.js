@@ -198,19 +198,28 @@ export default function Checkout(){
     const [image, setImage] = useState("");
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (lastClickedButton === 'BT' && !isPaymentSlipUploaded) {
+            alert('Please upload the payment slip before placing the order.');
+            return;
+        }
         await addPayment();
       };
 
-
+    const [isPaymentSlipUploaded, setIsPaymentSlipUploaded] = useState(false);
       function converToBase64(e){
+        
         console.log(e);
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onload =() =>{
             console.log(reader.result);
             setImage(reader.result);
+            setIsPaymentSlipUploaded(true);
+            
         }
       }
+     
+
 
 
     return(
@@ -219,20 +228,20 @@ export default function Checkout(){
 
             <div className="selectedMeal">
                 <div className="header">Checkout</div>
-                <div className="meal">
+                <div className="c-meal">
                     <div className="itemList">
                         <div className="item">
                             
-                            <div className="name">{baseName}</div>
-                            <div className="price">{basePrice} LKR</div>
+                            <div className="c-name">{baseName}</div>
+                            <div className="c-price">{basePrice} LKR</div>
 
                         </div>
                     </div>
                     <div className="itemList">
                         {parsedPortions.map((portion, index) => (
                         <div className="item" key={index}>
-                            <div className="name">{portion.name}</div>
-                            <div className="price">{portion.price} LKR</div>
+                            <div className="c-name">{portion.name}</div>
+                            <div className="c-price">{portion.price} LKR</div>
                         </div>
                         ))}
                     </div>
@@ -313,7 +322,7 @@ export default function Checkout(){
                 </div>
                 <div className="actions">
                     <button className="cancel">Cancel</button>
-                    <button className="placeOrder" onClick={handleSubmit}>Place Order</button>
+                    <button className="placeOrder" onClick={handleSubmit}  >Place Order</button>
                 </div>
             </div>
         </div>
