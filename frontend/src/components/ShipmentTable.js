@@ -3,7 +3,6 @@ import axios from "axios";
 import "../css/ShipmentTable.css";
 import { AiFillDelete, AiFillEdit, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Search from "../components/Search";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Search from "./Search";

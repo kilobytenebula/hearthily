@@ -1,7 +1,7 @@
 import './css/App.css';
 import './css/sort.css';
 import AllPayments from './components/allPayments';
-import NavBAr from './components/NavBar';
+import NavBAr from './components/navBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Services/Auth/AuthContext';
 import RefundRequest from './components/reqRefund';
