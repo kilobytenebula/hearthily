@@ -61,6 +61,10 @@ app.use("/supplier",supplierRouter);
 const shipmentRouter  = require("./routes/shipments.js");
 app.use("/shipment",shipmentRouter);
 
+//to access EmployeeRegister.js file in route folder
+const EmployeeRegister=require("./routes/EmployeeReg.js");
+app.use("/EmpReg",EmployeeRegister);
+
 //to access inviter.js file in routes folder
 const invitedsupplierRouter  = require("./routes/invitedsuppliers.js");
 app.use("/inviter",invitedsupplierRouter);
@@ -74,6 +78,21 @@ app.use('/api/v1/auth', AuthRoute);
 const EmpRoute = require('./src/routes/EmpRoute');
 app.use('/api/v1/employee',EmpRoute);
 
+//to access kitchenPortion.js file in routes folder
+const kitchenPortion = require("./routes/kitchenPortion.js");
+app.use("/kitchenPortion", kitchenPortion);
+
+//to access kitchenBase.js file in routes folder
+const kitchenBase = require("./routes/kitchenBase.js");
+app.use("/kitchenBase", kitchenBase);
+
+//to access kitchenChef.js file in routes folder
+const kitchenChef = require("./routes/kitchenChef.js");
+app.use("/kitchenChef", kitchenChef);
+
+//to access kitchenOrder.js file in routes folder
+const kitchenOrder = require("./routes/kitchenOrders.js");
+app.use("/kitchenOrder", kitchenOrder);
 
 app.use(cookieParser());
 

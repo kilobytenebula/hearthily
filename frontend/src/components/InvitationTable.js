@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../css/InvitationTable.css";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import axios from "axios";// to get data from database
-import Search from "../components/Search";
+import Search from "./Search";
 import InvitationForm from "./InvitationForm";
 
 
