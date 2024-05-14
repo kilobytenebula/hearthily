@@ -1,0 +1,69 @@
+@import url('root.css');
+body {
+    margin:0;
+}
+.list-base{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    width: 90%;
+    padding: 32px;
+    background-color: var(--bg-100);
+
+}
+.base-list-title-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 32px;
+}
+.base-list-heading{
+    font-size: 24px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 700;
+    color: var(--white-100);
+}
+.base-list-container{
+    display: flex;
+    flex-direction: row;
+    padding: 32px;
+    font-size: 16px;
+}
+
+.ktn-Title {
+    width: 20%;
+    /* Other CSS properties for .ktn-Title */
+}
+
+.ktn-Category {
+    width: 20%;
+    /* Other CSS properties for .ktn-Category */
+}
+
+.ktn-Type {
+    width: 20%;
+    /* Other CSS properties for .ktn-Type */
+}
+
+.ktn-RegularPrice {
+    width: 15%;
+    /* Other CSS properties for .ktn-RegularPrice */
+}
+
+.ktn-FullPrice {
+    width: 15%;
+    /* Other CSS properties for .ktn-FullPrice */
+}
+
+.ktn-Remove {
+    width: 10%;
+    /* Other CSS properties for .ktn-Remove */
+}
+.base-list-item-container{
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: var(--bg-200);
+    border-radius: 8px;
+}

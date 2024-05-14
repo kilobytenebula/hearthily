@@ -26,9 +26,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #F28638;
-    border: 1px solid #F28638;
-    background-color: rgba(255, 181, 114, 0.2);
+    font-size: 14px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 100;
+    border: 1px solid var(--orange-200);
     cursor: pointer;
 }
 
@@ -39,8 +40,6 @@ body {
 
 .filter-btn:hover {
     color: #fff;
-    background-color: #F28638;
-    border-color: #F28638;
 }
 
 .job-container {
@@ -63,7 +62,7 @@ body {
     font-weight: 700;
 }
 
-.fields-job ul {
+.fields-delivery ul {
     font-weight: 600;
     display: flex;
     list-style: none;

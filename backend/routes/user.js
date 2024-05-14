@@ -26,6 +26,8 @@ router.route('/:userId').get(async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+// get all users
 router.route('/').get(async (req, res) => {
     try {
         const users = await User.find();
@@ -35,5 +37,27 @@ router.route('/').get(async (req, res) => {
         res.status(500).json({ error: 'Error fetching users' });
     }
 });
+
+/// DELETE user by user ID
+router.route('/:userId').delete(async (req, res) => {
+    let userId = req.params.userId;
+    console.log(`DELETE request for user ID: ${userId}`);
+
+    try {
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            console.log(`User not found with ID: ${userId}`);
+            return res.status(404).json({ error: "User not found" });
+        }
+        console.log(`User deleted with ID: ${userId}`);
+        res.status(200).send({ status: "User deleted" });
+    } catch (err) {
+        console.error('Error deleting user:', err);
+        res.status(400).json('Error: ' + err);
+    }
+});
+
+
+
 
 module.exports = router;
