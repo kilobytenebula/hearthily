@@ -47,6 +47,12 @@ import UpdateOrder from "./components/UpdateOrder";
 import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
+import ChefsList from './components/ChefsList';
+import BaseList from './components/BaseList';
+import KitchenPanel from './components/KitchenPanel';
+import PortionList from './components/PortionList';
+import AddBase from './components/AddBase';
+import AddPortion from './components/AddPortion';
 
 function App() {
   return (
@@ -112,6 +118,14 @@ function App() {
           <Route path="/inventory-record" element={<GetInventory/>} />
           <Route path="/inventory-record/inventory/:inventoryId" element={<UpdateInventory/>} />
           <Route path="/admin-panel-order-history" element={<OrderHistory/>} />
+
+          {/* dimalsha */}
+          <Route path="/kitchen-panel" element={<KitchenPanel />} />
+          <Route path="/chefs-list" element={<ChefsList />} />
+          <Route path="/base-list" element={<BaseList />} />
+          <Route path="/portion-list" element={<PortionList />} />
+          <Route path="/add-base" element={<AddBase />} />
+          <Route path="/add-portion" element={<AddPortion />} />
           </Routes>
         </AuthProvider>
       </div>
