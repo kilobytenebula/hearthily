@@ -45,7 +45,6 @@ const NavBar = () => {
                 {userRole === 'inventory' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
                 {userRole === 'inventory' && <li><Link to="/shipment"><div className='navItem'><img src={ship} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
-                {}
             </ul>
             <ul>
                 <li><Link to="/main/user/empEdit"><div className='navItem'><img src={settings} alt="Payment History" title='Settings' /></div></Link></li>
