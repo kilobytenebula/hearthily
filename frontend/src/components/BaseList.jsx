@@ -59,8 +59,6 @@ const BaseList = () => {
     //           </div>
     //           <hr/></>
     //       })}
-    //   </div>
-    // </div>
     <div className='list-base'>
       <div className="base-list-title-bar">
                 <div className="base-list-heading">Base List</div>
@@ -75,7 +73,6 @@ const BaseList = () => {
                 <div class="ktn-RegularPrice"> Regular Price</div>
                 <div class="ktn-FullPrice"> Full Price</div>
                 <div class="ktn-Remove"> Remove </div>
-
             
             </div>
             

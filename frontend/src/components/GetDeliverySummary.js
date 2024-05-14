@@ -2,28 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../css/GetDelivery.css";
-import "../css/JobSummary.css";
+import "../css/DeliverySummary.css";
 import searchIcon from "../icons/search.png";
-import JobSummaryReport from "./JobSummaryReport";
+import DeliverySummaryReport from "./DeliverySummaryReport";
 import DocumentTitle from "./DocumentTitle";
 
-export default function JobSummary() {
-  const [jobsArray, setJobsArray] = useState([]);
+export default function DeliverySummary() {
+  const [deliverysArray, setDeliverysArray] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
 
-  DocumentTitle("Job Summary");
+  DocumentTitle("Delivery Summary");
 
   useEffect(() => {
     const fetchDeliveries = async () => {
       try {
         const response = await axios.get("http://localhost:3500/delivery/");
         const deliveries = response.data;
-        const jobsWithUserData = await Promise.all(
+        console.log("deliveries", deliveries);
+        const deliverysWithUserData = await Promise.all(
           deliveries.map(async (delivery) => {
-            // Fetch driver data for each delivery if driverId is not null
             let driverName = "Unassigned";
             let custName = "Unknown";
             let custLocation = "Unknown";
@@ -32,19 +32,23 @@ export default function JobSummary() {
                 `http://localhost:3500/driver/${delivery.driverId}`
               );
               const driverData = driverResponse.data.driver;
+              console.log("driverData", driverData);
               const driverUserResponse = await axios.get(
                 `http://localhost:3500/user/${driverData.userId}`
               );
-              const tempuserId = "6623f8eb4e06c62c5ff68977";
-              const userResponse = await axios.get(
-                `http://localhost:3500/user/${tempuserId}`
-              );
               const driverUserData = driverUserResponse.data.user;
-              const userData = userResponse.data.user;
-              //   driverName = userData ? `${userData.firstname} ${userData.lastname}` : driverName;
-              driverName = driverUserData ? `${userData.name}` : driverName;
-              custName = userData ? `${userData.name}` : custName;
-              custLocation = userData ? `${userData.address}` : custLocation;
+              console.log("driverUserData", driverUserData);
+
+              const customerResponse = await axios.get(
+                `http://localhost:3500/user/${delivery.userId}` // Assuming userId is available in delivery data
+              );
+              const custData = customerResponse.data.user;
+
+              console.log("custData", custData);
+
+              driverName = driverUserData ? driverUserData.name : driverName;
+              custName = custData ? custData.name : custName;
+              custLocation = custData ? custData.address : custLocation;
             }
 
             return {
@@ -55,7 +59,7 @@ export default function JobSummary() {
             };
           })
         );
-        setJobsArray(jobsWithUserData);
+        setDeliverysArray(deliverysWithUserData);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -67,7 +71,7 @@ export default function JobSummary() {
   }, []);
 
   // Filter deliveries based on search term and filter type
-  const filteredDeliveries = jobsArray.filter(
+  const filteredDeliveries = deliverysArray.filter(
     (delivery) =>
       (delivery.deliveryStatus === filterType || filterType === "all") &&
       (delivery.custName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -80,14 +84,14 @@ export default function JobSummary() {
 
   // Count the number of deliveries for each filter type
   const deliveryCount = {
-    all: jobsArray.length,
-    unassigned: jobsArray.filter(
+    all: deliverysArray.length,
+    unassigned: deliverysArray.filter(
       (delivery) => delivery.deliveryStatus === "of-delivery"
     ).length,
-    ondelivery: jobsArray.filter(
+    ondelivery: deliverysArray.filter(
       (delivery) => delivery.deliveryStatus === "on-delivery"
     ).length,
-    completed: jobsArray.filter(
+    completed: deliverysArray.filter(
       (delivery) => delivery.deliveryStatus === "completed"
     ).length,
   };
@@ -99,7 +103,7 @@ export default function JobSummary() {
   const sortDelivery = (deliveries) => {
     switch (sortBy) {
       case "name":
-        return deliveries.sort((a, b) => a.cusName.localeCompare(b.cusName));
+        return deliveries.sort((a, b) => a.custName.localeCompare(b.custName));
       case "date":
         return deliveries.sort((a, b) => new Date(a.date) - new Date(b.date));
       case "location":
@@ -118,7 +122,7 @@ export default function JobSummary() {
   return (
     <div className="delivery-container-main">
       <div className="top-bar">
-        <div className="container-title-text">Job Summary</div>
+        <div className="container-title-text">Deliveries Summary</div>
         <div className="search-container">
           <div className="search-icon">
             <img src={searchIcon} alt="search" />
@@ -131,7 +135,8 @@ export default function JobSummary() {
           />
         </div>
       </div>
-      <div className="filter-buttons">
+      <div className="top-buttons-bar">
+      <div className="filter-buttons-deliveries-summary">
         <div
           className={`filter-btn ${
             filterType === "all" ? "active-filter" : ""
@@ -165,7 +170,8 @@ export default function JobSummary() {
           Completed ({deliveryCount.completed})
         </div>
       </div>
-
+      <Link to="/drivers"><div className="performance-btn">Driver Performance</div></Link>
+      </div>
       <div className="driver-info-report-actions-wrapper">
         <div className="sort-menu">
           <select value={sortBy} onChange={handleSortBy}>
@@ -176,17 +182,18 @@ export default function JobSummary() {
             <option value="driver">Sort by Driver</option>
           </select>
         </div>
-        <JobSummaryReport deliveries={sortDelivery(filteredDeliveries)} />
+        <DeliverySummaryReport deliveries={sortDelivery(filteredDeliveries)} />
       </div>
 
       {isLoading ? (
         <div className="loading-deliveries">Beep boop boop...</div>
       ) : (
-        <div className="job-container">
+        <div className="delivery-container">
           {filteredDeliveries.length > 0 ? (
             <div>
-              <div className="fields-job">
+              <div className="fields-delivery">
                 <ul>
+                  <li className="summary-id">Delivery ID</li>
                   <li className="summary-name">Customer Name</li>
                   <li className="summary-date">Date</li>
                   <li className="summary-location">Location</li>
@@ -199,6 +206,7 @@ export default function JobSummary() {
                   <div className="item-delivery" key={delivery._id}>
                     <div className="item-link">
                       <ul>
+                        <li className="summary-id">{delivery._id}</li>
                         <li className="summary-name">{delivery.custName}</li>
                         <li className="summary-date">
                           {new Date(delivery.date).toLocaleDateString()}

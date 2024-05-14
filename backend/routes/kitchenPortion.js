@@ -14,13 +14,13 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 // Upload portion image
-router.post("/upload/portion", upload.single('portion'), (req, res) => {
-    res.json({
-        success: 1,
-        message: "Portion image uploaded successfully",
-        image_url: `http://localhost:3500/images/${req.file.filename}`
-    });
-});
+// router.post("/upload/portion", upload.single('portion'), (req, res) => {
+//     res.json({
+//         success: 1,
+//         message: "Portion image uploaded successfully",
+//         image_url: `http://localhost:3500/images/${req.file.filename}`
+//     });
+// });
 
 // Add portion
 router.post('/addportion', async (req, res) => {
@@ -38,7 +38,6 @@ router.post('/addportion', async (req, res) => {
     const portion = new KitchenPortion({
         id: id,
         name: req.body.name,
-        image: req.body.image,
         category: req.body.category,
         p_type: req.body.p_type,
         price: req.body.price,

@@ -81,10 +81,6 @@ export default function GetDriver() {
     return availabilityMap[availability] || "";
   };
 
-  const handleInfoHover = (driverId) => {
-    setTooltip(`Driver ID: ${driverId}`);
-  };
-
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
@@ -172,6 +168,7 @@ export default function GetDriver() {
         <div className="driver-container">
           <div className="fields">
             <ul>
+              <li className="drv-id">Driver ID</li>
               <li className="drv-name">Driver Name</li>
               <li className="drv-contact">Contact Number</li>
               <li className="drv-delivery-count">No. of Completed Deliveries</li>
@@ -185,6 +182,7 @@ export default function GetDriver() {
                 <div className="item" key={driver._id}>
                   <Link to={`/driver/${driver._id}`} className="item-link">
                     <ul>
+                      <li className="drv-id">{driver._id}</li>
                       <li className="drv-name">{driver.name}</li>
                       <li className="drv-contact">{driver.contact ? driver.contact : "n/a"}</li>
                       <li className="drv-delivery-count">{driver.deliveryCount}</li>
@@ -193,14 +191,6 @@ export default function GetDriver() {
                         <div className="availability-wrapper">
                           <div className={`drv-availability-dyn ${driver.isAvailable}`}>
                             {getAvailabilityClass(driver.isAvailable)}
-                          </div>
-                          <div
-                            className="info-icon-container"
-                            onMouseEnter={() => handleInfoHover(driver._id)}
-                            onMouseLeave={() => setTooltip("")}
-                          >
-                            <img src={infoIcon} alt="info" className="info-icon" />
-                            <span className="drv-tooltiptext">{tooltip}</span>
                           </div>
                         </div>
                       </li>

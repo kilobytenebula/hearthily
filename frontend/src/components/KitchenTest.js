@@ -74,6 +74,7 @@ export default function KitchenTest() {
     }
     try {
       const paymentResponse = await axios.get(`http://localhost:3500/payment/get/${selectedOrder}`);
+      console.log("selectedOrder", selectedOrder);
       const paymentMethod = paymentResponse.data[0].paymentMethod;
       console.log(paymentMethod);
       await axios.post("http://localhost:3500/delivery/add", {

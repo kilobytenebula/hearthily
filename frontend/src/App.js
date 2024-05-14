@@ -21,7 +21,7 @@ import KitchenTest from './components/KitchenTest';
 import GetJobHistory from './components/GetJobHistory';
 import GetDriver from './components/GetDriver';
 import GetDriverInfo from './components/GetDriverInfo';
-import JobSummary from './components/JobSummary';
+import GetDeliverySummary from './components/GetDeliverySummary';
 import Main from './Pages/Main'
 import { ToastContainer } from 'react-toastify'
 import Login from './Pages/Login/Login'
@@ -52,6 +52,7 @@ import BaseList from './components/BaseList';
 import KitchenPanel from './components/KitchenPanel';
 import PortionList from './components/PortionList';
 import AddBase from './components/AddBase';
+import AddPortion from './components/AddPortion';
 
 function App() {
   return (
@@ -82,7 +83,7 @@ function App() {
           <Route path="/job-history" element={<GetJobHistory />} />
           <Route path="/drivers" element={<GetDriver />} />
           <Route path="/driver/:driverId" element={<GetDriverInfo />} />
-          <Route path="/job-summary" element={<JobSummary />} />
+          <Route path="/delivery-summary" element={<GetDeliverySummary />} />
 
           {/* ash */}
           <Route path='/' element={<Login />} />
@@ -124,6 +125,7 @@ function App() {
           <Route path="/base-list" element={<BaseList />} />
           <Route path="/portion-list" element={<PortionList />} />
           <Route path="/add-base" element={<AddBase />} />
+          <Route path="/add-portion" element={<AddPortion />} />
           </Routes>
         </AuthProvider>
       </div>
