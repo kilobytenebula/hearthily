@@ -74,6 +74,7 @@ app.use('/api/v1/auth', AuthRoute);
 const EmpRoute = require('./src/routes/EmpRoute');
 app.use('/api/v1/employee',EmpRoute);
 
+
 app.use(cookieParser());
 
 //starting the server
