@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Checkbox } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "../css/kitchenPanel.css";
+import DocumentTitle from "./DocumentTitle";
+import searchIcon from "../icons/search.png";
 
-export default function KitchenPanel(){
+export default function KitchenPanel() {
   const [orders, setOrders] = useState([]);
   const [baseTypeFilter, setBaseTypeFilter] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  DocumentTitle("Kitchen List");
 
   const getAllOrders = async () => {
     try {
@@ -16,98 +19,78 @@ export default function KitchenPanel(){
           base_type: baseTypeFilter,
         },
       });
-      setOrders(data.orders);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const searchOrders = async () => {
-    try {
-      const { data } = await axios.get(
-        "http://localhost:3500/kitchenOrder/orders/search",
-        {
-          params: {
-            base_name: searchQuery,
-          },
-        }
+      // Filter orders based on both base type and search query
+      const filteredOrders = data.orders.filter(order =>
+        order.base_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setOrders(data.orders);
+      setOrders(filteredOrders);
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
-    if (baseTypeFilter !== null) {
-      getAllOrders();
-    }
-  }, [baseTypeFilter]);
-
-  useEffect(() => {
-    if (searchQuery !== "") {
-      searchOrders();
-    }
-  }, [searchQuery]);
+    getAllOrders();
+  }, [baseTypeFilter, searchQuery]); // Update orders whenever baseTypeFilter or searchQuery changes
 
   const handleBaseTypeFilter = (baseType) => {
     setBaseTypeFilter(baseType);
-    setSearchQuery("");
   };
 
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSubmit = async (index) => {
-    console.log("Submit clicked for order", index);
-    try {
-      const updatedOrder = { ...orders[index], status: "completed" };
-      const response = await axios.put(`http://localhost:3500/kitchenOrder/orders/${updatedOrder._id}`, updatedOrder);
-      const updatedOrders = [...orders];
-      updatedOrders[index] = response.data;
-      setOrders(updatedOrders);
-      console.log("Order status updated:", response.data);
-    } catch (error) {
-      console.error("Error updating order status:", error);
-    }
+    const value = e.target.value;
+    setSearchQuery(value);
+    // Trigger search whenever the user types in a base name
+    getAllOrders();
   };
 
   return (
-    <div className="container-fluid row mt-3 home-page">
-      <div className="col-md-3 filters">
-        <h4 className="text-center">Filter By Kitchen</h4>
-        <div className="d-flex flex-column">
-          <Checkbox.Group
-            options={[
-              { label: "Rice", value: "Rice" },
-              { label: "Others", value: "Others" },
-              { label: "Beverages", value: "Beverages" },
-              { label: "Bakery", value: "Bakery" },
-            ]}
-            value={baseTypeFilter}
-            onChange={(values) => handleBaseTypeFilter(values[0])}
+    <div className="kitchen-list-main">
+      <div className="top-bar">
+        <div className="container-title-text">Kitchen List</div>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search by base type"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
+           <div className="search-icon">
+            <img src={searchIcon} alt="search" />
+          </div>
+        </div>
+      </div>
+      <div className="filter-buttons">
+        {/* Filter buttons */}
+        <div
+          className={`filter-btn ${baseTypeFilter === "Rice" ? "active-filter" : ""}`}
+          onClick={() => handleBaseTypeFilter("Rice")}
+        >
+          Rice
+        </div>
+        <div
+          className={`filter-btn ${baseTypeFilter === "Others" ? "active-filter" : ""}`}
+          onClick={() => handleBaseTypeFilter("Others")}
+        >
+          Others
+        </div>
+        <div
+          className={`filter-btn ${baseTypeFilter === "Beverages" ? "active-filter" : ""}`}
+          onClick={() => handleBaseTypeFilter("Beverages")}
+        >
+          Beverages
+        </div>
+        <div
+          className={`filter-btn ${baseTypeFilter === "Bakery" ? "active-filter" : ""}`}
+          onClick={() => handleBaseTypeFilter("Bakery")}
+        >
+          Bakery
         </div>
       </div>
 
       <div className="col-md-9">
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search by base name"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-          <SearchOutlined className="search-icon" />
-        </div>
-
-        <h1 className="orders-heading">All Orders</h1>
-
-        <div
-          className="orders-container"
-          style={{ maxHeight: "550px", overflowY: "auto" }}
-        >
+        <div className="orders-container">
           {orders.map((order, index) => (
             <div className="order-card" key={index}>
               <p>
@@ -124,7 +107,7 @@ export default function KitchenPanel(){
               <p>
                 <strong>Quantity:</strong> {order.qty}
               </p>
-             
+              {/* Additional order information */}
             </div>
           ))}
         </div>
