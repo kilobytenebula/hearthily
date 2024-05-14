@@ -111,6 +111,7 @@ export default function AllPortions(){
             total_amount: total,
             status: status
         };
+        console.log(newOrder);
         axios.post("http://localhost:3500/order/add",newOrder).then(()=>{
             alert("Order Added")
         }).catch((err)=>{
