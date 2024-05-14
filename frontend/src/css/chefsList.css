@@ -1,79 +1,57 @@
-
-/* report.css */
-
-/* Styles for the outer report container */
-.report {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: 50px auto 0; /* Add more top margin */
-  padding: 40px 20px; /* Adjust padding */
-  /*border: 1px solid #ddd;  add border for better visualization */
-  /*border-radius: 5px;  add border radius */
-}
-
-/* Styles for the header section */
-.report-header {
+.fields-chef ul {
+  font-weight: 600;
   display: flex;
+  list-style: none;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  padding-left: 0px;
+  margin-bottom: 0px;
 }
 
-/* Styles for the h1 tag */
-.report-header h1 {
-    font-size: 24px;
-    margin: 0;
-    color: #f28638;
+.chef-id,
+.chef-name,
+.orders-comp {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chef-id {
+  width: 10%;
+  text-align: left;
+}
+
+.chef-name {
+  width: 70%;
+  text-align: center;
+}
+
+.orders-comp {
+  width: 20%;
+  text-align: center;
+}
+
+.chef-container {
+  margin-top: 32px;
+}
+
+.chefs-report-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: end;
+}
+
+.chefs-report-action-btn {
+    display: inline-block;
+    border-radius: 8px;
     text-align: center;
-    flex-grow: 1; /* Allows h1 to take up remaining space */
-  }
-
-  
-/* Styles for the generate PDF button */
-.generate-pdf-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--white-100);
+    background-color: var(--orange-200);
+    cursor: pointer;
 }
-
-.generate-pdf-button:hover {
-  background-color: #0056b3;
-}
-
-/* Styles for the main format section */
-.report-format-main {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  font-weight: bold;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-  margin-top: 50px;
-}
-
-/* Styles for the section containing all chefs */
-.report-allchef {
-  margin-top: 20px;
-}
-
-/* Styles for each chef's format */
-.report-format {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  align-items: center;
-}
-
-.report-format p {
-  margin: 0;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 10px 0;
-}
-
