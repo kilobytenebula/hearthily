@@ -1,3 +1,32 @@
+.top-buttons-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.filter-buttons-deliveries-summary {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+.performance-btn {
+    text-decoration: none;
+    font-size: 16px;
+    font-family:"Poppins-Medium", Helvetica ;
+    font-weight: 100;
+    padding: 12px 24px;
+    background-color: var(--orange-200);
+    border-radius: 8px;
+    color: var(--white-100);
+    border: none;
+    cursor: pointer;
+}
+
+.summary-id,
 .summary-name,
 .summary-date,
 .summary-location,
@@ -9,31 +38,37 @@
     justify-content: center;
 }
 
+.summary-id {
+    width: 20%;
+    text-align: left;
+}
+
 .summary-name {
-    width: 30%;
+    width: 20%;
+    text-align: center;
 }
 
 .summary-date {
-    width: 15%;
+    width: 10%;
     text-align: center;
 }
 
 .summary-location {
-    width: 15%;
+    width: 10%;
     text-align: center;
 }
 
 .summary-payment {
-    width: 15%;
+    width: 10%;
     text-align: center;
 }
 
 .summary-driver {
-    width: 25%;
+    width: 15%;
     text-align: center;
 }
 
-.jobsummary-report-actions-wrapper {
+.deliverysummary-report-actions-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,7 +76,7 @@
     width: 100%;
     margin-top: 32px;
 }
-.jobsummary-report-actions {
+.deliverysummary-report-actions {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -49,7 +84,7 @@
     width: fit-content;
     border-radius: 10px;
 }
-.jobsummary-report-action-btn {
+.deliverysummary-report-action-btn {
     display: inline-block;
     border-radius: 8px;
     text-align: center;
