@@ -45,7 +45,7 @@ export default function UserReport() {
                         value="all"
                         checked={filter === "all"}
                         onChange={handleFilterChange}
-                        style={{ marginRight: '5px', marginTop: '100px', marginLeft: '100px'}}
+                        style={{ marginRight: '5px', marginTop: '100px', marginLeft: '190px'}}
                     />
                     All Users
                 </label>
@@ -64,7 +64,7 @@ export default function UserReport() {
             </div>
 
             <div ref={componentRef} className="SSR_details" style={{ marginTop: '20px' }}>
-                <div className="SSR_supplier" style={{ padding: '20px', backgroundColor: '#1F1D2B', borderRadius: '10px', marginLeft: '100px', marginRight: '100px'}}>
+                <div className="SSR_supplier" style={{ padding: '20px', backgroundColor: '#1F1D2B', borderRadius: '10px', marginLeft: '190px', marginRight: '100px'}}>
                     <div className="SSR_cardHeader" style={{ marginBottom: '20px' }}>
                         <span className="SSR_cardName" style={{ background: '#1F1D2B', fontSize: '24px', fontWeight: 'bold' }}>User Report</span>
                     </div>
@@ -111,7 +111,7 @@ export default function UserReport() {
                     border: 'none',
                     borderRadius: '5px',
                     cursor: 'pointer',
-                    marginLeft: '100px',
+                    marginLeft: '190px',
                 }}
             >
                 Print PDF
