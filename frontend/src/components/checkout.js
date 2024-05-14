@@ -1,3 +1,4 @@
+
 import React, {useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -37,6 +38,8 @@ export default function Checkout(){
     const [lastOrderId, setLastOrderId] = useState('');
     const customerId = "66279ba428c2bd21af0ac912";
     const [lastClickedButton, setLastClickedButton] = useState(null);
+
+    console.log("details",basePrice);
     
     //Retrive available loyalty points
     useEffect(() => {
@@ -226,8 +229,8 @@ export default function Checkout(){
                 });
         } else {
             // User clicked cancel, do nothing
-        }
-    };
+        }
+    };
 
 
     return(

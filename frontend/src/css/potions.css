@@ -31,17 +31,18 @@
     align-items: center;
 }
 .potion-item{
-
     padding: 16px 16px 32px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     width: 200px;
+    margin-top: 90px;
     background-color: var(--bg-200);
     border-radius: 16px;
 }
 .potion-item-name{
+    margin-top: -80px;
     padding: 16px 32px 16px 32px;
     font-size: 18px;
     font-weight: 600;
@@ -142,5 +143,14 @@
     flex-direction: column;
     gap: 16px;
     margin-bottom: 16px;
+}
+
+.portion-circle-img{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 150px; 
+    height: 150px;
 }
 
