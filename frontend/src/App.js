@@ -37,7 +37,6 @@ import ResetByEmail from './Pages/ForgotPassword/ResetByEmail'
 import RegisterForm from './components/RegisterForm';
 import AllSupplier from "./components/AllSupplier";
 import UpdateSupplier from "./components/UpdateSupplier";
-import Dashboard from "./components/SupplierDashboard";
 import SupplierReport from "./components/SupplierReport";
 import InvitedSupplier from "./components/InvitedSupplier";
 import AddShipping from "./components/AddShipping";
@@ -47,6 +46,8 @@ import UpdateOrder from "./components/UpdateOrder";
 import GetInventory from './components/GetInventory';
 import UpdateInventory from './components/UpdateInventory';
 import OrderHistory from './components/OrderHistory';
+import AdminPage from './Pages/AdminPage/AdminPage';
+import UserReport from './Pages/AdminPage/UserReport';
 import ChefsList from './components/ChefsList';
 import BaseList from './components/BaseList';
 import KitchenPanel from './components/KitchenPanel';
@@ -92,6 +93,8 @@ function App() {
           <Route path='/forgotPassword' element={<ForgotPassword />} />
           <Route path='/changePassword' element={<ChangePassword />} />
           <Route path='/resetPassword' element={<ResetByEmail />} />
+          <Route path='/adminPage' element={<AdminPage />} />
+          <Route path='/userReport' element={<UserReport />} />
           <Route path='/main' element={<Main />} >
             <Route index element={ <UserStack />} />
             <Route path='user' element={<UserStack />} >

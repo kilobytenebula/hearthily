@@ -94,8 +94,6 @@ app.use("/kitchenChef", kitchenChef);
 const kitchenOrder = require("./routes/kitchenOrders.js");
 app.use("/kitchenOrder", kitchenOrder);
 
-
-
 app.use(cookieParser());
 
 //starting the server
