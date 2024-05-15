@@ -36,7 +36,7 @@ export default function UserReport() {
 
     return (
         <div>
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '20px', marginLeft: '10%' }}>
                 <label htmlFor="all" style={{ marginRight: '10px' }}>
                     <input
                         type="radio"
@@ -66,7 +66,7 @@ export default function UserReport() {
             <div ref={componentRef} className="SSR_details" style={{ marginTop: '20px' }}>
                 <div className="SSR_supplier" style={{ padding: '20px', backgroundColor: '#1F1D2B', borderRadius: '10px', marginLeft: '190px', marginRight: '100px'}}>
                     <div className="SSR_cardHeader" style={{ marginBottom: '20px' }}>
-                        <span className="SSR_cardName" style={{ background: '#1F1D2B', fontSize: '24px', fontWeight: 'bold' }}>User Report</span>
+                        <span className="SSR_cardName" style={{ background: '#1F1D2B', fontSize: '24px', fontWeight: 'bold' , color:"white"}}>User Report</span>
                     </div>
                     {loading ? (
                         <div>Loading...</div>
@@ -86,13 +86,13 @@ export default function UserReport() {
                             <tbody>
                                 {filteredUsers.map((user, index) => (
                                     <tr key={user._id}>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{index + 1}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.name}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.email}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.role}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.gender}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.address}</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{user.age}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc' , color:"white" }}>{index + 1}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.name}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.email}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.role}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.gender}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.address}</td>
+                                        <td style={{ padding: '8px', border: '1px solid #ccc', color:"white" }}>{user.age}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -111,7 +111,7 @@ export default function UserReport() {
                     border: 'none',
                     borderRadius: '5px',
                     cursor: 'pointer',
-                    marginLeft: '190px',
+                    marginLeft: '20%',
                 }}
             >
                 Print PDF

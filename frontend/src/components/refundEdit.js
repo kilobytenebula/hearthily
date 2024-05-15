@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { NavigationType, useParams } from 'react-router-dom';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import '../css/refundEdit.css';
 
@@ -8,6 +9,7 @@ export default function EditRefund() {
     const { id } = useParams();
     const [refundDetails, setRefundDetails] = useState(null);
     const [editedDetails, setEditedDetails] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const apiUrl = `http://localhost:3500/refund/get/${id}`;
@@ -41,8 +43,7 @@ export default function EditRefund() {
         axios.put(apiUrl, editedDetails)
             .then(response => {
                 console.log('Updated refund details:', response.data);
-                toast.success('Refund details updated successfully');
-                // Handle success, reset the form or show a success message
+                navigate('/requestedRefunds');
             })
             .catch(error => {
                 console.error('Error updating refund:', error);
