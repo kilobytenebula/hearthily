@@ -14,7 +14,6 @@ function AddShipping() {
       <div className="S_container">
         <div className="SS_title">
           <span>Make a Shipping</span>
-          <span className="date">{formattedDate}</span>
         </div>
         <OrderForm/>
       </div>

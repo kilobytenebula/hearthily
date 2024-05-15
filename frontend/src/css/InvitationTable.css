@@ -26,7 +26,7 @@
 }
 .SI_details .SI_supplier table thead tr {
     color: white;
-    border-bottom: 1px solid #EA7C69;
+    border-bottom: 1px solid var(--orange-200);
   }
 .SI_cardHeader .SI_cardName {
     font-weight: 600;
@@ -36,7 +36,7 @@
 .SI_cardHeader .SI_cardbtn {
     position: relative;
     padding: 5px 10px;
-    background: #EA7C69;
+    background: var(--orange-200);
     text-decoration: none;
     color: var(--white);
     border-radius: 6px;
@@ -64,7 +64,7 @@
 }
 
 .pending {
-    color: #F28638;
+    color: var(--orange-200);
     background-color: rgba(255, 181, 114, 0.2);
     border-radius: 40px;
     display: inline-block; 

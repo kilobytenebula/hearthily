@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 30px;
-    border: 1px solid #EA7C69;
+    border: 1px solid var(--orange-200);
     border-radius: 5px;
     background-color: #1F1D2B;
     margin-top: 20px;
@@ -33,7 +33,7 @@
     margin-top: 40px;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #EA7C69;
+    background-color: var(--orange-200);
     color: #fff;
     border: none;
     border-radius: 5px;

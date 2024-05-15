@@ -52,16 +52,12 @@ const NavBar = () => {
                  
                 {userRole === 'supplier' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}
-                {userRole === 'supplier' && <li><Link to="/shipment"><div className='navItem'><img src={airplane} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
+                {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}          
                 
-                
-                 {/* kitchen manager */}
                 {userRole === 'ktn_manager' && <li><Link to="/kitchen-panel"><div className='navItem'><img src={orderList} alt="orders" title='orders' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/chefs-list"><div className='navItem'><img src={chefsList} alt="chefs" title='chefs' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/base-list"><div className='navItem'><img src={addBases} alt="bases" title='bases' /></div></Link></li>}
                 {userRole === 'ktn_manager' && <li><Link to="/portion-list"><div className='navItem'><img src={addPortion} alt="portions" title='portions' /></div></Link></li>}
-
             </ul>
             <ul>
                 <li><Link to="/main/user/empEdit"><div className='navItem'><img src={settings} alt="Payment History" title='Settings' /></div></Link></li>

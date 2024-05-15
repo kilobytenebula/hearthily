@@ -14,7 +14,6 @@ function InvitedSupplier() {
         <NavBar/>
         <div className="SS_title">
           <span>Invitation to supplier</span>
-          <span className="date">{formattedDate}</span>
         </div>
         <InvitationTable/>
       </div>

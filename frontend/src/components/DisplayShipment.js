@@ -2,6 +2,7 @@ import React from "react";
 import "../css/DisplayShipment.css";
 import ShipmentTable from "./ShipmentTable";
 import NavBar from "./navBar";
+import Search from "./Search";
 
 
 function DispalyShipment() {
@@ -14,7 +15,6 @@ function DispalyShipment() {
         <NavBar/>
         <div className="SS_title">
           <span>Shipment</span>
-          <span className="date">{formattedDate}</span>
         </div>
         <ShipmentTable/>
       </div>

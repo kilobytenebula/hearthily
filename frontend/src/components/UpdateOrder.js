@@ -85,6 +85,7 @@ function UpdateOrder() {
               type="text"
               className="SR_input"
               required
+              readOnly
               value={supplier_name}
               onChange={(e) => {
                 setName(e.target.value);

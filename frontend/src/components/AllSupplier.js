@@ -13,7 +13,6 @@ function AllSupplier() {
         <NavBar/>
         <div className="SS_title">
           <span>Suppliers</span>
-          <span className="date">{formattedDate}</span>
         </div>
         <SupplierTable />
       </div>

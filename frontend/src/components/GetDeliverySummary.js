@@ -21,7 +21,7 @@ export default function DeliverySummary() {
       try {
         const response = await axios.get("http://localhost:3500/delivery/");
         const deliveries = response.data;
-        console.log("deliveries", deliveries);
+        
         const deliverysWithUserData = await Promise.all(
           deliveries.map(async (delivery) => {
             let driverName = "Unassigned";
@@ -32,20 +32,18 @@ export default function DeliverySummary() {
                 `http://localhost:3500/driver/${delivery.driverId}`
               );
               const driverData = driverResponse.data.driver;
-              console.log("driverData", driverData);
+              
               const driverUserResponse = await axios.get(
                 `http://localhost:3500/user/${driverData.userId}`
               );
               const driverUserData = driverUserResponse.data.user;
-              console.log("driverUserData", driverUserData);
-
+              
               const customerResponse = await axios.get(
                 `http://localhost:3500/user/${delivery.userId}` // Assuming userId is available in delivery data
               );
+
               const custData = customerResponse.data.user;
-
-              console.log("custData", custData);
-
+              
               driverName = driverUserData ? driverUserData.name : driverName;
               custName = custData ? custData.name : custName;
               custLocation = custData ? custData.address : custLocation;
@@ -108,7 +106,7 @@ export default function DeliverySummary() {
         return deliveries.sort((a, b) => new Date(a.date) - new Date(b.date));
       case "location":
         return deliveries.sort((a, b) =>
-          a.cusLocation.localeCompare(b.cusLocation)
+          a.custLocation.localeCompare(b.custLocation)
         );
       case "payment":
         return deliveries.sort((a, b) => a.payment.localeCompare(b.payment));

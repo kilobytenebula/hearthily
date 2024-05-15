@@ -1,12 +1,10 @@
 .ST_details {
     position: relative;
     width: 100%;
-    padding: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
-    margin-left: 120px;
-    margin-right: 100px;
+    margin-left: 200px;
     padding: 100px 20px; 
 } 
 .ST_details .ST_supplier {
@@ -27,7 +25,7 @@
 }
 .ST_details .ST_supplier table thead tr {
     color: white;
-    border-bottom: 1px solid #EA7C69;
+    border-bottom: 1px solid var(--orange-200);
   }
 .ST_cardHeader .ST_cardName {
     font-weight: 600;
@@ -37,7 +35,7 @@
 .ST_cardHeader .ST_cardbtn {
     position: relative;
     padding: 9px 15px;
-    background: #EA7C69;
+    background: var(--orange-200);
     text-decoration: none;
     color: var(--white);
     border-radius: 6px;
@@ -47,11 +45,11 @@
 .ST_cardHeader .ST_cardbt{
   position: relative;
   padding: 9px 15px;
-  background: #EA7C69;
+  background: var(--orange-200);
   text-decoration: none;
   color: var(--white);
   border-radius: 6px;
-  margin-left: 750px;
+  margin-left: 785px;
   font-size: 18px;
 } 
 

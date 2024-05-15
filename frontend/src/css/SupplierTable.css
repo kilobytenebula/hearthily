@@ -26,7 +26,7 @@
 }
 .S_details .S_supplier table thead tr {
     color: white;
-    border-bottom: 1px solid #EA7C69;
+    border-bottom: 1px solid var(--orange-200);
   }
 .S_cardHeader .S_cardName {
     font-weight: 600;
@@ -36,7 +36,7 @@
 .S_cardHeader .S_cardbtn {
     position: relative;
     padding: 5px 10px;
-    background: #EA7C69;
+    background: var(--orange-200);
     text-decoration: none;
     color: var(--white);
     border-radius: 6px;

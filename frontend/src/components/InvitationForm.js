@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/InvitationForm.css";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 function InvitationForm() {
   const [inviter_name, setIName] = useState("");
@@ -52,8 +53,7 @@ function InvitationForm() {
     axios.post('http://localhost:3500/inviter/sending', emailData)
       .then((res) => {
         console.log(res.data); // Log the response from the backend
-        alert('Email sent successfully');
-        window.location.reload();
+        toast.success('Email sent successfully');
       })
       .catch((error) => {
         console.error(error);
@@ -125,6 +125,7 @@ function InvitationForm() {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

@@ -46,7 +46,6 @@ function InvitationTable(){
 
     return(
         <div>
-            <Search />
             <InvitationForm/>
         <div className="SI_details">
             <div className="SI_supplier">
