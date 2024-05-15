@@ -16,7 +16,7 @@ const filterOrdersByBaseType = async (baseType) => {
             {
                 $match: { 
                     "base_info.base_type": baseType,
-                    "status": "pending"  // Add condition for pending status
+                    "status": { $in: ["pending", "preparing"] }  // Add condition for pending status
                 }
             }
         ]).toArray();
@@ -32,7 +32,10 @@ const filterOrdersByBaseType = async (baseType) => {
 // Function to search orders by base name and pending status
 const findOrdersByBaseName = async (baseName) => {
     try {
-        const orders = await mongoose.connection.db.collection("orders").find({ base_name: baseName, status: "pending" }).toArray();
+        orders = await mongoose.connection.db.collection("orders").find({
+            base_name: baseName,
+            status: { $in: ["pending", "preparing"] }
+          }).toArray();          
         return orders;
     } catch (error) {
         console.error("Error while finding orders by base name:", error);

@@ -78,7 +78,6 @@
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 20px; /* Add space between columns */
   margin-bottom: 20px; /* Add space between rows */
   flex-grow: 0;
   flex-shrink: 0;
@@ -142,4 +141,65 @@
 .fant-checkbox-group {
   display: flex;
   flex-direction: row !important;
+}
+
+.ktn-btn {
+  display: inline-block;
+  width: fit-content;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--white-100);
+  background-color: var(--orange-200);
+  cursor: pointer;
+}
+
+.ktn-btns-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.order-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--orange-200);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.order-card-content {
+  flex-grow: 1;
+}
+
+.ktn-btns-container {
+  display: flex;
+  justify-content: space-around; /* or any other alignment you prefer */
+  margin-top: 16px;
+}
+
+.ktn-btn {
+  background-color: var(--orange-200);
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.ktn-btn:hover {
+  background-color: var(--orange-100);
+}
+
+.portions-container {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: var(--bg-100);
 }
