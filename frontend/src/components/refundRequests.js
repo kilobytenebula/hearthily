@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import {Link, useParams} from 'react-router-dom'
 import axios from "axios";
 import '../css/refundRequests.css';
+import DocumentTitle from "./DocumentTitle";
 const download = require('../icons/download.png')
-
+const searchIcon = require("../icons/search.png");
 
 export default function RefundRequest(){
 
     const [refunds, setPayments] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    DocumentTitle("Refund Requests");
 
     useEffect(()=>{
 
@@ -19,7 +21,7 @@ export default function RefundRequest(){
                     setPayments(res.data);
                 })
                 .catch((err) => {
-                    alert(err.message);
+                    // alert(err.message);
                 });
         }
         getRefunds();
@@ -63,18 +65,25 @@ export default function RefundRequest(){
             <div className="header">
                 
                     <div className="titile">Refund Requests</div>
-                    <div className="refundSearchBar">
-                        <input 
-                            type="search" 
-                            placeholder="Search by Order Id..." 
+                    <div className="search-container">
+                        <div className="search-icon">
+                            <img src={searchIcon} alt="search" />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search by name or ID"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                 </div>
+                        </div>
+                    
             </div>
 
             <div className="refundsReqList">
-                {filteredRefunds.map((refund, index) => (
+                {filteredRefunds.length === 0 ? (
+                    <div>No refunds available</div>
+                ) : (
+                filteredRefunds.map((refund, index) => (
                     <div className="refundReq" key={index}>
                         <div className="cid">
                             <div className="title">Customer ID</div>
@@ -109,15 +118,16 @@ export default function RefundRequest(){
                             <div className="value">{refund.isSuccess}</div>
                         </div>
 
-                        {refund.isSuccess !== "accepted" && ( // Conditionally render action buttons if isSuccess is not "accepted"
+                        {refund.isSuccess == "pending" && ( // Conditionally render action buttons if isSuccess is not "accepted"
                             <div className="actions">
                                 <button className="accept" onClick={() => handleUpdateRefund(refund.orderId, "accepted")}>Accept</button>
                                 <button className="decline" onClick={() => handleUpdateRefund(refund.orderId, "declined")}>Decline</button>
                             </div>
                         )}
                     </div>
-                ))}
-            </div>
+                
+                ))
+                )}</div>
             
         </div>
     )

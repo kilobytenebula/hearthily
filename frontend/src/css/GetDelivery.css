@@ -27,7 +27,6 @@ body {
     flex-direction: column;
     justify-content: center;
     font-size: 14px;
-    font-family:"Poppins-Medium", Helvetica ;
     font-weight: 100;
     border: 1px solid var(--orange-200);
     cursor: pointer;

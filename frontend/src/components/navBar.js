@@ -40,10 +40,13 @@ const NavBar = () => {
                 {userRole === 'user' && <li><Link to="/order"><div className='navItem '><img src={home} alt="Home" title='Home' /></div></Link></li>}
                 {userRole === 'user' && <li><Link to="/order-history"><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></Link></li>}
                 {userRole === 'user' && <li><Link to="/payments"><div className='navItem'><img src={paymentHistory} alt="Payment History" title='Payment History' /></div></Link></li>}
-                {userRole === 'admin' && <li><Link to="/refunds"><div className='navItem'><img src={refund} alt="Refunds" title="Refunds"></img></div></Link></li>}
+                
                 {userRole === 'admin' && <li><Link to="/admin-panel-order-history"><div className='navItem'><img src={orderHistory} alt="Order History" title='Order History' /></div></Link></li>}
                 {userRole === 'admin' && <li><Link to="/paymentReports"><div className='navItem'><img src={paymentReports} alt="Payment Reports" title="Payment Reports"></img></div></Link></li>}
                 {userRole === 'admin' && <li><Link to="/delivery-summary"><div className='navItem'><img src={delivery} alt="Job Summary" title='Job Summary' /></div></Link></li>}
+                {userRole === 'admin' && <li><Link to="/adminPage"><div className='navItem'><img src={adminSetting} alt="adminPage" title="adminPage"></img></div></Link></li>}
+                {userRole === 'admin' && <li><Link to="/inventory-record"><div className='navItem'><img src={box} alt="Inventory Record" title='Inventory Record' /></div></Link></li>}
+                
                 {userRole === 'driver' && <li><Link to="/delivery"><div className='navItem'><img src={delivery} alt="Available Jobs" title='Available Jobs' /></div></Link></li>}
                 {userRole === 'driver' && <li><Link to="/job-history"><div className='navItem'><img src={jobHistory} alt="Job History" title='Job History' /></div></Link></li>}
                  
@@ -51,13 +54,7 @@ const NavBar = () => {
                 {userRole === 'supplier' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/displays"><div className='navItem'><img src={ship} alt="Shipments" title='Shipments' /></div></Link></li>}
                 {userRole === 'supplier' && <li><Link to="/shipment"><div className='navItem'><img src={airplane} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/inventory-record"><div className='navItem'><img src={box} alt="Inventory Record" title='Inventory Record' /></div></Link></li>}
                 
-                {userRole === 'inventory' && <li><Link to="/display"><div className='navItem'><img src={box} alt="Suppliers" title='Suppliers' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/displays"><div className='navItem'><img src={airplane} alt="Shipments" title='Shipments' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/invite"><div className='navItem'><img src={mail} alt="Invitations" title='Invitations' /></div></Link></li>}
-                {userRole === 'inventory' && <li><Link to="/shipment"><div className='navItem'><img src={ship} alt="Make a Shipment" title='Make a Shipment' /></div></Link></li>}
-                {userRole === 'admin' && <li><Link to="/adminPage"><div className='navItem'><img src={adminSetting} alt="adminPage" title="adminPage"></img></div></Link></li>}
                 
                  {/* kitchen manager */}
                 {userRole === 'ktn_manager' && <li><Link to="/kitchen-panel"><div className='navItem'><img src={orderList} alt="orders" title='orders' /></div></Link></li>}

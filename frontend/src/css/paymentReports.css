@@ -248,17 +248,21 @@
     padding-bottom: 32px;
 }
 .searchBarBT input[type="search"] {
-    padding: 8px;
-    border: 1px solid var(--white-100);
-    width: 260px;
-    border-radius: 4px;
+    padding: 12px 18px;
+    border: 1px solid rgba(244, 244, 244, 0.2);
+    background-color: var(--bg-100);
+    width: 30%;
+    color: #ABBBC2;
+    border-radius: 8px;
     margin-right: 5px; /* Add some space between input and button */
 }
 .searchBarCOD input[type="search"] {
-    padding: 8px;
-    border: 1px solid var(--white-100);
-    width: 260px;
-    border-radius: 4px;
+    padding: 12px 18px;
+    border: 1px solid rgba(244, 244, 244, 0.2);
+    background-color: var(--bg-100);
+    width: 30%;
+    color: #ABBBC2;
+    border-radius: 8px;
     margin-right: 5px; /* Add some space between input and button */
 }
 
@@ -315,4 +319,22 @@
     text-align: center;
     border-radius: 16px;
     border: 1px solid var(--red-100);
+}
+.refund-requests{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.refund-button{
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--orange-200);
+    color: var(--white-100);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    
 }

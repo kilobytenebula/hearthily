@@ -3,7 +3,7 @@ import axios from "axios";
 import '../css/paymentReports.css';
 import { CSVLink } from 'react-csv';
 import jsPDF from 'jspdf';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const download = require('../icons/download.png')
@@ -63,7 +63,7 @@ export default function PaymentReports(){
             .then((res)=>{
                 setAllRefunds(res.data);
             }).catch((err)=>{
-                alert(err.message);
+                // alert(err.message);
             }) 
         }
         getAllRefunds();
@@ -242,11 +242,14 @@ export default function PaymentReports(){
                         <div className="title">Balance After refund</div>
                         <div className="amount">{Balance} LKR</div>
                     </div>
+                    <div className="refund-requests">
+                    <Link to="/refunds"><button className="refund-button">Refund Requests</button></Link>
+                    </div>
                 </div>
             </div>
             <div className="navigations">
                 <button className={`navButton ${showCODOverview ? 'clicked' : ''}`} onClick={handleCodClick}>Cash On Delivery</button>
-                <button className={`navButton ${showBTOverview ? 'clicked' : ''}`} onClick={handleBankTransferClick}>Banck Transfers</button>
+                <button className={`navButton ${showBTOverview ? 'clicked' : ''}`} onClick={handleBankTransferClick}>Bank Transfers</button>
             </div>
             <div className="overview">
                 {showCODOverview && <div className="codOverview">
